@@ -6,6 +6,8 @@
 		<key>AssetNameKey</key>
 		<string>Basic Stream</string>
 		<key>AAPLStreamPlaylistURL</key>
+		<string>https://hls.videocc.net/f46ead66de/5/f46ead66dedfcbc94721932e30cccfd5.m3u8</string>
+		<key>AAPLStreamPlaylistURL_bak</key>
 		<string>https://devimages.apple.com.edgekey.net/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8</string>
 	</dict>
 	<dict>

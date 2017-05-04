@@ -132,6 +132,7 @@
 				TargetAttributes = {
 					428139ED1CE44B7300972264 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = V7WL667MJM;
 						LastSwiftMigration = 0800;
 						LastSwiftUpdateCheck = 0800;
 						ProvisioningStyle = Automatic;
@@ -299,10 +300,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = V7WL667MJM;
 				INFOPLIST_FILE = HLSCatalog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.HLSCatalog";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.HLSCatalog.bq";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -317,10 +318,10 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = V7WL667MJM;
 				INFOPLIST_FILE = HLSCatalog/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.HLSCatalog";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.HLSCatalog.bq";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

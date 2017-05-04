@@ -4,6 +4,7 @@
  
  Abstract:
  `AssetPlaybackManager` is the class that manages the playback of Assets in this sample using Key-value observing on various AVFoundation classes.
+AssetPlaybackManager 是同时键值监听管理资产的播放
  */
 
 import UIKit
@@ -23,9 +24,11 @@ class AssetPlaybackManager: NSObject {
     private let player = AVPlayer()
     
     /// A Bool tracking if the AVPlayerItem.status has changed to .readyToPlay for the current AssetPlaybackManager.playerItem.
+	/// 当前播放项是否可以播放
     private var readyForPlayback = false
     
     /// The AVPlayerItem associated with AssetPlaybackManager.asset.urlAsset
+	/// 与 AssetPlaybackManager.asset.urlAsset 关联的 AVPlayerItem
     private var playerItem: AVPlayerItem? {
         willSet {
             playerItem?.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status), context: &observerContext)
