@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7LL-Ks-SyH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7LL-Ks-SyH">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,7 +15,7 @@
             <objects>
                 <navigationController id="7LL-Ks-SyH" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Bus-26-8TV">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -89,7 +89,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUe-zd-6Sl">
-                                <rect key="frame" x="263" y="0.0" width="74" height="144"/>
+                                <rect key="frame" x="263.5" y="0.0" width="73" height="144"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="120"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -104,21 +104,30 @@
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="qkS-ae-k6v">
-                                <rect key="frame" x="18" y="172" width="564" height="31"/>
+                                <rect key="frame" x="14" y="172" width="572" height="31"/>
                                 <connections>
                                     <action selector="sliderValueChange:" destination="oyv-9t-G6O" eventType="valueChanged" id="x6g-fK-tKc"/>
                                 </connections>
                             </slider>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvx-zr-m8K">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Item" id="RXp-kT-z2Z"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="qkS-ae-k6v" firstAttribute="trailing" secondItem="DE5-sX-BVn" secondAttribute="trailingMargin" id="8lD-Hd-kAs"/>
                             <constraint firstItem="QX8-HS-gNG" firstAttribute="top" secondItem="WzS-8c-vnC" secondAttribute="bottom" constant="20" id="9kO-U1-Xb9"/>
+                            <constraint firstAttribute="trailing" secondItem="mvx-zr-m8K" secondAttribute="trailing" id="B2N-Us-OEO"/>
                             <constraint firstAttribute="centerX" secondItem="WzS-8c-vnC" secondAttribute="centerX" id="C7F-GK-KND"/>
                             <constraint firstAttribute="centerX" secondItem="DUe-zd-6Sl" secondAttribute="centerX" id="a4o-5J-xRn"/>
                             <constraint firstItem="qkS-ae-k6v" firstAttribute="leading" secondItem="DE5-sX-BVn" secondAttribute="leadingMargin" id="dvU-IA-5ib"/>
                             <constraint firstItem="WzS-8c-vnC" firstAttribute="top" secondItem="qkS-ae-k6v" secondAttribute="bottom" constant="8" id="hS9-ah-lMS"/>
                             <constraint firstItem="DUe-zd-6Sl" firstAttribute="top" secondItem="DE5-sX-BVn" secondAttribute="top" id="hjW-ob-Kex"/>
+                            <constraint firstItem="mvx-zr-m8K" firstAttribute="top" secondItem="aDz-7S-GjD" secondAttribute="bottom" id="piv-Vf-409"/>
+                            <constraint firstItem="mvx-zr-m8K" firstAttribute="leading" secondItem="DE5-sX-BVn" secondAttribute="leading" id="sqm-6k-HFj"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

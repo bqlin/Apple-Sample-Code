@@ -63,6 +63,7 @@
     // self.presentedViewController.view.
 	// -presentedView 默认返回 self.presentedViewController.view
     UIView *presentedViewControllerView = [super presentedView];
+	presentedViewControllerView.backgroundColor = [UIColor yellowColor];
     
     // Wrap the presented view controller's view in an intermediate hierarchy
     // that applies a shadow and rounded corners to the top-left and top-right
@@ -80,6 +81,7 @@
         presentationWrapperView.layer.shadowRadius = 13.f;
         presentationWrapperView.layer.shadowOffset = CGSizeMake(0, -6.f);
         self.presentationWrappingView = presentationWrapperView;
+		presentationWrapperView.backgroundColor = [UIColor greenColor];
         
         // presentationRoundedCornerView is CORNER_RADIUS points taller than the
         // height of the presented view controller's view.  This is because
@@ -91,6 +93,7 @@
         presentationRoundedCornerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         presentationRoundedCornerView.layer.cornerRadius = CORNER_RADIUS;
         presentationRoundedCornerView.layer.masksToBounds = YES;
+		presentationRoundedCornerView.backgroundColor = [UIColor redColor];
         
         // To undo the extra height added to presentationRoundedCornerView,
         // presentedViewControllerWrapperView is inset by CORNER_RADIUS points.
@@ -98,6 +101,7 @@
         // bounds to the size of -frameOfPresentedViewInContainerView.
         UIView *presentedViewControllerWrapperView = [[UIView alloc] initWithFrame:UIEdgeInsetsInsetRect(presentationRoundedCornerView.bounds, UIEdgeInsetsMake(0, 0, CORNER_RADIUS, 0))];
         presentedViewControllerWrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+		presentedViewControllerWrapperView.backgroundColor = [UIColor blueColor];
         
         // Add presentedViewControllerView -> presentedViewControllerWrapperView.
         presentedViewControllerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
