@@ -122,6 +122,7 @@ class ProfileViewController: UIViewController {
         var newConstraints = [NSLayoutConstraint]()
         
         if collection.verticalSizeClass == .compact {
+			print("横屏")
             // When we're vertically compact, show the image and labels side-by-side
             newConstraints += NSLayoutConstraint.constraints(withVisualFormat: "|[imageView]-[nameLabel]-|", options: [], metrics: nil, views: views)
             
@@ -138,6 +139,7 @@ class ProfileViewController: UIViewController {
             ]
         }
         else {
+			print("竖屏")
             // When we're vertically compact, show the image and labels top-and-bottom
             newConstraints += NSLayoutConstraint.constraints(withVisualFormat: "|[imageView]|", options: [], metrics: nil, views: views)
             

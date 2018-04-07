@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Load the conversations from disk and create our root model object.
         
         let user: User
+		// 获取 User.plist
         if let url = Bundle.main.url(forResource: "User", withExtension: "plist"),
             let userDictionary = NSDictionary(contentsOf: url) as? [String: AnyObject],
             let loadedUser = User(dictionary: userDictionary) {
