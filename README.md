@@ -4,6 +4,7 @@
 
 | 项目                                                         | 版本                    | 备注                                                         |
 | ------------------------------------------------------------ | ----------------------- | ------------------------------------------------------------ |
+| NavBarCustomizingUINavigationBarsappearance                  | Version 8.0, 2017-12-07 | 自定义导航栏                                                 |
 | AdaptivePhotosUsingUIKitTraitsandSizeClasses                 | Version 4.1, 2016-09-13 | 可使用图片布局                                               |
 | ExampleappusingPhotosframework                               | Version 3.0, 2015-10-21 | Phonto 框架                                                  |
 | CustomViewControllerPresentationsandTransitions              | Version 1.0, 2016-01-28 | 自定义过渡                                                   |

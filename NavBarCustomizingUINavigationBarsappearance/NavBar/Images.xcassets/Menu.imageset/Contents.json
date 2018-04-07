@@ -1,0 +1,192 @@
+{
+  "images" : [
+    {
+      "idiom" : "universal",
+      "filename" : "Menu@1x.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "Menu@1x-6.png",
+      "memory" : "1GB",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "Menu@1x-21.png",
+      "memory" : "2GB",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "Menu@1x-3.png",
+      "memory" : "4GB",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "Menu@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "Menu@2x-12.png",
+      "memory" : "1GB",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "Menu@2x-1.png",
+      "memory" : "2GB",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "Menu@2x-3.png",
+      "memory" : "4GB",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "Menu@3x.png",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "Menu@3x-2.png",
+      "memory" : "1GB",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "Menu@3x-1.png",
+      "memory" : "2GB",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "Menu@3x-3.png",
+      "memory" : "4GB",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "Menu@1x-1.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "Menu@1x-9.png",
+      "memory" : "1GB",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "Menu@1x-4.png",
+      "memory" : "2GB",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "Menu@1x-33.png",
+      "memory" : "4GB",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "Menu@2x-7.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "Menu@2x-16.png",
+      "memory" : "1GB",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "Menu@2x-8.png",
+      "memory" : "2GB",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "Menu@2x-9.png",
+      "memory" : "4GB",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "Menu@3x-6.png",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "Menu@3x-8.png",
+      "memory" : "1GB",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "Menu@3x-5.png",
+      "memory" : "2GB",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "iphone",
+      "filename" : "Menu@3x-4.png",
+      "memory" : "4GB",
+      "scale" : "3x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "Menu@1x-2.png",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "Menu@1x-16.png",
+      "memory" : "1GB",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "Menu@1x-27.png",
+      "memory" : "2GB",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "Menu@1x-32.png",
+      "memory" : "4GB",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "Menu@2x-6.png",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "Menu@2x-2.png",
+      "memory" : "1GB",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "Menu@2x-4.png",
+      "memory" : "2GB",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "ipad",
+      "filename" : "Menu@2x-5.png",
+      "memory" : "4GB",
+      "scale" : "2x"
+    }
+  ],
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  }
+}
