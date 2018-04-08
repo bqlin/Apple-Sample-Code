@@ -5,6 +5,7 @@
  Abstract:
  Demonstrates configuring the navigation bar to use a UIView
   as the title.
+使用分段控件作为导航栏标题
  */
 
 import UIKit
