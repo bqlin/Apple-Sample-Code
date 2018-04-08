@@ -4,6 +4,7 @@
  
  Abstract:
  Demonstrates displaying text above the navigation bar.
+在 viewDidAppear 中设置导航栏 prompt
  */
 
 import UIKit
