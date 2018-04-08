@@ -14,6 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UINavigationControllerDel
     var window: UIWindow?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
+		// 设置根控制器（此处为 UINvaigationController）代理为自身，以支持容器内子控制器屏幕旋转
         (window!.rootViewController as! UINavigationController).delegate = self
         
         return true
