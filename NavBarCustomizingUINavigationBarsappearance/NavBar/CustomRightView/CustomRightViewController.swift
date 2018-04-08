@@ -10,7 +10,8 @@
 import UIKit
 
 class CustomRightViewController: UIViewController {
-    
+	
+	// 使用结构体值来替代数字索引
     struct SegmentedControl {
         static let textButton = 0
         static let imageButton = 1
@@ -23,6 +24,7 @@ class CustomRightViewController: UIViewController {
     
     /**
      *  IBAction for the segemented control.
+	根据分段控件设置导航栏右侧项目
      */
     @IBAction func changeRightBarItem(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
