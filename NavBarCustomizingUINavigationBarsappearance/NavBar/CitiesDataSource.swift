@@ -4,6 +4,7 @@ See LICENSE.txt for this sample’s licensing information
 
 Abstract:
 Data source of city names.
+使用独立的类作为数据源
 */
 
 import Foundation
@@ -15,13 +16,15 @@ class CitiesDataSource: NSObject, UITableViewDataSource
 	
 	override init() {
 		super.init()
-		
+		/// 获取 Cities.json 数据为 [String]
+		// json URL
 		let citiesJSONURL =
 			URL(fileURLWithPath: Bundle.main.path(forResource: "Cities", ofType: "json")!)
 		do {
 			let citiesJSONData = try Data(contentsOf: citiesJSONURL)
 			let jsonObject = try JSONSerialization.jsonObject(with: citiesJSONData,
 															  options: JSONSerialization.ReadingOptions(rawValue: UInt(0)))
+			// 若能初始化为 [String] 则赋值到 cities
 			if let jsonCities = jsonObject as? [String] {
 				cities = jsonCities
 			}
@@ -31,6 +34,7 @@ class CitiesDataSource: NSObject, UITableViewDataSource
 		}
 	}
 	
+	/// cities 的读取
 	@objc func city(index: Int) -> String {
 		return cities[index]
 	}

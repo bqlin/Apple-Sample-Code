@@ -4,6 +4,7 @@
  
  Abstract:
  Demonstrates applying a custom background to a navigation bar.
+自定义导航栏样式
  */
 
 import UIKit
@@ -21,6 +22,7 @@ class CustomAppearanceViewController: UITableViewController {
 		tableView.dataSource = dataSource
 		
         // Place the background switcher in the toolbar.
+		// 设置底部工具栏
         let backgroundSwitcherItem = UIBarButtonItem(customView: backgroundSwitcher)
         toolbarItems = [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
@@ -33,6 +35,7 @@ class CustomAppearanceViewController: UITableViewController {
 	
     /**
      *  Configures the navigation bar to use an image as its background.
+	配置导航栏图片背景
      */
     func applyImageBackgroundToTheNavigationBar() {
         // These background images contain a small pattern which is displayed
@@ -49,6 +52,7 @@ class CustomAppearanceViewController: UITableViewController {
         // in the topmost and leftmost pixels being stretched when the images
         // are resized.  Not coincidentally, the pixels in these rows/columns
         // are empty.
+		// 设置图片拉伸已实现导航栏背景图片为右下角对齐
         backgroundImageForDefaultBarMetrics =
 			backgroundImageForDefaultBarMetrics.resizableImage(withCapInsets: UIEdgeInsets(top: 0,
 																						   left: 0,
@@ -84,6 +88,7 @@ class CustomAppearanceViewController: UITableViewController {
     /**
      *  Configures the navigation bar to use a transparent background (see-through
      *  but without any blur).
+	设置导航栏透明（通过设置动态生成的透明图片实现）
      */
     func applyTransparentBackgroundToTheNavigationBar(_ opacity: CGFloat) {
         var transparentBackground: UIImage
@@ -122,6 +127,7 @@ class CustomAppearanceViewController: UITableViewController {
     /**
      *  Configures the navigation bar to use a custom color as its background.
      *  The navigation bar remains translucent.
+	设置 navigationBar 的 barTintColor
      */
     func applyBarTintColorToTheNavigationBar() {
         // Be aware when selecting a barTintColor for a translucent bar that
@@ -143,8 +149,9 @@ class CustomAppearanceViewController: UITableViewController {
         // applying appearance customizations directly to the navigation bar.
         /* let navigationBarAppearance = UINavigationBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]) */
         let navigationBarAppearance = self.navigationController!.navigationBar
-        
+		
         navigationBarAppearance.barTintColor = darkendBarTintColor
+		// 其 tintColor 则只是导航栏上点击控件的颜色
         
         // For comparison, apply the same barTintColor to the toolbar, which
         // has been configured to be opaque.
