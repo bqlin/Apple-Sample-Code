@@ -85,17 +85,17 @@
                         <viewControllerLayoutGuide type="bottom" id="QX8-HS-gNG"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DE5-sX-BVn">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="260"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUe-zd-6Sl">
-                                <rect key="frame" x="263.5" y="0.0" width="73" height="144"/>
+                                <rect key="frame" x="123.5" y="44" width="73" height="144"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="120"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WzS-8c-vnC">
-                                <rect key="frame" x="178" y="210" width="245" height="30"/>
+                                <rect key="frame" x="37.5" y="170" width="245" height="30"/>
                                 <state key="normal" title="Present With Standard Presentation">
                                     <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
@@ -104,13 +104,13 @@
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="qkS-ae-k6v">
-                                <rect key="frame" x="14" y="172" width="572" height="31"/>
+                                <rect key="frame" x="14" y="132" width="292" height="31"/>
                                 <connections>
                                     <action selector="sliderValueChange:" destination="oyv-9t-G6O" eventType="valueChanged" id="x6g-fK-tKc"/>
                                 </connections>
                             </slider>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mvx-zr-m8K">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <items>
                                     <barButtonItem title="Item" id="RXp-kT-z2Z"/>
                                 </items>
@@ -125,13 +125,13 @@
                             <constraint firstAttribute="centerX" secondItem="DUe-zd-6Sl" secondAttribute="centerX" id="a4o-5J-xRn"/>
                             <constraint firstItem="qkS-ae-k6v" firstAttribute="leading" secondItem="DE5-sX-BVn" secondAttribute="leadingMargin" id="dvU-IA-5ib"/>
                             <constraint firstItem="WzS-8c-vnC" firstAttribute="top" secondItem="qkS-ae-k6v" secondAttribute="bottom" constant="8" id="hS9-ah-lMS"/>
-                            <constraint firstItem="DUe-zd-6Sl" firstAttribute="top" secondItem="DE5-sX-BVn" secondAttribute="top" id="hjW-ob-Kex"/>
+                            <constraint firstItem="DUe-zd-6Sl" firstAttribute="top" secondItem="mvx-zr-m8K" secondAttribute="bottom" id="hjW-ob-Kex"/>
                             <constraint firstItem="mvx-zr-m8K" firstAttribute="top" secondItem="aDz-7S-GjD" secondAttribute="bottom" id="piv-Vf-409"/>
                             <constraint firstItem="mvx-zr-m8K" firstAttribute="leading" secondItem="DE5-sX-BVn" secondAttribute="leading" id="sqm-6k-HFj"/>
                         </constraints>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="260"/>
+                    <size key="freeformSize" width="320" height="220"/>
                     <connections>
                         <outlet property="slider" destination="qkS-ae-k6v" id="qrw-wn-wws"/>
                     </connections>
