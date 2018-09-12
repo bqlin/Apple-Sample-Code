@@ -14,7 +14,8 @@
 
 
 @interface AAPLRootListViewController () <PHPhotoLibraryChangeObserver>
-@property (nonatomic, strong) NSArray *sectionFetchResults;
+/// 章节数组，相册组
+@property (nonatomic, strong) NSArray<PHFetchResult *> *sectionFetchResults;
 @property (nonatomic, strong) NSArray *sectionLocalizedTitles;
 @end
 
@@ -27,11 +28,15 @@ static NSString * const AllPhotosSegue = @"showAllPhotos";
 static NSString * const CollectionSegue = @"showCollection";
 
 - (void)awakeFromNib {
+	[super awakeFromNib];
+	
     // Create a PHFetchResult object for each section in the table view.
+	// 所有照片，这里注意要区分智能相册中的所有照片
     PHFetchOptions *allPhotosOptions = [[PHFetchOptions alloc] init];
     allPhotosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
     PHFetchResult *allPhotos = [PHAsset fetchAssetsWithOptions:allPhotosOptions];
-    
+	
+	// 智能相册
     PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
     
     PHFetchResult *topLevelUserCollections = [PHCollectionList fetchTopLevelUserCollectionsWithOptions:nil];
@@ -79,6 +84,7 @@ static NSString * const CollectionSegue = @"showCollection";
 
         // Configure the AAPLAssetGridViewController with the asset collection.
         PHAssetCollection *assetCollection = (PHAssetCollection *)collection;
+		// 获取指定行相册的结果
         PHFetchResult *assetsFetchResult = [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil];
 
         assetGridViewController.assetsFetchResults = assetsFetchResult;

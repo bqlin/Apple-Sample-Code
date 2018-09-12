@@ -28,6 +28,8 @@ static NSString * const CellReuseIdentifier = @"Cell";
 static CGSize AssetGridThumbnailSize;
 
 - (void)awakeFromNib {
+	[super awakeFromNib];
+	
     self.imageManager = [[PHCachingImageManager alloc] init];
     [self resetCachedAssets];
     
