@@ -119,6 +119,7 @@ static NSString * const CollectionSegue = @"showCollection";
         cell = [tableView dequeueReusableCellWithIdentifier:AllPhotosReuseIdentifier forIndexPath:indexPath];
         cell.textLabel.text = NSLocalizedString(@"All Photos", @"");
     } else {
+        // 显示每个相册组的相册
         PHFetchResult *fetchResult = self.sectionFetchResults[indexPath.section];
         PHCollection *collection = fetchResult[indexPath.row];
         
@@ -146,14 +147,18 @@ static NSString * const CollectionSegue = @"showCollection";
         __block BOOL reloadRequired = NO;
 
         [self.sectionFetchResults enumerateObjectsUsingBlock:^(PHFetchResult *collectionsFetchResult, NSUInteger index, BOOL *stop) {
+            /// 遍历检查每个相册组，当相册中照片有更新也会进行更新（照片数量）
+            // 获取更新
             PHFetchResultChangeDetails *changeDetails = [changeInstance changeDetailsForFetchResult:collectionsFetchResult];
 
+            // 替换更新
             if (changeDetails != nil) {
                 [updatedSectionFetchResults replaceObjectAtIndex:index withObject:[changeDetails fetchResultAfterChanges]];
                 reloadRequired = YES;
             }
         }];
         
+        // 更新 UI
         if (reloadRequired) {
             self.sectionFetchResults = updatedSectionFetchResults;
             [self.tableView reloadData];

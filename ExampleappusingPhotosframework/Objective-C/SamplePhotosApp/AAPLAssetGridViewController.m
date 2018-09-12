@@ -100,6 +100,7 @@ static CGSize AssetGridThumbnailSize;
             /*
                 Tell the collection view to animate insertions and deletions if we
                 have incremental diffs.
+             更新 UI，增删改
              */
             [collectionView performBatchUpdates:^{
                 NSIndexSet *removedIndexes = [collectionChanges removedIndexes];
@@ -177,12 +178,15 @@ static CGSize AssetGridThumbnailSize;
     if (!isViewVisible) { return; }
     
     // The preheat window is twice the height of the visible rect.
+    // 预加载区域是 collectionView 的等宽，两倍高
     CGRect preheatRect = self.collectionView.bounds;
     preheatRect = CGRectInset(preheatRect, 0.0f, -0.5f * CGRectGetHeight(preheatRect));
     
     /*
         Check if the collection view is showing an area that is significantly
         different to the last preheated area.
+     
+     检查 collection view 是否与上一个预加载区域不同。当两个区域的中点纵坐标相差 1/3 高度则为不同。
      */
     CGFloat delta = ABS(CGRectGetMidY(preheatRect) - CGRectGetMidY(self.previousPreheatRect));
     if (delta > CGRectGetHeight(self.collectionView.bounds) / 3.0f) {
