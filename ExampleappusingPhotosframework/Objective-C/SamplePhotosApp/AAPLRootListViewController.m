@@ -39,6 +39,7 @@ static NSString * const CollectionSegue = @"showCollection";
 	// 智能相册
     PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
     
+    // 用户定义相册
     PHFetchResult *topLevelUserCollections = [PHCollectionList fetchTopLevelUserCollectionsWithOptions:nil];
 
     // Store the PHFetchResult objects and localized titles for each section.

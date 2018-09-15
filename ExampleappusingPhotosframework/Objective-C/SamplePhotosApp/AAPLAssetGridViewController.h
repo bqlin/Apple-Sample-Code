@@ -11,7 +11,10 @@
 
 @interface AAPLAssetGridViewController : UICollectionViewController
 
+/// 相册内容
 @property (nonatomic, strong) PHFetchResult *assetsFetchResults;
+
+/// 相册
 @property (nonatomic, strong) PHAssetCollection *assetCollection;
 
 @end
