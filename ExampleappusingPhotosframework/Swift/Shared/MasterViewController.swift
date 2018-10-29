@@ -79,7 +79,7 @@ class MasterViewController: UITableViewController {
                 PHPhotoLibrary.shared().performChanges({
                     PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: title)
                 }, completionHandler: { success, error in
-                    if !success { print("error creating album: \(error)") }
+                    if !success { print("error creating album: \(String(describing: error))") }
                 })
             }
         })

@@ -205,7 +205,7 @@ class AssetGridViewController: UICollectionViewController {
                 addAssetRequest?.addAssets([creationRequest.placeholderForCreatedAsset!] as NSArray)
             }
         }, completionHandler: {success, error in
-            if !success { print("error creating asset: \(error)") }
+            if !success { print("error creating asset: \(String(describing: error))") }
         })
     }
 

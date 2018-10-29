@@ -82,10 +82,12 @@ static NSString * const AdjustmentFormatIdentifier = @"com.example.apple-samplec
     self.imageView.hidden = NO;
 }
 
+/// 显示带播放按钮的工具栏
 - (void)showPlaybackToolbar {
     self.toolbarItems = @[self.playButton, self.space, self.trashButton];
 }
 
+/// 显示不带播放按钮的工具栏
 - (void)showStaticToolbar {
     self.toolbarItems = @[self.space, self.trashButton];
 }
@@ -121,6 +123,8 @@ static NSString * const AdjustmentFormatIdentifier = @"com.example.apple-samplec
             Progress callbacks may not be on the main thread. Since we're updating
             the UI, dispatch to the main queue.
          */
+        // 然而并没有执行
+        NSLog(@"live photo progress: %@", @(progress));
         dispatch_async(dispatch_get_main_queue(), ^{
             self.progressView.progress = progress;
         });
