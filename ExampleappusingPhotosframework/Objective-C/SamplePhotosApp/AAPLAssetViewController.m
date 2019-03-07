@@ -42,11 +42,12 @@ static NSString * const AdjustmentFormatIdentifier = @"com.example.apple-samplec
     [[PHPhotoLibrary sharedPhotoLibrary] registerChangeObserver:self];
 }
 
+// 根据照片类型更新 UI
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     // Set the appropriate toolbarItems based on the mediaType of the asset.
-    if (self.asset.mediaType == PHAssetMediaTypeVideo) {
+    if (self.asset.mediaType == PHAssetMediaTypeVideo) { // 若为视频则显示播放工具栏
         [self showPlaybackToolbar];
     } else {
         [self showStaticToolbar];
@@ -58,7 +59,7 @@ static NSString * const AdjustmentFormatIdentifier = @"com.example.apple-samplec
     
     // Enable the trash button if the asset can be deleted.
     BOOL isTrashable = NO;
-    if (self.assetCollection) {
+    if (self.assetCollection) { // 从所有图片过来的图片是没有赋值相册的
         isTrashable = [self.assetCollection canPerformEditOperation:PHCollectionEditOperationRemoveContent];
     } else {
         isTrashable = [self.asset canPerformEditOperation:PHAssetEditOperationDelete];
@@ -100,6 +101,7 @@ static NSString * const AdjustmentFormatIdentifier = @"com.example.apple-samplec
 
 #pragma mark - ImageView/LivePhotoView Image Setting methods.
 
+// 获取图片并更新对应 UI
 - (void)updateImage {
     self.lastTargetSize = [self targetSize];
 
@@ -113,6 +115,7 @@ static NSString * const AdjustmentFormatIdentifier = @"com.example.apple-samplec
     }
 }
 
+// 图片为 live photo 时的 UI
 - (void)updateLiveImage {
     // Prepare the options to pass when fetching the live photo.
     PHLivePhotoRequestOptions *livePhotoOptions = [[PHLivePhotoRequestOptions alloc] init];
@@ -158,10 +161,11 @@ static NSString * const AdjustmentFormatIdentifier = @"com.example.apple-samplec
     }];
 }
 
+// 图片为普通静态图片时的 UI
 - (void)updateStaticImage {
     // Prepare the options to pass when fetching the live photo.
     PHImageRequestOptions *options = [[PHImageRequestOptions alloc] init];
-    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;
+    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat; // 其实请求的结果会可能是原图
     options.networkAccessAllowed = YES;
     options.progressHandler = ^(double progress, NSError *error, BOOL *stop, NSDictionary *info) {
         /*
@@ -172,8 +176,9 @@ static NSString * const AdjustmentFormatIdentifier = @"com.example.apple-samplec
             self.progressView.progress = progress;
         });
     };
-    
-    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:[self targetSize] contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {
+	
+	CGSize targetSize = [self targetSize];
+    [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:targetSize contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {
         // Hide the progress view now the request has completed.
         self.progressView.hidden = YES;
         
@@ -226,7 +231,7 @@ static NSString * const AdjustmentFormatIdentifier = @"com.example.apple-samplec
 
     // If PHAsset supports edit operations, allow the user to toggle its favorite status.
     if ([self.asset canPerformEditOperation:PHAssetEditOperationProperties]) {
-        NSString *favoriteActionTitle = !self.asset.favorite ? NSLocalizedString(@"Favorite", @"") : NSLocalizedString(@"Unfavorite", @"");
+        NSString *favoriteActionTitle = !self.asset.favorite ? NSLocalizedString(@"❤️Favorite", @"") : NSLocalizedString(@"💔Unfavorite", @"");
         
         [alertController addAction:[UIAlertAction actionWithTitle:favoriteActionTitle style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
             [self toggleFavoriteState];
@@ -335,6 +340,7 @@ static NSString * const AdjustmentFormatIdentifier = @"com.example.apple-samplec
 
 #pragma mark - Photo editing methods.
 
+/// 应用图片滤镜
 - (void)applyFilterWithName:(NSString *)filterName {
     // Prepare the options to pass when requesting to edit the image.
     PHContentEditingInputRequestOptions *options = [[PHContentEditingInputRequestOptions alloc] init];
@@ -381,6 +387,7 @@ static NSString * const AdjustmentFormatIdentifier = @"com.example.apple-samplec
     }];
 }
 
+/// 切换收藏按钮状态
 - (void)toggleFavoriteState {
     [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
         PHAssetChangeRequest *request = [PHAssetChangeRequest changeRequestForAsset:self.asset];
@@ -392,6 +399,7 @@ static NSString * const AdjustmentFormatIdentifier = @"com.example.apple-samplec
     }];
 }
 
+/// 重置还原图片编辑
 - (void)revertToOriginal {
     [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
         PHAssetChangeRequest *request = [PHAssetChangeRequest changeRequestForAsset:self.asset];

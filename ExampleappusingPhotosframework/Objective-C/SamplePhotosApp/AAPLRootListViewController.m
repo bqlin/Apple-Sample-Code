@@ -14,7 +14,7 @@
 
 
 @interface AAPLRootListViewController () <PHPhotoLibraryChangeObserver>
-/// 章节数组，相册组
+/// 章节数组，相册组 [所有图片，智能相册组，用户相册组]
 @property (nonatomic, strong) NSArray<PHFetchResult *> *sectionFetchResults;
 @property (nonatomic, strong) NSArray *sectionLocalizedTitles;
 @end
@@ -31,21 +31,22 @@ static NSString * const CollectionSegue = @"showCollection";
 	[super awakeFromNib];
 	
     // Create a PHFetchResult object for each section in the table view.
-	// 所有照片，这里注意要区分智能相册中的所有照片
+	// 通过 PHAsset 获取所有照片，这里注意要区分智能相册中的所有照片
     PHFetchOptions *allPhotosOptions = [[PHFetchOptions alloc] init];
     allPhotosOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
     PHFetchResult *allPhotos = [PHAsset fetchAssetsWithOptions:allPhotosOptions];
 	
-	// 智能相册
+	// 通过 PHAssetCollection 获取智能相册
     PHFetchResult *smartAlbums = [PHAssetCollection fetchAssetCollectionsWithType:PHAssetCollectionTypeSmartAlbum subtype:PHAssetCollectionSubtypeAlbumRegular options:nil];
-    
-    // 用户定义相册
+	
+	// 通过 PHCollectionList 获取用户相册
     PHFetchResult *topLevelUserCollections = [PHCollectionList fetchTopLevelUserCollectionsWithOptions:nil];
 
     // Store the PHFetchResult objects and localized titles for each section.
     self.sectionFetchResults = @[allPhotos, smartAlbums, topLevelUserCollections];
     self.sectionLocalizedTitles = @[@"", NSLocalizedString(@"Smart Albums", @""), NSLocalizedString(@"Albums", @"")];
-    
+	
+	// 注册相册变动监听
     [[PHPhotoLibrary sharedPhotoLibrary] registerChangeObserver:self];
 }
 
@@ -68,15 +69,16 @@ static NSString * const CollectionSegue = @"showCollection";
     UITableViewCell *cell = sender;
     
     // Set the title of the AAPLAssetGridViewController.
+	// 设置目标控制器标题为单元格的文本
     assetGridViewController.title = cell.textLabel.text;
 
     // Get the PHFetchResult for the selected section.
     NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
     PHFetchResult *fetchResult = self.sectionFetchResults[indexPath.section];
     
-    if ([segue.identifier isEqualToString:AllPhotosSegue]) {
+    if ([segue.identifier isEqualToString:AllPhotosSegue]) { // 所有图片
         assetGridViewController.assetsFetchResults = fetchResult;
-    } else if ([segue.identifier isEqualToString:CollectionSegue]) {
+    } else if ([segue.identifier isEqualToString:CollectionSegue]) { // 只能相册组、用户相册组
         // Get the PHAssetCollection for the selected row.
         PHCollection *collection = fetchResult[indexPath.row];
         if (![collection isKindOfClass:[PHAssetCollection class]]) {
@@ -88,6 +90,7 @@ static NSString * const CollectionSegue = @"showCollection";
 		// 获取指定行相册的结果
         PHFetchResult *assetsFetchResult = [PHAsset fetchAssetsInAssetCollection:assetCollection options:nil];
 
+		// 把相册、相册图片结果赋值给目标控制器
         assetGridViewController.assetsFetchResults = assetsFetchResult;
         assetGridViewController.assetCollection = assetCollection;
     }
@@ -148,12 +151,12 @@ static NSString * const CollectionSegue = @"showCollection";
         __block BOOL reloadRequired = NO;
 
         [self.sectionFetchResults enumerateObjectsUsingBlock:^(PHFetchResult *collectionsFetchResult, NSUInteger index, BOOL *stop) {
-            /// 遍历检查每个相册组，当相册中照片有更新也会进行更新（照片数量）
-            // 获取更新
+			// 通过 PHFetchResult 获取变更对象，若该对象为空则无更新
             PHFetchResultChangeDetails *changeDetails = [changeInstance changeDetailsForFetchResult:collectionsFetchResult];
 
             // 替换更新
             if (changeDetails != nil) {
+				// 替换更新的内容
                 [updatedSectionFetchResults replaceObjectAtIndex:index withObject:[changeDetails fetchResultAfterChanges]];
                 reloadRequired = YES;
             }
@@ -164,7 +167,6 @@ static NSString * const CollectionSegue = @"showCollection";
             self.sectionFetchResults = updatedSectionFetchResults;
             [self.tableView reloadData];
         }
-        
     });
 }
 
@@ -189,6 +191,7 @@ static NSString * const CollectionSegue = @"showCollection";
 
         // Create a new album with the title entered.
         [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
+			// 创建相册
             [PHAssetCollectionChangeRequest creationRequestForAssetCollectionWithTitle:title];
         } completionHandler:^(BOOL success, NSError *error) {
             if (!success) {

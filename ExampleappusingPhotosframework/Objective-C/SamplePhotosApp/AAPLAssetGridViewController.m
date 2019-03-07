@@ -17,7 +17,11 @@
 
 @interface AAPLAssetGridViewController () <PHPhotoLibraryChangeObserver>
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addButton;
+
+/// 图片缓存对象
 @property (nonatomic, strong) PHCachingImageManager *imageManager;
+
+/// 预热区域
 @property CGRect previousPreheatRect;
 @end
 
@@ -25,8 +29,11 @@
 @implementation AAPLAssetGridViewController
 
 static NSString * const CellReuseIdentifier = @"Cell";
+/// 缩略图尺寸，需要在单元格视图的大小上乘以屏幕 scale
 static CGSize AssetGridThumbnailSize;
 
+
+// 在 viewDidLoad 前调用
 - (void)awakeFromNib {
 	[super awakeFromNib];
 	
@@ -56,6 +63,7 @@ static CGSize AssetGridThumbnailSize;
     }
 }
 
+// 在 -viewDidAppear: 中更新缓存
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
@@ -137,14 +145,14 @@ static CGSize AssetGridThumbnailSize;
     AAPLGridViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellReuseIdentifier forIndexPath:indexPath];
     cell.representedAssetIdentifier = asset.localIdentifier;
     
-    // Add a badge to the cell if the PHAsset represents a Live Photo.
+    // Add a badge to the cell if the PHAsset represents a Live Photo. Live Photo 则添加
     if (asset.mediaSubtypes & PHAssetMediaSubtypePhotoLive) {
         // Add Badge Image to the cell to denote that the asset is a Live Photo.
         UIImage *badge = [PHLivePhotoView livePhotoBadgeImageWithOptions:PHLivePhotoBadgeOptionsOverContent];
         cell.livePhotoBadgeImage = badge;
     }
     
-    // Request an image for the asset from the PHCachingImageManager.
+    // Request an image for the asset from the PHCachingImageManager. 使用 PHCachingImageManager 缓存对象请求请求图片
     [self.imageManager requestImageForAsset:asset
 								 targetSize:AssetGridThumbnailSize
 								contentMode:PHImageContentModeAspectFill
@@ -168,30 +176,30 @@ static CGSize AssetGridThumbnailSize;
 
 #pragma mark - Asset Caching
 
+/// 重置缓存资源
 - (void)resetCachedAssets {
     [self.imageManager stopCachingImagesForAllAssets];
     self.previousPreheatRect = CGRectZero;
 }
 
+/// 更新缓存资源
 - (void)updateCachedAssets {
     BOOL isViewVisible = [self isViewLoaded] && [[self view] window] != nil;
     if (!isViewVisible) { return; }
     
     // The preheat window is twice the height of the visible rect.
-    // 预加载区域是 collectionView 的等宽，两倍高
+	// 预热区域 是可视区域的两倍高，上增加 1/2，下增加 1/2
     CGRect preheatRect = self.collectionView.bounds;
     preheatRect = CGRectInset(preheatRect, 0.0f, -0.5f * CGRectGetHeight(preheatRect));
     
     /*
         Check if the collection view is showing an area that is significantly
         different to the last preheated area.
-     
      检查 collection view 是否与上一个预加载区域不同。当两个区域的中点纵坐标相差 1/3 高度则为不同。
      */
     CGFloat delta = ABS(CGRectGetMidY(preheatRect) - CGRectGetMidY(self.previousPreheatRect));
     if (delta > CGRectGetHeight(self.collectionView.bounds) / 3.0f) {
-        
-        // Compute the assets to start caching and to stop caching.
+        // Compute the assets to start caching and to stop caching. 通过 rect 获取对应的一组 index path
         NSMutableArray *addedIndexPaths = [NSMutableArray array];
         NSMutableArray *removedIndexPaths = [NSMutableArray array];
         
@@ -202,11 +210,12 @@ static CGSize AssetGridThumbnailSize;
             NSArray *indexPaths = [self.collectionView aapl_indexPathsForElementsInRect:addedRect];
             [addedIndexPaths addObjectsFromArray:indexPaths];
         }];
-        
+		
+		// 获取对应的 PHAsset 数组
         NSArray *assetsToStartCaching = [self assetsAtIndexPaths:addedIndexPaths];
         NSArray *assetsToStopCaching = [self assetsAtIndexPaths:removedIndexPaths];
         
-        // Update the assets the PHCachingImageManager is caching.
+        // Update the assets the PHCachingImageManager is caching. 缓存新预热数据，清空旧预热数据
         [self.imageManager startCachingImagesForAssets:assetsToStartCaching
 											targetSize:AssetGridThumbnailSize
 										   contentMode:PHImageContentModeAspectFill
@@ -221,38 +230,40 @@ static CGSize AssetGridThumbnailSize;
     }
 }
 
+/// 比较两个矩形，回调新增部分以及重合部分
 - (void)computeDifferenceBetweenRect:(CGRect)oldRect andRect:(CGRect)newRect removedHandler:(void (^)(CGRect removedRect))removedHandler addedHandler:(void (^)(CGRect addedRect))addedHandler {
-    if (CGRectIntersectsRect(newRect, oldRect)) {
+    if (CGRectIntersectsRect(newRect, oldRect)) { // 两者有交集
         CGFloat oldMaxY = CGRectGetMaxY(oldRect);
         CGFloat oldMinY = CGRectGetMinY(oldRect);
         CGFloat newMaxY = CGRectGetMaxY(newRect);
         CGFloat newMinY = CGRectGetMinY(newRect);
         
-        if (newMaxY > oldMaxY) {
+        if (newMaxY > oldMaxY) { // 增加 newRect 下方突出的部分
             CGRect rectToAdd = CGRectMake(newRect.origin.x, oldMaxY, newRect.size.width, (newMaxY - oldMaxY));
             addedHandler(rectToAdd);
         }
         
-        if (oldMinY > newMinY) {
+        if (oldMinY > newMinY) { // 增加 newRect 上方突出部分
             CGRect rectToAdd = CGRectMake(newRect.origin.x, newMinY, newRect.size.width, (oldMinY - newMinY));
             addedHandler(rectToAdd);
         }
         
-        if (newMaxY < oldMaxY) {
+        if (newMaxY < oldMaxY) { // 减去 newRect 下方重合部分
             CGRect rectToRemove = CGRectMake(newRect.origin.x, newMaxY, newRect.size.width, (oldMaxY - newMaxY));
             removedHandler(rectToRemove);
         }
         
-        if (oldMinY < newMinY) {
+        if (oldMinY < newMinY) { // 减去 newRect 上方重合部分
             CGRect rectToRemove = CGRectMake(newRect.origin.x, oldMinY, newRect.size.width, (newMinY - oldMinY));
             removedHandler(rectToRemove);
         }
-    } else {
+    } else { // 无交集
         addedHandler(newRect);
         removedHandler(oldRect);
     }
 }
 
+/// 获取一组 indePath 对应的一组 PHAsset
 - (NSArray *)assetsAtIndexPaths:(NSArray *)indexPaths {
     if (indexPaths.count == 0) { return nil; }
     
@@ -268,7 +279,7 @@ static CGSize AssetGridThumbnailSize;
 #pragma mark - Actions
 
 - (IBAction)handleAddButtonItem:(id)sender {
-    // Create a random dummy image.
+    // Create a random dummy image. 生成随机色图片
     CGRect rect = rand() % 2 == 0 ? CGRectMake(0, 0, 400, 300) : CGRectMake(0, 0, 300, 400);
     UIGraphicsBeginImageContextWithOptions(rect.size, NO, 1.0f);
     [[UIColor colorWithHue:(float)(rand() % 100) / 100 saturation:1.0 brightness:1.0 alpha:1.0] setFill];
@@ -276,7 +287,7 @@ static CGSize AssetGridThumbnailSize;
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    // Add it to the photo library
+    // Add it to the photo library 添加到相册
     [[PHPhotoLibrary sharedPhotoLibrary] performChanges:^{
         PHAssetChangeRequest *assetChangeRequest = [PHAssetChangeRequest creationRequestForAssetFromImage:image];
         
@@ -292,5 +303,3 @@ static CGSize AssetGridThumbnailSize;
 }
 
 @end
-
-

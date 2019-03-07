@@ -11,6 +11,7 @@ import UIKit
 import Photos
 import PhotosUI
 
+// 通过对 UICollectionView 添加分类的方式，添加通过区域矩形获取 indexPath 数组的方法
 private extension UICollectionView {
     func indexPathsForElements(in rect: CGRect) -> [IndexPath] {
         let allLayoutAttributes = collectionViewLayout.layoutAttributesForElements(in: rect)!
@@ -31,6 +32,7 @@ class AssetGridViewController: UICollectionViewController {
 
     // MARK: UIViewController / Lifecycle
 
+	// 在 viewDidLoad 函数中获取所有图片 PHAsset
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,7 +55,7 @@ class AssetGridViewController: UICollectionViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        // Determine the size of the thumbnails to request from the PHCachingImageManager
+        // Determine the size of the thumbnails to request from the PHCachingImageManager 计算用于请求图片的缩略图大小
         let scale = UIScreen.main.scale
         let cellSize = (collectionViewLayout as! UICollectionViewFlowLayout).itemSize
         thumbnailSize = CGSize(width: cellSize.width * scale, height: cellSize.height * scale)
@@ -120,11 +122,13 @@ class AssetGridViewController: UICollectionViewController {
 
     // MARK: Asset Caching
 
+	/// 重置 PHCachingImageManager 对象缓存的 PHAsset
     fileprivate func resetCachedAssets() {
         imageManager.stopCachingImagesForAllAssets()
         previousPreheatRect = .zero
     }
 
+	/// 更新 PHCachingImageManager 缓存 PHAsset
     fileprivate func updateCachedAssets() {
         // Update only if the view is visible.
         guard isViewLoaded && view.window != nil else { return }
@@ -133,7 +137,7 @@ class AssetGridViewController: UICollectionViewController {
         let visibleRect = CGRect(origin: collectionView!.contentOffset, size: collectionView!.bounds.size)
         let preheatRect = visibleRect.insetBy(dx: 0, dy: -0.5 * visibleRect.height)
 
-        // Update only if the visible area is significantly different from the last preheated area.
+        // Update only if the visible area is significantly different from the last preheated area. 当新旧预热区域中点相差 1/3 的高度时，则更新r预热区域
         let delta = abs(preheatRect.midY - previousPreheatRect.midY)
         guard delta > view.bounds.height / 3 else { return }
 
@@ -156,6 +160,7 @@ class AssetGridViewController: UICollectionViewController {
         previousPreheatRect = preheatRect
     }
 
+	/// 比较新旧区域，直接返回新增和重合区域数组的元组
     fileprivate func differencesBetweenRects(_ old: CGRect, _ new: CGRect) -> (added: [CGRect], removed: [CGRect]) {
         if old.intersects(new) {
             var added = [CGRect]()
@@ -184,6 +189,7 @@ class AssetGridViewController: UICollectionViewController {
 
     // MARK: UI Actions
 
+	/// 添加一个随机色图片到相册
     @IBAction func addAsset(_ sender: AnyObject?) {
 
         // Create a dummy image of a random solid color and random orientation.
@@ -205,7 +211,7 @@ class AssetGridViewController: UICollectionViewController {
                 addAssetRequest?.addAssets([creationRequest.placeholderForCreatedAsset!] as NSArray)
             }
         }, completionHandler: {success, error in
-            if !success { print("error creating asset: \(String(describing: error))") }
+			if !success { print("error creating asset: \(String(describing: error))") }
         })
     }
 
@@ -213,6 +219,7 @@ class AssetGridViewController: UICollectionViewController {
 
 // MARK: PHPhotoLibraryChangeObserver
 extension AssetGridViewController: PHPhotoLibraryChangeObserver {
+	/// 相册内容更新，增删改
     func photoLibraryDidChange(_ changeInstance: PHChange) {
 
         guard let changes = changeInstance.changeDetails(for: fetchResult)

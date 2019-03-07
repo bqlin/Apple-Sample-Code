@@ -47,6 +47,7 @@ class AssetViewController: UIViewController {
 
     deinit {
         PHPhotoLibrary.shared().unregisterChangeObserver(self)
+		print("dealloc")
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -76,7 +77,8 @@ class AssetViewController: UIViewController {
                 }
             #endif
         }
-        
+		
+		/// 同步 PHAsset 状态到 UI 展示
         // Enable editing buttons if the asset can be edited.
         editButton.isEnabled = asset.canPerform(.content)
         favoriteButton.isEnabled = asset.canPerform(.properties)
@@ -181,7 +183,7 @@ class AssetViewController: UIViewController {
                     _ = self.navigationController!.popViewController(animated: true)
                 }
             } else {
-                print("can't remove asset: \(String(describing: error))")
+				print("can't remove asset: \(String(describing: error))")
             }
         }
 
@@ -210,7 +212,7 @@ class AssetViewController: UIViewController {
                     sender.title = self.asset.isFavorite ? "♥︎" : "♡"
                 }
             } else {
-                print("can't set favorite: \(String(describing: error))")
+                print("can't set favorite: \(error.debugDescription)")
             }
         })
     }
@@ -298,7 +300,7 @@ class AssetViewController: UIViewController {
             let request = PHAssetChangeRequest(for: self.asset)
             request.revertAssetContentToOriginal()
         }, completionHandler: { success, error in
-            if !success { print("can't revert asset: \(String(describing: error))") }
+			if !success { print("can't revert asset: \(String(describing: error))") }
         })
     }
 
@@ -357,7 +359,7 @@ class AssetViewController: UIViewController {
                             let request = PHAssetChangeRequest(for: self.asset)
                             request.contentEditingOutput = output
                         }, completionHandler: { success, error in
-                            if !success { print("can't edit asset: \(String(describing: error))") }
+							if !success { print("can't edit asset: \(String(describing: error))") }
                         })
                     })
                 }

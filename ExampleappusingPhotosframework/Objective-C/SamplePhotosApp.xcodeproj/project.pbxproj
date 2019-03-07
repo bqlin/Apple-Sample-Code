@@ -292,7 +292,7 @@
 				DEVELOPMENT_TEAM = V7WL667MJM;
 				INFOPLIST_FILE = SamplePhotosApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SamplePhotosApp.objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -305,7 +305,7 @@
 				DEVELOPMENT_TEAM = V7WL667MJM;
 				INFOPLIST_FILE = SamplePhotosApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.SamplePhotosApp.objc";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
