@@ -192,7 +192,9 @@
 - (void)newLocationUpdate:(NSString *)locationDescription
 {
 	// Use this method to update the label which indicates the current location
-	self.currentLocation.textColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-	self.currentLocation.text = locationDescription;
+	dispatch_async(dispatch_get_main_queue(), ^{
+		self.currentLocation.textColor = [UIColor colorWithWhite:1.0 alpha:1.0];
+		self.currentLocation.text = locationDescription;
+	});
 }
 @end
