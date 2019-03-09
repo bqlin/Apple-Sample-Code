@@ -2,6 +2,8 @@
 
 This sample shows how to use AVAssetWriterInputMetadataAdaptor API to write timed location metadata, obtained from CoreLocation, during live video capture. The captured movie file has video, audio and metadata track. The metadata track contains location corresponding to where the video was recorded.
 
+旨在使用 AVAssetWriterInputMetadataAdaptor 写入位置元数据。
+
 ## Requirements
 
 Xcode 5.0 or later, iOS 8 or later

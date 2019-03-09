@@ -30,6 +30,7 @@
 	AVAssetWriterInput					*_assetWriterMetadataIn;
 	AVAssetWriterInputMetadataAdaptor	*_assetWriterMetadataAdaptor;
 	
+	/// 视频文件写入队列
 	dispatch_queue_t					_movieWritingQueue;
 	// Only accessed on movie writing queue
     BOOL								_readyToRecordAudio;
@@ -51,10 +52,11 @@
 {
     if (self = [super init])
 	{
-		// Initialize CLLocationManager to receive updates in current location
+		// Initialize CLLocationManager to receive updates in current location，创建定位管理器
 		self.locationManager = [[CLLocationManager alloc] init];
 		self.locationManager.delegate = self;
 		[self.locationManager requestWhenInUseAuthorization];
+		
 		self.referenceOrientation = AVCaptureVideoOrientationPortrait;
 		
         // The temporary path for the video before saving it to the photo album
@@ -70,6 +72,7 @@
 	if ( _assetWriter.status == AVAssetWriterStatusUnknown )
 	{
 		// If the asset writer status is unknown, implies writing hasn't started yet, hence start writing with start time as the buffer's presentation timestamp
+		// 如果 asset writer 状态未知，则意味着写入尚未开始，因此开始以开始时间作为缓冲区的显示时间戳写入
 		if ([_assetWriter startWriting])
 			[_assetWriter startSessionAtSourceTime:CMSampleBufferGetPresentationTimeStamp(sampleBuffer)];
 		else
@@ -78,6 +81,7 @@
 	
 	if ( _assetWriter.status == AVAssetWriterStatusWriting )
 	{
+		// 通过操作 writerInput 拼接 sampleBuffer 来实现拼接数据帧
 		// If the asset writer status is writing, append sample buffer to its corresponding asset writer input
 		if (mediaType == AVMediaTypeVideo)
 		{
@@ -98,13 +102,16 @@
 	}
 }
 
+/// 配置 writer 音频输入，一次配置
 - (BOOL)setupAssetWriterAudioInput:(CMFormatDescriptionRef)currentFormatDescription
 {
 	// Create audio output settings dictionary which would be used to configure asset writer input
+	// 获取音频格式数据
 	const AudioStreamBasicDescription *currentASBD = CMAudioFormatDescriptionGetStreamBasicDescription(currentFormatDescription);
+	// 获取音频轨道布局
 	size_t aclSize = 0;
 	const AudioChannelLayout *currentChannelLayout = CMAudioFormatDescriptionGetChannelLayout(currentFormatDescription, &aclSize);
-	
+	// 创建对应的音频轨道布局数据
 	NSData *currentChannelLayoutData = nil;
 	// AVChannelLayoutKey must be specified, but if we don't know any better give an empty data and let AVAssetWriter decide.
 	if ( currentChannelLayout && aclSize > 0 )
@@ -112,15 +119,18 @@
 	else
 		currentChannelLayoutData = [NSData data];
 	
-	NSDictionary *audioCompressionSettings = @{AVFormatIDKey : [NSNumber numberWithInteger:kAudioFormatMPEG4AAC],
-											   AVSampleRateKey : [NSNumber numberWithFloat:currentASBD->mSampleRate],
-											   AVEncoderBitRatePerChannelKey : [NSNumber numberWithInt:64000],
-											   AVNumberOfChannelsKey : [NSNumber numberWithInteger:currentASBD->mChannelsPerFrame],
-											   AVChannelLayoutKey : currentChannelLayoutData};
+	// 创建音频压缩配置
+	NSDictionary *audioCompressionSettings =
+	@{AVFormatIDKey : [NSNumber numberWithInteger:kAudioFormatMPEG4AAC],
+	  AVSampleRateKey : [NSNumber numberWithFloat:currentASBD->mSampleRate],
+	  AVEncoderBitRatePerChannelKey : [NSNumber numberWithInt:64000],
+	  AVNumberOfChannelsKey : [NSNumber numberWithInteger:currentASBD->mChannelsPerFrame],
+	  AVChannelLayoutKey : currentChannelLayoutData};
 	
 	if ([_assetWriter canApplyOutputSettings:audioCompressionSettings forMediaType:AVMediaTypeAudio])
 	{
 		// Intialize asset writer audio input with the above created settings dictionary
+		// 通过音频压缩配置创建 writerAudioInput
 		_assetWriterAudioIn = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeAudio outputSettings:audioCompressionSettings];
 		_assetWriterAudioIn.expectsMediaDataInRealTime = YES;
 		
@@ -144,14 +154,16 @@
 	return YES;
 }
 
+/// 配置 writerVideoInput
 - (BOOL)setupAssetWriterVideoInput:(CMFormatDescriptionRef)currentFormatDescription
 {
 	// Create video output settings dictionary which would be used to configure asset writer input
-	CGFloat bitsPerPixel;
 	CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(currentFormatDescription);
 	NSUInteger numPixels = dimensions.width * dimensions.height;
-	NSUInteger bitsPerSecond;
 	
+	// 配置码率
+	CGFloat bitsPerPixel;
+	NSUInteger bitsPerSecond;
 	// Assume that lower-than-SD resolutions are intended for streaming, and use a lower bitrate
 	if ( numPixels < (640 * 480) )
 		bitsPerPixel = 4.05; // This bitrate matches the quality produced by AVCaptureSessionPresetMedium or Low.
@@ -160,14 +172,18 @@
 	
 	bitsPerSecond = numPixels * bitsPerPixel;
 	
-	NSDictionary *videoCompressionSettings = @{AVVideoCodecKey : AVVideoCodecH264,
-											   AVVideoWidthKey : [NSNumber numberWithInteger:dimensions.width],
-											   AVVideoHeightKey : [NSNumber numberWithInteger:dimensions.height],
-											   AVVideoCompressionPropertiesKey : @{ AVVideoAverageBitRateKey : [NSNumber numberWithInteger:bitsPerSecond],
-																					AVVideoMaxKeyFrameIntervalKey :[NSNumber numberWithInteger:30]}};
+	NSDictionary *videoCompressionSettings =
+	@{AVVideoCodecKey : AVVideoCodecH264,
+	  AVVideoWidthKey : [NSNumber numberWithInteger:dimensions.width],
+	  AVVideoHeightKey : [NSNumber numberWithInteger:dimensions.height],
+	  AVVideoCompressionPropertiesKey :
+		  @{ AVVideoAverageBitRateKey : [NSNumber numberWithInteger:bitsPerSecond],
+			 AVVideoMaxKeyFrameIntervalKey :[NSNumber numberWithInteger:30]}
+	  };
 	
 	if ([_assetWriter canApplyOutputSettings:videoCompressionSettings forMediaType:AVMediaTypeVideo])
 	{
+		// 创建视频的 wrtiterInput，并设置 transform
 		// Intialize asset writer video input with the above created settings dictionary
 		_assetWriterVideoIn = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeVideo outputSettings:videoCompressionSettings];
 		_assetWriterVideoIn.expectsMediaDataInRealTime = YES;
@@ -193,17 +209,21 @@
 	return YES;
 }
 
+/// 配置 metadataInput
 - (BOOL)setupAssetWriterMetadataInputAndMetadataAdaptor
 {
 	// All combinations of identifiers, data types and extended language tags that will be appended to the metadata adaptor must form the specifications dictionary
-	CMFormatDescriptionRef metadataFormatDescription = NULL;
+	// 创建元数据规格
 	NSArray *specifications = @[@{(__bridge NSString *)kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier : (__bridge NSString *)kCMMetadataIdentifier_QuickTimeMetadataLocation_ISO6709,
 						 (__bridge NSString *)kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType : (__bridge NSString *)kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709}];
 	
 	// Create metadata format description with the above created specifications which will be used to configure asset writer input
+	// 通过规格创建元数据格式描述
+	CMFormatDescriptionRef metadataFormatDescription = NULL;
 	OSStatus err = CMMetadataFormatDescriptionCreateWithMetadataSpecifications(kCFAllocatorDefault, kCMMetadataFormatType_Boxed, (__bridge CFArrayRef)specifications, &metadataFormatDescription);
 	if (!err)
 	{
+		// 创建 metadataInput，并创建对应的 inputMetadataAdaptor
 		// Intialize asset writer video input with the above created specifications as source hint for the type of metadata to expect
 		_assetWriterMetadataIn = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeMetadata outputSettings:nil sourceFormatHint:metadataFormatDescription];
 		// Initialize metadata adaptor with the metadata input with the expected source hint
@@ -256,9 +276,12 @@
 	});
 }
 
+/// 停止录制
 - (void)stopRecording
 {
+	// session stopRunning
 	[self pauseCaptureSession];
+	// 停止更新位置信息
 	[self.locationManager stopUpdatingLocation];
 	
 	dispatch_async(_movieWritingQueue, ^{
@@ -271,6 +294,7 @@
 		// recordingDidStop is called from saveMovieToCameraRoll
 		[self.delegate recordingWillStop];
 		
+		// 停止写入，并保存到相册
 		[_assetWriter finishWritingWithCompletionHandler:^()
 		{
 			AVAssetWriterStatus completionStatus = _assetWriter.status;
@@ -343,6 +367,7 @@
 					CMTime locationMovieTime = CMTimeConvertScale([self movieTimeForLocationTime:newLocation.timestamp], 1000, kCMTimeRoundingMethod_Default);
 					
 					AVTimedMetadataGroup *newGroup = [[AVTimedMetadataGroup alloc] initWithItems:@[metadataItem] timeRange:CMTimeRangeMake(locationMovieTime, kCMTimeInvalid)];
+					NSLog(@"newGroup: [%f: %@]", CMTimeGetSeconds(locationMovieTime), metadataItem);
 					
 					if (_assetWriterMetadataIn.readyForMoreMediaData)
 					{
@@ -363,8 +388,10 @@
 
 #pragma mark - Capture
 
+/// 音频和视频的 dataOuput 都会回调到该方法
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
+	// 增加 sampleBuffer 引用计数
 	CFRetain(sampleBuffer);
 	dispatch_async(_movieWritingQueue, ^{
 		if (_assetWriter)
@@ -373,7 +400,7 @@
 			
 			if (connection == _videoConnection)
 			{
-				// Initialize the video input if this is not done yet
+				// Initialize the video input if this is not done yet，配置 writerVideoInput
 				if (!_readyToRecordVideo)
 					_readyToRecordVideo = [self setupAssetWriterVideoInput:CMSampleBufferGetFormatDescription(sampleBuffer)];
 				
@@ -383,7 +410,7 @@
 			}
 			else if (connection == _audioConnection)
 			{
-				// Initialize the audio input if this is not done yet
+				// Initialize the audio input if this is not done yet，配置 writerAudioInput
 				if (!_readyToRecordAudio)
 					_readyToRecordAudio = [self setupAssetWriterAudioInput:CMSampleBufferGetFormatDescription(sampleBuffer)];
 				
@@ -405,6 +432,7 @@
 				[self.delegate recordingDidStart];
 			}
 		}
+		// 释放 sampleBuffer 引用计数
 		CFRelease(sampleBuffer);
 	});
 }
@@ -448,6 +476,7 @@
     if ([_captureSession canAddInput:audioIn])
         [_captureSession addInput:audioIn];
 
+	// 创建 audioDataOutput，并在独立的串行队列中回调
 	AVCaptureAudioDataOutput *audioOut = [[AVCaptureAudioDataOutput alloc] init];
 	dispatch_queue_t audioCaptureQueue = dispatch_queue_create("Audio Capture Queue", DISPATCH_QUEUE_SERIAL);
 	[audioOut setSampleBufferDelegate:self queue:audioCaptureQueue];
@@ -462,7 +491,8 @@
     AVCaptureDeviceInput *videoIn = [[AVCaptureDeviceInput alloc] initWithDevice:[self videoDeviceWithPosition:AVCaptureDevicePositionBack] error:nil];
     if ([_captureSession canAddInput:videoIn])
         [_captureSession addInput:videoIn];
-    
+	
+	// 创建 videoDataOutput，设置视频格式为 kCVPixelFormatType_32BGRA，在独立的串行队列中回调
 	AVCaptureVideoDataOutput *videoOut = [[AVCaptureVideoDataOutput alloc] init];
 	[videoOut setAlwaysDiscardsLateVideoFrames:YES];
 	[videoOut setVideoSettings:@{(id)kCVPixelBufferPixelFormatTypeKey : [NSNumber numberWithInt:kCVPixelFormatType_32BGRA]}];
@@ -494,6 +524,7 @@
 		[_captureSession startRunning];
 }
 
+/// session stopRunning
 - (void)pauseCaptureSession
 {
 	if (_captureSession.isRunning)
@@ -516,6 +547,7 @@
 	});
 }
 
+/// 销毁工作，不可恢复
 - (void)stopAndTearDownCaptureSession
 {
     [_captureSession stopRunning];
@@ -559,6 +591,7 @@
 	}
 }
 
+/// NSDate -> CMTime
 - (CMTime)cmTimeForNSDate:(NSDate *)date
 {
 	CMTime now = CMClockGetTime(CMClockGetHostTimeClock());
@@ -567,14 +600,17 @@
 	return eventTime;
 }
 
+/// 转换定位时间为视频文件时间
 - (CMTime)movieTimeForLocationTime:(NSDate *)date
 {
 	CMTime locationTime = [self cmTimeForNSDate:date];
 	CMTime locationMovieTime = CMSyncConvertTime(locationTime, CMClockGetHostTimeClock(), _captureSession.masterClock);
+	NSLog(@"date: %@ -> %f", date, CMTimeGetSeconds(locationMovieTime));
 	
 	return locationMovieTime;
 }
 
+/// 屏幕方向 -> 旋转角度
 - (CGFloat)angleOffsetFromPortraitOrientationToOrientation:(AVCaptureVideoOrientation)orientation
 {
 	CGFloat angle = 0.0;
@@ -600,6 +636,7 @@
 	return angle;
 }
 
+/// 屏幕方向 -> transform
 - (CGAffineTransform)transformFromCurrentVideoOrientationToOrientation:(AVCaptureVideoOrientation)orientation
 {
 	CGAffineTransform transform = CGAffineTransformIdentity;
@@ -624,6 +661,7 @@
 
 - (void)showError:(NSError *)error
 {
+	// 在主 runloop 中弹窗
     CFRunLoopPerformBlock(CFRunLoopGetMain(), kCFRunLoopCommonModes, ^(void)
 	{
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:error.localizedDescription

@@ -49,7 +49,7 @@
 	[notificationCenter addObserver:self selector:@selector(deviceOrientationDidChange) name:UIDeviceOrientationDidChangeNotification object:nil];
 	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
 	
-	// Setup and start the capture session
+	// Setup and start the capture session，配置采集会话
     [_captureManager setupAndStartCaptureSession];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:[UIApplication sharedApplication]];
 	
