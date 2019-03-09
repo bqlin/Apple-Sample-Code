@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03481E732233D57E009679A1 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03481E722233D57E009679A1 /* Launch Screen.storyboard */; };
 		FE1EC13919330769007F9D5A /* AAPLPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FE1EC13819330769007F9D5A /* AAPLPlayerView.m */; };
 		FE58FE7C192D7E5A00F476D9 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE58FE7B192D7E5A00F476D9 /* CoreMedia.framework */; };
 		FEB060261900A3DD00FB86D8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FEB060241900A3DD00FB86D8 /* InfoPlist.strings */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03481E722233D57E009679A1 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		FE1EC13719330769007F9D5A /* AAPLPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLPlayerView.h; sourceTree = "<group>"; };
 		FE1EC13819330769007F9D5A /* AAPLPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLPlayerView.m; sourceTree = "<group>"; };
 		FE58FE7B192D7E5A00F476D9 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -84,6 +86,7 @@
 				FED5313119182C3700B80770 /* AAPLPlayerViewController.m */,
 				FED626911915FAEF009F0E76 /* AAPLTimedAnnotationWriter.h */,
 				FED626921915FAEF009F0E76 /* AAPLTimedAnnotationWriter.m */,
+				03481E722233D57E009679A1 /* Launch Screen.storyboard */,
 				FEB060301900A3DD00FB86D8 /* Main_iPad.storyboard */,
 				FEB060361900A3DD00FB86D8 /* Images.xcassets */,
 				FEB060221900A3DD00FB86D8 /* Supporting Files */,
@@ -164,6 +167,7 @@
 				FEB060321900A3DD00FB86D8 /* Main_iPad.storyboard in Resources */,
 				FEE0C9171979DAE5002DED00 /* sample.m4v in Resources */,
 				FEB060371900A3DD00FB86D8 /* Images.xcassets in Resources */,
+				03481E732233D57E009679A1 /* Launch Screen.storyboard in Resources */,
 				FEB060261900A3DD00FB86D8 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -282,7 +286,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = V7WL667MJM;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -291,7 +294,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "bq.com.example.apple-samplecode.AVTimedAnnotationWriter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -299,7 +302,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				DEVELOPMENT_TEAM = V7WL667MJM;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -308,7 +310,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "bq.com.example.apple-samplecode.AVTimedAnnotationWriter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 2;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
