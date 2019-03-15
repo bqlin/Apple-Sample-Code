@@ -53,29 +53,36 @@
  size and tile size in megabytes. This translates to an amount 
  of pixels. Keep in mind this is almost always significantly different
  from the size of a file on disk for compressed formats such as png, or jpeg.
+ 图像常数：对于图像，我们定义结果图像大小和磁贴大小，以兆字节为单位，像素的数量。请记住，来自磁盘的压缩文件，如 png 或 jpeg，器文件大小会有很大差别。
 
  For an image to be displayed in iOS, it must first be uncompressed (decoded) from 
  disk. The approximate region of pixel data that is decoded from disk is defined by both, 
  the clipping rect set onto the current graphics context, and the content/image 
  offset relative to the current context.
+ 对于要在iOS中显示的图像，必须首先对其从磁盘进行解压缩（解码）。从磁盘解码的像素数据的近似区域由两者定义，在当前图形上下文的rect剪切设置和内容/图像上相对于当前上下文的偏移量。
 
  To get the uncompressed file size of an image, use: Width x Height / pixelsPerMB, where 
  pixelsPerMB = 262144 pixels in a 32bit colospace (which iOS is optimized for).
+ 要获得图像的未压缩文件大小，请使用：Width x Height / pixelsPerMB，其中pixelsPerMB = 32位colospace中的262144像素（iOS针对其进行了优化）。
  
  Supported formats are: PNG, TIFF, JPEG. Unsupported formats: GIF, BMP, interlaced images.
+ 支持的格式为：PNG，TIFF，JPEG。不支持的格式：GIF，BMP，隔行扫描图像。
 */
 #define kImageFilename @"large_leaves_70mp.jpg" // 7033x10110 image, 271 MB uncompressed
 
 /* The arguments to the downsizing routine are the resulting image size, and 
  "tile" size. And they are defined in terms of megabytes to simplify the correlation
  between images and memory footprint available to your application.
+ 缩小规则的参数是得到的图像大小和“平铺”大小。 它们以兆字节为单位进行定义，以简化应用程序可用的映像与内存占用之间的关联。
  
  The "tile" is the maximum amount of pixel data to load from the input image into
  memory at one time. The size of the tile defines the number of iterations 
  required to piece together the resulting image.
+ “瓦片”是一次从输入图像加载到存储器中的最大像素数据量。图块的大小定义了将结果图像拼凑在一起所需的迭代次数。
  
  Choose a resulting size for your image given both: the hardware profile of your 
- target devices, and the amount of memory taken by the rest of your application. 
+ target devices, and the amount of memory taken by the rest of your application.
+ 在以下两种情况下为图像选择最终大小：目标设备的硬件配置文件以及应用程序其余部分占用的内存量。
  
  Maximizing the source image tile size will minimize the time required to complete 
  the downsize routine. Thus, performance must be balanced with resulting image quality.
