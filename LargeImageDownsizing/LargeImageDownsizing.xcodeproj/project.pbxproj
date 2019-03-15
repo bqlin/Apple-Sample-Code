@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A52F7C8A223BB77B0065111C /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A52F7C89223BB77B0065111C /* Launch Screen.storyboard */; };
 		C41B001F13E8C43D0089C2E6 /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = C41B001E13E8C43D0089C2E6 /* ReadMe.txt */; };
 		C42B301518DB7CBC00F98B9F /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = C42B301318DB7CBC00F98B9F /* MainWindow.xib */; };
 		C465AC9F138B5AEE00055050 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C465AC9E138B5AEE00055050 /* UIKit.framework */; };
@@ -26,11 +27,11 @@
 		C465ACE2138B6A3D00055050 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C465ACDC138B6A3D00055050 /* Icon-Small@2x.png */; };
 		C465ACE3138B6A3D00055050 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = C465ACDD138B6A3D00055050 /* Icon.png */; };
 		C465ACE4138B6A3D00055050 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C465ACDE138B6A3D00055050 /* Icon@2x.png */; };
-		C4BB37FF18AAD07800E4E62F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C4BB37FE18AAD07800E4E62F /* Default-568h@2x.png */; };
 		C4CBB70E13D1404300D1B910 /* large_leaves_70mp.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4CBB70D13D1404300D1B910 /* large_leaves_70mp.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A52F7C89223BB77B0065111C /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		C41B001E13E8C43D0089C2E6 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = SOURCE_ROOT; };
 		C42B301418DB7CBC00F98B9F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		C465AC9A138B5AEE00055050 /* LargeImage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LargeImage.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,7 +58,6 @@
 		C465ACDC138B6A3D00055050 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
 		C465ACDD138B6A3D00055050 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		C465ACDE138B6A3D00055050 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
-		C4BB37FE18AAD07800E4E62F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C4CBB70D13D1404300D1B910 /* large_leaves_70mp.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = large_leaves_70mp.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,7 +79,6 @@
 		C465AC8F138B5AEE00055050 = {
 			isa = PBXGroup;
 			children = (
-				C4BB37FE18AAD07800E4E62F /* Default-568h@2x.png */,
 				C465ACA4138B5AEE00055050 /* LargeImageDownsizing */,
 				C465AC9D138B5AEE00055050 /* Frameworks */,
 				C465AC9B138B5AEE00055050 /* Products */,
@@ -133,6 +132,7 @@
 				C465ACAA138B5AEE00055050 /* LargeImageDownsizing-Prefix.pch */,
 				C465ACB6138B5AEF00055050 /* LargeImageDownsizingViewController.xib */,
 				C465ACAB138B5AEE00055050 /* main.m */,
+				A52F7C89223BB77B0065111C /* Launch Screen.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -209,9 +209,9 @@
 				C465ACB8138B5AEF00055050 /* LargeImageDownsizingViewController.xib in Resources */,
 				C465ACDF138B6A3D00055050 /* Icon-72.png in Resources */,
 				C465ACE0138B6A3D00055050 /* Icon-Small-50.png in Resources */,
-				C4BB37FF18AAD07800E4E62F /* Default-568h@2x.png in Resources */,
 				C465ACE1138B6A3D00055050 /* Icon-Small.png in Resources */,
 				C465ACE2138B6A3D00055050 /* Icon-Small@2x.png in Resources */,
+				A52F7C8A223BB77B0065111C /* Launch Screen.storyboard in Resources */,
 				C465ACE3138B6A3D00055050 /* Icon.png in Resources */,
 				C42B301518DB7CBC00F98B9F /* MainWindow.xib in Resources */,
 				C465ACE4138B6A3D00055050 /* Icon@2x.png in Resources */,
