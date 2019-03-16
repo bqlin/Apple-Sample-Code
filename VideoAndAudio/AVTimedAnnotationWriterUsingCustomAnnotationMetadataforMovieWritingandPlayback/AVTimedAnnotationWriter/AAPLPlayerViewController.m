@@ -34,6 +34,7 @@
 	{
 		// Set up player to preview the file which was just exported
 		AVAsset *asset = [AVURLAsset assetWithURL:movieURL];
+		// 获取视频轨道到 videoTrack 属性
 		[asset loadValuesAsynchronouslyForKeys:@[@"tracks"] completionHandler:^{
 			// Get the first enabled video track in the asset.
 			NSArray *videoTracks = [asset tracksWithMediaType:AVMediaTypeVideo];
@@ -55,6 +56,7 @@
 		}];
 		
 		AVPlayerItem *playerItem = [AVPlayerItem playerItemWithAsset:asset];
+		// 创建播放时的 metadataOutput，在主队列中回调数据
 		// Add player item metadata output to receive timed metadata groups during playback
 		AVPlayerItemMetadataOutput *output = [[AVPlayerItemMetadataOutput alloc] initWithIdentifiers:nil];
 		[output setDelegate:self queue:dispatch_get_main_queue()];
@@ -63,6 +65,7 @@
 		
 		// Default annotation color is set to green
 		self.annotationColor = [UIColor greenColor];
+		// 添加两指手势
 		// We use two finger tap to change the annotation color
 		UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeAnnotationColor:)];
 		[twoFingerTap setNumberOfTouchesRequired:2];
@@ -72,8 +75,10 @@
 
 #pragma mark - AVPlayerItemMetadataOutputPushDelegate
 
+/// 播放时的元数据回调
 - (void)metadataOutput:(AVPlayerItemMetadataOutput *)output didOutputTimedMetadataGroups:(NSArray *)groups fromPlayerItemTrack:(AVPlayerItemTrack *)track
 {
+	// 获取参考的轨道，判断是否包含当前的视频轨道
 	NSArray *referencedTracks = [[track assetTrack] associatedTracksOfType:AVTrackAssociationTypeMetadataReferent];
 	if (![referencedTracks containsObject:self.videoTrack])
 		return;
@@ -87,6 +92,7 @@
 		// Annotation text item
 		AVMetadataItem *textItem = [[AVMetadataItem metadataItemsFromArray:[group items] filteredByIdentifier:AAPLTimedAnnotationWriterCommentFieldIdentifier] firstObject];
 		
+		// 获取相关数据
 		float radius = 0.0;
 		CGPoint center = CGPointZero;
 		NSString *commentText = nil;
@@ -98,6 +104,7 @@
 		if (textItem.value)
 			commentText = textItem.stringValue;
 		
+		// 创建 bezizerPath，用于创建新的 shapeLayer
 		// Create CAShapeLayer which has gray rectangle with 0.5 opacity and circle (focus ring) of radius with 0 opacity
 		// This shape layer is similar to the one drawn in updateCircleLayerWithCenter:radius:
 		// Here we use the positioning information from AVPlayerItemMetadataOutput
@@ -114,11 +121,13 @@
 		fillLayer.lineWidth = 5;
 		fillLayer.opacity = 0.5;
 		
+		// 移除原有图层，添加替换新图层
 		[self.circleLayer removeFromSuperlayer];
 		self.circleLayer = fillLayer;
 		[self.circleLayer setHidden:NO];
 		[self.view.layer addSublayer:self.circleLayer];
 		
+		// 创建对应的 label
 		UILabel *newAnnotationText = [[UILabel alloc] initWithFrame:CGRectMake(center.x + radius, center.y - radius, 200, 40)];
 		newAnnotationText.text = commentText;
 		newAnnotationText.textColor = [UIColor whiteColor];
@@ -133,6 +142,7 @@
 
 #pragma mark - Gesture resognizer
 
+/// 两指手势响应，修改对应的 layer 和 label 的颜色
 - (void)changeAnnotationColor:(UITapGestureRecognizer *)recognizer
 {
 	// For every two finger tap we change the color of the annotation being drawn from green -> blue -> red -> green

@@ -11,6 +11,7 @@
 @import UIKit;
 @import AVKit;
 
+/// 实现的是 AVPlayerViewController 的子类，用于根据在元数据中的信息生成 layer 和 label
 @interface AAPLPlayerViewController : AVPlayerViewController
 
 - (void)setupPlaybackWithURL:(NSURL *)movieURL;
