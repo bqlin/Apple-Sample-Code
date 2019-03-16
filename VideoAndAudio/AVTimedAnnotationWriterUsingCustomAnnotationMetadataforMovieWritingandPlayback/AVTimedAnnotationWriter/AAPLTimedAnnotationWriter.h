@@ -11,8 +11,11 @@
 @import Foundation;
 @import AVFoundation;
 
+/// 圆形中点坐标
 NSString *const AAPLTimedAnnotationWriterCircleCenterCoordinateIdentifier;
+/// 圆形半径
 NSString *const AAPLTimedAnnotationWriterCircleRadiusIdentifier;
+/// 评论内容
 NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier;
 
 @interface AAPLTimedAnnotationWriter : NSObject

@@ -20,19 +20,25 @@ NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier = @"mdta/com.exa
 
 @optional
 - (CMSampleBufferRef)copyNextSampleBuffer;
+// 只有元数据的提供者才会该方法吧？
 - (AVTimedMetadataGroup *)copyNextTimedMetadataGroup;
 
 @end
 
+/// 对 AVAssetReaderTrackOutput 扩展 AAPLAssetWriterInputSampleProvider 协议的两个方法
 @interface AVAssetReaderTrackOutput (SampleProvider) <AAPLAssetWriterInputSampleProvider>
+// AVAssetReader 有 -copyNextSampleBuffer 方法实现，但没 -copyNextTimedMetadataGroup 方法实现
 
 @end
 
+/// 元数据供应者
 @interface AVMetadataSampleProvider : NSObject <AAPLAssetWriterInputSampleProvider>
 {
 @private
     NSArray					*metadataSamples;
+	/// 当前读取的样本索引
     NSUInteger				currentSampleNum;
+	// metadataSamples 的个数
     NSUInteger				numOfSamples;
 };
 
@@ -40,6 +46,7 @@ NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier = @"mdta/com.exa
 
 @end
 
+/// sampleBuffer 轨道封装
 @interface AVSampleBufferChannel : NSObject
 {
 @private
@@ -48,6 +55,7 @@ NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier = @"mdta/com.exa
     AVAssetWriterInputMetadataAdaptor		*assetWriterAdaptor;
     
     dispatch_block_t						completionHandler;
+	/// 序列化串行队列
     dispatch_queue_t						serializationQueue;
     BOOL									finished;  // only accessed on serialization queue
 }
@@ -73,9 +81,12 @@ NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier = @"mdta/com.exa
 															   ----------------------------------
  */
 
+/// 注解写入器
 @interface AAPLTimedAnnotationWriter ()
 {
+	/// 序列化队列，串行
 	dispatch_queue_t			serializationQueue;
+	/// 全局信号量
 	dispatch_semaphore_t		globalDispatchSemaphore;
 	
 	// All of these are created, accessed, and torn down exclusively on the serializaton queue
@@ -89,6 +100,7 @@ NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier = @"mdta/com.exa
 
 @property AVAsset	*sourceAsset;
 @property NSArray   *metadataGroups;
+/// tmp/Movie.MOV
 @property NSURL		*destinationAssetURL;
 
 @end
@@ -120,6 +132,7 @@ NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier = @"mdta/com.exa
 	return self.destinationAssetURL;
 }
 
+/// 写入元数据组
 - (void)writeMetadataGroups:(NSArray *)metadataGroups
 {
 	self.metadataGroups = metadataGroups;
@@ -133,6 +146,7 @@ NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier = @"mdta/com.exa
 		
 		if (success)
 		{
+			// 先移除已存在的导出资源
 			// AVAssetWriter does not overwrite files for us, so remove the destination file if it already exists
 			NSFileManager *fm = [NSFileManager defaultManager];
 			NSString *localOutputPath = [self.destinationAssetURL path];
@@ -140,6 +154,7 @@ NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier = @"mdta/com.exa
 				success = [fm removeItemAtPath:localOutputPath error:&localError];
 		}
 		
+		// 配置 reader 和 writer，并开始读取与写入
 		// Set up the AVAssetReader and AVAssetWriter, then begin writing samples or flag an error
 		if (success)
 			success = [self setUpReaderAndWriterReturningError:&localError];
@@ -153,6 +168,7 @@ NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier = @"mdta/com.exa
 	dispatch_semaphore_wait(globalDispatchSemaphore, DISPATCH_TIME_FOREVER);
 }
 
+/// 配置 reader 和 writer
 - (BOOL)setUpReaderAndWriterReturningError:(NSError **)outError
 {
 	BOOL success = YES;
@@ -160,6 +176,7 @@ NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier = @"mdta/com.exa
 	AVAsset *localAsset = self.sourceAsset;
 	NSURL *localOutputURL = self.destinationAssetURL;
 	
+	// 创建 reader 和 writer
 	// Create asset reader and asset writer
 	assetReader = [[AVAssetReader alloc] initWithAsset:localAsset error:&localError];
 	success = (assetReader != nil);
@@ -168,11 +185,12 @@ NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier = @"mdta/com.exa
 		success = (assetWriter != nil);
 	}
 	
+	// 创建音频、视频轨道的 trackOuput 和 writerInput
 	// Create asset reader outputs and asset writer inputs for the first audio track and first video track of the asset
 	if (success) {
-		AVAssetTrack *audioTrack = nil, *videoTrack = nil;
-		
+		// 获取音频和视频轨道
 		// Grab first audio track and first video track, if the asset has them
+		AVAssetTrack *audioTrack = nil, *videoTrack = nil;
 		NSArray *audioTracks = [localAsset tracksWithMediaType:AVMediaTypeAudio];
 		if ([audioTracks count] > 0)
 			audioTrack = [audioTracks objectAtIndex:0];
@@ -204,27 +222,32 @@ NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier = @"mdta/com.exa
 			// Create and save an instance of AVSampleBufferChannel, which will coordinate the work of reading and writing sample buffers
 			videoSampleBufferChannel = [[AVSampleBufferChannel alloc] initWithSampleProvider:videoOutput assetWriterInput:videoInput assetWriterAdaptor:nil];
 			
+			//
 			// Setup metadata track in order to write metadata samples
 			CMFormatDescriptionRef metadataFormatDescription = NULL;
-			NSArray *specs = @[
-							   @{(__bridge NSString *)kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier : AAPLTimedAnnotationWriterCircleCenterCoordinateIdentifier,
-								 (__bridge NSString *)kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType : (__bridge NSString *)kCMMetadataBaseDataType_PointF32},
-							   @{(__bridge NSString *)kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier : AAPLTimedAnnotationWriterCircleRadiusIdentifier,
-								 (__bridge NSString *)kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType : (__bridge NSString *)kCMMetadataBaseDataType_Float64},
-							   @{(__bridge NSString *)kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier : AAPLTimedAnnotationWriterCommentFieldIdentifier,
-								 (__bridge NSString *)kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType : (__bridge NSString *)kCMMetadataBaseDataType_UTF8}];
+			NSArray *specs =
+			@[
+			  @{(__bridge NSString *)kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier : AAPLTimedAnnotationWriterCircleCenterCoordinateIdentifier,
+				(__bridge NSString *)kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType : (__bridge NSString *)kCMMetadataBaseDataType_PointF32},
+			  @{(__bridge NSString *)kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier : AAPLTimedAnnotationWriterCircleRadiusIdentifier,
+				(__bridge NSString *)kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType : (__bridge NSString *)kCMMetadataBaseDataType_Float64},
+			  @{(__bridge NSString *)kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier : AAPLTimedAnnotationWriterCommentFieldIdentifier,
+				(__bridge NSString *)kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType : (__bridge NSString *)kCMMetadataBaseDataType_UTF8}];
 			
 			
 			OSStatus err = CMMetadataFormatDescriptionCreateWithMetadataSpecifications(kCFAllocatorDefault, kCMMetadataFormatType_Boxed, (__bridge CFArrayRef)specs, &metadataFormatDescription);
 			if (!err)
 			{
+				// 用上面的配置信息创建 AVAssetWriterInput 和 AVAssetWriterInputMetadataAdaptor
 				AVAssetWriterInput *assetWriterMetadataIn = [AVAssetWriterInput assetWriterInputWithMediaType:AVMediaTypeMetadata outputSettings:nil sourceFormatHint:metadataFormatDescription];
 				AVAssetWriterInputMetadataAdaptor *assetWriterMetadataAdaptor = [AVAssetWriterInputMetadataAdaptor assetWriterInputMetadataAdaptorWithAssetWriterInput:assetWriterMetadataIn];
 				assetWriterMetadataIn.expectsMediaDataInRealTime = YES;
 				
+				// 元数据关联到视频轨道
 				[assetWriterMetadataIn addTrackAssociationWithTrackOfInput:videoInput type:AVTrackAssociationTypeMetadataReferent];
 				[assetWriter addInput:assetWriterMetadataIn];
 				
+				// 创建元数据数据源
 				AVMetadataSampleProvider *metadataSampleProvider = [[AVMetadataSampleProvider alloc] initWithMetadataSamples:self.metadataGroups];
 				
 				metadataSampleBufferChannel = [[AVSampleBufferChannel alloc] initWithSampleProvider:metadataSampleProvider assetWriterInput:assetWriterMetadataIn assetWriterAdaptor:assetWriterMetadataAdaptor];
@@ -243,6 +266,7 @@ NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier = @"mdta/com.exa
 	return success;
 }
 
+/// 开始读取与写入
 - (BOOL)startReadingAndWritingReturningError:(NSError **)outError
 {
 	BOOL success = YES;
@@ -364,29 +388,33 @@ NSString *const AAPLTimedAnnotationWriterCommentFieldIdentifier = @"mdta/com.exa
 	return self;
 }
 
+/// 开始读取与写入
 - (void)startReadingAndWritingWithCompletionHandler:(dispatch_block_t)localCompletionHandler
 {
 	completionHandler = [localCompletionHandler copy];
 	
+	// 请求媒体数据
 	[assetWriterInput requestMediaDataWhenReadyOnQueue:serializationQueue usingBlock:^{
 		if (finished)
 			return;
 		
 		BOOL completedOrFailed = NO;
 		
+		// 循环读取文件帧数据，直到读取完毕，在这过程中 writer 写入数据
 		// Read samples in a loop as long as the asset writer input is ready
 		while ([assetWriterInput isReadyForMoreMediaData] && !completedOrFailed) {
 			CMSampleBufferRef sampleBuffer = NULL;
 			AVTimedMetadataGroup *metadataGroup = nil;
-			if ([[assetWriterInput mediaType] isEqualToString:AVMediaTypeMetadata])
+			if ([[assetWriterInput mediaType] isEqualToString:AVMediaTypeMetadata]) // 元数据
 			{
 				metadataGroup = [sampleProvider copyNextTimedMetadataGroup];
 			}
-			else
+			else // 音频或视频轨道
 			{
 				sampleBuffer = [sampleProvider copyNextSampleBuffer];
 			}
 			
+			// 分别拼接 sampleBuffer 和 timedMetadataGroup
 			if (sampleBuffer != NULL) {
 				BOOL success = [assetWriterInput appendSampleBuffer:sampleBuffer];
 				CFRelease(sampleBuffer);
