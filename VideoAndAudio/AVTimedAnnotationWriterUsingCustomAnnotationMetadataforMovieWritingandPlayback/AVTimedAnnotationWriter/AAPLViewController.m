@@ -98,6 +98,7 @@ static NSString* const AAPLViewControllerRateObservationContext = @"AAPLViewCont
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+	// 点击预览后使用 AAPLPlayerViewController 进行播放
 	if ([segue.identifier isEqualToString:@"Export"])
 	{
 		NSURL *url = [self writeToMovie];
@@ -207,6 +208,7 @@ static NSString* const AAPLViewControllerRateObservationContext = @"AAPLViewCont
 	fillLayer.lineWidth = 5;
 	fillLayer.opacity = 0.5;
 	
+	// 移除原有的 circleLayer，替换成新的
 	[self.circleLayer removeFromSuperlayer];
 	self.circleLayer = fillLayer;
 	
@@ -241,6 +243,7 @@ static NSString* const AAPLViewControllerRateObservationContext = @"AAPLViewCont
 }
 
 // This method creates the timed metadata groups with circle center, radius and text to write out to a movie file
+/// 从 UI 中获取数据创建元数据，并添加到 metadataGroups 中
 - (void)addMetadataForCirclePosition:(CGPoint)circleCenter
 {
 	CMTime currentTime = [self.player currentTime];
@@ -318,6 +321,7 @@ static NSString* const AAPLViewControllerRateObservationContext = @"AAPLViewCont
 	}
 }
 
+// 在当前时间把元数据添加进去
 // One finger tap begins playback and starts recording circle location over time
 - (IBAction)handleOneFingerTapFrom:(UITapGestureRecognizer *)recognizer
 {
