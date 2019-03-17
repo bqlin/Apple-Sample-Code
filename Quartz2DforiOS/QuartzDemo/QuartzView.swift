@@ -25,7 +25,7 @@ extension CGContext {
 }
 
 
-
+/// 绘制视图基类
 class QuartzView: UIView {
 
     // center and optionally scale the drawing
@@ -47,7 +47,7 @@ class QuartzView: UIView {
     }
 
 
-
+	/// 统一在 -drawRect: 中绘制
     override func draw(_ rect: CGRect) {
         drawInContext( UIGraphicsGetCurrentContext()! )
     }

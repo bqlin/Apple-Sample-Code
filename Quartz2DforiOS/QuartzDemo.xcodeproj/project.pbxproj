@@ -270,6 +270,7 @@
 				TargetAttributes = {
 					524CC7DF1EA966C7008E6547 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = V7WL667MJM;
 						ProvisioningStyle = Automatic;
 					};
 					524CC7F51EA966C8008E6547 = {
@@ -518,7 +519,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = V7WL667MJM;
 				INFOPLIST_FILE = QuartzDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -532,7 +533,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = V7WL667MJM;
 				INFOPLIST_FILE = QuartzDemo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

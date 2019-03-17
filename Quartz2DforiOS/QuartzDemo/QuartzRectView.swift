@@ -36,18 +36,19 @@ class QuartzRectView: QuartzView {
         // Stroke Rect convenience that is equivalent to above
         context.stroke(CGRect(x: 30.0, y: 120.0, width: 60.0, height: 60.0))
 
+		// 绘制左下角 10 宽度方形
         // Stroke rect convenience equivalent to the above with built-in call to CGContextSetLineWidth().
         context.stroke(CGRect(x: 30.0, y: 210.0, width: 60.0, height: 60.0), width: 10.0)
 
         // Demonstate the stroke is on both sides of the path.
         context.savingGState {
-
+			// 绘制左下角红色方形
             context.setStrokeColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 1.0)
             context.stroke(CGRect(x: 30.0, y: 210.0, width: 60.0, height: 60.0), width: 2.0)
 
         }
 
-        
+		// 绘制中列方形
         // Bulk call to add multiple rects to the current path.
         let rects = [
             CGRect(x: 120.0, y: 30.0, width: 60.0, height: 60.0),

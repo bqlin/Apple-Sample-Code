@@ -36,10 +36,12 @@ class QuartzMaskingView: QuartzView {
         // the alpha channel as a mask.
 
         // Allocate data
+		// 分配数据
         let rasterBuffer: CFMutableData = CFDataCreateMutable(nil, rasterBufferSize)!
         CFDataSetLength(rasterBuffer, rasterBufferSize)
 
         // Create a bitmap context
+		// 创建位图上下文
         let context = CGContext(data: CFDataGetMutableBytePtr(rasterBuffer),
                                 width: imageWidth,
                                 height: imageHeight,
@@ -49,17 +51,21 @@ class QuartzMaskingView: QuartzView {
                                 bitmapInfo: CGImageAlphaInfo.alphaOnly.rawValue)!
 
         // Set the blend mode to copy to avoid any alteration of the source data
+		// 将混合模式设置为复制以避免对源数据进行任何更改
         context.setBlendMode(.copy)
 
         // Draw the image to extract the alpha channel
+		// 绘制图像以提取Alpha通道
         context.draw(QuartzMaskingView.alphaImage, in: CGRect(x: 0.0, y: 0.0, width: CGFloat(imageWidth), height: CGFloat(imageHeight)))
 
         // Now the alpha channel has been copied into our NSData object above, so lets make an image mask.
 
         // Create a data provider for our data object (NSMutableData is tollfree bridged to CFMutableDataRef, which is compatible with CFDataRef)
+		// 为我们的数据对象创建数据提供程序（NSMutableData是tollfree桥接到CFMutableDataRef，它与CFDataRef兼容）
         let dataProvider: CGDataProvider = CGDataProvider(data: rasterBuffer)!
 
         // Create our new mask image with the same size as the original image
+		// 创建与原始图像大小相同的新蒙版图像
         return CGImage(maskWidth: imageWidth,
                        height: imageHeight,
                        bitsPerComponent: bitsPerPixel,
