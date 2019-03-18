@@ -51,14 +51,17 @@
 
 @interface ImageScrollView : UIScrollView <UIScrollViewDelegate> {
 	// The TiledImageView that is currently front most
+	// 最前面的视图
 	TiledImageView* frontTiledView;
 	// The old TiledImageView that we draw on top of when the zooming stops
 	TiledImageView* backTiledView;	
 	// A low res version of the image that is displayed until the TiledImageView
 	// renders its content.
+	// 渲染的低分辨率图像
 	UIImageView *backgroundImageView;
     float minimumScale;
 	// current image zoom scale
+	// 当前缩放比率
 	CGFloat imageScale;
     UIImage* image;
 }

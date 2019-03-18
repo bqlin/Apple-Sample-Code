@@ -75,24 +75,30 @@
 		// determine the size of the image
         self.image = img;
         CGRect imageRect = CGRectMake(0.0f,0.0f,CGImageGetWidth(image.CGImage),CGImageGetHeight(image.CGImage));
+		// 默认为 视图宽/图像宽
         imageScale = self.frame.size.width/imageRect.size.width;
         minimumScale = imageScale * 0.75f;
         NSLog(@"imageScale: %f",imageScale);
         imageRect.size = CGSizeMake(imageRect.size.width*imageScale, imageRect.size.height*imageScale);
+		NSLog(@"sacle image size: %@", NSStringFromCGSize(imageRect.size));
+		
         // Create a low res image representation of the image to display before the TiledImageView
         // renders its content.
+		// 通过渲染在较小的尺寸达到节省内存
         UIGraphicsBeginImageContext(imageRect.size);		
         CGContextRef context = UIGraphicsGetCurrentContext();		
         CGContextSaveGState(context);
         CGContextDrawImage(context, imageRect, image.CGImage);
         CGContextRestoreGState(context);		
         UIImage *backgroundImage = UIGraphicsGetImageFromCurrentImageContext();		
-        UIGraphicsEndImageContext();		
+        UIGraphicsEndImageContext();
+		
         backgroundImageView = [[UIImageView alloc] initWithImage:backgroundImage];
         backgroundImageView.frame = imageRect;
         backgroundImageView.contentMode = UIViewContentModeScaleAspectFit;
         [self addSubview:backgroundImageView];
         [self sendSubviewToBack:backgroundImageView];
+		
         // Create the TiledImageView based on the size of the image and scale it to fit the view.
         frontTiledView = [[TiledImageView alloc] initWithFrame:imageRect image:image scale:imageScale];
         [self addSubview:frontTiledView];
@@ -105,6 +111,7 @@
 #pragma mark Override layoutSubviews to center content
 
 // We use layoutSubviews to center the image in the view
+// 通过 -layoutSubviews 布局实现图像居中
 - (void)layoutSubviews {
     [super layoutSubviews];
     // center the image as it becomes smaller than the size of the screen
@@ -125,6 +132,7 @@
 	// to handle the interaction between CATiledLayer and high resolution screens, we need to manually set the
 	// tiling view's contentScaleFactor to 1.0. (If we omitted this, it would be 2.0 on high resolution screens,
 	// which would cause the CATiledLayer to ask us for tiles of the wrong scales.)
+	// 为了让 CATiledLayer 缩放正确，需设置视图的 contentScaleFactor 为 1.0
 	frontTiledView.contentScaleFactor = 1.0;
 }
 #pragma mark -

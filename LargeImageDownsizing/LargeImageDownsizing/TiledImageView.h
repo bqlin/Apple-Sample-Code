@@ -47,6 +47,7 @@
 
 #import <UIKit/UIKit.h>
 
+/// 内部使用 CATiledLayer，并通过 -drawRect: 不断绘制指定尺寸的图像
 @interface TiledImageView : UIView {
 	CGFloat imageScale;
     UIImage* image;

@@ -30,10 +30,8 @@ View Controllers
 ----------------
  
 LargeImageDownsizingViewController.h, .m
-The main view controller of the application. It kicks off the downsizing routine and updates an image view 
-showing the current progress as the resulting image is pieced together. When the downsize completes, the image 
-view is swapped out for a scroll view that contains the resulting image to allow for zooming and panning to 
-inspect the levels of detail of the resulting image.
+The main view controller of the application. It kicks off the downsizing routine and updates an image view  showing the current progress as the resulting image is pieced together. When the downsize completes, the image view is swapped out for a scroll view that contains the resulting image to allow for zooming and panning to inspect the levels of detail of the resulting image.
+应用程序的主视图控制器。它开始缩小规模并更新显示当前进度的图像视图，因为生成的图像拼凑在一起。 缩小尺寸完成后，图像视图将换出包含结果图像的滚动视图，以允许缩放和平移以检查生成图像的细节级别。
  
 Views
 ----------------
