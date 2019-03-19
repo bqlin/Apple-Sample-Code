@@ -83,13 +83,14 @@
 }
 
 -(void)drawRect:(CGRect)rect {
+	//NSLog(@"TiledImage Rect: %@", NSStringFromCGRect(rect));
     CGContextRef context = UIGraphicsGetCurrentContext();    
 	CGContextSaveGState(context);
 	// Scale the context so that the image is rendered 
 	// at the correct size for the zoom level.
-	CGContextScaleCTM(context, imageScale,imageScale);	
+	CGContextScaleCTM(context, imageScale, imageScale);	
 	CGContextDrawImage(context, imageRect, image.CGImage);
-	CGContextRestoreGState(context);	
+	CGContextRestoreGState(context);
 }
 
 @end

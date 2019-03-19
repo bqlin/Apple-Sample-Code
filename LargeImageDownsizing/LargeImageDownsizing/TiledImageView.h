@@ -51,6 +51,7 @@
 @interface TiledImageView : UIView {
 	CGFloat imageScale;
     UIImage* image;
+	/// 图像原始尺寸
     CGRect imageRect;
 }
 @property (retain) UIImage* image;

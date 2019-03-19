@@ -146,7 +146,7 @@
 // we create a new TiledImageView based on the new zoom level and draw it on top of the old TiledImageView.
 - (void)scrollViewDidEndZooming:(UIScrollView *)scrollView withView:(UIView *)view atScale:(CGFloat)scale {
 	// set the new scale factor for the TiledImageView
-	imageScale *=scale;
+	imageScale *= scale;
     if( imageScale < minimumScale ) imageScale = minimumScale;
     CGRect imageRect = CGRectMake(0.0f,0.0f,CGImageGetWidth(image.CGImage) * imageScale,CGImageGetHeight(image.CGImage) * imageScale);
     // Create a new TiledImageView based on new frame and scaling.

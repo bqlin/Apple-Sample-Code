@@ -75,21 +75,17 @@
  between images and memory footprint available to your application.
  缩小规则的参数是得到的图像大小和“平铺”大小。 它们以兆字节为单位进行定义，以简化应用程序可用的映像与内存占用之间的关联。
  
- The "tile" is the maximum amount of pixel data to load from the input image into
- memory at one time. The size of the tile defines the number of iterations 
- required to piece together the resulting image.
+ The "tile" is the maximum amount of pixel data to load from the input image into memory at one time. The size of the tile defines the number of iterations required to piece together the resulting image.
  “瓦片”是一次从输入图像加载到存储器中的最大像素数据量。图块的大小定义了将结果图像拼凑在一起所需的迭代次数。
  
- Choose a resulting size for your image given both: the hardware profile of your 
- target devices, and the amount of memory taken by the rest of your application.
+ Choose a resulting size for your image given both: the hardware profile of your target devices, and the amount of memory taken by the rest of your application.
  在以下两种情况下为图像选择最终大小：目标设备的硬件配置文件以及应用程序其余部分占用的内存量。
  
- Maximizing the source image tile size will minimize the time required to complete 
- the downsize routine. Thus, performance must be balanced with resulting image quality.
+ Maximizing the source image tile size will minimize the time required to complete the downsize routine. Thus, performance must be balanced with resulting image quality.
+ 最大化源图像图块大小将最小化完成缩小尺寸例程所需的时间。 因此，性能必须与产生的图像质量相平衡。
  
- Choosing appropriate resulting image size and tile size can be done, but is left as 
- an exercise to the developer. Note that the device type/version string 
- (e.g. "iPhone2,1" can be determined at runtime through use of the sysctlbyname function:
+ Choosing appropriate resulting image size and tile size can be done, but is left as an exercise to the developer. Note that the device type/version string(e.g. "iPhone2,1" can be determined at runtime through use of the sysctlbyname function:
+ 可以选择合适的结果图像大小和图块大小，但留给开发人员作为练习。 请注意，设备类型/版本字符串（例如“iPhone2,1”可以在运行时通过使用sysctlbyname函数来确定：
 
  size_t size;
  sysctlbyname("hw.machine", NULL, &size, NULL, 0);
