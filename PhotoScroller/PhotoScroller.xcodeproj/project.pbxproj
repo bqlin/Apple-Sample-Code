@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		53897E101642F7F900FB20C4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53897E0D1642F7F900FB20C4 /* Default-568h@2x.png */; };
-		53897E111642F7F900FB20C4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 53897E0E1642F7F900FB20C4 /* Default.png */; };
-		53897E121642F7F900FB20C4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 53897E0F1642F7F900FB20C4 /* Default@2x.png */; };
+		036EFEAF22413E420061A844 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 036EFEAE22413E420061A844 /* Launch Screen.storyboard */; };
 		53EB7BB015B76E8B003193F9 /* CuriousFrog.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 53EB793E15B76E8A003193F9 /* CuriousFrog.jpg */; };
 		53EB7BB115B76E8B003193F9 /* LeggyFrog.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 53EB793F15B76E8A003193F9 /* LeggyFrog.jpg */; };
 		53EB7BB215B76E8B003193F9 /* PeeringFrog.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 53EB794015B76E8A003193F9 /* PeeringFrog.jpg */; };
@@ -648,10 +646,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		036EFEAE22413E420061A844 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = SOURCE_ROOT; };
 		28B8D5E015818A5B00386DDB /* ReadMe.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
-		53897E0D1642F7F900FB20C4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = SOURCE_ROOT; };
-		53897E0E1642F7F900FB20C4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = SOURCE_ROOT; };
-		53897E0F1642F7F900FB20C4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = SOURCE_ROOT; };
 		53EB793215B76B07003193F9 /* PhotoScroller_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoScroller_Prefix.pch; sourceTree = SOURCE_ROOT; };
 		53EB793315B76B07003193F9 /* PhotoScroller-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoScroller-Info.plist"; sourceTree = SOURCE_ROOT; };
 		53EB793A15B76E50003193F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
@@ -2005,7 +2001,6 @@
 				53EB7BAC15B76E8B003193F9 /* Placeholder Images */,
 			);
 			name = PhotoScroller;
-			path = FrogScroller;
 			sourceTree = "<group>";
 		};
 		C9CD3156157E63950099CB16 /* Supporting Files */ = {
@@ -2015,10 +2010,8 @@
 				53EB7E2715B76F33003193F9 /* ImageData.plist */,
 				53EB793215B76B07003193F9 /* PhotoScroller_Prefix.pch */,
 				53EB793315B76B07003193F9 /* PhotoScroller-Info.plist */,
+				036EFEAE22413E420061A844 /* Launch Screen.storyboard */,
 				53EB7E4515B7744D003193F9 /* MainStoryboard.storyboard */,
-				53897E0D1642F7F900FB20C4 /* Default-568h@2x.png */,
-				53897E0E1642F7F900FB20C4 /* Default.png */,
-				53897E0F1642F7F900FB20C4 /* Default@2x.png */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2449,6 +2442,7 @@
 				53EB7D1D15B76E8B003193F9 /* LeggyFrog_250_0_2.png in Resources */,
 				53EB7D1E15B76E8B003193F9 /* LeggyFrog_250_0_3.png in Resources */,
 				53EB7D1F15B76E8B003193F9 /* LeggyFrog_250_1_0.png in Resources */,
+				036EFEAF22413E420061A844 /* Launch Screen.storyboard in Resources */,
 				53EB7D2015B76E8B003193F9 /* LeggyFrog_250_1_1.png in Resources */,
 				53EB7D2115B76E8B003193F9 /* LeggyFrog_250_1_2.png in Resources */,
 				53EB7D2215B76E8B003193F9 /* LeggyFrog_250_1_3.png in Resources */,
@@ -2706,9 +2700,6 @@
 				53EB7E1E15B76E8B003193F9 /* LeggyFrog_Placeholder.png in Resources */,
 				53EB7E1F15B76E8B003193F9 /* PeeringFrog_Placeholder.png in Resources */,
 				53EB7E4715B7744D003193F9 /* MainStoryboard.storyboard in Resources */,
-				53897E101642F7F900FB20C4 /* Default-568h@2x.png in Resources */,
-				53897E111642F7F900FB20C4 /* Default.png in Resources */,
-				53897E121642F7F900FB20C4 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
