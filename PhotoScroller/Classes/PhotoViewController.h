@@ -47,6 +47,7 @@
 
 #import <UIKit/UIKit.h>
 
+/// 承载 ImageScrollView 的 UIViewController
 @interface PhotoViewController : UIViewController
 
 + (PhotoViewController *)photoViewControllerForPageIndex:(NSUInteger)pageIndex;

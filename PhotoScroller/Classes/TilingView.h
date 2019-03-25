@@ -47,7 +47,7 @@
 
 #import <UIKit/UIKit.h>
 
-
+/// 瓷砖视图
 @interface TilingView : UIView 
 
 - (id)initWithImageName:(NSString *)name size:(CGSize)size;

@@ -65,6 +65,7 @@
     return nil;
 }
 
+/// 初始化创建方法，以 pageIndex 为标识
 - (id)initWithPageIndex:(NSInteger)pageIndex
 {
     self = [super initWithNibName:nil bundle:nil];
@@ -82,6 +83,7 @@
 
 - (void)loadView
 {
+	// 把 view 属性设置为 ImageScrollView
     ImageScrollView *scrollView = [[ImageScrollView alloc] init];
     scrollView.index = _pageIndex;
     scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;

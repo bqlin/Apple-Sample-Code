@@ -70,6 +70,7 @@ static NSString *_ImageNameAtIndex(NSUInteger index);
 
 @interface ImageScrollView () <UIScrollViewDelegate>
 {
+	/// 承载地分辨率占位图
     UIImageView *_zoomView;  // if tiling, this contains a very low-res placeholder image,
                              // otherwise it contains the full image.
     CGSize _imageSize;
@@ -77,8 +78,9 @@ static NSString *_ImageNameAtIndex(NSUInteger index);
 #if TILE_IMAGES
     TilingView *_tilingView;
 #endif
-        
+	// 调整尺寸后的中点
     CGPoint _pointToCenterAfterResize;
+	/// 用于在调整尺寸后恢复缩放
     CGFloat _scaleToRestoreAfterResize;
 }
 
@@ -100,6 +102,7 @@ static NSString *_ImageNameAtIndex(NSUInteger index);
     return self;
 }
 
+/// index setter，创建占位图 UIImageView 和缩放的 TilingView
 - (void)setIndex:(NSUInteger)index
 {
     _index = index;
@@ -121,6 +124,7 @@ static NSString *_ImageNameAtIndex(NSUInteger index);
     [super layoutSubviews];
     
     // center the zoom view as it becomes smaller than the size of the screen
+	// 当缩放视图小于屏幕大小时，居中布局
     CGSize boundsSize = self.bounds.size;
     CGRect frameToCenter = _zoomView.frame;
     
@@ -141,14 +145,17 @@ static NSString *_ImageNameAtIndex(NSUInteger index);
 
 - (void)setFrame:(CGRect)frame
 {
+	// 尺寸变更
     BOOL sizeChanging = !CGSizeEqualToSize(frame.size, self.frame.size);
-    
+	
+	// 做调整尺寸前的准备
     if (sizeChanging) {
         [self prepareToResize];
     }
     
     [super setFrame:frame];
-    
+	
+	// 调整尺寸后做恢复工作
     if (sizeChanging) {
         [self recoverFromResizing];
     }
@@ -170,6 +177,7 @@ static NSString *_ImageNameAtIndex(NSUInteger index);
 - (void)displayTiledImageNamed:(NSString *)imageName size:(CGSize)imageSize
 {
     // clear views for the previous image
+	// 销毁 _zoomView、_tilingView
     [_zoomView removeFromSuperview];
     _zoomView = nil;
     _tilingView = nil;
@@ -181,7 +189,8 @@ static NSString *_ImageNameAtIndex(NSUInteger index);
     _zoomView = [[UIImageView alloc] initWithFrame:(CGRect){ CGPointZero, imageSize }];
     [_zoomView setImage:_PlaceholderImageNamed(imageName)];
     [self addSubview:_zoomView];
-    
+	
+	/// 瓷砖视图，添加到 _zoomView 上
     _tilingView = [[TilingView alloc] initWithImageName:imageName size:imageSize];
     _tilingView.frame = _zoomView.bounds;
     [_zoomView addSubview:_tilingView];
@@ -209,6 +218,7 @@ static NSString *_ImageNameAtIndex(NSUInteger index);
 
 #endif // TILE_IMAGES
 
+/// 配置图像尺寸，并赋值为 contentSize，并计算 zoomScale 范围
 - (void)configureForImageSize:(CGSize)imageSize
 {
     _imageSize = imageSize;
@@ -217,10 +227,12 @@ static NSString *_ImageNameAtIndex(NSUInteger index);
     self.zoomScale = self.minimumZoomScale;
 }
 
+/// 重新设置 maximumZoomScale、minimumZoomScale
 - (void)setMaxMinZoomScalesForCurrentBounds
 {
     CGSize boundsSize = self.bounds.size;
-                
+	
+	// 取短边/图宽为最小缩放比
     // calculate min/max zoomscale
     CGFloat xScale = boundsSize.width  / _imageSize.width;    // the scale needed to perfectly fit the image width-wise
     CGFloat yScale = boundsSize.height / _imageSize.height;   // the scale needed to perfectly fit the image height-wise
@@ -248,6 +260,7 @@ static NSString *_ImageNameAtIndex(NSUInteger index);
 
 #pragma mark - Rotation support
 
+/// 重新布局准备
 - (void)prepareToResize
 {
     CGPoint boundsCenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
@@ -261,6 +274,7 @@ static NSString *_ImageNameAtIndex(NSUInteger index);
         _scaleToRestoreAfterResize = 0;
 }
 
+/// 调整尺寸后的恢复
 - (void)recoverFromResizing
 {
     [self setMaxMinZoomScalesForCurrentBounds];
@@ -305,6 +319,7 @@ static NSString *_ImageNameAtIndex(NSUInteger index);
 
 @end
 
+/// 通过本地 plist 加载图片数组数据
 static NSArray *_ImageData(void)
 {
     static NSArray *data = nil;
@@ -336,6 +351,7 @@ static NSUInteger _ImageCount(void)
     return count;
 }
 
+/// 通过索引去除对应索引的图片名称
 static NSString *_ImageNameAtIndex(NSUInteger index)
 {
     NSDictionary *info = [_ImageData() objectAtIndex:index];
@@ -344,6 +360,7 @@ static NSString *_ImageNameAtIndex(NSUInteger index)
 
 #if !TILE_IMAGES
 // we use "imageWithContentsOfFile:" instead of "imageNamed:" here to avoid caching
+/// 创建对应索引的 UIImage
 static UIImage *_ImageAtIndex(NSUInteger index)
 {
     NSString *imageName = _ImageNameAtIndex(index);
@@ -353,6 +370,7 @@ static UIImage *_ImageAtIndex(NSUInteger index)
 #endif
 
 #if TILE_IMAGES
+/// 同本地数据获取图像尺寸
 static CGSize _ImageSizeAtIndex(NSUInteger index)
 {
     NSDictionary *info = [_ImageData() objectAtIndex:index];
@@ -360,6 +378,7 @@ static CGSize _ImageSizeAtIndex(NSUInteger index)
                       [[info valueForKey:@"height"] floatValue]);
 }
 
+/// 拼接得到占位图名称，并创建 UIImage
 static UIImage *_PlaceholderImageNamed(NSString *name)
 {
     return [UIImage imageNamed:[NSString stringWithFormat:@"%@_Placeholder", name]];

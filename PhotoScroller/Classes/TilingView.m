@@ -110,6 +110,7 @@
     int firstRow = floorf(CGRectGetMinY(rect) / tileSize.height);
     int lastRow = floorf((CGRectGetMaxY(rect)-1) / tileSize.height);
 
+	// 获取并绘制瓷砖图片
     for (int row = firstRow; row <= lastRow; row++) {
         for (int col = firstCol; col <= lastCol; col++) {
             UIImage *tile = [self tileForScale:scale row:row col:col];
@@ -125,6 +126,7 @@
     }
 }
 
+/// 获取瓷砖图片
 - (UIImage *)tileForScale:(CGFloat)scale row:(int)row col:(int)col
 {
     // we use "imageWithContentsOfFile:" instead of "imageNamed:" here because we don't

@@ -47,6 +47,7 @@
 
 #import <UIKit/UIKit.h>
 
+/// 继承于 UIScrollView，实现图像高效缩放，其 delegate 已经由自身实现了
 @interface ImageScrollView : UIScrollView
 
 @property (nonatomic) NSUInteger index;
