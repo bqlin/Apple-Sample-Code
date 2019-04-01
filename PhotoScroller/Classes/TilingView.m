@@ -89,8 +89,13 @@
     // for its "a" component, which is one of the two scale components. We could also ask
     // for "d". This assumes (safely) that the view is being scaled equally in both dimensions.
     CGFloat scale = CGContextGetCTM(context).a;
-    
-    CATiledLayer *tiledLayer = (CATiledLayer *)[self layer];
+	
+	__block CATiledLayer *tiledLayer = nil;
+	if (![NSThread isMainThread]) {
+		dispatch_sync(dispatch_get_main_queue(), ^{
+			tiledLayer = (CATiledLayer *)[self layer];
+		});
+	}
     CGSize tileSize = tiledLayer.tileSize;
     
     // Even at scales lower than 100%, we are drawing into a rect in the coordinate system
@@ -114,12 +119,16 @@
     for (int row = firstRow; row <= lastRow; row++) {
         for (int col = firstCol; col <= lastCol; col++) {
             UIImage *tile = [self tileForScale:scale row:row col:col];
-            CGRect tileRect = CGRectMake(tileSize.width * col, tileSize.height * row,
+            __block CGRect tileRect = CGRectMake(tileSize.width * col, tileSize.height * row,
                                          tileSize.width, tileSize.height);
 
             // if the tile would stick outside of our bounds, we need to truncate it so as
             // to avoid stretching out the partial tiles at the right and bottom edges
-            tileRect = CGRectIntersection(self.bounds, tileRect);
+			if (![NSThread isMainThread]) {
+				dispatch_sync(dispatch_get_main_queue(), ^{
+					tileRect = CGRectIntersection(self.bounds, tileRect);
+				});
+			}
 
             [tile drawInRect:tileRect];            
         }
