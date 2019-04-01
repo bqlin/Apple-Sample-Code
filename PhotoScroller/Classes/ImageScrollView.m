@@ -70,7 +70,7 @@ static NSString *_ImageNameAtIndex(NSUInteger index);
 
 @interface ImageScrollView () <UIScrollViewDelegate>
 {
-	/// 承载地分辨率占位图
+	/// 承载低分辨率占位图
     UIImageView *_zoomView;  // if tiling, this contains a very low-res placeholder image,
                              // otherwise it contains the full image.
     CGSize _imageSize;

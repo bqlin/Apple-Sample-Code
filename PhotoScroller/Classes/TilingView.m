@@ -75,7 +75,7 @@
 // always keep the tiling view's contentScaleFactor at 1.0. UIKit will try to set it back
 // to 2.0 on retina displays, which is the right call in most cases, but since we're backed
 // by a CATiledLayer it will actually cause us to load the wrong sized tiles.
-//
+// 要处理CATiledLayer和高分辨率屏幕之间的交互，我们需要始终将平铺视图的contentScaleFactor保持为1.0。 UIKit将尝试在视网膜显示器上将其设置回2.0，这在大多数情况下是正确的调用，但由于我们使用CATiledLayer支持，它实际上会导致我们加载错误大小的磁贴。
 - (void)setContentScaleFactor:(CGFloat)contentScaleFactor
 {
     [super setContentScaleFactor:1.f];
@@ -88,6 +88,7 @@
     // get the scale from the context by getting the current transform matrix, then asking
     // for its "a" component, which is one of the two scale components. We could also ask
     // for "d". This assumes (safely) that the view is being scaled equally in both dimensions.
+    // 通过获取当前变换矩阵从上下文中获取比例，然后询问其“a”组件，它是两个比例组件之一。 我们也可以要求“d”。 这假定（安全地）视图在两个维度上均等地缩放。
     CGFloat scale = CGContextGetCTM(context).a;
     
     CATiledLayer *tiledLayer = (CATiledLayer *)[self layer];
@@ -101,10 +102,12 @@
     // At 12.5%, our lowest scale, we are stretching about 6 small tiles to fill the entire
     // original image area. But this is okay, because the big blurry image we're drawing
     // here will be scaled way down before it is displayed.)
+    // 即使在低于100％的比例下，我们也会在完整图像的坐标系中绘制一个矩形。 50％的一个瓷砖覆盖100％的两个瓷砖的宽度（在原始图像坐标中）。 因此在50％时我们需要拉伸瓷砖以使宽度和高度加倍; 在25％时，我们需要将它们拉伸到四倍宽度和高度; 等等。 （请注意，这意味着我们正在绘制非常模糊的图像，因为比例变低。在12.5％，我们的最低比例，我们正在拉伸大约6个小瓦片来填充整个原始图像区域。但这没关系，因为大模糊 我们在这里绘制的图像将在显示之前按比例缩小。）
     tileSize.width /= scale;
     tileSize.height /= scale;
     
     // calculate the rows and columns of tiles that intersect the rect we have been asked to draw
+    // 计算与我们被要求绘制的矩形相交的瓷砖的行和列
     int firstCol = floorf(CGRectGetMinX(rect) / tileSize.width);
     int lastCol = floorf((CGRectGetMaxX(rect)-1) / tileSize.width);
     int firstRow = floorf(CGRectGetMinY(rect) / tileSize.height);
@@ -119,6 +122,7 @@
 
             // if the tile would stick outside of our bounds, we need to truncate it so as
             // to avoid stretching out the partial tiles at the right and bottom edges
+            // 如果瓷砖会粘在我们的边界之外，我们需要将其截断，以避免拉出右边和底边的部分瓷砖
             tileRect = CGRectIntersection(self.bounds, tileRect);
 
             [tile drawInRect:tileRect];            
