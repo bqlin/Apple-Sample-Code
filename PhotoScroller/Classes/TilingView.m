@@ -90,8 +90,13 @@
     // for "d". This assumes (safely) that the view is being scaled equally in both dimensions.
     // 通过获取当前变换矩阵从上下文中获取比例，然后询问其“a”组件，它是两个比例组件之一。 我们也可以要求“d”。 这假定（安全地）视图在两个维度上均等地缩放。
     CGFloat scale = CGContextGetCTM(context).a;
-    
-    CATiledLayer *tiledLayer = (CATiledLayer *)[self layer];
+	
+	__block CATiledLayer *tiledLayer = nil;
+	if (![NSThread isMainThread]) {
+		dispatch_sync(dispatch_get_main_queue(), ^{
+			tiledLayer = (CATiledLayer *)[self layer];
+		});
+	}
     CGSize tileSize = tiledLayer.tileSize;
     
     // Even at scales lower than 100%, we are drawing into a rect in the coordinate system
@@ -117,14 +122,17 @@
     for (int row = firstRow; row <= lastRow; row++) {
         for (int col = firstCol; col <= lastCol; col++) {
             UIImage *tile = [self tileForScale:scale row:row col:col];
-            CGRect tileRect = CGRectMake(tileSize.width * col, tileSize.height * row,
+            __block CGRect tileRect = CGRectMake(tileSize.width * col, tileSize.height * row,
                                          tileSize.width, tileSize.height);
 
             // if the tile would stick outside of our bounds, we need to truncate it so as
             // to avoid stretching out the partial tiles at the right and bottom edges
             // 如果瓷砖会粘在我们的边界之外，我们需要将其截断，以避免拉出右边和底边的部分瓷砖
-            tileRect = CGRectIntersection(self.bounds, tileRect);
-
+			if (![NSThread isMainThread]) {
+				dispatch_sync(dispatch_get_main_queue(), ^{
+					tileRect = CGRectIntersection(self.bounds, tileRect);
+				});
+			}
             [tile drawInRect:tileRect];            
         }
     }
