@@ -6,6 +6,8 @@
  The interaction controller for the Swipe demo.  Tracks a UIScreenEdgePanGestureRecognizer
   from a specified screen edge and derives the completion percentage for the
   transition.
+ 
+ 接收手势，并跟踪手势来同步过渡进度
  */
 
 @import UIKit;

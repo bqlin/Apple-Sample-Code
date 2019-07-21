@@ -10,7 +10,10 @@
 #import "AAPLSwipeTransitionDelegate.h"
 
 @interface AAPLSwipeFirstViewController ()
+
+// 添加这个属性只是为了实现懒加载
 @property (nonatomic, strong) AAPLSwipeTransitionDelegate *customTransitionDelegate;
+
 @end
 
 
