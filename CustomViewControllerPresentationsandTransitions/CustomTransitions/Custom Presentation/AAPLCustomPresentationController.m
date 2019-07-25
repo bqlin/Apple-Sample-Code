@@ -42,7 +42,7 @@
 
 
 //| ----------------------------------------------------------------------------
-- (UIView*)presentedView
+- (UIView *)presentedView
 {
     // Return the wrapping view created in -presentationTransitionWillBegin.
 	// 返回在 -presentationTransitionWillBegin 方法创建的包边视图
@@ -61,7 +61,7 @@
 {
     // The default implementation of -presentedView returns
     // self.presentedViewController.view.
-	// -presentedView 默认返回 self.presentedViewController.view
+	// -presentedView 默认返回 self.presentedViewController.view，将原本的 presentedView 放在 presentedViewControllerView 子视图中，并通过在本类的 presentedView 返回 presentationWrappingView 来替代该视图
     UIView *presentedViewControllerView = [super presentedView];
 	//presentedViewControllerView.backgroundColor = [UIColor yellowColor];
     
@@ -76,6 +76,7 @@
     //
     // SEE ALSO: The note in AAPLCustomPresentationSecondViewController.m.
     {
+		// 阴影层，与推出的视图控制器一样大
         UIView *presentationWrapperView = [[UIView alloc] initWithFrame:self.frameOfPresentedViewInContainerView];
         presentationWrapperView.layer.shadowOpacity = 0.44f;
         presentationWrapperView.layer.shadowRadius = 13.f;
@@ -89,6 +90,7 @@
         // effect calls for only the top two corners to be rounded we size
         // the view such that the bottom CORNER_RADIUS points lie below
         // the bottom edge of the screen.
+		// 圆角层，扩大该图层的高度，以实现只看到顶部两个圆角
         UIView *presentationRoundedCornerView = [[UIView alloc] initWithFrame:UIEdgeInsetsInsetRect(presentationWrapperView.bounds, UIEdgeInsetsMake(0, 0, -CORNER_RADIUS, 0))];
         presentationRoundedCornerView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         presentationRoundedCornerView.layer.cornerRadius = CORNER_RADIUS;
@@ -99,6 +101,7 @@
         // presentedViewControllerWrapperView is inset by CORNER_RADIUS points.
         // This also matches the size of presentedViewControllerWrapperView's
         // bounds to the size of -frameOfPresentedViewInContainerView.
+		// presentedViewControllerView 容器层，与 presentedViewControllerView 一样大小
         UIView *presentedViewControllerWrapperView = [[UIView alloc] initWithFrame:UIEdgeInsetsInsetRect(presentationRoundedCornerView.bounds, UIEdgeInsetsMake(0, 0, CORNER_RADIUS, 0))];
         presentedViewControllerWrapperView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 		//presentedViewControllerWrapperView.backgroundColor = [UIColor blueColor];
