@@ -16,17 +16,29 @@
 
 该例子实现了控制器间使用交叉溶解动画实现全屏显示。它演示实现自定义过渡的最小配置。
 
+- `transitioningDelegate<UIViewControllerTransitioningDelegate>`，该代理告诉谁来负责动画、谁来控制动画、谁来控制整个过渡过程
+
 ### Swipe - 侧滑 ###
 
 <!-- This example implements a full screen presentation that transitions between view controllers by sliding the presented view controller on and off the screen.  You will learn how to implement UIPercentDrivenInteractiveTransition to add interactivity to your transitions. -->
 
 该示例实现控制器间通过把视图控制器滑出滑入屏幕实现转换。你将学习如何实现 `UIPercentDrivenInteractiveTransition` 向过渡添加交互。
 
+该示例重点在于实现从侧边过渡的动画，以及对动画过程的控制。
+
+- AAPLSwipeTransitionDelegate 实现了 `UIViewControllerTransitioningDelegate` 协议，接收了一些属性，用于创建与配置需要返回的几个对象：
+	- AAPLSwipeTransitionAnimator（实现了 `UIViewControllerAnimatedTransitioning`），提供了进场与退场动画的实现；
+	- AAPLSwipeTransitionInteractionController（`UIPercentDrivenInteractiveTransition`），控制了进场、退场动画的过程（progress）；
+
 ### Custom Presentation - 自定义 ###
 
 <!-- This example implements a custom presentation that displays the presented view controller in the lower third of the screen.  You will learn how to implement your own UIPresentationController subclass that defines a custom layout for the presented view controller, and responds to changes to the presented view controller's preferredContentSize. -->
 
 该示例实现了一个呈现视图控制在屏幕三分之一的位置显示的自定义转换。你将学习如何实现自己的 `UIPresentationController` 子类来为呈现的视图控制器定义一个布局，并响应呈现的视图控制器的 `preferredContentSize` 值的改变。
+
+该示例动用了许多自定义的操作，很巧妙，而且似乎相当实用。
+
+AAPLCustomPresentationController，是 `UIPresentationController` 的子类，也实现了 `UIViewControllerTransitioningDelegate` 协议。在该类中实现中，动画实现、过渡管理都是自身。这样的做法以致于，AAPLCustomPresentationController 对象本身无需找地方引用着，生命周期伴随着 presented view controller。
 
 ### Adaptive Presentation - 自适应 ###
 

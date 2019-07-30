@@ -283,7 +283,7 @@
 				TargetAttributes = {
 					D06B690E1A5B05A10009167D = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = ETRBR9HA5V;
+						DevelopmentTeam = V7WL667MJM;
 					};
 				};
 			};
@@ -469,7 +469,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = ETRBR9HA5V;
+				DEVELOPMENT_TEAM = V7WL667MJM;
 				INFOPLIST_FILE = CustomTransitions/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bq.samplecode.CustomTransitions;
@@ -483,7 +483,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				DEVELOPMENT_TEAM = ETRBR9HA5V;
+				DEVELOPMENT_TEAM = V7WL667MJM;
 				INFOPLIST_FILE = CustomTransitions/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = bq.samplecode.CustomTransitions;
