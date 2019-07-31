@@ -40,6 +40,44 @@
 
 AAPLCustomPresentationController，是 `UIPresentationController` 的子类，也实现了 `UIViewControllerTransitioningDelegate` 协议。在该类中实现中，动画实现、过渡管理都是自身。这样的做法以致于，AAPLCustomPresentationController 对象本身无需找地方引用着，生命周期伴随着 presented view controller。
 
+该类在使用中，只需要调用 `-initWithPresentedViewController:presentingViewController:` 方法进行创建，再复制给第二个页面的 `transitioningDelegate` 属性即可。而在该初始化方法中，可将 presentedViewController 的 `modalPresentationStyle` 配置为 `UIModalPresentationCustom`。
+
+#### 暗色、圆角、阴影效果
+
+通过返回自定义的 `presentedView` 来对弹出的 presentedViewController 的视图进行包装，实现圆角、阴影效果。
+
+而自定义 `presentedView` 是在 `-presentationTransitionWillBegin` 方法中完成，这时的 presentedViewController 视图层级已经就绪了。值得注意的是，通过调用父类的 `presentedView` 方法可以获取 presentedViewController 的视图。
+
+这里的配置也很巧妙，使用 3 层的视图包装来实现圆角、阴影效果。因为圆角需要裁剪子视图，所以圆角层需要在阴影层之上，又因为只需要实现顶部的两个圆角，所以直接让底部的两个圆角超出视图范围被裁剪掉即可。另外，为了不影响 presentedViewController 的布局，还最后需要一层 presentedViewControllerWrapperView 在原本的位置布局。在这些包装视图布局过程中，充分使用了 autoresizingMask，使之具有自动布局属性。
+
+暗色层，dimmingView，也是在 `-presentationTransitionWillBegin` 方法中完成创建与布局。不同的是，dimmingView 是添加到 `self.containerView` 上。最后还通过 `self.presentingViewController.transitionCoordinator` 的 `-animateAlongsideTransition:completion:` 方法实现 dimmingView 的动画淡入。
+
+对应地，在 `-dismissalTransitionWillBegin` 方法中，用同样的方式对 dimmingView 动画淡出。
+
+#### 动态改变视图大小
+
+该示例最大的特点还在于其可以动态改变推出的视图的大小。其实现主要为：
+
+1. `-preferredContentSizeDidChangeForChildContentContainer:`
+
+该方法在视图控制器的 `preferredContentSize` 改变时进行调用，这里用于触发该控制器视图的自身布局。
+
+2. `-sizeForChildContentContainer:withParentContainerSize:`
+
+提供 presentedViewController 的 `preferredContentSize`。
+
+3. `-frameOfPresentedViewInContainerView`
+
+根据 containerView 提供 presentedView 的布局。
+
+4. `-containerViewWillLayoutSubviews`
+
+布局 dimmingView 和 presentationWrappingView。
+
+#### 其他
+
+其次，该类还实现了动画（`<UIViewControllerAnimatedTransitioning>`）和过渡代理（`<UIViewControllerTransitioningDelegate>`）。
+
 ### Adaptive Presentation - 自适应 ###
 
 <!-- This example implements a custom presentation that responds to size class changes.  You will learn how to implement UIAdaptivePresentationControllerDelegate to adapt your presentation to the compact horizontal size class. -->
