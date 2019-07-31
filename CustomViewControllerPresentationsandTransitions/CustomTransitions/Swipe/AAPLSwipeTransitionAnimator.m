@@ -75,7 +75,7 @@
     
     // Based on our configured targetEdge, derive a normalized vector that will
     // be used to offset the frame of the presented view controller.
-    CGVector offset;
+    CGVector offset = CGVectorMake(0, 0);
     if (self.targetEdge == UIRectEdgeTop)
         offset = CGVectorMake(0.f, 1.f);
     else if (self.targetEdge == UIRectEdgeBottom)
@@ -119,7 +119,7 @@
         }
         
     } completion:^(BOOL finished) {
-        BOOL wasCancelled = [transitionContext transitionWasCancelled];
+        BOOL wasCancelled = transitionContext.transitionWasCancelled;
         
         // Due to a bug with unwind segues targeting a view controller inside
         // of a navigation controller, we must remove the toView in cases where

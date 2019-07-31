@@ -131,7 +131,7 @@ const char * AAPLSlideTabBarControllerDelegateAssociationKey = "AAPLSlideTabBarC
     // is started, and new animation + interaction controllers are created.
     //
     [self.tabBarController.transitionCoordinator animateAlongsideTransition:NULL completion:^(id<UIViewControllerTransitionCoordinatorContext> context) {
-        if ([context isCancelled] && sender.state == UIGestureRecognizerStateChanged)
+        if (context.cancelled && sender.state == UIGestureRecognizerStateChanged)
             [self beginInteractiveTransitionIfPossible:sender];
     }];
 }

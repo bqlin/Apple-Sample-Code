@@ -210,7 +210,7 @@
             } completion:^(BOOL finished) {
                 // Finish the transition once the final animation completes.
                 if (--sliceAnimationsPending == 0) {
-                    BOOL wasCancelled = [transitionContext transitionWasCancelled];
+                    BOOL wasCancelled = transitionContext.transitionWasCancelled;
                     
                     [transitionContainer removeFromSuperview];
                     

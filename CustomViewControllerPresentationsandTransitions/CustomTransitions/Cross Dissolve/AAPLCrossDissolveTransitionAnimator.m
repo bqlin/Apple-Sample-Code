@@ -74,7 +74,7 @@
         // When we complete, tell the transition context
         // passing along the BOOL that indicates whether the transition
         // finished or not.
-        BOOL wasCancelled = [transitionContext transitionWasCancelled];
+        BOOL wasCancelled = transitionContext.transitionWasCancelled;
         [transitionContext completeTransition:!wasCancelled];
     }];
 }

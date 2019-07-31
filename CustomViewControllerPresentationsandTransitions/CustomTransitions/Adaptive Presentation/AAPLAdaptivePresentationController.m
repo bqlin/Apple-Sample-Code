@@ -48,7 +48,7 @@
 {
     // The default implementation of -presentedView returns
     // self.presentedViewController.view.
-    UIView *presentedViewControllerView = [super presentedView];
+    UIView *presentedViewControllerView = super.presentedView;
     
     // Wrap the presented view controller's view in an intermediate hierarchy
     // that applies a shadow and adds a dismiss button to the top left corner.
@@ -181,7 +181,7 @@
 //| ----------------------------------------------------------------------------
 - (NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext
 {
-    return [transitionContext isAnimated] ? 0.35 : 0;
+    return transitionContext.animated ? 0.35 : 0;
 }
 
 
@@ -236,7 +236,7 @@
         // When we complete, tell the transition context
         // passing along the BOOL that indicates whether the transition
         // finished or not.
-        BOOL wasCancelled = [transitionContext transitionWasCancelled];
+        BOOL wasCancelled = transitionContext.transitionWasCancelled;
         [transitionContext completeTransition:!wasCancelled];
         
         // Reset the alpha of the dismissed view, in case it will be used

@@ -34,7 +34,7 @@
 //| ----------------------------------------------------------------------------
 - (void)setTransitioningDelegate:(id<UIViewControllerTransitioningDelegate>)transitioningDelegate
 {
-    [super setTransitioningDelegate:transitioningDelegate];
+    super.transitioningDelegate = transitioningDelegate;
     
     // For an adaptive presentation, the presentation controller's delegate
     // must be configured prior to invoking
