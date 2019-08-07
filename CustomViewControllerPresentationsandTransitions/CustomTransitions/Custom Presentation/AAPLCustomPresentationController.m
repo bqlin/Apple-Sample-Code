@@ -267,7 +267,7 @@
 //
 - (IBAction)dimmingViewTapped:(UITapGestureRecognizer*)sender
 {
-	[self.presentingViewController dismissViewControllerAnimated:YES completion:NULL];
+	[self.presentedViewController dismissViewControllerAnimated:YES completion:NULL];
 }
 
 #pragma mark -

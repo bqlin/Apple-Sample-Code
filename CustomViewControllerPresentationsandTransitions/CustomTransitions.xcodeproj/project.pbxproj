@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03CFFB5122FB2F26005C5C2A /* SlidePresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03CFFB5022FB2F25005C5C2A /* SlidePresentationController.m */; };
 		D04185DC1A5F25FA004295A5 /* AAPLSwipeTransitionAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = D04185DB1A5F25FA004295A5 /* AAPLSwipeTransitionAnimator.m */; };
 		D04185DF1A5F26D2004295A5 /* AAPLSwipeTransitionInteractionController.m in Sources */ = {isa = PBXBuildFile; fileRef = D04185DE1A5F26D2004295A5 /* AAPLSwipeTransitionInteractionController.m */; };
 		D04186141A5F471D004295A5 /* AAPLSwipeSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D04186131A5F471D004295A5 /* AAPLSwipeSecondViewController.m */; };
@@ -43,6 +44,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03CFFB4F22FB2F25005C5C2A /* SlidePresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlidePresentationController.h; sourceTree = "<group>"; };
+		03CFFB5022FB2F25005C5C2A /* SlidePresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlidePresentationController.m; sourceTree = "<group>"; };
 		D012017E1B7E8E5100364AFB /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D04185DA1A5F25FA004295A5 /* AAPLSwipeTransitionAnimator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLSwipeTransitionAnimator.h; sourceTree = "<group>"; };
 		D04185DB1A5F25FA004295A5 /* AAPLSwipeTransitionAnimator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLSwipeTransitionAnimator.m; sourceTree = "<group>"; };
@@ -115,10 +118,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		03CFFB4E22FB2F25005C5C2A /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				03CFFB4F22FB2F25005C5C2A /* SlidePresentationController.h */,
+				03CFFB5022FB2F25005C5C2A /* SlidePresentationController.m */,
+			);
+			name = Transition;
+			path = ../../QMUI_iOS_Light/light_ui/Light/Transition;
+			sourceTree = "<group>";
+		};
 		D06B69061A5B05A10009167D = {
 			isa = PBXGroup;
 			children = (
 				D012017E1B7E8E5100364AFB /* README.md */,
+				03CFFB4E22FB2F25005C5C2A /* Transition */,
 				D06B69111A5B05A10009167D /* CustomTransitions */,
 				D06B69101A5B05A10009167D /* Products */,
 			);
@@ -342,6 +356,7 @@
 				D0F432871B7DA68C006960FF /* AAPLAdaptivePresentationSecondViewController.m in Sources */,
 				D04185DF1A5F26D2004295A5 /* AAPLSwipeTransitionInteractionController.m in Sources */,
 				D06B69631A5C84FA0009167D /* AAPLSwipeTransitionDelegate.m in Sources */,
+				03CFFB5122FB2F26005C5C2A /* SlidePresentationController.m in Sources */,
 				D06B69431A5B1D8E0009167D /* AAPLMenuViewController.m in Sources */,
 				D07774021AA7ACF400EBDCE1 /* AAPLSlideTransitionInteractionController.m in Sources */,
 				D06B69541A5C53D60009167D /* AAPLCrossDissolveFirstViewController.m in Sources */,

@@ -60,7 +60,7 @@ AAPLCustomPresentationController，是 `UIPresentationController` 的子类，�
 
 1. `-preferredContentSizeDidChangeForChildContentContainer:`
 
-该方法在视图控制器的 `preferredContentSize` 改变时进行调用，这里用于触发该控制器视图的自身布局。
+该方法在视图控制器的 `preferredContentSize` 改变时的回调，这里用于触发该控制器视图的自身布局。
 
 2. `-sizeForChildContentContainer:withParentContainerSize:`
 
