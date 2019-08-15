@@ -35,12 +35,28 @@
     // released prior to calling -presentViewController:animated:completion:
     // the NS_VALID_UNTIL_END_OF_SCOPE attribute is appended to the declaration.
 	
-//    AAPLCustomPresentationController *presentationController NS_VALID_UNTIL_END_OF_SCOPE;
-//    presentationController = [[AAPLCustomPresentationController alloc] initWithPresentedViewController:secondViewController presentingViewController:self];
-//    secondViewController.transitioningDelegate = presentationController;
+    AAPLCustomPresentationController *presentationController NS_VALID_UNTIL_END_OF_SCOPE;
+    presentationController = [[AAPLCustomPresentationController alloc] initWithPresentedViewController:secondViewController presentingViewController:self];
+    secondViewController.transitioningDelegate = presentationController;
 	
-	SlidePresentationController *presentation = [[SlidePresentationController alloc] initWithPresentedViewController:secondViewController presentingViewController:self];
-	secondViewController.transitioningDelegate = presentation;
+//	SlidePresentationController *presentation = [[SlidePresentationController alloc] initWithPresentedViewController:secondViewController presentingViewController:self];
+//	secondViewController.transitioningDelegate = presentation;
+//	presentation.edgeDirection = UIRectEdgeTop;
+//	{ // 设置阴影
+//		CALayer *layer = presentation.shadowView.layer;
+//		layer.shadowOpacity = 0.44;
+//		layer.shadowRadius = 13;
+//		layer.shadowOffset = CGSizeMake(0, -6);
+//	}
+//	{ // 设置背景色
+//		UIView *view = presentation.dimmingView;
+//		view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+//	}
+//	{ // 设置圆角
+//		presentation.cornerRadius = 20;
+//		presentation.sideCornerRounding = NO;
+//		presentation.welt = YES;
+//	}
 	
     [self presentViewController:secondViewController animated:YES completion:NULL];
 }
