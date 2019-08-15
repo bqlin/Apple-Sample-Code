@@ -16,6 +16,11 @@
 	NSLog(@"%s", __FUNCTION__);
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[super viewWillAppear:animated];
+	NSLog(@"%s", __FUNCTION__);
+}
+
 #pragma mark -
 #pragma mark Presentation
 
