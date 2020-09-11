@@ -41,6 +41,11 @@ static CGSize AssetGridThumbnailSize;
     [self resetCachedAssets];
     
     [[PHPhotoLibrary sharedPhotoLibrary] registerChangeObserver:self];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        /// 滚动到底部
+        [self.collectionView scrollToItemAtIndexPath:[NSIndexPath indexPathForItem:self.assetsFetchResults.count - 1 inSection:0] atScrollPosition:UICollectionViewScrollPositionBottom animated:YES];
+    });
 }
 
 - (void)dealloc {
@@ -159,6 +164,7 @@ static CGSize AssetGridThumbnailSize;
 									options:nil
 							  resultHandler:^(UIImage *result, NSDictionary *info) {
         // Set the cell's thumbnail image if it's still showing the same asset.
+        NSLog(@"%@: \n%@", @(indexPath.item), info);
         if ([cell.representedAssetIdentifier isEqualToString:asset.localIdentifier]) {
             cell.thumbnailImage = result;
         }

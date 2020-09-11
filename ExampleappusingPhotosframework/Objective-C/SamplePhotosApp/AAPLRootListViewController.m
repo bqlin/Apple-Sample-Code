@@ -78,7 +78,7 @@ static NSString * const CollectionSegue = @"showCollection";
     
     if ([segue.identifier isEqualToString:AllPhotosSegue]) { // 所有图片
         assetGridViewController.assetsFetchResults = fetchResult;
-    } else if ([segue.identifier isEqualToString:CollectionSegue]) { // 只能相册组、用户相册组
+    } else if ([segue.identifier isEqualToString:CollectionSegue]) { // 智能相册组、用户相册组
         // Get the PHAssetCollection for the selected row.
         PHCollection *collection = fetchResult[indexPath.row];
         if (![collection isKindOfClass:[PHAssetCollection class]]) {
@@ -166,6 +166,7 @@ static NSString * const CollectionSegue = @"showCollection";
         if (reloadRequired) {
             self.sectionFetchResults = updatedSectionFetchResults;
             [self.tableView reloadData];
+            NSLog(@"相册更新");
         }
     });
 }

@@ -135,6 +135,7 @@ static NSString * const AdjustmentFormatIdentifier = @"com.example.apple-samplec
     
     // Request the live photo for the asset from the default PHImageManager.
     [[PHImageManager defaultManager] requestLivePhotoForAsset:self.asset targetSize:[self targetSize] contentMode:PHImageContentModeAspectFit options:livePhotoOptions resultHandler:^(PHLivePhoto * _Nullable livePhoto, NSDictionary * _Nullable info) {
+        NSLog(@"图片信息：%@", info);
         // Hide the progress view now the request has completed.
         self.progressView.hidden = YES;
         
@@ -179,6 +180,7 @@ static NSString * const AdjustmentFormatIdentifier = @"com.example.apple-samplec
 	
 	CGSize targetSize = [self targetSize];
     [[PHImageManager defaultManager] requestImageForAsset:self.asset targetSize:targetSize contentMode:PHImageContentModeAspectFit options:options resultHandler:^(UIImage *result, NSDictionary *info) {
+        NSLog(@"图片信息：%@", info);
         // Hide the progress view now the request has completed.
         self.progressView.hidden = YES;
         
