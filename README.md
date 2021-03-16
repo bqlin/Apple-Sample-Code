@@ -14,4 +14,5 @@
 | AVSimpleEditoriOS                                            | Version 1.1, 2013-08-22 | 基本的视频编辑操作                                           |
 | AVTimedAnnotationWriter: Using Custom Annotation Metadata for Movie Writing and Playback | Version 1.0, 2014-09-17 | use the AVAssetWriterInputMetadataAdaptor API to write circle annotation metadata during video playback |
 | SimpleBackgroundTransfer                                     | Version 1.1, 2013-10-01 | 后台下载示例                                                 |
+| AVFoundation Looping Player                                  | Version 2.0, 2016-09-13 | 循环播放示例                                                 |
 
