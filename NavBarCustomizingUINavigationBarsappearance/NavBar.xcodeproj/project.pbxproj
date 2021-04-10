@@ -23,6 +23,7 @@
 		538A32761FB37B2200CFDBDE /* CustomBackButtonDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538A32731FB37B2200CFDBDE /* CustomBackButtonDetailViewController.swift */; };
 		538A32781FB37B2B00CFDBDE /* LargeTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538A32771FB37B2B00CFDBDE /* LargeTitleViewController.swift */; };
 		538A327A1FB3AE3700CFDBDE /* CitiesDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538A32791FB3AE3700CFDBDE /* CitiesDataSource.swift */; };
+		C4F1451F04CCC5B2E9199E56 /* NewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4F9AECB24B12F592512285A /* NewDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		538A32731FB37B2200CFDBDE /* CustomBackButtonDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomBackButtonDetailViewController.swift; path = NavBar/CustomBackButton/CustomBackButtonDetailViewController.swift; sourceTree = "<group>"; };
 		538A32771FB37B2B00CFDBDE /* LargeTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LargeTitleViewController.swift; path = NavBar/LargeTitle/LargeTitleViewController.swift; sourceTree = "<group>"; };
 		538A32791FB3AE3700CFDBDE /* CitiesDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CitiesDataSource.swift; path = NavBar/CitiesDataSource.swift; sourceTree = "<group>"; };
+		C4F9AECB24B12F592512285A /* NewDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewDetailViewController.swift; path = NavBar/CustomBackButton/NewDetailViewController.swift; sourceTree = "<group>"; };
 		D0E35F801A8D45B700F74DCE /* ReadMe.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ReadMe.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,6 +124,7 @@
 				538A32721FB37B2200CFDBDE /* CustomBackButtonNavController.swift */,
 				538A32711FB37B2200CFDBDE /* CustomBackButtonViewController.h */,
 				538A32701FB37B2200CFDBDE /* CustomBackButtonViewController.m */,
+				C4F9AECB24B12F592512285A /* NewDetailViewController.swift */,
 			);
 			name = CustomBackButton;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				LastUpgradeCheck = 0900;
 				TargetAttributes = {
 					1D6058900D05DD3D006BFB54 = {
+						DevelopmentTeam = V7WL667MJM;
 						LastSwiftMigration = 0910;
 						ProvisioningStyle = Automatic;
 					};
@@ -244,6 +248,7 @@
 				538A32741FB37B2200CFDBDE /* CustomBackButtonViewController.m in Sources */,
 				538A32691FB37AEC00CFDBDE /* NavigationPromptViewController.swift in Sources */,
 				538A32671FB37AD900CFDBDE /* CustomTitleViewController.swift in Sources */,
+				C4F1451F04CCC5B2E9199E56 /* NewDetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,7 +289,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = V7WL667MJM;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "$(SRCROOT)/NavBar/NavBar-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -304,7 +309,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = V7WL667MJM;
 				INFOPLIST_FILE = "$(SRCROOT)/NavBar/NavBar-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

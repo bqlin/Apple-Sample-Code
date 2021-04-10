@@ -18,4 +18,9 @@ class CustomBackButtonDetailViewController: UIViewController {
         
         cityLabel.text = city
     }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        navigationController?.pushViewController(NewDetailViewController(), animated: true)
+    }
 }

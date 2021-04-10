@@ -52,7 +52,7 @@ class CustomAppearanceViewController: UITableViewController {
         // in the topmost and leftmost pixels being stretched when the images
         // are resized.  Not coincidentally, the pixels in these rows/columns
         // are empty.
-		// 设置图片拉伸已实现导航栏背景图片为右下角对齐
+		// 设置图片拉伸以实现导航栏背景图片为右下角对齐
         backgroundImageForDefaultBarMetrics =
 			backgroundImageForDefaultBarMetrics.resizableImage(withCapInsets: UIEdgeInsets(top: 0,
 																						   left: 0,
@@ -207,12 +207,18 @@ class CustomAppearanceViewController: UITableViewController {
     // MARK: - UITableViewDelegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		if navigationItem.prompt == dataSource.city(index: indexPath.row) {
-            navigationItem.prompt = nil
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
-        else {
-			navigationItem.prompt = dataSource.city(index: indexPath.row)
-        }
+        // if navigationItem.prompt == dataSource.city(index: indexPath.row) {
+        //     navigationItem.prompt = nil
+        //     tableView.deselectRow(at: indexPath, animated: true)
+        // }
+        // else {
+        // 	navigationItem.prompt = dataSource.city(index: indexPath.row)
+        // }
+        
+        let controller = NewDetailViewController()
+        navigationController?.pushViewController(controller, animated: true)
+        // !!!: 这里放在push之后设置，是为了防止viewDidLoad方法提前调用
+        controller.view.backgroundColor = UIColor.red.withAlphaComponent(0.5)
+        controller.title = dataSource.city(index: indexPath.row)
     }
 }
