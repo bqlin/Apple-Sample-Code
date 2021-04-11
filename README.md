@@ -106,3 +106,9 @@ use the AVAssetWriterInputMetadataAdaptor API to write circle annotation metadat
 
 拍照滤镜示例。
 
+#### AVReaderWriter
+
+- AVReaderWriterOfflineAudioVideoProcessing
+- Version 3.1, 2016-09-13
+
+使用AVAssetReader和AVAssetWriter离线处理音视频。
