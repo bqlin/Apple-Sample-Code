@@ -112,3 +112,10 @@ use the AVAssetWriterInputMetadataAdaptor API to write circle annotation metadat
 - Version 3.1, 2016-09-13
 
 使用AVAssetReader和AVAssetWriter离线处理音视频。
+
+#### AVBasicVideoOutput
+
+- Real-timeVideoProcessingUsingAVPlayerItemVideoOutput-fixed
+- Version 1.2, 2015-10-01
+
+Real-time Video Processing Using AVPlayerItemVideoOutput.
