@@ -1,0 +1,376 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FB70D441213FFFF200C1C3B8 /* RosyMetalRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = FB70D440213FFFF200C1C3B8 /* RosyMetalRenderer.m */; };
+		FBC3D763213CCCBD0035395A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC3D762213CCCBD0035395A /* AppDelegate.m */; };
+		FBC3D766213CCCBD0035395A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC3D765213CCCBD0035395A /* ViewController.m */; };
+		FBC3D769213CCCBD0035395A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBC3D767213CCCBD0035395A /* Main.storyboard */; };
+		FBC3D76B213CCCBF0035395A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBC3D76A213CCCBF0035395A /* Assets.xcassets */; };
+		FBC3D76E213CCCBF0035395A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBC3D76C213CCCBF0035395A /* LaunchScreen.storyboard */; };
+		FBC3D771213CCCBF0035395A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC3D770213CCCBF0035395A /* main.m */; };
+		FBC3D779213CEA3A0035395A /* PreviewMetalView.m in Sources */ = {isa = PBXBuildFile; fileRef = FBC3D778213CEA3A0035395A /* PreviewMetalView.m */; };
+		FBF3DED0213D557100F29808 /* RosyCIRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF3DECF213D557100F29808 /* RosyCIRenderer.m */; };
+		FBF3DED3213D5A7000F29808 /* FilterRendererUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = FBF3DED2213D5A7000F29808 /* FilterRendererUtil.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FB70D43F213FFFF200C1C3B8 /* RosyMetalRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RosyMetalRenderer.h; sourceTree = "<group>"; };
+		FB70D440213FFFF200C1C3B8 /* RosyMetalRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RosyMetalRenderer.m; sourceTree = "<group>"; };
+		FBC3D75E213CCCBD0035395A /* AVCamPhotoFilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AVCamPhotoFilter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FBC3D761213CCCBD0035395A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FBC3D762213CCCBD0035395A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FBC3D764213CCCBD0035395A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FBC3D765213CCCBD0035395A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FBC3D768213CCCBD0035395A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FBC3D76A213CCCBF0035395A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FBC3D76D213CCCBF0035395A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FBC3D76F213CCCBF0035395A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FBC3D770213CCCBF0035395A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FBC3D777213CEA3A0035395A /* PreviewMetalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PreviewMetalView.h; sourceTree = "<group>"; };
+		FBC3D778213CEA3A0035395A /* PreviewMetalView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PreviewMetalView.m; sourceTree = "<group>"; };
+		FBF3DECD213D553C00F29808 /* FilterRendererProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterRendererProtocol.h; sourceTree = "<group>"; };
+		FBF3DECE213D557100F29808 /* RosyCIRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RosyCIRenderer.h; sourceTree = "<group>"; };
+		FBF3DECF213D557100F29808 /* RosyCIRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RosyCIRenderer.m; sourceTree = "<group>"; };
+		FBF3DED1213D5A7000F29808 /* FilterRendererUtil.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterRendererUtil.h; sourceTree = "<group>"; };
+		FBF3DED2213D5A7000F29808 /* FilterRendererUtil.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterRendererUtil.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FBC3D75B213CCCBD0035395A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FBC3D755213CCCBD0035395A = {
+			isa = PBXGroup;
+			children = (
+				FBC3D760213CCCBD0035395A /* AVCamPhotoFilter */,
+				FBC3D75F213CCCBD0035395A /* Products */,
+				FBC3D77A213D17260035395A /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		FBC3D75F213CCCBD0035395A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FBC3D75E213CCCBD0035395A /* AVCamPhotoFilter.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FBC3D760213CCCBD0035395A /* AVCamPhotoFilter */ = {
+			isa = PBXGroup;
+			children = (
+				FBC3D761213CCCBD0035395A /* AppDelegate.h */,
+				FBC3D762213CCCBD0035395A /* AppDelegate.m */,
+				FBC3D764213CCCBD0035395A /* ViewController.h */,
+				FBC3D765213CCCBD0035395A /* ViewController.m */,
+				FBC3D777213CEA3A0035395A /* PreviewMetalView.h */,
+				FBC3D778213CEA3A0035395A /* PreviewMetalView.m */,
+				FBF3DECD213D553C00F29808 /* FilterRendererProtocol.h */,
+				FBF3DED1213D5A7000F29808 /* FilterRendererUtil.h */,
+				FBF3DED2213D5A7000F29808 /* FilterRendererUtil.m */,
+				FBF3DECE213D557100F29808 /* RosyCIRenderer.h */,
+				FBF3DECF213D557100F29808 /* RosyCIRenderer.m */,
+				FB70D43F213FFFF200C1C3B8 /* RosyMetalRenderer.h */,
+				FB70D440213FFFF200C1C3B8 /* RosyMetalRenderer.m */,
+				FBC3D767213CCCBD0035395A /* Main.storyboard */,
+				FBC3D76A213CCCBF0035395A /* Assets.xcassets */,
+				FBC3D76C213CCCBF0035395A /* LaunchScreen.storyboard */,
+				FBC3D76F213CCCBF0035395A /* Info.plist */,
+				FBC3D770213CCCBF0035395A /* main.m */,
+			);
+			path = AVCamPhotoFilter;
+			sourceTree = "<group>";
+		};
+		FBC3D77A213D17260035395A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FBC3D75D213CCCBD0035395A /* AVCamPhotoFilter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FBC3D774213CCCBF0035395A /* Build configuration list for PBXNativeTarget "AVCamPhotoFilter" */;
+			buildPhases = (
+				FBC3D75A213CCCBD0035395A /* Sources */,
+				FBC3D75B213CCCBD0035395A /* Frameworks */,
+				FBC3D75C213CCCBD0035395A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AVCamPhotoFilter;
+			productName = AVCamPhotoFilter;
+			productReference = FBC3D75E213CCCBD0035395A /* AVCamPhotoFilter.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FBC3D756213CCCBD0035395A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = Bq;
+				TargetAttributes = {
+					FBC3D75D213CCCBD0035395A = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+				};
+			};
+			buildConfigurationList = FBC3D759213CCCBD0035395A /* Build configuration list for PBXProject "AVCamPhotoFilter" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FBC3D755213CCCBD0035395A;
+			productRefGroup = FBC3D75F213CCCBD0035395A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FBC3D75D213CCCBD0035395A /* AVCamPhotoFilter */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FBC3D75C213CCCBD0035395A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBC3D76E213CCCBF0035395A /* LaunchScreen.storyboard in Resources */,
+				FBC3D76B213CCCBF0035395A /* Assets.xcassets in Resources */,
+				FBC3D769213CCCBD0035395A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FBC3D75A213CCCBD0035395A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FBF3DED0213D557100F29808 /* RosyCIRenderer.m in Sources */,
+				FBC3D766213CCCBD0035395A /* ViewController.m in Sources */,
+				FBF3DED3213D5A7000F29808 /* FilterRendererUtil.m in Sources */,
+				FB70D441213FFFF200C1C3B8 /* RosyMetalRenderer.m in Sources */,
+				FBC3D779213CEA3A0035395A /* PreviewMetalView.m in Sources */,
+				FBC3D771213CCCBF0035395A /* main.m in Sources */,
+				FBC3D763213CCCBD0035395A /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FBC3D767213CCCBD0035395A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FBC3D768213CCCBD0035395A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FBC3D76C213CCCBF0035395A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FBC3D76D213CCCBF0035395A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FBC3D772213CCCBF0035395A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FBC3D773213CCCBF0035395A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FBC3D775213CCCBF0035395A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9U2KRZU6GT;
+				INFOPLIST_FILE = AVCamPhotoFilter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = bq.AVCamPhotoFilter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FBC3D776213CCCBF0035395A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9U2KRZU6GT;
+				INFOPLIST_FILE = AVCamPhotoFilter/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = bq.AVCamPhotoFilter;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FBC3D759213CCCBD0035395A /* Build configuration list for PBXProject "AVCamPhotoFilter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FBC3D772213CCCBF0035395A /* Debug */,
+				FBC3D773213CCCBF0035395A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FBC3D774213CCCBF0035395A /* Build configuration list for PBXNativeTarget "AVCamPhotoFilter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FBC3D775213CCCBF0035395A /* Debug */,
+				FBC3D776213CCCBF0035395A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FBC3D756213CCCBD0035395A /* Project object */;
+}
