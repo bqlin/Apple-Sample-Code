@@ -7,22 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0338F6BD222CC4780061ACD1 /* AVCaptureVideoPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0338F6B9222CC4780061ACD1 /* AVCaptureVideoPreviewView.m */; };
-		0338F6BE222CC4780061ACD1 /* AVPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0338F6BA222CC4780061ACD1 /* AVPlayerView.m */; };
+		037471D42622FF290093DCF5 /* AVCaptureVideoPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 037471D02622FF290093DCF5 /* AVCaptureVideoPreviewView.m */; };
+		037471D52622FF290093DCF5 /* AVPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 037471D12622FF290093DCF5 /* AVPlayerView.m */; };
+		037471D7262300700093DCF5 /* squarePNG.png in Resources */ = {isa = PBXBuildFile; fileRef = 037471D62623006F0093DCF5 /* squarePNG.png */; };
 		FB1CFED521396151004F41E3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1CFED421396151004F41E3 /* AppDelegate.m */; };
 		FB1CFED821396152004F41E3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1CFED721396152004F41E3 /* ViewController.m */; };
 		FB1CFEDB21396152004F41E3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB1CFED921396152004F41E3 /* Main.storyboard */; };
 		FB1CFEDD21396153004F41E3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FB1CFEDC21396153004F41E3 /* Assets.xcassets */; };
 		FB1CFEE021396153004F41E3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB1CFEDE21396153004F41E3 /* LaunchScreen.storyboard */; };
 		FB1CFEE321396153004F41E3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FB1CFEE221396153004F41E3 /* main.m */; };
-		FB1CFEEA213961D1004F41E3 /* squarePNG.png in Resources */ = {isa = PBXBuildFile; fileRef = FB1CFEE9213961D1004F41E3 /* squarePNG.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0338F6B9222CC4780061ACD1 /* AVCaptureVideoPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCaptureVideoPreviewView.m; sourceTree = "<group>"; };
-		0338F6BA222CC4780061ACD1 /* AVPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVPlayerView.m; sourceTree = "<group>"; };
-		0338F6BB222CC4780061ACD1 /* AVPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVPlayerView.h; sourceTree = "<group>"; };
-		0338F6BC222CC4780061ACD1 /* AVCaptureVideoPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCaptureVideoPreviewView.h; sourceTree = "<group>"; };
+		037471D02622FF290093DCF5 /* AVCaptureVideoPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVCaptureVideoPreviewView.m; sourceTree = "<group>"; };
+		037471D12622FF290093DCF5 /* AVPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVPlayerView.m; sourceTree = "<group>"; };
+		037471D22622FF290093DCF5 /* AVPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVPlayerView.h; sourceTree = "<group>"; };
+		037471D32622FF290093DCF5 /* AVCaptureVideoPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVCaptureVideoPreviewView.h; sourceTree = "<group>"; };
+		037471D62623006F0093DCF5 /* squarePNG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = squarePNG.png; sourceTree = "<group>"; };
 		FB1CFED021396151004F41E3 /* SquareCam-ARC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SquareCam-ARC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB1CFED321396151004F41E3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		FB1CFED421396151004F41E3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -33,7 +34,6 @@
 		FB1CFEDF21396153004F41E3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FB1CFEE121396153004F41E3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FB1CFEE221396153004F41E3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FB1CFEE9213961D1004F41E3 /* squarePNG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = squarePNG.png; path = ../../SquareCam/SquareCam/squarePNG.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,16 +47,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0338F6B8222CC4780061ACD1 /* CommonView */ = {
+		037471CF2622FF290093DCF5 /* CommonView */ = {
 			isa = PBXGroup;
 			children = (
-				0338F6BC222CC4780061ACD1 /* AVCaptureVideoPreviewView.h */,
-				0338F6B9222CC4780061ACD1 /* AVCaptureVideoPreviewView.m */,
-				0338F6BB222CC4780061ACD1 /* AVPlayerView.h */,
-				0338F6BA222CC4780061ACD1 /* AVPlayerView.m */,
+				037471D32622FF290093DCF5 /* AVCaptureVideoPreviewView.h */,
+				037471D02622FF290093DCF5 /* AVCaptureVideoPreviewView.m */,
+				037471D22622FF290093DCF5 /* AVPlayerView.h */,
+				037471D12622FF290093DCF5 /* AVPlayerView.m */,
 			);
-			name = CommonView;
-			path = ../../../Common/CommonView;
+			path = CommonView;
 			sourceTree = "<group>";
 		};
 		FB1CFEC721396151004F41E3 = {
@@ -78,7 +77,7 @@
 		FB1CFED221396151004F41E3 /* SquareCam-ARC */ = {
 			isa = PBXGroup;
 			children = (
-				0338F6B8222CC4780061ACD1 /* CommonView */,
+				037471CF2622FF290093DCF5 /* CommonView */,
 				FB1CFED321396151004F41E3 /* AppDelegate.h */,
 				FB1CFED421396151004F41E3 /* AppDelegate.m */,
 				FB1CFED621396152004F41E3 /* ViewController.h */,
@@ -88,7 +87,7 @@
 				FB1CFEDE21396153004F41E3 /* LaunchScreen.storyboard */,
 				FB1CFEE121396153004F41E3 /* Info.plist */,
 				FB1CFEE221396153004F41E3 /* main.m */,
-				FB1CFEE9213961D1004F41E3 /* squarePNG.png */,
+				037471D62623006F0093DCF5 /* squarePNG.png */,
 			);
 			path = "SquareCam-ARC";
 			sourceTree = "<group>";
@@ -152,7 +151,7 @@
 			files = (
 				FB1CFEE021396153004F41E3 /* LaunchScreen.storyboard in Resources */,
 				FB1CFEDD21396153004F41E3 /* Assets.xcassets in Resources */,
-				FB1CFEEA213961D1004F41E3 /* squarePNG.png in Resources */,
+				037471D7262300700093DCF5 /* squarePNG.png in Resources */,
 				FB1CFEDB21396152004F41E3 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -164,11 +163,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0338F6BE222CC4780061ACD1 /* AVPlayerView.m in Sources */,
-				0338F6BD222CC4780061ACD1 /* AVCaptureVideoPreviewView.m in Sources */,
 				FB1CFED821396152004F41E3 /* ViewController.m in Sources */,
+				037471D42622FF290093DCF5 /* AVCaptureVideoPreviewView.m in Sources */,
 				FB1CFEE321396153004F41E3 /* main.m in Sources */,
 				FB1CFED521396151004F41E3 /* AppDelegate.m in Sources */,
+				037471D52622FF290093DCF5 /* AVPlayerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
