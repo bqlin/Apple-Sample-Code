@@ -119,3 +119,29 @@ use the AVAssetWriterInputMetadataAdaptor API to write circle annotation metadat
 - Version 1.2, 2015-10-01
 
 Real-time Video Processing Using AVPlayerItemVideoOutput.
+
+### Adaptive
+
+自适应式UI示例。
+
+#### AdaptiveElements
+
+- AdaptiveElementsImplementingYourOwnAdaptiveDesignwithUIKit-fixed
+- Version 1.0, 2016-09-13
+
+使用UIKit实现自适应设计。
+
+#### AdaptivePhotos
+
+- AdaptivePhotosUsingUIKitTraitsandSizeClasses-fixed
+- Version 4.1, 2016-09-13
+
+使用UIKit Traits和Size Classes。
+
+#### AstroLayout
+
+- AstroLayoutBuildingAdaptiveUIwithAutoLayout
+- Version 1.0, 2015-09-16
+
+使用Auto Layout构建自适应UI。
+
