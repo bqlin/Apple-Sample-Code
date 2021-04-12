@@ -45,6 +45,7 @@ class SmallElementViewController: UIViewController {
                 We use the `.overFullScreen` presentation style so the ExampleContainerViewController
                 underneath will go through the normal layout process, even while the presentation is active.
              */
+             // 这里使用`.overFullScreen`主要了为了保证下方的stack view正常布局，否则在present后，下面的视图将不响应布局。从而无法替换底下stack view的内容。
             newElementViewController.modalPresentationStyle = .overFullScreen
             present(newElementViewController, animated: true, completion: nil)
         }
@@ -56,9 +57,15 @@ class SmallElementViewController: UIViewController {
             (which could happen when the parent changes to a different Design),
             if we presented the ElementViewController, then dismiss it.
          */
+        // 当从smallElement->largeElement时，若已经present了一层，则要dismiss一层。
+        // print("\(#function): paren: \(parent), presentedViewController: \(presentedViewController)")
         if parent == nil && presentedViewController != nil {
             dismiss(animated: false, completion: nil)
         }
+    }
+    
+    deinit {
+        print("\(Self.self) \(#function)")
     }
 
 }

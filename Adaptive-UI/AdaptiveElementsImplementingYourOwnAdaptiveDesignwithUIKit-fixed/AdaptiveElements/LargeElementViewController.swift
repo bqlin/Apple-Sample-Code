@@ -22,7 +22,7 @@ class LargeElementViewController: UIViewController {
             If we are not being presented full-screen,
             then add a constraint to make this view no wider than our superview's readable content guide.
          */
-
+        // 确定当前是非全屏的才添加约束
         if presentingViewController == nil && widthConstraint == nil, let superview = view.superview {
             widthConstraint = view.widthAnchor.constraint(lessThanOrEqualTo: superview.readableContentGuide.widthAnchor)
             widthConstraint?.isActive = true
@@ -36,7 +36,7 @@ class LargeElementViewController: UIViewController {
             When this view appears, if we are being presented,
             add a tap gesture recognizer so we can dismiss when we are tapped.
          */
-
+        // 只有在present时才添加手势
         if isBeingPresented {
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.tapped))
             view.addGestureRecognizer(tapGestureRecognizer)
@@ -47,6 +47,10 @@ class LargeElementViewController: UIViewController {
         if gestureRecognizer.state == .ended {
             dismiss(animated: true, completion: nil)
         }
+    }
+    
+    deinit {
+        print("\(Self.self) \(#function)")
     }
 
 }

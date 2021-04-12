@@ -47,6 +47,7 @@ class ExampleContainerViewController: UIViewController {
         let newDesign = decideDesign(size)
 
         // Step 3: If the design is different than what is displayed, change the UI.
+        // 这里避免了重复调用applyDesign替换控制器
         if displayedDesign != newDesign {
             applyDesign(newDesign)
             displayedDesign = newDesign
@@ -78,8 +79,9 @@ class ExampleContainerViewController: UIViewController {
             Rule: If the width is less than a threshold value, be small, otherwise be large.
             (We chose 750 as a threshold value since it produces reasonable results for this example,
             but there is nothing special about that number.)
+             CGFloat(750)
          */
-        let widthThreshold = CGFloat(750)
+        let widthThreshold = max(size.width, size.height)
 
         let elementKind: Design.ElementKind
         if size.width < widthThreshold {
@@ -88,12 +90,14 @@ class ExampleContainerViewController: UIViewController {
         else {
             elementKind = .large
         }
+        print("element kind: \(elementKind), size: \(size)")
 
         // Return a Design encapsulating the results of those decisions.
         return Design(axis: axis, elementKind: elementKind)
     }
 
     func applyDesign(_ newDesign: Design) {
+        print(#function)
         /*
             Change the view controllers and views to display the new design.
             Be careful to only change properties that need to be changed.
@@ -114,6 +118,7 @@ class ExampleContainerViewController: UIViewController {
                 }
 
                 // Create the new view controller.
+                // 从storyboard加载id为smallElement或largeElement的控制器
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let newElementViewController = storyboard.instantiateViewController(withIdentifier: newDesign.elementIdentifier)
 
