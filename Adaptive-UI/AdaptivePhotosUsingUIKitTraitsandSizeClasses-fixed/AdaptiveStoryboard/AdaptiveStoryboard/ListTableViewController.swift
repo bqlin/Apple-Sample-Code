@@ -33,7 +33,7 @@ class ListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ListTableViewController.showDetailTargetDidChange(_:)), name: UIViewController.showDetailTargetDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showDetailTargetDidChange(_:)), name: UIViewController.showDetailTargetDidChangeNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

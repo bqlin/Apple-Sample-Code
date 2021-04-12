@@ -132,7 +132,7 @@ class RatingControl: UIControl {
         
         guard let touchedView = hitTest(position, with: event) as? UIImageView else { return }
         
-        guard let touchedIndex = imageViews.index(of: touchedView) else { return }
+        guard let touchedIndex = imageViews.firstIndex(of: touchedView) else { return }
         
         rating = RatingControl.minimumRating + touchedIndex
 

@@ -40,7 +40,7 @@ class ConversationViewController: UITableViewController {
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: ConversationViewController.cellIdentifier)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ConversationViewController.showDetailTargetDidChange(_:)), name: UIViewController.showDetailTargetDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showDetailTargetDidChange(_:)), name: UIViewController.showDetailTargetDidChangeNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {

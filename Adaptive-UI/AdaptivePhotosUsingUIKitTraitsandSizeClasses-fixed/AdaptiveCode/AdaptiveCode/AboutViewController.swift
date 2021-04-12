@@ -21,14 +21,14 @@ class AboutViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         let headlineLabel = UILabel()
-        headlineLabel.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline)
+        headlineLabel.font = .preferredFont(forTextStyle: .headline)
         headlineLabel.numberOfLines = 1
         headlineLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(headlineLabel)
         self.headlineLabel = headlineLabel
         
         let label = UILabel()
-        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        label.font = .preferredFont(forTextStyle: .body)
         label.numberOfLines = 0
         
         if let url = Bundle.main.url(forResource: "Text", withExtension: "txt") {
@@ -73,9 +73,10 @@ class AboutViewController: UIViewController {
         else {
             // Fallback on earlier versions.
             constraints += NSLayoutConstraint.constraints(withVisualFormat: "20-[label]-20|", options: [], metrics:nil, views: viewsAndGuides)
-            
             constraints += NSLayoutConstraint.constraints(withVisualFormat: "20-[headlineLabel]-20|", options: [], metrics:nil, views: viewsAndGuides)
         }
+        // 让label可压缩
+        label.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         
         NSLayoutConstraint.activate(constraints)
         updateLabelsForTraitCollection(traitCollection)

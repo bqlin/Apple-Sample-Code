@@ -17,7 +17,7 @@ class EmptyViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = NSLocalizedString("No Conversation Selected", comment: "No Conversation Selected")
         label.textColor = UIColor(white: 0.0, alpha: 0.4)
-        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.headline)
+        label.font = .preferredFont(forTextStyle: .headline)
         view.addSubview(label)
         
         let xConstraint = NSLayoutConstraint(item: label, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0)

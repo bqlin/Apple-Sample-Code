@@ -15,7 +15,7 @@ extension UIViewController {
     */
     @objc func willShowingViewControllerPushWithSender(_ sender: AnyObject?) -> Bool {
         // Find and ask the right view controller about showing.
-        if let target = targetViewController(forAction: #selector(UIViewController.willShowingViewControllerPushWithSender(_:)), sender: sender) {
+        if let target = targetViewController(forAction: #selector(willShowingViewControllerPushWithSender(_:)), sender: sender) {
             return target.willShowingViewControllerPushWithSender(sender)
         }
 
@@ -29,7 +29,7 @@ extension UIViewController {
     */
     @objc func willShowingDetailViewControllerPushWithSender(_ sender: AnyObject?) -> Bool {
         // Find and ask the right view controller about showing.
-        if let target = targetViewController(forAction: #selector(UIViewController.willShowingDetailViewControllerPushWithSender(_:)), sender: sender) {
+        if let target = targetViewController(forAction: #selector(willShowingDetailViewControllerPushWithSender(_:)), sender: sender) {
             return target.willShowingDetailViewControllerPushWithSender(sender)
         }
 

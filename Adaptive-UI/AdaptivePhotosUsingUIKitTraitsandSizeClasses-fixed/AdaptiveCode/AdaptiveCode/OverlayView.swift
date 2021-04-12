@@ -53,7 +53,7 @@ class OverlayView: UIView {
         backgroundView.contentView.backgroundColor = UIColor(white: 0.7, alpha: 0.3)
         addSubview(backgroundView)
         
-        label.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
+        label.font = .preferredFont(forTextStyle: .body)
         addSubview(label)
         
         // Setup constraints.
@@ -84,7 +84,7 @@ class OverlayView: UIView {
             application will receive a `UIContentSizeCategoryDidChangeNotification`
             should a change to the user's preferred text size have occurred.
         */
-        NotificationCenter.default.addObserver(self, selector: #selector(OverlayView.contentSizeCategoryDidChange(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(contentSizeCategoryDidChange(_:)), name: UIContentSizeCategory.didChangeNotification, object: nil)
     }
     
     deinit {
@@ -94,7 +94,7 @@ class OverlayView: UIView {
     // MARK: Content Size Handling
     
     @objc func contentSizeCategoryDidChange(_ notification: Notification) {
-        label.font = UIFont.preferredFont(forTextStyle:  UIFont.TextStyle.body)
+        label.font = .preferredFont(forTextStyle:  .body)
 
         invalidateIntrinsicContentSize()
     }
@@ -124,6 +124,7 @@ class OverlayView: UIView {
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
 
+        // 判断是否发生了横竖屏切换
         guard traitCollection.verticalSizeClass != previousTraitCollection?.verticalSizeClass ||
               traitCollection.horizontalSizeClass != previousTraitCollection?.horizontalSizeClass else { return }
         

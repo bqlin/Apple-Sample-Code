@@ -43,7 +43,7 @@ class PhotoViewController: UIViewController {
         
         let ratingControl = RatingControl()
         ratingControl.translatesAutoresizingMaskIntoConstraints = false
-        ratingControl.addTarget(self, action: #selector(PhotoViewController.changeRating(_:)), for: .valueChanged)
+        ratingControl.addTarget(self, action: #selector(changeRating(_:)), for: .valueChanged)
         self.ratingControl = ratingControl
         view.addSubview(ratingControl)
         
@@ -62,14 +62,13 @@ class PhotoViewController: UIViewController {
 
         var newConstraints = [NSLayoutConstraint]()
         
+        // imageView铺满父视图
         newConstraints += NSLayoutConstraint.constraints(withVisualFormat: "|[imageView]|", options: [], metrics: nil, views: views)
-
         newConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:|[imageView]|", options: [], metrics: nil, views: views)
         
+        // ratingControl、overlayView右下对齐
         newConstraints += NSLayoutConstraint.constraints(withVisualFormat: "[ratingControl]-20-|", options: [], metrics: nil, views: views)
-        
         newConstraints += NSLayoutConstraint.constraints(withVisualFormat: "[overlayView]-20-|", options: [], metrics: nil, views: views)
-        
         newConstraints += NSLayoutConstraint.constraints(withVisualFormat: "V:[overlayView]-[ratingControl]-20-|", options: [], metrics: nil, views: views)
         
         NSLayoutConstraint.activate(newConstraints)

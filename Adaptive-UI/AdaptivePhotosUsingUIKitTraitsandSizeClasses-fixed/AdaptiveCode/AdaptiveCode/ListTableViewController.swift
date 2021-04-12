@@ -24,9 +24,9 @@ class ListTableViewController: UITableViewController {
 
         title = NSLocalizedString("Conversations", comment: "Conversations")
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("About", comment: "About"), style: .plain, target: self, action: #selector(ListTableViewController.showAboutViewController(_:)))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("About", comment: "About"), style: .plain, target: self, action: #selector(showAboutViewController(_:)))
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Profile", comment: "Profile"), style: .plain, target: self, action: #selector(ListTableViewController.showProfileViewController(_:)))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Profile", comment: "Profile"), style: .plain, target: self, action: #selector(showProfileViewController(_:)))
         
         clearsSelectionOnViewWillAppear = false
     }
@@ -46,7 +46,7 @@ class ListTableViewController: UITableViewController {
 
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: ListTableViewController.cellIdentifier)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(ListTableViewController.showDetailTargetDidChange(_:)), name: UIViewController.showDetailTargetDidChangeNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(showDetailTargetDidChange(_:)), name: UIViewController.showDetailTargetDidChangeNotification, object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -106,7 +106,7 @@ class ListTableViewController: UITableViewController {
         
         let aboutViewController = AboutViewController()
         aboutViewController.navigationItem.title = NSLocalizedString("About", comment: "About")
-        aboutViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(ListTableViewController.closeAboutViewController(_:)))
+        aboutViewController.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeAboutViewController(_:)))
 
         let navController = UINavigationController(rootViewController: aboutViewController)
         navController.modalPresentationStyle = .fullScreen
@@ -121,7 +121,7 @@ class ListTableViewController: UITableViewController {
     
     @objc func showProfileViewController(_ sender: UIBarButtonItem) {
         let profileController = ProfileViewController(user: user)
-        profileController.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(ListTableViewController.closeProfileViewController(_:)))
+        profileController.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(closeProfileViewController(_:)))
         
         let profileNavController = UINavigationController(rootViewController: profileController)
         profileNavController.modalPresentationStyle = .popover
