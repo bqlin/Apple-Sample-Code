@@ -20,8 +20,11 @@
     UIImageView *neptune;
     
     /* To do a basic animation (-changeLayout:), all that's needed is to activate and deactivate an array of constraints. To do more sophisticated animations, holding on to individual constraints instead allows for more control (below). */
+    /// 垂直一列约束
     NSArray *compactConstraints;
+    /// 斜着一列约束
     NSArray *regularConstraints;
+    /// 公共约束
     NSArray *sharedConstraints;
     
     /* Keeping these around for the more sophisticated animation between layouts found in -keyframeBasedLayoutChange:. If the animation is for a whole set of constraints at once (-changeLayout:), use an array of constraints as seen above with compactConstraints, regularConstraints, and sharedConstraints. */
@@ -163,7 +166,7 @@
     }
     
     /* Simplify creating multiple similar constraints using a block. As with creating the planet views, this could be done individually or in a method outside of this one instead of a block, but since they are so similar, this reduces the amount of code required. Each planet gets its centerXAnchor set to the centerXAnchor of the superview. That means that, in a compact horizontal setting, the planets will be aligned by their centers in the middle of the superview. */
-    
+    // 水平居中对齐
     NSLayoutConstraint *(^createCenterXConstraint)(UIImageView *, NSString *) = ^(UIImageView *planetToCenter, NSString *identifierName){
         NSLayoutConstraint *newConstraint = [planetToCenter.centerXAnchor constraintEqualToAnchor: self.view.centerXAnchor];
         newConstraint.identifier = identifierName;
