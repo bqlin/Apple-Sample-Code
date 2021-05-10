@@ -72,7 +72,7 @@ class QuartzDashViewController: UIViewController, UIPickerViewDelegate, UIPicker
 
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        var p: [CGFloat] = patterns[row]
+        let p: [CGFloat] = patterns[row]
         var title = String(format:"%.0f", p[0])
         for i in 1..<p.count {
             title += String(format:"-%.0f", p[i])

@@ -18,6 +18,37 @@
 
 定制页面过渡。
 
+### CollectionViewTransition
+
+- Version 1.1, 2013-10-29
+
+两个不同layout但内容相同的collection view动画过渡。
+
+### Photo Transitioning
+
+- PhotoTransitioningUsingUIViewPropertyAnimatortocreateafullyinterativeandinterruptiblecustomviewcontrollertransition-fixed
+-  Version 1.0, 2016-10-27
+
+使用UIViewPropertyAnimator创建可交互、可中断的视图控制器过渡效果。
+
+### CustomAnimatableProperty
+
+- Version 1.0, 2014-04-02
+
+图层动画。
+
+### StreetScroller
+
+- Version 1.2, 2013-07-31
+
+使用UIScrollView子类实现无限滚动。
+
+### ViewTransitions
+
+- Version 1.12, 2013-07-31
+
+视图过渡切换动画。
+
 ## Image
 
 图像处理相关示例。
@@ -28,6 +59,31 @@
 - Version 3.0, 2015-10-21
 
 Photos framework示例。
+
+### LargeImageDownsizing
+
+- Version 1.1, 2014-03-27
+
+使用降采样方式加载并显示大图。
+
+### PhotoScroller
+
+- Version 1.3, 2012-11-06
+
+使用局部加载的方式加载并显示大图。
+
+### QuartzDemo
+
+- Quartz2DforiOS-fixed
+- Version 5.0, 2017-09-19
+
+Quartz2D API使用示例。
+
+### UIImageEffects
+
+- Version 1.1, 2014-07-31
+
+使用vImage、Quartz、UIKit方式绘制图像高斯模糊和染色效果。
 
 ## Foundation
 

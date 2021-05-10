@@ -120,10 +120,10 @@ class QuartzBlendingViewController: UIViewController, UIPickerViewDelegate, UIPi
         quartzBlendingView.destinationColor = UIColor.black
         quartzBlendingView.blendMode = .normal
 
-        if let index = colors.index(of: quartzBlendingView.destinationColor) {
+        if let index = colors.firstIndex(of: quartzBlendingView.destinationColor) {
             picker.selectRow(index, inComponent: 0, animated: false)
         }
-        if let index = colors.index(of: quartzBlendingView.sourceColor) {
+        if let index = colors.firstIndex(of: quartzBlendingView.sourceColor) {
             picker.selectRow(index, inComponent: 1, animated: false)
         }
         picker.selectRow(Int(quartzBlendingView.blendMode.rawValue), inComponent: 2, animated: false)
@@ -166,7 +166,7 @@ class QuartzBlendingViewController: UIViewController, UIPickerViewDelegate, UIPi
             return NSAttributedString(string: blendModes[row])
         }
         let squareString: String = String(format: "%C", 0x2588) // This is a Unicode character for a simple square block.
-        let attributes = [ NSForegroundColorAttributeName : colors[row], NSBackgroundColorAttributeName : UIColor.lightGray ]
+        let attributes = [ NSAttributedString.Key.foregroundColor : colors[row], NSAttributedString.Key.backgroundColor : UIColor.lightGray ]
         return NSAttributedString(string: squareString, attributes:attributes)
     }
 

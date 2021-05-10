@@ -40,8 +40,8 @@ class QuartzTextView: QuartzView {
         // set up an attributed string using CoreText attributes.  Here, we set
         // up the string to use the demo font, and to take the forground color from the context.
         let lineText = NSMutableAttributedString(string:"Hello from CoreText")
-        lineText.addAttribute(kCTFontAttributeName as String, value: demoFont!, range: NSMakeRange(0, lineText.length))
-        lineText.addAttribute(kCTForegroundColorFromContextAttributeName as String, value: true, range: NSMakeRange(0, lineText.length))
+        lineText.addAttribute(.font, value: demoFont!, range: NSMakeRange(0, lineText.length))
+        lineText.addAttribute(NSAttributedString.Key(rawValue: kCTForegroundColorFromContextAttributeName as String), value: true, range: NSMakeRange(0, lineText.length))
 
         // format the text as a CoreText line
         let lineToDraw: CTLine = CTLineCreateWithAttributedString(lineText)
