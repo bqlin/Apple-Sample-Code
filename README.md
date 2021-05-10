@@ -1,6 +1,8 @@
 # Apple Sample Code - 苹果示例代码
 
-## 包含项目
+## UI
+
+用户界面相关示例。
 
 ### NavBar
 
@@ -9,13 +11,6 @@
 
 定制导航栏示例。
 
-### SamplePhotosApp
-
-- ExampleappusingPhotosframework
-- Version 3.0, 2015-10-21
-
-Photos framework示例。
-
 ### CustomTransitions
 
 - CustomViewControllerPresentationsandTransitions
@@ -23,12 +18,20 @@ Photos framework示例。
 
 定制页面过渡。
 
-### HLSCatalog
+## Image
 
-- HLSCatalogUsingAVFoundationtoplayandpersistHTTPLiveStreams
-- Version 1.2, 2016-09-21
+图像处理相关示例。
 
-HLS 下载示例。
+### SamplePhotosApp
+
+- ExampleappusingPhotosframework
+- Version 3.0, 2015-10-21
+
+Photos framework示例。
+
+## Foundation
+
+通用功能示例。
 
 ### SimpleBackgroundTransfer
 
@@ -36,9 +39,16 @@ HLS 下载示例。
 
 后台下载示例。
 
-### VideoAndAudio
+## VideoAndAudio
 
 音视频相关示例。
+
+### HLSCatalog
+
+- HLSCatalogUsingAVFoundationtoplayandpersistHTTPLiveStreams
+- Version 1.2, 2016-09-21
+
+HLS 下载示例。
 
 #### AVCompositionDebugVieweriOS
 
