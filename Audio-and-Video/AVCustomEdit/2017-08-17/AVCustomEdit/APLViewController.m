@@ -539,13 +539,13 @@ bail:
 		
 		_scrubInFlight = YES;
 		
-		[self.player seekToTime:CMTimeMakeWithSeconds(time, NSEC_PER_SEC)
-				toleranceBefore:CMTimeMakeWithSeconds(tolerance, NSEC_PER_SEC)
-				 toleranceAfter:CMTimeMakeWithSeconds(tolerance, NSEC_PER_SEC)
-			  completionHandler:^(BOOL finished) {
-				  _scrubInFlight = NO;
-				  [self updateTimeLabel];
-			  }];
+        [self.player seekToTime:CMTimeMakeWithSeconds(time, NSEC_PER_SEC)
+                toleranceBefore:CMTimeMakeWithSeconds(tolerance, NSEC_PER_SEC)
+                 toleranceAfter:CMTimeMakeWithSeconds(tolerance, NSEC_PER_SEC)
+              completionHandler:^(BOOL finished) {
+            self->_scrubInFlight = NO;
+            [self updateTimeLabel];
+        }];
 	}
 }
 

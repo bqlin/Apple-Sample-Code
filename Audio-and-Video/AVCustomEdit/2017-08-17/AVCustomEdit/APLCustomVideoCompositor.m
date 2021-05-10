@@ -100,7 +100,7 @@
 		dispatch_async(_renderingQueue,^() {
 			
 			// Check if all pending requests have been cancelled
-			if (_shouldCancelAllRequests) {
+            if (self->_shouldCancelAllRequests) {
 				[request finishCancelledRequest];
 			} else {
 				NSError *err = nil;
@@ -126,7 +126,7 @@
 	
 	dispatch_barrier_async(_renderingQueue, ^() {
 		// start accepting requests again
-		_shouldCancelAllRequests = NO;
+        self->_shouldCancelAllRequests = NO;
 	});
 }
 
