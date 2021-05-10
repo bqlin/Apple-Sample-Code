@@ -49,6 +49,10 @@ class APLCustomVideoCompositor: NSObject, AVVideoCompositing {
     fileprivate init(metalRenderer: APLMetalRenderer) {
         self.metalRenderer = metalRenderer
     }
+    
+    override init() {
+        fatalError()
+    }
 
     // MARK: AVVideoCompositing protocol functions
 
@@ -143,16 +147,16 @@ class APLCustomVideoCompositor: NSObject, AVVideoCompositing {
 
 class APLCrossDissolveCompositor: APLCustomVideoCompositor {
 
-    init?() {
-        guard let newRenderer = APLCrossDissolveRenderer() else { return nil }
+    override init() {
+        guard let newRenderer = APLCrossDissolveRenderer() else { fatalError() }
         super.init(metalRenderer: newRenderer)
     }
 }
 
 class APLDiagonalWipeCompositor: APLCustomVideoCompositor {
 
-    init?() {
-        guard let newRenderer = APLDiagonalWipeRenderer() else { return nil }
+    override init() {
+        guard let newRenderer = APLDiagonalWipeRenderer() else { fatalError() }
         super.init(metalRenderer: newRenderer)
     }
 }

@@ -46,7 +46,7 @@ class APLExport {
         guard let progressTimer = progressTimer else { return }
         progressTimer.invalidate()
 
-        if exportSession.status != AVAssetExportSessionStatus.completed {
+        if exportSession.status != .completed {
             if let error = exportSession.error { print("An export error occurred: \(error.localizedDescription)") }
             return
         }
@@ -99,7 +99,7 @@ class APLExport {
          */
 
         exportSession.outputURL = URL(fileURLWithPath: filePath)
-        exportSession.outputFileType = AVFileTypeQuickTimeMovie
+        exportSession.outputFileType = .mov
 
         exportSession.exportAsynchronously(completionHandler: {
             DispatchQueue.main.async {

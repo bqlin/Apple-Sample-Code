@@ -77,7 +77,7 @@ class APLDiagonalWipeRenderer: APLMetalRenderer {
         super.init()
 
         // The default library contains all of the shader functions that were compiled into our app bundle.
-        guard let library = device.newDefaultLibrary() else { return nil }
+        guard let library = device.makeDefaultLibrary() else { return nil }
 
         // Retrieve the functions that will comprise our pipeline.
 
@@ -212,12 +212,12 @@ class APLDiagonalWipeRenderer: APLMetalRenderer {
         renderEncoder.setRenderPipelineState(pipelineState)
 
         // Specify vertex, color and texture buffers for the vertex shader function.
-        renderEncoder.setVertexBuffer(vertexBuffer, offset:0, at:0)
-        renderEncoder.setVertexBuffer(colorBuffer, offset:0, at:1)
-        renderEncoder.setVertexBuffer(textureBuffer, offset: 0, at: 2)
+        renderEncoder.setVertexBuffer(vertexBuffer, offset:0, index:0)
+        renderEncoder.setVertexBuffer(colorBuffer, offset:0, index:1)
+        renderEncoder.setVertexBuffer(textureBuffer, offset: 0, index: 2)
 
         // Set a texture for the fragment shader function.
-        renderEncoder.setFragmentTexture(texture, at:0)
+        renderEncoder.setFragmentTexture(texture, index:0)
 
         // Tell the render context we want to draw our primitives (triangle strip).
         renderEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 5, instanceCount: 1)
@@ -248,7 +248,7 @@ class APLDiagonalWipeRenderer: APLMetalRenderer {
 
         // Create a new command buffer for each renderpass to the current drawable.
         let commandBuffer = commandQueue.makeCommandBuffer()
-        commandBuffer.label = "MyCommand"
+        commandBuffer?.label = "MyCommand"
 
         /*
          Obtain a drawable texture for this render pass and set up the renderpass descriptor for the command
@@ -257,8 +257,8 @@ class APLDiagonalWipeRenderer: APLMetalRenderer {
         let renderPassDescriptor = setupRenderPassDescriptor(destinationTexture)
 
         // Create a render command encoder so we can render into something.
-        let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
-        renderEncoder.label = "MyRenderEncoder"
+        let renderEncoder = commandBuffer?.makeRenderCommandEncoder(descriptor: renderPassDescriptor)
+        renderEncoder?.label = "MyRenderEncoder"
 
         var quadVertexData1: [Float] = [
             -1.0, 1.0,
@@ -278,7 +278,7 @@ class APLDiagonalWipeRenderer: APLMetalRenderer {
                               options: .storageModeShared)
 
         // Texture data varies from 0 -> 1, whereas vertex data varies from -1 -> 1.
-        var quadTextureData1: [Float] = [
+        let quadTextureData1: [Float] = [
             0.5 + quadVertexData1[0]/2, 0.5 + quadVertexData1[1]/2,
             0.5 + quadVertexData1[2]/2, 0.5 + quadVertexData1[3]/2,
             0.5 + quadVertexData1[4]/2, 0.5 + quadVertexData1[5]/2,
@@ -293,8 +293,8 @@ class APLDiagonalWipeRenderer: APLMetalRenderer {
 
         guard let renderPipelineState = renderPipelineState else { return }
         // Render Foreground texture.
-        renderTexture(renderEncoder, texture: foregroundTexture, vertexBuffer: quadvertexBuffer,
-                      textureBuffer:  quadtextureBuffer,
+        renderTexture(renderEncoder!, texture: foregroundTexture, vertexBuffer: quadvertexBuffer!,
+                      textureBuffer:  quadtextureBuffer!,
                       pipelineState: renderPipelineState)
 
         var quadVertexData2: [Float] = [
@@ -314,7 +314,7 @@ class APLDiagonalWipeRenderer: APLMetalRenderer {
                               length: homogeneousCoords.count * MemoryLayout.size(ofValue: homogeneousCoords[0]),
                               options: .storageModeShared)
 
-        var quadTextureData2: [Float] = [
+        let quadTextureData2: [Float] = [
             0.5 + quadVertexData2[0]/2, 0.5 + quadVertexData2[1]/2,
             0.5 + quadVertexData2[2]/2, 0.5 + quadVertexData2[3]/2,
             0.5 + quadVertexData2[4]/2, 0.5 + quadVertexData2[5]/2,
@@ -328,19 +328,19 @@ class APLDiagonalWipeRenderer: APLMetalRenderer {
                               options: .storageModeShared)
 
         // Render Background texture.
-        renderTexture(renderEncoder, texture: backgroundTexture, vertexBuffer: quadvertexBuffer2,
-                      textureBuffer: quadtextureBuffer2,
+        renderTexture(renderEncoder!, texture: backgroundTexture, vertexBuffer: quadvertexBuffer2!,
+                      textureBuffer: quadtextureBuffer2!,
                       pipelineState: renderPipelineState)
 
         // We're done encoding commands.
-        renderEncoder.endEncoding()
+        renderEncoder?.endEncoding()
 
         // Use the command buffer completion block to release the reference to the pixel buffers.
-        commandBuffer.addCompletedHandler({ _ in
+        commandBuffer?.addCompletedHandler({ _ in
             self.pixelBuffers = nil // Release the reference to the pixel buffers.
         })
         // Finalize rendering here & push the command buffer to the GPU.
-        commandBuffer.commit()
+        commandBuffer?.commit()
     }
 
 }

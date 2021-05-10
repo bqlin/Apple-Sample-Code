@@ -11,7 +11,7 @@ import CoreGraphics
 import CoreVideo
 import MetalKit
 
-class APLMetalRenderer: AnyObject {
+class APLMetalRenderer {
 
     /// A `MTLDevice` object instance representing a GPU that can execute commands.
     let device: MTLDevice
@@ -32,7 +32,7 @@ class APLMetalRenderer: AnyObject {
         device = defaultMetalDevice
 
         // Create the command queue to submit work to the GPU.
-        commandQueue = device.makeCommandQueue()
+        commandQueue = device.makeCommandQueue()!
 
         // Create a new texture cache to use to create textures from the pixel buffers for the movie frames.
         guard CVMetalTextureCacheCreate(kCFAllocatorDefault, nil, device, nil, &textureCache) == kCVReturnSuccess

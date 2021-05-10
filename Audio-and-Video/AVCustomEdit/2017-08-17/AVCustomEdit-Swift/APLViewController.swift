@@ -22,7 +22,7 @@ class APLPlayerView: UIView {
     override class var layerClass: AnyClass {
         return AVPlayerLayer.self
     }
-
+    
     var player: AVPlayer? {
         get {
             return playerLayer.player
@@ -40,29 +40,29 @@ class APLPlayerView: UIView {
 
 class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate,
     APLTransitionTypePickerDelegate, UIAdaptivePresentationControllerDelegate, APLExportStatus {
-
+    
     // MARK: Properties
-
+    
     /// Context used in KVO to identify rate changes.
     fileprivate var playerRateObservationContext = 0
     /// Context used in KVO to identify player status changes.
     fileprivate var playerStatusObservationContext = 1
-
+    
     /// Storyboard Seque identifier for the 'Set Transition'.
     static let transition = "Transition"
-
+    
     /// APLSimpleEditor object instance used to build a composition from the clips.
     fileprivate var editor: APLSimpleEditor = APLSimpleEditor()
-
+    
     /// The movie clips.
     fileprivate var clips = [AVAsset]()
-
+    
     /// The available time ranges for the movie clips.
     fileprivate var clipTimeRanges = [CMTimeRange]()
-
+    
     /// Instance of AVPlayer used for movie playback.
     fileprivate var player = AVPlayer()
-
+    
     /// Instance of AVPlayerItem used to represent the presentation state of the asset played by the AVPlayer.
     fileprivate var playerItem: AVPlayerItem? = nil {
         didSet {
@@ -70,7 +70,7 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
             player.replaceCurrentItem(with: self.playerItem)
         }
     }
-
+    
     /// The `UIView` subclass containing an AVPlayerLayer layer to which the output of AVPlayer can be directed.
     @IBOutlet fileprivate weak var playerView: APLPlayerView!
     /// The `UIToolbar` control that will display the scrubber, playPauseButton, and other elements.
@@ -87,10 +87,10 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
     @IBOutlet fileprivate weak var currentTimeLabel: UILabel!
     /// The 'UIProgressView` for displaying the status of the export operation.
     @IBOutlet fileprivate weak var exportProgressView: UIProgressView!
-
+    
     /// Indicates whether the movie is playing.
     fileprivate var playing = false
-
+    
     /// Indicates whether the user is currently scrubbing video using the toolbar slider.
     fileprivate var scrubInFlight = false
     /// After the movie has played to its end time, seek back to time zero to play it again.
@@ -106,51 +106,51 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
     fileprivate var transitionDuration = 2.0
     fileprivate var transitionType = TransitionType.diagonalWipe.rawValue
     fileprivate var transitionsEnabled = true
-
+    
     // MARK: Initialization
-
+    
     required init?(coder aDecoder: NSCoder) {
-
+        
         super.init(coder: aDecoder)
         player.addObserver(self, forKeyPath: "rate", options: [.new, .old],
-                           context: &playerRateObservationContext)
+            context: &playerRateObservationContext)
     }
-
+    
     // MARK: View Loading
     
     override func viewDidLoad() {
-
+        
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view, typically from a nib.
         
         playerView.player = self.player
-
+        
         updateScrubber()
         updateTimeLabel()
         
         // Add the clips from the main bundle to create a composition using them.
         setupEditingAndPlayback()
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
-
+        
         super.viewDidAppear(animated)
-
+        
         addTimeObserverToPlayer()
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
-
+        
         super.viewWillDisappear(animated)
         
         player.pause()
         removeTimeObserverFromPlayer()
     }
-
+    
     // MARK: Set Transition
-
-    override func prepare(for segue: UIStoryboardSegue, sender:Any?) {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == APLViewController.transition {
             
@@ -162,7 +162,7 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
              'viewControllerForAdaptivePresentationStyle' functions to be called.
              */
             controller.delegate = self
-
+            
             transitionTypePickerController.delegate = self
             transitionTypePickerController.currentTransition = transitionType
             if transitionType == TransitionType.crossDissolve.rawValue {
@@ -180,37 +180,37 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
             }
         }
     }
-
+    
     // Specify the presentation style to use (called for iPhone only).
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         return .fullScreen
     }
-
+    
     // Called when the Set Transition view controller 'Done' button is pressed.
-    func doneAction() {
+    @objc func doneAction() {
         // Dismiss the view controller that was presented.
         self.dismiss(animated: true) {}
     }
-
+    
     /*
      Present/wrap the view controller in a navigation controller (for iPhone/compact).
      If this method is not implemented, or returns nil, then the originally presented view controller is used.
     */
     func presentationController(_ controller: UIPresentationController,
                                 viewControllerForAdaptivePresentationStyle style: UIModalPresentationStyle) -> UIViewController? {
-
+        
         let navController = UINavigationController(rootViewController: controller.presentedViewController)
         let presentedViewController = controller.presentedViewController
         presentedViewController.navigationItem.rightBarButtonItem =
             UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(doneAction))
-
+        
         return navController
     }
-
+    
     // MARK: Editor
-
+    
     func setupEditingAndPlayback() {
-
+        
         guard let clip1Path = Bundle.main.path(forResource: "sample_clip1", ofType: "m4v") else {
             print("Failed to get clip1 from main bundle!"); return
         }
@@ -223,10 +223,10 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
         
         let dispatchGroup = DispatchGroup()
         let assetKeysToLoadAndTest: [String] = ["tracks", "duration", "composable"]
-
-        loadAsset(asset1, withKeys:assetKeysToLoadAndTest, usingDispatchGroup:dispatchGroup)
-        loadAsset(asset2, withKeys:assetKeysToLoadAndTest, usingDispatchGroup:dispatchGroup)
-
+        
+        loadAsset(asset1, withKeys: assetKeysToLoadAndTest, usingDispatchGroup: dispatchGroup)
+        loadAsset(asset2, withKeys: assetKeysToLoadAndTest, usingDispatchGroup: dispatchGroup)
+        
         dispatchGroup.notify(queue: DispatchQueue.main, execute: {
             // Wait until all the above clips have loaded before synchronizing with the editor.
             if self.clips.count > 1 {
@@ -257,12 +257,12 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
             
             self.clips.append(asset)
             // This code assumes that both assets are atleast 5 seconds long.
-            self.clipTimeRanges.append(CMTimeRange(start: CMTimeMakeWithSeconds(0, 1),
-                                                   duration: CMTimeMakeWithSeconds(5, 1)))
+            self.clipTimeRanges.append(CMTimeRange(start: CMTimeMakeWithSeconds(0, preferredTimescale: 1),
+                duration: CMTimeMakeWithSeconds(5, preferredTimescale: 1)))
             dispatchGroup.leave()
         })
     }
-
+    
     func synchronizePlayerWithEditor() {
         
         guard let playerItem = editor.playerItem() else {
@@ -271,20 +271,20 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
         }
         
         if self.playerItem != playerItem {
-
+            
             if let currentPlayerItem = self.playerItem {
                 currentPlayerItem.removeObserver(self, forKeyPath: #keyPath(AVPlayerItem.status))
                 NotificationCenter.default.removeObserver(self, name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: currentPlayerItem)
             }
             
             self.playerItem = playerItem
-
+            
             self.playerItem!.seekingWaitsForVideoCompositionRendering = true
-
+            
             // Observe the player item "status" key to determine when it is ready to play.
             self.playerItem!.addObserver(self, forKeyPath: #keyPath(AVPlayerItem.status),
-                                         options: [.new],
-                                         context: &playerStatusObservationContext)
+                options: [.new],
+                context: &playerStatusObservationContext)
             
             /*
              When the player item has played to its end time we'll set a flag
@@ -305,10 +305,10 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
         
         // Transitions.
         if transitionsEnabled {
-            self.editor.transitionDuration = CMTimeMakeWithSeconds(transitionDuration, 600)
+            self.editor.transitionDuration = CMTimeMakeWithSeconds(transitionDuration, preferredTimescale: 600)
             self.editor.transitionType = transitionType
         } else {
-            self.editor.transitionDuration = kCMTimeInvalid
+            self.editor.transitionDuration = .invalid
         }
         
         // Build AVComposition and AVVideoComposition objects for playback.
@@ -318,7 +318,7 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
     }
     
     func synchronizeEditorClipsWithOurClips() {
-
+        
         var validClips = [AVAsset]()
         for item in self.clips {
             validClips.append(item)
@@ -326,20 +326,20 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
         guard let clips = validClips as? [AVURLAsset] else { return }
         editor.clips = clips
     }
-
+    
     func synchronizeEditorClipTimeRangesWithOurClipTimeRanges() {
-
+        
         var validClipTimeRanges = [CMTimeRange]()
         for item in self.clipTimeRanges {
             validClipTimeRanges.append(item)
         }
         self.editor.clipTimeRanges = validClipTimeRanges
     }
-
+    
     // MARK: Utilities
     
     // Update the scrubber and time label periodically.
-
+    
     func addTimeObserverToPlayer() {
         
         guard let currentPlayerItem = self.player.currentItem else { return }
@@ -351,20 +351,20 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
         if __inline_isfinited(duration) != 0 {
             
             let width = (Double(scrubber.bounds.width))
-            var interval = 0.5 * duration.divided(by: width)
+            var interval = 0.5 * (width / duration)
             
             // The time label needs to update at least once per second.
             if interval > 1.0 {
                 interval = 1.0
             }
-
-            let updateTime = CMTimeMakeWithSeconds(interval, Int32(NSEC_PER_SEC))
+            
+            let updateTime = CMTimeMakeWithSeconds(interval, preferredTimescale: Int32(NSEC_PER_SEC))
             timeObserver =
                 self.player.addPeriodicTimeObserver(forInterval: updateTime, queue: DispatchQueue.main,
-                                                    using: { [unowned self] _ in
-                self.updateScrubber()
-                self.updateTimeLabel()
-            })
+                    using: { [unowned self] _ in
+                        self.updateScrubber()
+                        self.updateTimeLabel()
+                    })
         }
     }
     
@@ -375,33 +375,33 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
         player.removeTimeObserver(timeObserver)
         self.timeObserver = nil
     }
-
+    
     func playerItemDuration() -> CMTime {
         
-        var itemDuration = kCMTimeInvalid
+        var itemDuration = CMTime.invalid
         
         guard let playerItem = self.player.currentItem else { return itemDuration }
         
-        if playerItem.status == AVPlayerItemStatus.readyToPlay {
+        if playerItem.status == .readyToPlay {
             itemDuration = playerItem.duration
         }
         
         return itemDuration
     }
-
+    
     // MARK: - KVO Observation
     
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?,
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?,
                                context: UnsafeMutableRawPointer?) {
-
+        
         // Make sure the this KVO callback was intended for this view controller.
         if context == &playerRateObservationContext {
-
+            
             guard let newRate = change?[.newKey] as? Float,
-                let oldRate = change?[.oldKey] as? Float else { return }
+                  let oldRate = change?[.oldKey] as? Float else { return }
             if newRate != oldRate {
                 playing = (newRate != 0) || (playRateToRestore != 0)
-
+                
                 updatePlayPauseButton()
                 updateScrubber()
                 updateTimeLabel()
@@ -424,37 +424,37 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
         }
     }
-
+    
     func updatePlayPauseButton() {
-
-        let style = playing ?  UIBarButtonSystemItem.pause : UIBarButtonSystemItem.play
+        
+        let style = playing ? UIBarButtonItem.SystemItem.pause : UIBarButtonItem.SystemItem.play
         let newPlayPauseButton = UIBarButtonItem(barButtonSystemItem: style, target: self,
-                                                 action: #selector(togglePlayPause(_:)))
+            action: #selector(togglePlayPause(_:)))
         
         guard var items = self.toolbar?.items else {
             return
         }
         
-        if let indexOfFirstSuchElement = items.index(where: { $0 == playPauseButton }) {
+        if let indexOfFirstSuchElement = items.firstIndex(where: { $0 == playPauseButton }) {
             items[indexOfFirstSuchElement] = newPlayPauseButton
             playPauseButton = newPlayPauseButton
         }
-
+        
         self.toolbar.setItems(items, animated: false)
-}
-
+    }
+    
     func updateTimeLabel() {
-
+        
         var seconds = CMTimeGetSeconds(player.currentTime())
         if __inline_isfinited(seconds) <= 0 {
             seconds = 0
         }
-
+        
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.minute, .second]
         formatter.unitsStyle = .positional
         formatter.zeroFormattingBehavior = .pad
-
+        
         guard let formattedString = formatter.string(from: TimeInterval(seconds)) else { return }
         currentTimeLabel.text = formattedString
     }
@@ -464,39 +464,39 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
         let duration = CMTimeGetSeconds(playerItemDuration())
         if __inline_isfinited(duration) != 0 {
             let time = CMTimeGetSeconds(player.currentTime())
-            scrubber.setValue(Float(time.divided(by: duration)), animated: true)
+            scrubber.setValue(Float(duration / time), animated: true)
         } else {
             scrubber.setValue(0, animated: true)
         }
     }
-
-    func updateProgress(_ timer: Timer) {
-
+    
+    @objc func updateProgress(_ timer: Timer) {
+        
         guard let session = timer.userInfo as? AVAssetExportSession else { return }
-        if session.status == AVAssetExportSessionStatus.exporting {
+        if session.status == AVAssetExportSession.Status.exporting {
             exportProgressView?.progress = session.progress
         }
     }
-
+    
     func reportError(_ error: Error) {
-
+        
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: error.localizedDescription,
-                                                    message: error.localizedDescription, preferredStyle: .alert)
+                message: error.localizedDescription, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"),
-                                                    style: .cancel, handler: nil))
+                style: .cancel, handler: nil))
             self.present(alertController, animated: true, completion: nil)
         }
     }
-
+    
     // MARK: Playback
-
+    
     @IBAction func togglePlayPause(_ sender: AnyObject) {
-
+        
         playing = !playing
         if playing {
             if seekToZeroBeforePlaying {
-                player.seek(to: kCMTimeZero)
+                player.seek(to: CMTime.zero)
                 seekToZeroBeforePlaying = false
                 updateScrubber()
             }
@@ -507,7 +507,7 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
     }
     
     @IBAction func beginScrubbing(_ sender: AnyObject) {
-
+        
         seekToZeroBeforePlaying = false
         playRateToRestore = player.rate
         player.rate = 0
@@ -526,7 +526,7 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
     
     func scrubToSliderValue(_ sliderValue: Float) {
         
-        let duration: Float64 = CMTimeGetSeconds(playerItemDuration())
+        let duration = CMTimeGetSeconds(playerItemDuration())
         
         if __inline_isfinited(duration) > 0 {
             
@@ -535,23 +535,23 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
             }
             let width = scrubber.bounds.width
             
-            let time = duration.multiplied(by: Float64(sliderValue))
-            let tolerance = 1 * duration.divided(by: Float64(width))
+            let time = duration * Float64(sliderValue)
+            let tolerance = Float64(width) / duration
             
             scrubInFlight = true
             
-            player.seek(to: CMTimeMakeWithSeconds(time, Int32(NSEC_PER_SEC)),
-                        toleranceBefore: CMTimeMakeWithSeconds(tolerance, Int32(NSEC_PER_SEC)),
-                        toleranceAfter: CMTimeMakeWithSeconds(tolerance, Int32(NSEC_PER_SEC)),
-                        completionHandler: { (_) in
-                            self.scrubInFlight = false
-                            self.updateTimeLabel()
-            })
+            player.seek(to: CMTimeMakeWithSeconds(time, preferredTimescale: Int32(NSEC_PER_SEC)),
+                toleranceBefore: CMTimeMakeWithSeconds(tolerance, preferredTimescale: Int32(NSEC_PER_SEC)),
+                toleranceAfter: CMTimeMakeWithSeconds(tolerance, preferredTimescale: Int32(NSEC_PER_SEC)),
+                completionHandler: { (_) in
+                    self.scrubInFlight = false
+                    self.updateTimeLabel()
+                })
         }
     }
     
     @IBAction func endScrubbing(_ sender: AnyObject) {
-
+        
         if scrubInFlight {
             scrubToSliderValue(lastScrubSliderValue)
         }
@@ -562,20 +562,20 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
     }
     
     // Called when the player item has played to its end time.
-    func playerItemDidReachEnd(_ notification: Notification) {
-
+    @objc func playerItemDidReachEnd(_ notification: Notification) {
+        
         // After the movie has played to its end time, seek back to time zero to play it again.
         seekToZeroBeforePlaying = true
     }
     
     @IBAction func handleTapGesture(_ tapGestureRecognizer: UITapGestureRecognizer) {
-
+        
         toolbar.isHidden = !toolbar.isHidden
         currentTimeLabel.isHidden = !currentTimeLabel.isHidden
     }
-
+    
     // MARK: Export
-
+    
     @IBAction func exportToMovie(_ sender: AnyObject) {
         
         exportProgressView.isHidden = false
@@ -590,60 +590,60 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
         
         // Get the assets to be used in the export operation.
         guard let theComposition = editor.composition, let theVideoComposition = editor.videoComposition else { return }
-
+        
         // Use the APLExport object to perform the actual transcode of the assets.
         guard let exporter = APLExport(theComposition, videoComposition: theVideoComposition,
-                                       presetName: AVAssetExportPresetMediumQuality, controller: self) else { return }
-
+            presetName: AVAssetExportPresetMediumQuality, controller: self) else { return }
+        
         // Transcode the assets.
         exporter.export()
     }
-
+    
     func exportCompleted() {
-
+        
         exportProgressView.isHidden = true
         currentTimeLabel.isHidden = false
-
+        
         // Reset progress bar now that export has completed.
         exportProgressView.progress = 1
-                
+        
         player.play()
         playPauseButton.isEnabled = true
         transitionButton.isEnabled = true
         scrubber.isEnabled = true
         exportButton.isEnabled = true
     }
-
+    
     // MARK: Transitions
-
+    
     @IBAction func selectTransition(_ sender: AnyObject) {
         // Show the view controller as a popover (iPad) or as a modal view controller (iPhone / iPhone Plus).
         guard let contentVC =
-            self.storyboard?.instantiateViewController(withIdentifier: "SetTransition") else { return }
-
+        self.storyboard?.instantiateViewController(withIdentifier: "SetTransition") else { return }
+        
         contentVC.edgesForExtendedLayout = UIRectEdge.all
         contentVC.modalPresentationStyle = UIModalPresentationStyle.popover
         guard let presentationController = contentVC.popoverPresentationController else { return }
-
+        
         // Display popover from the UIButton (sender) as the anchor.
         presentationController.sourceRect = sender.frame
         guard let button = sender as? UIButton else { return }
         presentationController.sourceView = button.superview
-
+        
         presentationController.permittedArrowDirections = .any
-
+        
         /*
          Present content view controller in a compact screen so that it can be dismissed as a full screen
          view controller.
         */
         presentationController.delegate = self
-
+        
         // Present the view controller modally.
         self.present(contentVC, animated: false) {
             // Done.
         }
     }
-
+    
     // MARK: Gesture recognizer delegate
     
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
@@ -663,9 +663,9 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
         // Let the editor know of the change in transition type.
         synchronizeWithEditor()
     }
-
+    
     func transitionTypeControllerDismiss() {
-
+        
         self.dismiss(animated: true, completion: nil)
     }
 }

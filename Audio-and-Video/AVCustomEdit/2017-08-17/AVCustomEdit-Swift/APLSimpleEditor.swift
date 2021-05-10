@@ -34,14 +34,14 @@ class APLSimpleEditor: NSObject, AVVideoCompositionValidationHandling {
     private lazy var transitionTimeRanges: [CMTimeRange] = self.initTimeRanges()
 
     func initTimeRanges() -> [CMTimeRange] {
-        let time = CMTimeMake(0, 0)
-        return Array(repeating: CMTimeRangeMake(time, time), count: clips.count)
+        let time = CMTimeMake(value: 0, timescale: 0)
+        return Array(repeating: CMTimeRangeMake(start: time, duration: time), count: clips.count)
     }
 
     func buildComposition(compositionVideoTracks: inout [AVMutableCompositionTrack],
                           _ compositionAudioTracks: inout [AVMutableCompositionTrack]) {
         var alternatingIndex = 0
-        var nextClipStartTime = kCMTimeZero
+        var nextClipStartTime = CMTime.zero
 
         // Make transitionDuration no greater than half the shortest clip duration.
         guard var transitionDuration = self.transitionDuration else {
@@ -66,15 +66,15 @@ class APLSimpleEditor: NSObject, AVVideoCompositionValidationHandling {
             if i < clipTimeRanges.count {
                 timeRangeInAsset = clipTimeRanges[i]
             } else {
-                timeRangeInAsset = CMTimeRangeMake(kCMTimeZero, asset.duration)
+                timeRangeInAsset = CMTimeRangeMake(start: .zero, duration: asset.duration)
             }
             
             do {
-                let clipVideoTrack = asset.tracks(withMediaType: AVMediaTypeVideo)[0]
+                let clipVideoTrack = asset.tracks(withMediaType: .video)[0]
                 try compositionVideoTracks[alternatingIndex].insertTimeRange(timeRangeInAsset,
                                                                              of: clipVideoTrack, at: nextClipStartTime)
                 
-                let clipAudioTrack = asset.tracks(withMediaType: AVMediaTypeAudio)[0]
+                let clipAudioTrack = asset.tracks(withMediaType: .audio)[0]
                 try compositionAudioTracks[alternatingIndex].insertTimeRange(timeRangeInAsset,
                                                                              of: clipAudioTrack, at: nextClipStartTime)
             } catch {
@@ -87,7 +87,7 @@ class APLSimpleEditor: NSObject, AVVideoCompositionValidationHandling {
              Second clip begins with a transition.
              Exclude that transition from the pass through time ranges.
              */
-            passThroughTimeRanges[i] = CMTimeRangeMake(nextClipStartTime, timeRangeInAsset.duration)
+            passThroughTimeRanges[i] = CMTimeRangeMake(start: nextClipStartTime, duration: timeRangeInAsset.duration)
             if i > 0 {
                 passThroughTimeRanges[i].start = CMTimeAdd(passThroughTimeRanges[i].start, transitionDuration)
                 passThroughTimeRanges[i].duration = CMTimeSubtract(passThroughTimeRanges[i].duration, transitionDuration)
@@ -105,7 +105,7 @@ class APLSimpleEditor: NSObject, AVVideoCompositionValidationHandling {
             
             // Remember the time range for the transition to the next item.
             if i + 1 < clipsCount {
-                transitionTimeRanges[i] = CMTimeRangeMake(nextClipStartTime, transitionDuration)
+                transitionTimeRanges[i] = CMTimeRangeMake(start: nextClipStartTime, duration: transitionDuration)
             }
         }
     }
@@ -173,15 +173,15 @@ class APLSimpleEditor: NSObject, AVVideoCompositionValidationHandling {
 
         // Add two video tracks and two audio tracks.
         var compositionVideoTracks =
-            [composition.addMutableTrack(withMediaType: AVMediaTypeVideo,
-                                         preferredTrackID: kCMPersistentTrackID_Invalid),
-             composition.addMutableTrack(withMediaType: AVMediaTypeVideo,
-                                         preferredTrackID: kCMPersistentTrackID_Invalid)]
+            [composition.addMutableTrack(withMediaType: .video,
+                                         preferredTrackID: kCMPersistentTrackID_Invalid)!,
+             composition.addMutableTrack(withMediaType: .video,
+                                         preferredTrackID: kCMPersistentTrackID_Invalid)!]
         var compositionAudioTracks =
-            [composition.addMutableTrack(withMediaType: AVMediaTypeAudio,
-                                         preferredTrackID: kCMPersistentTrackID_Invalid),
-             composition.addMutableTrack(withMediaType: AVMediaTypeAudio,
-                                         preferredTrackID: kCMPersistentTrackID_Invalid)]
+            [composition.addMutableTrack(withMediaType: .audio,
+                                         preferredTrackID: kCMPersistentTrackID_Invalid)!,
+             composition.addMutableTrack(withMediaType: .audio,
+                                         preferredTrackID: kCMPersistentTrackID_Invalid)!]
 
         buildComposition(compositionVideoTracks: &compositionVideoTracks, &compositionAudioTracks)
 
@@ -205,7 +205,7 @@ class APLSimpleEditor: NSObject, AVVideoCompositionValidationHandling {
         guard !clips.isEmpty else { return }
 
         // Use the naturalSize of the first video track.
-        let videoTracks = clips[0].tracks(withMediaType: AVMediaTypeVideo)
+        let videoTracks = clips[0].tracks(withMediaType: .video)
         let videoSize = videoTracks[0].naturalSize
             
         let composition = AVMutableComposition()
@@ -226,7 +226,7 @@ class APLSimpleEditor: NSObject, AVVideoCompositionValidationHandling {
         }
 
         // Every videoComposition needs these properties to be set:
-        videoComposition.frameDuration = CMTimeMake(1, 30) // 30 fps.
+        videoComposition.frameDuration = CMTimeMake(value: 1, timescale: 30) // 30 fps.
         videoComposition.renderSize = videoSize
 
         buildTransitionComposition(composition, andVideoComposition: videoComposition)
