@@ -443,9 +443,6 @@ bail:
 	int minutes = secondsInt/60;
 	secondsInt -= minutes*60;
 	
-	self.currentTimeLabel.textColor = [UIColor colorWithWhite:1.0 alpha:1.0];
-	self.currentTimeLabel.textAlignment = NSTextAlignmentCenter;
-	
 	self.currentTimeLabel.text = [NSString stringWithFormat:@"%.2i:%.2i", minutes, secondsInt];
 }
 
@@ -568,8 +565,8 @@ bail:
 
 - (IBAction)handleTapGesture:(UITapGestureRecognizer *)tapGestureRecognizer
 {
-    self.toolbar.hidden = !self.toolbar.hidden;
-	self.currentTimeLabel.hidden = !self.currentTimeLabel.hidden;
+    BOOL hidden = !self.toolbar.hidden;
+    self.toolbar.hidden = self.currentTimeLabel.hidden = self.scrubber.hidden = hidden;
 }
 
 - (IBAction)exportToMovie:(id)sender

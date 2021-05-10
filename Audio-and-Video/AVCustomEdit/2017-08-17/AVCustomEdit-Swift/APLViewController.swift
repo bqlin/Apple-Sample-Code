@@ -351,7 +351,7 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
         if __inline_isfinited(duration) != 0 {
             
             let width = (Double(scrubber.bounds.width))
-            var interval = 0.5 * (width / duration)
+            var interval = 0.5 * (duration / width)
             
             // The time label needs to update at least once per second.
             if interval > 1.0 {
@@ -464,7 +464,7 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
         let duration = CMTimeGetSeconds(playerItemDuration())
         if __inline_isfinited(duration) != 0 {
             let time = CMTimeGetSeconds(player.currentTime())
-            scrubber.setValue(Float(duration / time), animated: true)
+            scrubber.setValue(Float(time / duration), animated: true)
         } else {
             scrubber.setValue(0, animated: true)
         }
@@ -536,7 +536,7 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
             let width = scrubber.bounds.width
             
             let time = duration * Float64(sliderValue)
-            let tolerance = Float64(width) / duration
+            let tolerance = duration / Float64(width)
             
             scrubInFlight = true
             
@@ -570,8 +570,10 @@ class APLViewController: UIViewController, UIGestureRecognizerDelegate, UIPopove
     
     @IBAction func handleTapGesture(_ tapGestureRecognizer: UITapGestureRecognizer) {
         
-        toolbar.isHidden = !toolbar.isHidden
-        currentTimeLabel.isHidden = !currentTimeLabel.isHidden
+        let isHidden = !toolbar.isHidden
+        toolbar.isHidden = isHidden
+        currentTimeLabel.isHidden = isHidden
+        scrubber.isHidden = isHidden
     }
     
     // MARK: Export
