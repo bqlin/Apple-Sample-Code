@@ -14,7 +14,7 @@ let assetTransitionDuration = 0.8
 class AssetTransitionController: NSObject {
     
     weak var navigationController: UINavigationController?
-    var operation: UINavigationControllerOperation = .none
+    var operation: UINavigationController.Operation = .none
     var transitionDriver: AssetTransitionDriver?
     var initiallyInteractive = false
     var panGestureRecognizer: UIPanGestureRecognizer = UIPanGestureRecognizer()
@@ -37,7 +37,7 @@ class AssetTransitionController: NSObject {
         panGestureRecognizer.require(toFail: interactivePopGestureRecognizer)
     }
     
-    func initiateTransitionInteractively(_ panGesture: UIPanGestureRecognizer) {
+    @objc func initiateTransitionInteractively(_ panGesture: UIPanGestureRecognizer) {
         if panGesture.state == .began && transitionDriver == nil {
             initiallyInteractive = true
             let _ = navigationController?.popViewController(animated: true)
@@ -64,7 +64,7 @@ extension AssetTransitionController: UIGestureRecognizerDelegate {
 
 extension AssetTransitionController: UINavigationControllerDelegate {
     
-    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationControllerOperation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    internal func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         
         // Remember the direction of the transition (.push or .pop)
         self.operation = operation

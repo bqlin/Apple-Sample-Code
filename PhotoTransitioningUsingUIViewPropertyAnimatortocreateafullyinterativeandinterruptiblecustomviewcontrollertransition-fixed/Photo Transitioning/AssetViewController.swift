@@ -44,7 +44,7 @@ enum AssetLayoutStyle {
         case .oneUp:
             layout.minimumLineSpacing = 40
             layout.minimumInteritemSpacing = 0
-            layout.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20)
+            layout.sectionInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
             layout.scrollDirection = .horizontal;
             layout.itemSize = size
         }

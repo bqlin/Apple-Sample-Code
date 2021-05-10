@@ -17,7 +17,7 @@ class AssetTransitionDriver: NSObject {
     var isInteractive: Bool { return transitionContext.isInteractive }
     let transitionContext: UIViewControllerContextTransitioning
     
-    private let operation: UINavigationControllerOperation
+    private let operation: UINavigationController.Operation
     private let panGestureRecognizer: UIPanGestureRecognizer
     private var itemFrameAnimator: UIViewPropertyAnimator?
     private var items: Array<AssetTransitionItem> = []
@@ -25,7 +25,7 @@ class AssetTransitionDriver: NSObject {
     
     // MARK: Initialization
     
-    init(operation: UINavigationControllerOperation, context: UIViewControllerContextTransitioning, panGestureRecognizer panGesture: UIPanGestureRecognizer) {
+    init(operation: UINavigationController.Operation, context: UIViewControllerContextTransitioning, panGestureRecognizer panGesture: UIPanGestureRecognizer) {
         self.transitionContext = context
         self.operation = operation
         self.panGestureRecognizer = panGesture
@@ -214,7 +214,7 @@ class AssetTransitionDriver: NSObject {
     
     // MARK: Gesture Callbacks
     
-    func press(_ longPressGesture: UILongPressGestureRecognizer) {
+    @objc func press(_ longPressGesture: UILongPressGestureRecognizer) {
         switch longPressGesture.state {
         case .began:
             pauseAnimation()
@@ -250,7 +250,7 @@ class AssetTransitionDriver: NSObject {
     
     // MARK: Interesting Interruptible Transitioning Stuff
     
-    func updateInteraction(_ fromGesture: UIPanGestureRecognizer) {
+    @objc func updateInteraction(_ fromGesture: UIPanGestureRecognizer) {
         switch fromGesture.state {
             case .began, .changed:
                 // Ask the gesture recognizer for it's translation
