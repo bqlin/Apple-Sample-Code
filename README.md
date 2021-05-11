@@ -226,3 +226,10 @@ Real-time Video Processing Using AVPlayerItemVideoOutput.
 - 2019-05-18
 
 使用MetalKit进行基本的颜色绘制。
+
+### HelloTriangle
+
+- UsingARenderPipelineToRenderPrimitives
+- 2020-09-05
+
+使用Metal绘制渐变三角形。
