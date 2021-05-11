@@ -49,6 +49,31 @@
 
 视图过渡切换动画。
 
+### Adaptive
+
+自适应式UI示例。
+
+#### AdaptiveElements
+
+- AdaptiveElementsImplementingYourOwnAdaptiveDesignwithUIKit-fixed
+- Version 1.0, 2016-09-13
+
+使用UIKit实现自适应设计。
+
+#### AdaptivePhotos
+
+- AdaptivePhotosUsingUIKitTraitsandSizeClasses-fixed
+- Version 4.1, 2016-09-13
+
+使用UIKit Traits和Size Classes。
+
+#### AstroLayout
+
+- AstroLayoutBuildingAdaptiveUIwithAutoLayout
+- Version 1.0, 2015-09-16
+
+使用Auto Layout构建自适应UI。
+
 ## Image
 
 图像处理相关示例。
@@ -186,28 +211,11 @@ use the AVAssetWriterInputMetadataAdaptor API to write circle annotation metadat
 
 Real-time Video Processing Using AVPlayerItemVideoOutput.
 
-### Adaptive
+## Metal
 
-自适应式UI示例。
+### MetalComputeBasic
 
-#### AdaptiveElements
+- PerformingCalculationsOnAGPU
+- 2020-02-29
 
-- AdaptiveElementsImplementingYourOwnAdaptiveDesignwithUIKit-fixed
-- Version 1.0, 2016-09-13
-
-使用UIKit实现自适应设计。
-
-#### AdaptivePhotos
-
-- AdaptivePhotosUsingUIKitTraitsandSizeClasses-fixed
-- Version 4.1, 2016-09-13
-
-使用UIKit Traits和Size Classes。
-
-#### AstroLayout
-
-- AstroLayoutBuildingAdaptiveUIwithAutoLayout
-- Version 1.0, 2015-09-16
-
-使用Auto Layout构建自适应UI。
-
+使用Metal着色器实现一般的for循环，并在计算管线实现并行计算。
