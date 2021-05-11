@@ -45,13 +45,13 @@ Implementation of a platform independent renderer class, which performs Metal se
         id<MTLFunction> fragmentFunction = [defaultLibrary newFunctionWithName:@"fragmentShader"];
 
         // Configure a pipeline descriptor that is used to create a pipeline state.
-        MTLRenderPipelineDescriptor *pipelineStateDescriptor = [[MTLRenderPipelineDescriptor alloc] init];
-        pipelineStateDescriptor.label = @"Simple Pipeline";
-        pipelineStateDescriptor.vertexFunction = vertexFunction;
-        pipelineStateDescriptor.fragmentFunction = fragmentFunction;
-        pipelineStateDescriptor.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat;
+        MTLRenderPipelineDescriptor *pipelineDescriptor = [[MTLRenderPipelineDescriptor alloc] init];
+        pipelineDescriptor.label = @"Simple Pipeline";
+        pipelineDescriptor.vertexFunction = vertexFunction;
+        pipelineDescriptor.fragmentFunction = fragmentFunction;
+        pipelineDescriptor.colorAttachments[0].pixelFormat = mtkView.colorPixelFormat;
 
-        _pipelineState = [_device newRenderPipelineStateWithDescriptor:pipelineStateDescriptor
+        _pipelineState = [_device newRenderPipelineStateWithDescriptor:pipelineDescriptor
                                                                  error:&error];
                 
         // Pipeline State creation could fail if the pipeline descriptor isn't set up properly.
