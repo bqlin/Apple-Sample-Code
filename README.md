@@ -219,3 +219,10 @@ Real-time Video Processing Using AVPlayerItemVideoOutput.
 - 2020-02-29
 
 使用Metal着色器实现一般的for循环，并在计算管线实现并行计算。
+
+### MetalKitAndRenderingSetup
+
+- UsingMetalToDrawAViewContentsents
+- 2019-05-18
+
+使用MetalKit进行基本的颜色绘制。
