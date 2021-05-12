@@ -7,31 +7,60 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		034DA08B264BD5590094D64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA08A264BD5590094D64A /* AppDelegate.swift */; };
 		034DA08D264BD5590094D64A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA08C264BD5590094D64A /* ViewController.swift */; };
 		034DA090264BD5590094D64A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 034DA08E264BD5590094D64A /* Main.storyboard */; };
-		034DA092264BD55B0094D64A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 034DA091264BD55B0094D64A /* Assets.xcassets */; };
 		034DA095264BD55B0094D64A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 034DA093264BD55B0094D64A /* LaunchScreen.storyboard */; };
 		034DA09F264BDD500094D64A /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA09E264BDD500094D64A /* Renderer.swift */; };
 		034DA0A1264BDD7E0094D64A /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 034DA0A0264BDD7E0094D64A /* AAPLShaders.metal */; };
+		034DA0AA264BF9650094D64A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA08C264BD5590094D64A /* ViewController.swift */; };
+		034DA0AB264BF9650094D64A /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA09E264BDD500094D64A /* Renderer.swift */; };
+		034DA0AC264BF9650094D64A /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 034DA0A0264BDD7E0094D64A /* AAPLShaders.metal */; };
+		034DA0BA264BF97B0094D64A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA08C264BD5590094D64A /* ViewController.swift */; };
+		034DA0BB264BF97B0094D64A /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA09E264BDD500094D64A /* Renderer.swift */; };
+		034DA0BC264BF97B0094D64A /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 034DA0A0264BDD7E0094D64A /* AAPLShaders.metal */; };
+		034DA0F3264BFE690094D64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA0F2264BFE690094D64A /* AppDelegate.swift */; };
+		034DA0F4264BFEAD0094D64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA0F2264BFE690094D64A /* AppDelegate.swift */; };
+		034DA0F7264BFEC60094D64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA0F5264BFEC20094D64A /* AppDelegate.swift */; };
+		034DA0F9264BFF350094D64A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 034DA0D3264BFD2B0094D64A /* Main.storyboard */; };
+		034DA0FA264BFF860094D64A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 034DA0D0264BFD220094D64A /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		034DA087264BD5590094D64A /* HiTriangle-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HiTriangle-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		034DA08A264BD5590094D64A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		034DA08C264BD5590094D64A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		034DA08F264BD5590094D64A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		034DA091264BD55B0094D64A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		034DA094264BD55B0094D64A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		034DA096264BD55B0094D64A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		034DA09E264BDD500094D64A /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		034DA0A0264BDD7E0094D64A /* AAPLShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = AAPLShaders.metal; path = ../../../objc/Renderer/AAPLShaders.metal; sourceTree = "<group>"; };
 		034DA0A2264BDD8C0094D64A /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLShaderTypes.h; path = ../../../objc/Renderer/AAPLShaderTypes.h; sourceTree = "<group>"; };
 		034DA0A4264BDDCD0094D64A /* HiTriangle-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HiTriangle-Bridging-Header.h"; sourceTree = "<group>"; };
+		034DA0B6264BF9650094D64A /* HelloTriangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTriangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		034DA0C6264BF97B0094D64A /* HiTriangle-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HiTriangle-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		034DA0CA264BFACC0094D64A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		034DA0CB264BFAD50094D64A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		034DA0D1264BFD220094D64A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		034DA0D4264BFD2B0094D64A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		034DA0F2264BFE690094D64A /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Application/iOS/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
+		034DA0F5264BFEC20094D64A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		034DA084264BD5590094D64A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		034DA0AE264BF9650094D64A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		034DA0BE264BF97B0094D64A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -54,6 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				034DA087264BD5590094D64A /* HiTriangle-iOS.app */,
+				034DA0B6264BF9650094D64A /* HelloTriangle.app */,
+				034DA0C6264BF97B0094D64A /* HiTriangle-macOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,11 +92,11 @@
 		034DA089264BD5590094D64A /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				034DA08A264BD5590094D64A /* AppDelegate.swift */,
 				034DA08C264BD5590094D64A /* ViewController.swift */,
 				034DA0A4264BDDCD0094D64A /* HiTriangle-Bridging-Header.h */,
-				034DA091264BD55B0094D64A /* Assets.xcassets */,
+				034DA0C8264BF9CE0094D64A /* macOS */,
 				034DA09C264BD5CF0094D64A /* iOS */,
+				034DA0C9264BF9D50094D64A /* tvOS */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -73,6 +104,7 @@
 		034DA09C264BD5CF0094D64A /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				034DA0F2264BFE690094D64A /* AppDelegate.swift */,
 				034DA08E264BD5590094D64A /* Main.storyboard */,
 				034DA093264BD55B0094D64A /* LaunchScreen.storyboard */,
 				034DA096264BD55B0094D64A /* Info.plist */,
@@ -88,6 +120,25 @@
 				034DA0A2264BDD8C0094D64A /* AAPLShaderTypes.h */,
 			);
 			path = Renderer;
+			sourceTree = "<group>";
+		};
+		034DA0C8264BF9CE0094D64A /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				034DA0CB264BFAD50094D64A /* Info.plist */,
+				034DA0D0264BFD220094D64A /* Main.storyboard */,
+				034DA0F5264BFEC20094D64A /* AppDelegate.swift */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		034DA0C9264BF9D50094D64A /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				034DA0D3264BFD2B0094D64A /* Main.storyboard */,
+				034DA0CA264BFACC0094D64A /* Info.plist */,
+			);
+			path = tvOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -108,6 +159,40 @@
 			name = "HiTriangle-iOS";
 			productName = HiTriangle;
 			productReference = 034DA087264BD5590094D64A /* HiTriangle-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		034DA0A8264BF9650094D64A /* HiTriangle-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 034DA0B3264BF9650094D64A /* Build configuration list for PBXNativeTarget "HiTriangle-tvOS" */;
+			buildPhases = (
+				034DA0A9264BF9650094D64A /* Sources */,
+				034DA0AE264BF9650094D64A /* Frameworks */,
+				034DA0AF264BF9650094D64A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HiTriangle-tvOS";
+			productName = HiTriangle;
+			productReference = 034DA0B6264BF9650094D64A /* HelloTriangle.app */;
+			productType = "com.apple.product-type.application";
+		};
+		034DA0B8264BF97B0094D64A /* HiTriangle-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 034DA0C3264BF97B0094D64A /* Build configuration list for PBXNativeTarget "HiTriangle-macOS" */;
+			buildPhases = (
+				034DA0B9264BF97B0094D64A /* Sources */,
+				034DA0BE264BF97B0094D64A /* Frameworks */,
+				034DA0BF264BF97B0094D64A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "HiTriangle-macOS";
+			productName = HiTriangle;
+			productReference = 034DA0C6264BF97B0094D64A /* HiTriangle-macOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -139,7 +224,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				034DA0B8264BF97B0094D64A /* HiTriangle-macOS */,
 				034DA086264BD5590094D64A /* HiTriangle-iOS */,
+				034DA0A8264BF9650094D64A /* HiTriangle-tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -150,8 +237,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				034DA095264BD55B0094D64A /* LaunchScreen.storyboard in Resources */,
-				034DA092264BD55B0094D64A /* Assets.xcassets in Resources */,
 				034DA090264BD5590094D64A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		034DA0AF264BF9650094D64A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				034DA0F9264BFF350094D64A /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		034DA0BF264BF97B0094D64A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				034DA0FA264BFF860094D64A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,10 +264,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				034DA0F3264BFE690094D64A /* AppDelegate.swift in Sources */,
 				034DA08D264BD5590094D64A /* ViewController.swift in Sources */,
 				034DA09F264BDD500094D64A /* Renderer.swift in Sources */,
 				034DA0A1264BDD7E0094D64A /* AAPLShaders.metal in Sources */,
-				034DA08B264BD5590094D64A /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		034DA0A9264BF9650094D64A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				034DA0F4264BFEAD0094D64A /* AppDelegate.swift in Sources */,
+				034DA0AA264BF9650094D64A /* ViewController.swift in Sources */,
+				034DA0AB264BF9650094D64A /* Renderer.swift in Sources */,
+				034DA0AC264BF9650094D64A /* AAPLShaders.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		034DA0B9264BF97B0094D64A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				034DA0F7264BFEC60094D64A /* AppDelegate.swift in Sources */,
+				034DA0BA264BF97B0094D64A /* ViewController.swift in Sources */,
+				034DA0BB264BF97B0094D64A /* Renderer.swift in Sources */,
+				034DA0BC264BF97B0094D64A /* AAPLShaders.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +310,22 @@
 				034DA094264BD55B0094D64A /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		034DA0D0264BFD220094D64A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				034DA0D1264BFD220094D64A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		034DA0D3264BFD2B0094D64A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				034DA0D4264BFD2B0094D64A /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -308,10 +448,10 @@
 		034DA09A264BD55B0094D64A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Application/iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -328,16 +468,115 @@
 		034DA09B264BD55B0094D64A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Application/iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = bq.HiTriangle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Application/HiTriangle-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		034DA0B4264BF9650094D64A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/System/Library/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					TARGET_TVOS,
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Application/tvOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = bq.HiTriangle;
+				PRODUCT_NAME = HelloTriangle;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Application/HiTriangle-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
+			};
+			name = Debug;
+		};
+		034DA0B5264BF9650094D64A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/System/Library/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = TARGET_TVOS;
+				INFOPLIST_FILE = Application/tvOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = bq.HiTriangle;
+				PRODUCT_NAME = HelloTriangle;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = appletvos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Application/HiTriangle-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		034DA0C4264BF97B0094D64A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Application/macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = bq.HiTriangle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OBJC_BRIDGING_HEADER = "Application/HiTriangle-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		034DA0C5264BF97B0094D64A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = Application/macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = bq.HiTriangle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Application/HiTriangle-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -361,6 +600,24 @@
 			buildConfigurations = (
 				034DA09A264BD55B0094D64A /* Debug */,
 				034DA09B264BD55B0094D64A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		034DA0B3264BF9650094D64A /* Build configuration list for PBXNativeTarget "HiTriangle-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				034DA0B4264BF9650094D64A /* Debug */,
+				034DA0B5264BF9650094D64A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		034DA0C3264BF97B0094D64A /* Build configuration list for PBXNativeTarget "HiTriangle-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				034DA0C4264BF97B0094D64A /* Debug */,
+				034DA0C5264BF97B0094D64A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
