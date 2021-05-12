@@ -233,3 +233,10 @@ Real-time Video Processing Using AVPlayerItemVideoOutput.
 - 2020-09-05
 
 使用Metal绘制渐变三角形。
+
+### CPU-GPU-Synchronization
+
+- SynchronizingCPUAndGPUWork
+- 2021-01-16
+
+同步CPU和GPU的工作。
