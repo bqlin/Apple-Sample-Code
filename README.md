@@ -240,3 +240,10 @@ Real-time Video Processing Using AVPlayerItemVideoOutput.
 - 2021-01-16
 
 同步CPU和GPU的工作。
+
+### BasicTexturing
+
+- CreatingAndSamplingTextures
+- 2021-01-16
+
+展示一个自定义纹理加载器，将图像数据加载到纹理中，并将其绘制到四边形中。
