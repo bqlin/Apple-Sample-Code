@@ -43,14 +43,7 @@ class Renderer: NSObject, MTKViewDelegate {
         self.commandQueue = commandQueue
         
         generateTriangles()
-        
-        totalVertexCount = Triangle.vertices.count * triangles.count
-        let triangleVertexBufferSize = totalVertexCount * MemoryLayout<AAPLVertex>.size
-        for bufferIndex in 0 ..< maxFramesInFlight {
-            guard let buffer = device.makeBuffer(length: triangleVertexBufferSize, options: .storageModeShared) else { break }
-            buffer.label = "Vertex Buffer #\(bufferIndex)"
-            vertexBuffers.append(buffer)
-        }
+        generateVertexBuffers()
         
         mtkView.delegate = self
     }
@@ -58,13 +51,26 @@ class Renderer: NSObject, MTKViewDelegate {
     let device: MTLDevice
     let inFlightSemaphore: DispatchSemaphore
     let maxFramesInFlight = 3
-    var vertexBuffers = [MTLBuffer]()
     var commandQueue: MTLCommandQueue!
     var pipelineState: MTLRenderPipelineState!
     var viewportSize: vector_uint2
-    var totalVertexCount: Int!
     var wavePosition: Float = 0
     var currentBufferIndex = -1
+    
+    var totalVertexCount: Int!
+    var vertexBuffers = [MTLBuffer]()
+    
+    func generateVertexBuffers() {
+        var vertexBuffers = [MTLBuffer]()
+        totalVertexCount = Triangle.vertices.count * triangles.count
+        let triangleVertexBufferSize = totalVertexCount * MemoryLayout<AAPLVertex>.size
+        for bufferIndex in 0 ..< maxFramesInFlight {
+            guard let buffer = device.makeBuffer(length: triangleVertexBufferSize, options: .storageModeShared) else { break }
+            buffer.label = "Vertex Buffer #\(bufferIndex)"
+            vertexBuffers.append(buffer)
+        }
+        self.vertexBuffers = vertexBuffers
+    }
     
     let numTriangles = 50
     var triangles = [Triangle]()
@@ -89,6 +95,7 @@ class Renderer: NSObject, MTKViewDelegate {
         self.triangles = triangles
     }
     
+    // 更新三角形位置与颜色
     func updateState() {
         let waveMagnitude: Float = 128
         let waveSpeed: Float = 0.05
@@ -117,6 +124,7 @@ class Renderer: NSObject, MTKViewDelegate {
         viewportSize = size.toVector_uint2
     }
     
+    // 该方法绘制的是一帧的内容
     func draw(in view: MTKView) {
         inFlightSemaphore.wait()
         
