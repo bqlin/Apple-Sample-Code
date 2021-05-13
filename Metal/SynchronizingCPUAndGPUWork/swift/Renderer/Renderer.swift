@@ -95,7 +95,7 @@ class Renderer: NSObject, MTKViewDelegate {
         wavePosition += waveSpeed
         let vertices = Triangle.vertices
         
-        var currentTriangleVertices = vertexBuffers[currentBufferIndex].contents().bindMemory(to: AAPLVertex.self, capacity: numTriangles * vertices.count)
+        let currentTriangleVertices = vertexBuffers[currentBufferIndex].contents().bindMemory(to: AAPLVertex.self, capacity: numTriangles * vertices.count)
         
         for i in 0 ..< numTriangles {
             // 得出应用波形曲线后的三角形位置
