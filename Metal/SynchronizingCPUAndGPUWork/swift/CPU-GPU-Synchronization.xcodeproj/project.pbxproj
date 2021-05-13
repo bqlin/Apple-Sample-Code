@@ -42,7 +42,7 @@
 		03C81C3B264CDEB0009EA163 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		03C81C3C264CDF0A009EA163 /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLShaderTypes.h; path = ../../objc/Renderer/AAPLShaderTypes.h; sourceTree = "<group>"; };
 		03C81C3D264CDF0A009EA163 /* AAPLShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = AAPLShaders.metal; path = ../../objc/Renderer/AAPLShaders.metal; sourceTree = "<group>"; };
-		03C81C4D264D4742009EA163 /* CPU-GPU-Synchronization-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CPU-GPU-Synchronization-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		03C81C4D264D4742009EA163 /* HelloTriangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTriangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03C81C5D264D4746009EA163 /* CPU-GPU-Synchronization-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CPU-GPU-Synchronization-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03C81C60264D4AAC009EA163 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		03C81C61264D4AAC009EA163 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				03C81C1C264CD9A9009EA163 /* CPU-GPU-Synchronization-iOS.app */,
-				03C81C4D264D4742009EA163 /* CPU-GPU-Synchronization-tvOS.app */,
+				03C81C4D264D4742009EA163 /* HelloTriangle.app */,
 				03C81C5D264D4746009EA163 /* CPU-GPU-Synchronization-macOS.app */,
 			);
 			name = Products;
@@ -180,7 +180,7 @@
 			);
 			name = "CPU-GPU-Synchronization-tvOS";
 			productName = "CPU-GPU-Synchronization";
-			productReference = 03C81C4D264D4742009EA163 /* CPU-GPU-Synchronization-tvOS.app */;
+			productReference = 03C81C4D264D4742009EA163 /* HelloTriangle.app */;
 			productType = "com.apple.product-type.application";
 		};
 		03C81C4F264D4746009EA163 /* CPU-GPU-Synchronization-macOS */ = {
@@ -491,38 +491,60 @@
 		03C81C4B264D4742009EA163 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/System/Library/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					TARGET_TVOS,
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = Application/tvOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "bq.CPU-GPU-Synchronization";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HelloTriangle;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Application/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TVOS_DEPLOYMENT_TARGET = 10.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
 		03C81C4C264D4742009EA163 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/System/Library/Frameworks",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = TARGET_TVOS;
 				INFOPLIST_FILE = Application/tvOS/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "bq.CPU-GPU-Synchronization";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = HelloTriangle;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = appletvos;
 				SWIFT_OBJC_BRIDGING_HEADER = "Application/Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TVOS_DEPLOYMENT_TARGET = 10.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
