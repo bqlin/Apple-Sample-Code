@@ -82,8 +82,8 @@ class Renderer: NSObject, MTKViewDelegate {
         let horizontalSpacing: Float = 16
         var triangles = [Triangle]()
         for t in 0 ..< numTriangles {
+            // position：横向排列；color：循环使用上面定义的颜色
             let trianglePosition: vector_float2 = [(Float(numTriangles) / -2 + Float(t)) * horizontalSpacing, 0]
-            
             triangles.append(Triangle(position: trianglePosition, color: colors[t % colors.count]))
         }
         self.triangles = triangles
@@ -92,18 +92,18 @@ class Renderer: NSObject, MTKViewDelegate {
     func updateState() {
         let waveMagnitude: Float = 128
         let waveSpeed: Float = 0.05
-        
         wavePosition += waveSpeed
-        
         let vertices = Triangle.vertices
         
         var currentTriangleVertices = vertexBuffers[currentBufferIndex].contents().bindMemory(to: AAPLVertex.self, capacity: numTriangles * vertices.count)
         
         for i in 0 ..< numTriangles {
+            // 得出应用波形曲线后的三角形位置
             var position = triangles[i].position
             position.y = sin(position.x / waveMagnitude + wavePosition) * waveMagnitude
             triangles[i].position = position
             
+            // 给每个顶点增加用三角形位置偏移，以及同步颜色值
             for vi in 0 ..< vertices.count {
                 let index = vi + (i * vertices.count)
                 currentTriangleVertices[index].position = vertices[vi].position + position
