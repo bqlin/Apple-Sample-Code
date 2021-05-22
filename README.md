@@ -37,12 +37,6 @@
 
 图层动画。
 
-### StreetScroller
-
-- Version 1.2, 2013-07-31
-
-使用UIScrollView子类实现无限滚动。
-
 ### ViewTransitions
 
 - Version 1.12, 2013-07-31
@@ -73,6 +67,21 @@
 - Version 1.0, 2015-09-16
 
 使用Auto Layout构建自适应UI。
+
+## ScrollView
+
+#### StreetScroller
+
+- Version 1.2, 2013-07-31
+
+使用UIScrollView子类实现无限滚动。
+
+#### PageControl
+
+- PageControlUsingaPaginatedUIScrollView
+- Version 7.0, 2017-09-21
+
+This application demonstrates how to use a "paginated" UIScrollView to display pages of images in a horizontal fashion as a mechanism for navigating between different pages of content. It is optimized to minimize the memory usage by loading only three image pages at a time the user user scrolls: the current page, the page before and after it. This application was designed as universal to run on both iPhone and iPad devices.
 
 ## Image
 
