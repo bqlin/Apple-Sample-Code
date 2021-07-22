@@ -140,13 +140,13 @@ Quartz2D API使用示例。
 
 HLS 下载示例。
 
-#### AVCompositionDebugVieweriOS
+### AVCompositionDebugVieweriOS
 
 - Version 1.1, 2014-03-11
 
 AVCompostion、AVVideoComposition、AVAudioMix查看、调试视图。
 
-#### AVCustomEdit
+### AVCustomEdit
 
 - 2014-09-18
   - Minor fix. Import OpenGL headers.
@@ -155,13 +155,13 @@ AVCompostion、AVVideoComposition、AVAudioMix查看、调试视图。
 
 AVMutableComposition、AVVideoComposition、AVVideoCompositionInstruction使用示例。
 
-#### AVSimpleEditoriOS
+### AVSimpleEditoriOS
 
 - Version 1.1, 2013-08-22
 
 基本的视频编辑示例。
 
-#### AVTimedAnnotationWriter
+### AVTimedAnnotationWriter
 
 - AVTimedAnnotationWriterUsingCustomAnnotationMetadataforMovieWritingandPlayback
 - Version 1.0, 2014-09-17
@@ -170,20 +170,20 @@ AVTimedAnnotationWriter: Using Custom Annotation Metadata for Movie Writing and 
 
 use the AVAssetWriterInputMetadataAdaptor API to write circle annotation metadata during video playback.
 
-#### AVCaptureLocation
+### AVCaptureLocation
 
 - UsingAVFoundationAPIstorecordamoviewithlocationmetadata
 
 旨在使用 AVAssetWriterInputMetadataAdaptor 写入位置元数据。
 
-#### AVPlayerLooping
+### AVPlayerLooping
 
 - AVFoundationLoopingPlayerUsingAVQueuePlayerandAVPlayerLoopertodemonstrateloopplayback
 - Version 2.0, 2016-09-13
 
 循环播放示例。
 
-#### AVCam
+### AVCam
 
 - AVCam-iOSUsingAVFoundationtoCaptureImagesandMovies
 
@@ -191,14 +191,14 @@ use the AVAssetWriterInputMetadataAdaptor API to write circle annotation metadat
 
 使用AVFoundation采集图片和影片示例。
 
-#### AVCamManual
+### AVCamManual
 
 - AVCamManualExtendingAVCamtoUseManualCaptureAPI
 - Version 3.1, 2016-09-15
 
 更细化的手动采集示例。
 
-#### AVCamPhotoFilter
+### AVCamPhotoFilter
 
 - AVCamPhotoFilterUsingAVFoundationtoCapturephotoswithimageprocessing
 
@@ -206,19 +206,26 @@ use the AVAssetWriterInputMetadataAdaptor API to write circle annotation metadat
 
 拍照滤镜示例。
 
-#### AVReaderWriter
+### AVReaderWriter
 
 - AVReaderWriterOfflineAudioVideoProcessing
 - Version 3.1, 2016-09-13
 
 使用AVAssetReader和AVAssetWriter离线处理音视频。
 
-#### AVBasicVideoOutput
+### AVBasicVideoOutput
 
 - Real-timeVideoProcessingUsingAVPlayerItemVideoOutput-fixed
 - Version 1.2, 2015-10-01
 
 Real-time Video Processing Using AVPlayerItemVideoOutput.
+
+### AVFoundationSimplePlayer
+
+- CreatingAMoviePlayerAppWithBasicPlaybackControls
+- 2020-02-12
+
+AVPlayer简单使用。
 
 ## Metal
 
