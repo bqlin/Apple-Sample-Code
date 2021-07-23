@@ -129,7 +129,7 @@ Quartz2D API使用示例。
 
 后台下载示例。
 
-## VideoAndAudio
+## VideoAudio
 
 音视频相关示例。
 
@@ -226,6 +226,13 @@ Real-time Video Processing Using AVPlayerItemVideoOutput.
 - 2020-02-12
 
 AVPlayer简单使用。
+
+### AVFoundationQueuePlayer-iOS
+
+- AVFoundationQueuePlayer-iOSUsingaMixtureofLocalFileBasedAssetsandHTTPLiveStreamingAssetswithAVFoundation
+- Version 2.0, 2016-09-13
+
+AVQueuePlayer简单使用。
 
 ## Metal
 
