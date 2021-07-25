@@ -227,7 +227,7 @@ Real-time Video Processing Using AVPlayerItemVideoOutput.
 
 AVPlayer简单使用。
 
-### AVFoundationQueuePlayer-iOS
+### AVFoundationQueuePlayer
 
 - AVFoundationQueuePlayer-iOSUsingaMixtureofLocalFileBasedAssetsandHTTPLiveStreamingAssetswithAVFoundation
 - Version 2.0, 2016-09-13

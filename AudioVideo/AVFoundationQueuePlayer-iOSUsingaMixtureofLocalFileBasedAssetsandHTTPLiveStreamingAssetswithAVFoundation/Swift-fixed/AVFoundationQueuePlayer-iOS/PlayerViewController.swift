@@ -28,33 +28,27 @@ class PlayerViewController: UIViewController, UICollectionViewDataSource {
 
     var currentTime: Double {
         get {
-            return CMTimeGetSeconds(player.currentTime())
+            player.currentTime().seconds
         }
         
         set {
-            let newTime = CMTimeMakeWithSeconds(newValue, preferredTimescale: 1)
-            player.seek(to: newTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
+            player.seek(to: CMTime(seconds: newValue, preferredTimescale: 1), toleranceBefore: .zero, toleranceAfter: .zero)
         }
     }
     
     var duration: Double {
         guard let currentItem = player.currentItem else { return 0.0 }
-        
-        return CMTimeGetSeconds(currentItem.duration)
+        return currentItem.duration.seconds
     }
     
     var rate: Float {
         get {
-            return player.rate
+            player.rate
         }
         
         set {
             player.rate = newValue
         }
-    }
-    
-    var playerLayer: AVPlayerLayer? {
-        return playerView.playerLayer
     }
     
     /*
@@ -120,7 +114,7 @@ class PlayerViewController: UIViewController, UICollectionViewDataSource {
         // Make sure we don't have a strong reference cycle by only capturing self as weak.
         let interval = CMTimeMake(value: 1, timescale: 1)
         timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { [unowned self] time in
-            let timeElapsed = Float(CMTimeGetSeconds(time))
+            let timeElapsed = Float(time.seconds)
             
             self.timeSlider.value = Float(timeElapsed)
             self.startTimeLabel.text = self.createTimeString(time: timeElapsed)
@@ -392,8 +386,8 @@ class PlayerViewController: UIViewController, UICollectionViewDataSource {
             }
 
             let hasValidDuration = newDuration.isNumeric && newDuration.value != 0
-            let newDurationSeconds = hasValidDuration ? CMTimeGetSeconds(newDuration) : 0.0
-            let currentTime = hasValidDuration ? Float(CMTimeGetSeconds(player.currentTime())) : 0.0
+            let newDurationSeconds = hasValidDuration ? newDuration.seconds : 0.0
+            let currentTime = hasValidDuration ? Float(player.currentTime().seconds) : 0.0
             
             timeSlider.maximumValue = Float(newDurationSeconds)
 
