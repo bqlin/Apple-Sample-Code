@@ -11,12 +11,12 @@
     },
     {
         "title" : "HTTP Live Stream",
-        "mediaURL" : "https://devimages.apple.com.edgekey.net/samplecode/avfoundationMedia/AVFoundationQueuePlayer_HLS2/master.m3u8",
+        "mediaURL" : "http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8",
         "thumbnailResourceName" : "HLSThumb.png"
     },
     {
         "title" : "Progressive Download",
-        "mediaURL" : "https://devimages.apple.com.edgekey.net/samplecode/avfoundationMedia/AVFoundationQueuePlayer_Progressive.mov",
+        "mediaURL" : "https://www.apple.com/105/media/cn/holiday/2018/5b24a151_4795_46e3_bc8e_b58d111ed697/films/share-your-gifts/holiday-share-your-gifts-tpl-cn-2018_1280x720h.mp4",
         "thumbnailResourceName" : "ProgressiveThumb.png"
 	}
 ]
