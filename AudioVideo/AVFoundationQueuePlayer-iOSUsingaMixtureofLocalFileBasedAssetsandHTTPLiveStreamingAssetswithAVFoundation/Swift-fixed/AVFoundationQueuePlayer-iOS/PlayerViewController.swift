@@ -13,8 +13,6 @@ import AVFoundation
     KVO context used to differentiate KVO callbacks for this class versus other
     classes in its class hierarchy.
 */
-private var playerViewControllerKVOContext = 0
-
 class PlayerViewController: UIViewController, UICollectionViewDataSource {
     // MARK: Properties
     
@@ -87,22 +85,11 @@ class PlayerViewController: UIViewController, UICollectionViewDataSource {
     @IBOutlet weak var playerView: PlayerView!
 
     // MARK: View Controller
-	
+    
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 
-        /*
-            Update the UI when these player properties change.
-        
-            Use the context parameter to distinguish KVO for our particular observers 
-            and not those destined for a subclass that also happens to be observing
-            these properties.
-        */
-		addObserver(self, forKeyPath: #keyPath(PlayerViewController.player.currentItem.duration), options: [.new, .initial], context: &playerViewControllerKVOContext)
-		addObserver(self, forKeyPath: #keyPath(PlayerViewController.player.rate), options: [.new, .initial], context: &playerViewControllerKVOContext)
-		addObserver(self, forKeyPath: #keyPath(PlayerViewController.player.currentItem.status), options: [.new, .initial], context: &playerViewControllerKVOContext)
-		addObserver(self, forKeyPath: #keyPath(PlayerViewController.player.currentItem), options: [.new, .initial], context: &playerViewControllerKVOContext)
-
+        setupPlayerObservers()
         playerView.playerLayer.player = player
 
         /*
@@ -110,15 +97,6 @@ class PlayerViewController: UIViewController, UICollectionViewDataSource {
         */
         let manifestURL = Bundle.main.url(forResource: "MediaManifest", withExtension: "json")!
         asynchronouslyLoadURLAssetsWithManifestURL(jsonURL: manifestURL)
-        
-        // Make sure we don't have a strong reference cycle by only capturing self as weak.
-        let interval = CMTimeMake(value: 1, timescale: 1)
-        timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { [unowned self] time in
-            let timeElapsed = Float(time.seconds)
-            
-            self.timeSlider.value = Float(timeElapsed)
-            self.startTimeLabel.text = self.createTimeString(time: timeElapsed)
-        }
 	}
 
 	override func viewDidDisappear(_ animated: Bool) {
@@ -130,12 +108,11 @@ class PlayerViewController: UIViewController, UICollectionViewDataSource {
         }
 
 		player.pause()
-
-		removeObserver(self, forKeyPath: #keyPath(PlayerViewController.player.currentItem.duration), context: &playerViewControllerKVOContext)
-        removeObserver(self, forKeyPath: #keyPath(PlayerViewController.player.rate), context: &playerViewControllerKVOContext)
-        removeObserver(self, forKeyPath: #keyPath(PlayerViewController.player.currentItem.status), context: &playerViewControllerKVOContext)
-        removeObserver(self, forKeyPath: #keyPath(PlayerViewController.player.currentItem), context: &playerViewControllerKVOContext)
 	}
+    
+    deinit {
+        kvObservers = []
+    }
     
     // MARK: Asset Loading
     
@@ -358,87 +335,90 @@ class PlayerViewController: UIViewController, UICollectionViewDataSource {
     }
     
     // MARK: KVO Observation
-
+    
     // Update our UI when player or `player.currentItem` changes.
-	override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        // Make sure the this KVO callback was intended for this view controller.
-        guard context == &playerViewControllerKVOContext else {
-            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
-            return
-        }
-
-        if keyPath == #keyPath(PlayerViewController.player.currentItem) {
-            queueDidChangeWithOldPlayerItems(oldPlayerItems: [], newPlayerItems: player.items())
-        }
-        else if keyPath == #keyPath(PlayerViewController.player.currentItem.duration) {
+    var kvObservers = [NSKeyValueObservation]()
+    func setupPlayerObservers() {
+        /*
+         Update the UI when these player properties change.
+         
+         Use the context parameter to distinguish KVO for our particular observers
+         and not those destined for a subclass that also happens to be observing
+         these properties.
+         
+         这种情况也会导致change为空
+         */
+        kvObservers.append(player.observe(\.currentItem?.duration, options: [.new, .initial]) { [unowned self] (player, change) in
             // Update `timeSlider` and enable / disable controls when `duration` > 0.0.
-
             /*
-                Handle `NSNull` value for `NSKeyValueChangeNewKey`, i.e. when 
-                `player.currentItem` is nil.
-            */
-            let newDuration: CMTime
-            if let newDurationAsValue = change?[NSKeyValueChangeKey.newKey] as? NSValue {
-                newDuration = newDurationAsValue.timeValue
-            }
-            else {
-                newDuration = CMTime.zero
-            }
-
+             Handle `NSNull` value for `NSKeyValueChangeNewKey`, i.e. when
+             `player.currentItem` is nil.
+             */
+            let newDuration: CMTime = player.currentItem?.duration ?? .zero
+            
             let hasValidDuration = newDuration.isNumeric && newDuration.value != 0
-            let newDurationSeconds = hasValidDuration ? newDuration.seconds : 0.0
-            let currentTime = hasValidDuration ? Float(player.currentTime().seconds) : 0.0
+            let durationSeconds = hasValidDuration ? Float(newDuration.seconds) : 0.0
+            let currentTimeSeconds = hasValidDuration ? Float(player.currentTime().seconds) : 0.0
             
-            timeSlider.maximumValue = Float(newDurationSeconds)
-
-            timeSlider.value = currentTime
+            self.timeSlider.isEnabled = hasValidDuration
+            self.timeSlider.maximumValue = Float(durationSeconds)
+            self.timeSlider.value = currentTimeSeconds
             
-            rewindButton.isEnabled = hasValidDuration
+            self.rewindButton.isEnabled = hasValidDuration
+            self.playPauseButton.isEnabled = hasValidDuration
+            self.fastForwardButton.isEnabled = hasValidDuration
             
-            playPauseButton.isEnabled = hasValidDuration
+            self.self.startTimeLabel.isEnabled = hasValidDuration
+            self.startTimeLabel.text = self.createTimeString(time: currentTimeSeconds)
             
-            fastForwardButton.isEnabled = hasValidDuration
-            
-            timeSlider.isEnabled = hasValidDuration
-            
-            startTimeLabel.isEnabled = hasValidDuration
-            startTimeLabel.text = createTimeString(time: currentTime)
-            
-            durationLabel.isEnabled = hasValidDuration
-            durationLabel.text = createTimeString(time: Float(newDurationSeconds))
-        }
-        else if keyPath == #keyPath(PlayerViewController.player.rate) {
+            self.durationLabel.isEnabled = hasValidDuration
+            self.durationLabel.text = self.createTimeString(time: durationSeconds)
+        })
+        
+        kvObservers.append(player.observe(\.rate, options: [.new, .initial]) { [unowned self] (player, change) in
             // Update `playPauseButton` image.
-
-            let newRate = (change?[NSKeyValueChangeKey.newKey] as! NSNumber).doubleValue
+            
+            guard let newRate = change.newValue else { return }
             
             let buttonImageName = newRate == 1.0 ? "PauseButton" : "PlayButton"
             
             let buttonImage = UIImage(named: buttonImageName)
-
-            playPauseButton.setImage(buttonImage, for: .normal)
-        }
-        else if keyPath ==  #keyPath(PlayerViewController.player.currentItem.status) {
+            
+            self.playPauseButton.setImage(buttonImage, for: .normal)
+        })
+        
+        // 这种方式监听OC枚举会导致change的值为空
+        kvObservers.append(player.observe(\.currentItem?.status, options: [.new, .initial]) { [unowned self] (player, change) in
             // Display an error if status becomes `.Failed`.
-
+            
             /*
-                Handle `NSNull` value for `NSKeyValueChangeNewKey`, i.e. when
-                `player.currentItem` is nil.
-            */
-            let newStatus: AVPlayerItem.Status
-
-            if let newStatusAsNumber = change?[NSKeyValueChangeKey.newKey] as? NSNumber {
-                newStatus = AVPlayerItem.Status(rawValue: newStatusAsNumber.intValue)!
-            }
-            else {
-                newStatus = .unknown
-            }
+             Handle `NSNull` value for `NSKeyValueChangeNewKey`, i.e. when
+             `player.currentItem` is nil.
+             */
+            
+            let newStatus: AVPlayerItem.Status = player.currentItem?.status ?? .unknown
+            debugPrint("status: \(newStatus.debugString)")
             
             if newStatus == .failed {
-                handleError(with: player.currentItem?.error?.localizedDescription, error: player.currentItem?.error)
+                self.handleError(with: player.currentItem?.error?.localizedDescription, error: player.currentItem?.error)
             }
+        })
+        
+        kvObservers.append(player.observe(\.currentItem, options: [.new, .initial]) { [unowned self] (player, change) in
+            debugPrint("item: \(change)")
+            self.queueDidChangeWithOldPlayerItems(oldPlayerItems: [], newPlayerItems: player.items())
+        })
+        
+        // Make sure we don't have a strong reference cycle by only capturing self as weak.
+        let interval = CMTime(value: 1, timescale: 1)
+        timeObserverToken = player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main) { [unowned self] time in
+            let timeElapsed = Float(time.seconds)
+            
+            self.timeSlider.value = Float(timeElapsed)
+            self.startTimeLabel.text = self.createTimeString(time: timeElapsed)
         }
-	}
+    }
+    
 
     /*
         Trigger KVO for anyone observing our properties affected by `player` and
@@ -449,9 +429,9 @@ class PlayerViewController: UIViewController, UICollectionViewDataSource {
             "duration":     [#keyPath(PlayerViewController.player.currentItem.duration)],
             "rate":         [#keyPath(PlayerViewController.player.rate)]
         ]
-        
+
         return affectedKeyPathsMappingByKey[key] ?? super.keyPathsForValuesAffectingValue(forKey: key)
-	}    
+	}
     
     /*
         `player.items` is not KVO observable so we need to call this function
@@ -476,7 +456,12 @@ class PlayerViewController: UIViewController, UICollectionViewDataSource {
     // MARK: Error Handling
 
 	func handleError(with message: String?, error: Error? = nil) {
-        NSLog("Error occurred with message: \(message), error: \(error).")
+        if let message = message {
+            debugPrint("Error message: \(message)")
+        }
+        if let error = error {
+            debugPrint("Error: \(error)")
+        }
     
         let alertTitle = NSLocalizedString("alert.error.title", comment: "Alert title for errors")
         
@@ -522,5 +507,18 @@ class PlayerViewController: UIViewController, UICollectionViewDataSource {
         components.second = Int(max(0.0, time))
         
         return timeRemainingFormatter.string(from: components as DateComponents)!
+    }
+}
+
+extension AVPlayerItem.Status {
+    var debugString: String {
+        switch self {
+            case .readyToPlay:
+            return "readyToPlay"
+            case .failed:
+            return "failed"
+            default:
+            return "unknown"
+        }
     }
 }
