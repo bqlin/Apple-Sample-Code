@@ -135,8 +135,9 @@ Quartz2D API使用示例。
 
 ### HLSCatalog
 
-- HLSCatalogUsingAVFoundationtoplayandpersistHTTPLiveStreams
+- UsingAVFoundationtoplayandpersistHTTPLiveStreams
 - Version 1.2, 2016-09-21
+- 2018-06-26
 
 HLS 下载示例。
 
