@@ -1,0 +1,13 @@
+# AVFoundationPiPPlayer
+
+该示例把asset key的加载放到了AVPlayerItem的初始化，使用`init(asset:automaticallyLoadedAssetKeys:)`方法。并在status为`.readyToPlay`时，检查这些key。
+
+替换item之前，先移除item的status监听、重新移除、注册时间监听。
+
+在status为`.readyToPlay`时，才创建AVPictureInPictureController。并监听`PlayerViewController.pictureInPictureController.isPictureInPicturePossible`键，更新画中画按钮的启用。
+
+调用AVPictureInPictureController对象的`startPictureInPicture()`、`stopPictureInPicture()`方法开启和停止画中画。并检查`isPictureInPictureActive`状态。
+
+由于进入画中画模式时AVPlayerLayer会出现画中画的图标，像在示例中的全屏界面，为了沉浸式体验可能需要隐藏相关的播放控件。
+
+AVPictureInPictureController是使用AVPlayerLayer进行初始化的，换句话说它只是管理了AVPlayerLayer及其AVPlayer，但也意味着自定义的播放器，如使用Metal渲染的播放器，即不使用AVPlayerLayer的，就不能实现画中画功能了。
