@@ -31,16 +31,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let audioSession = AVAudioSession.sharedInstance()
 
 		do {
-			try audioSession.setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)))
+            try audioSession.setCategory(.playback)
 		} catch {
 			print("Audio session setCategory failed")
 		}
 
 		return true
 	}
-}
-
-// Helper function inserted by Swift 4.2 migrator.
-fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
-	return input.rawValue
 }
