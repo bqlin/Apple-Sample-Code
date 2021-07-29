@@ -150,8 +150,8 @@ class PlayerViewController: UIViewController, AVPictureInPictureControllerDelega
 		}
 		
 		set {
-			let newTime = CMTimeMakeWithSeconds(newValue, 1)
-			player.seek(to: newTime, toleranceBefore: kCMTimeZero, toleranceAfter: kCMTimeZero)
+			let newTime = CMTimeMakeWithSeconds(newValue, preferredTimescale: 1)
+			player.seek(to: newTime, toleranceBefore: CMTime.zero, toleranceAfter: CMTime.zero)
 		}
 	}
 	
@@ -168,14 +168,14 @@ class PlayerViewController: UIViewController, AVPictureInPictureControllerDelega
             // Update playPauseButton type.
             let newRate = player.rate
 
-            let style: UIBarButtonSystemItem = newRate == 0.0 ? .play : .pause
+            let style: UIBarButtonItem.SystemItem = newRate == 0.0 ? .play : .pause
             let newPlayPauseButton = UIBarButtonItem(barButtonSystemItem: style, target: self,
                                                      action: #selector(PlayerViewController.playPauseButtonWasPressed(_:)))
 
             // Replace the current button with the updated button in the toolbar.
             var items = strongSelf.toolbar.items!
 
-            if let playPauseItemIndex = items.index(of: strongSelf.playPauseButton) {
+            if let playPauseItemIndex = items.firstIndex(of: strongSelf.playPauseButton) {
                 items[playPauseItemIndex] = newPlayPauseButton
 
                 strongSelf.playPauseButton = newPlayPauseButton
@@ -252,7 +252,7 @@ class PlayerViewController: UIViewController, AVPictureInPictureControllerDelega
         guard let backingButton = pictureInPictureButton.customView as? UIButton else {
             return
         }
-        backingButton.setImage(AVPictureInPictureController.pictureInPictureButtonStartImage(compatibleWith: nil), for: UIControlState.normal)
+        backingButton.setImage(AVPictureInPictureController.pictureInPictureButtonStartImage(compatibleWith: nil), for: UIControl.State.normal)
 	}
 	
 	override func viewDidDisappear(_ animated: Bool) {
@@ -288,7 +288,7 @@ class PlayerViewController: UIViewController, AVPictureInPictureControllerDelega
 		// Only add the time observer if one hasn't been created yet.
 		guard timeObserverToken == nil else { return }
 		
-		let time = CMTimeMake(1, 30)
+		let time = CMTimeMake(value: 1, timescale: 30)
 		
 		// Use a weak self variable to avoid a retain cycle in the block.
 		timeObserverToken =

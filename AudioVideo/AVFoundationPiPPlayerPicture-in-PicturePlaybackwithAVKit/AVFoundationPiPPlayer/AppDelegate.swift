@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	var window: UIWindow?
 	
-	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]? = nil) -> Bool {
+	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
 		/*
 			Setup audio session for picture in picture playback.
 			Application has to be configured correctly to be able to initiate picture in picture.
@@ -31,11 +31,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let audioSession = AVAudioSession.sharedInstance()
 
 		do {
-			try audioSession.setCategory(AVAudioSessionCategoryPlayback)
+			try audioSession.setCategory(AVAudioSession.Category(rawValue: convertFromAVAudioSessionCategory(AVAudioSession.Category.playback)))
 		} catch {
 			print("Audio session setCategory failed")
 		}
 
 		return true
 	}
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromAVAudioSessionCategory(_ input: AVAudioSession.Category) -> String {
+	return input.rawValue
 }
