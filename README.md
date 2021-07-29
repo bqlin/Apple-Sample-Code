@@ -234,6 +234,13 @@ AVPlayer简单使用。
 
 AVQueuePlayer简单使用。
 
+### AVFoundationPiPPlayer
+
+- AVFoundationPiPPlayerPicture-in-PicturePlaybackwithAVKit
+- Version 1.4, 2018-02-08
+
+简单实现视频画中画模式。
+
 ## Metal
 
 ### MetalComputeBasic
