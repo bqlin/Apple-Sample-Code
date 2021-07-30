@@ -199,9 +199,11 @@ use the AVAssetWriterInputMetadataAdaptor API to write circle annotation metadat
 
 更细化的手动采集示例。
 
-### AVCamPhotoFilter
+### AVCamFilter
 
 - AVCamPhotoFilterUsingAVFoundationtoCapturephotoswithimageprocessing
+- AVCamFilterApplyingFiltersToACaptureStream
+  - 2019-05-15
 
 [AVCamFilter: Applying Filters to a Capture Stream | Apple Developer Documentation](https://developer.apple.com/documentation/avfoundation/cameras_and_media_capture/avcamfilter_applying_filters_to_a_capture_stream#//apple_ref/doc/uid/TP40017556)
 
