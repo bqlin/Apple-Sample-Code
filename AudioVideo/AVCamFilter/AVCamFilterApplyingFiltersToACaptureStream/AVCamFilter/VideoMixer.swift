@@ -149,7 +149,7 @@ class VideoMixer {
         commandEncoder.setFragmentTexture(inputTexture0, index: 0)
         commandEncoder.setFragmentTexture(inputTexture1, index: 1)
         commandEncoder.setFragmentSamplerState(sampler, index: 0)
-        commandEncoder.setFragmentBytes(UnsafeMutableRawPointer(&parameters), length: MemoryLayout<MixerParameters>.size, index: 0)
+        commandEncoder.setFragmentBytes(withUnsafeMutablePointer(to: &parameters) { $0 }, length: MemoryLayout<MixerParameters>.size, index: 0)
         commandEncoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 4)
         commandEncoder.endEncoding()
         

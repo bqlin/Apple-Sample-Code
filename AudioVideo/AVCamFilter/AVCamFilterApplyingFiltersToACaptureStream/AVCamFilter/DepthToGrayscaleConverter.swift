@@ -171,7 +171,7 @@ class DepthToGrayscaleConverter: FilterRenderer {
         commandEncoder.setComputePipelineState(computePipelineState!)
         commandEncoder.setTexture(inputTexture, index: 0)
         commandEncoder.setTexture(outputTexture, index: 1)
-        commandEncoder.setBytes( UnsafeMutableRawPointer(&range), length: MemoryLayout<DepthRenderParam>.size, index: 0)
+        commandEncoder.setBytes(withUnsafeMutablePointer(to: &range) { $0 }, length: MemoryLayout<DepthRenderParam>.size, index: 0)
         
         // Set up the thread groups.
         let width = computePipelineState!.threadExecutionWidth
