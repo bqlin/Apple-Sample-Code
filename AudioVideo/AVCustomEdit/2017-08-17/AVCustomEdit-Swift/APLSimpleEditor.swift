@@ -108,6 +108,18 @@ class APLSimpleEditor: NSObject, AVVideoCompositionValidationHandling {
                 transitionTimeRanges[i] = CMTimeRangeMake(start: nextClipStartTime, duration: transitionDuration)
             }
         }
+        print("clipTimeRanges: ")
+        clipTimeRanges.forEach { (timeRange) in
+            CMTimeRangeShow(timeRange)
+        }
+        print("clipTimeRanges: ")
+        passThroughTimeRanges.forEach { (timeRange) in
+            CMTimeRangeShow(timeRange)
+        }
+        print("clipTimeRanges: ")
+        transitionTimeRanges.forEach { (timeRange) in
+            CMTimeRangeShow(timeRange)
+        }
     }
 
     func makeTransitionInstructions(videoComposition: AVMutableVideoComposition,
