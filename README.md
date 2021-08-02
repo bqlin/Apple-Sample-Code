@@ -244,6 +244,13 @@ AVQueuePlayer简单使用。
 
 简单实现视频画中画模式。
 
+### AVCamBarcode
+
+- AVCamBarcodeUsingAVFoundationtoDetectBarcodesandFaces
+- Version 3.0, 2017-09-19
+
+使用AVFoundation采集API监测条形码和人脸。
+
 ## Metal
 
 ### MetalComputeBasic
