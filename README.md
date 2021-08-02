@@ -251,6 +251,13 @@ AVQueuePlayer简单使用。
 
 使用AVFoundation采集API监测条形码和人脸。
 
+### AVAEMixerSample
+
+- UsingAVAudioEngineforPlaybackMixingandRecordingAVAEMixerSample
+- Version 2.3, 2017-03-23
+
+使用AVAudioEngine进行播放、录音和混音。
+
 ## Metal
 
 ### MetalComputeBasic
