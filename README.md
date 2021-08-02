@@ -258,6 +258,13 @@ AVQueuePlayer简单使用。
 
 使用AVAudioEngine进行播放、录音和混音。
 
+### AVMetadataRecordPlay
+
+- AVMetadataRecordPlayTimedMetadataCaptureRecordingandPlayback
+- Version 1.2, 2017-03-09
+
+使用AVFoundation采集API录制和播放带时间元数据的影片。
+
 ## Metal
 
 ### MetalComputeBasic
