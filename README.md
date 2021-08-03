@@ -265,6 +265,12 @@ AVQueuePlayer简单使用。
 
 使用AVFoundation采集API录制和播放带时间元数据的影片。
 
+### HelloMetronome
+
+- Version 1.1, 2017-02-24
+
+使用AVAudioEngine和AVAudioPlayerNode实现节拍器。
+
 ## Metal
 
 ### MetalComputeBasic
