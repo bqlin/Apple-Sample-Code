@@ -90,7 +90,7 @@ class ItemSelectionViewController<Item: Equatable & RawRepresentable>: UITableVi
 			if selectedItems.isEmpty {
 				indexPathsToReload = [indexPath]
 			} else {
-				indexPathsToReload = [indexPath, IndexPath(row: allItems.index(of: selectedItems[0])!, section: 0)]
+				indexPathsToReload = [indexPath, IndexPath(row: allItems.firstIndex(of: selectedItems[0])!, section: 0)]
 			}
 			
 			selectedItems = [allItems[indexPath.row]]

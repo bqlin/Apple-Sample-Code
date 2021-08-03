@@ -91,7 +91,7 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 						alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings",
 						                                                                 comment: "Alert button to open Settings"),
 						                                                                 style: .`default`, handler: { _ in
-							UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+							UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
 						}))
 						
 						self.present(alertController, animated: true, completion: nil)
@@ -351,7 +351,9 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 				
 				case .back:
 					preferredPosition = .front
-			}
+                @unknown default:
+                fatalError()
+            }
 			
 			let devices = self.videoDeviceDiscoverySession.devices
 			let newVideoDevice = devices.first(where: { $0.position == preferredPosition })
@@ -602,7 +604,7 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 		// Create the initial metadata object overlay layer that can be used for either machine readable codes or faces.
 		let metadataObjectOverlayLayer = MetadataObjectLayer()
 		metadataObjectOverlayLayer.metadataObject = transformedMetadataObject
-		metadataObjectOverlayLayer.lineJoin = kCALineJoinRound
+		metadataObjectOverlayLayer.lineJoin = .round
 		metadataObjectOverlayLayer.lineWidth = 7.0
 		metadataObjectOverlayLayer.strokeColor = view.tintColor.withAlphaComponent(0.7).cgColor
 		metadataObjectOverlayLayer.fillColor = view.tintColor.withAlphaComponent(0.3).cgColor
@@ -614,7 +616,7 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 			
 			// If the metadata object has a string value, display it.
 			let textLayerString: String?
-			if let stringValue = barcodeMetadataObject.stringValue, !stringValue.characters.isEmpty {
+			if let stringValue = barcodeMetadataObject.stringValue, !stringValue.isEmpty {
 				textLayerString = stringValue
 			} else if let barcodeDescriptor = barcodeMetadataObject.descriptor {
 				if barcodeDescriptor is CIQRCodeDescriptor {
@@ -636,7 +638,7 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 				let barcodeOverlayBoundingBox = barcodeOverlayPath.boundingBox
 				
 				let textLayer = CATextLayer()
-				textLayer.alignmentMode = kCAAlignmentCenter
+				textLayer.alignmentMode = .center
 				textLayer.bounds = CGRect(x: 0.0, y: 0.0, width: barcodeOverlayBoundingBox.size.width, height: barcodeOverlayBoundingBox.size.height)
 				textLayer.contentsScale = UIScreen.main.scale
 				textLayer.font = UIFont.boldSystemFont(ofSize: 19).fontName as CFString

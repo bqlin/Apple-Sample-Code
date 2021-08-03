@@ -33,7 +33,7 @@ class PreviewView: UIView, UIGestureRecognizerDelegate {
 	}
 	
 	private func commonInit() {
-		maskLayer.fillRule = kCAFillRuleEvenOdd
+		maskLayer.fillRule = .evenOdd
 		maskLayer.fillColor = UIColor.black.cgColor
 		maskLayer.opacity = 0.6
 		layer.addSublayer(maskLayer)
@@ -138,7 +138,7 @@ class PreviewView: UIView, UIGestureRecognizerDelegate {
 		When a user is resizing the region of interest in `resizeRegionOfInterestWithGestureRecognizer()`,
 		the KVO notification will be triggered when the resizing is finished.
 	*/
-	@objc private(set) var regionOfInterest = CGRect.null
+	@objc dynamic private(set) var regionOfInterest = CGRect.null
 	
 	/**
 		Updates the region of interest with a proposed region of interest ensuring
