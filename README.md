@@ -278,6 +278,12 @@ AVQueuePlayer简单使用。
 
 使用AVAudioEngine、AVAudioEnvironmentNode和AVAudioPlayerNode播放多方位多声道音频。
 
+### VideoSnake
+
+- Version 4.1, 2016-09-28
+
+实现视频与来自加速度计和陀螺仪的运动数据进行时间同步。
+
 ## Metal
 
 ### MetalComputeBasic
