@@ -11,7 +11,7 @@ import AVFoundation
 import CoreLocation
 import Photos
 
-class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelegate, CLLocationManagerDelegate {
+class CameraViewController: UIViewController, CLLocationManagerDelegate {
 	
 	// MARK: View Controller Life Cycle
 	
@@ -30,7 +30,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 			access is optional. If audio access is denied, audio is not recorded
 			during movie recording.
 		*/
-		switch AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) {
+		switch AVCaptureDevice.authorizationStatus(for: .video) {
 			case .authorized:
 				// The user has previously granted access to the camera.
 				break
@@ -45,7 +45,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 					create an AVCaptureDeviceInput for audio during session setup.
 				*/
 				sessionQueue.suspend()
-				AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted: Bool) in
+				AVCaptureDevice.requestAccess(for: .video, completionHandler: { granted in
 					if !granted {
 						self.setupResult = .notAuthorized
 					}
@@ -99,7 +99,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 						let alertController = UIAlertController(title: "AVMetadataRecordPlay", message: message, preferredStyle: .alert)
 						alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"), style: .cancel, handler: nil))
 						alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: "Alert button to open Settings"), style: .`default`, handler: { _ in
-							UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+							UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
 						}))
 						self.present(alertController, animated: true, completion: nil)
 					}
@@ -170,21 +170,23 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		
 		// Add video input.
 		do {
-			var defaultVideoDevice: AVCaptureDevice?
-			
+			var defaultVideoDevice: AVCaptureDevice!
 			// Choose the back dual camera if available, otherwise default to a wide angle camera.
-			if let dualCameraDevice = AVCaptureDevice.defaultDevice(withDeviceType: .builtInDuoCamera, mediaType: AVMediaTypeVideo, position: .back) {
+			if let dualCameraDevice = AVCaptureDevice.default(.builtInDuoCamera, for: .video, position: .back) {
 				defaultVideoDevice = dualCameraDevice
 			}
-			else if let backCameraDevice = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: .back) {
+			else if let backCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back) {
 				// If the back dual camera is not available, default to the back wide angle camera.
 				defaultVideoDevice = backCameraDevice
 			}
-			else if let frontCameraDevice = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: .front) {
+			else if let frontCameraDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) {
 				// In some cases where users break their phones, the back wide angle camera is not available. In this case, we should default to the front wide angle camera.
 				defaultVideoDevice = frontCameraDevice
 			}
 			
+			guard defaultVideoDevice != nil else {
+				fatalError("Can not find a camera.")
+			}
 			let videoDeviceInput = try AVCaptureDeviceInput(device: defaultVideoDevice)
 			
 			if session.canAddInput(videoDeviceInput) {
@@ -210,7 +212,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 						}
 					}
 					
-					self.previewView.videoPreviewLayer.connection.videoOrientation = initialVideoOrientation
+					self.previewView.videoPreviewLayer.connection?.videoOrientation = initialVideoOrientation
 				}
 			}
 			else {
@@ -229,7 +231,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		
 		// Add audio input.
 		do {
-			let audioDevice = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeAudio)
+			guard let audioDevice = AVCaptureDevice.default(for: .audio) else {
+				fatalError("Can not find a audio device.")
+			}
 			let audioDeviceInput = try AVCaptureDeviceInput(device: audioDevice)
 			
 			if session.canAddInput(audioDeviceInput) {
@@ -247,14 +251,14 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		if session.canAddOutput(movieFileOutput) {
 			session.addOutput(movieFileOutput)
 			
-			if let movieFileOutputVideoConnection = movieFileOutput.connection(withMediaType: AVMediaTypeVideo) {
+			if let movieFileOutputVideoConnection = movieFileOutput.connection(with: .video) {
 				// Enable video video stabilization.
 				if movieFileOutputVideoConnection.isVideoStabilizationSupported {
 					movieFileOutputVideoConnection.preferredVideoStabilizationMode = .auto
 				}
 				
 				// Enable video orientation timed metadata.
-				movieFileOutput.setRecordsVideoOrientationAndMirroringChanges(true, asMetadataTrackFor: movieFileOutputVideoConnection)
+				movieFileOutput.setRecordsVideoOrientationAndMirroringChangesAsMetadataTrack(true, for: movieFileOutputVideoConnection)
 			}
 		}
 		else {
@@ -304,7 +308,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	
 	@IBOutlet private weak var cameraUnavailableLabel: UILabel!
 	
-	private let videoDeviceDiscoverySession = AVCaptureDeviceDiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDuoCamera], mediaType: AVMediaTypeVideo, position: .unspecified)!
+	private let videoDeviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera, .builtInDuoCamera], mediaType: .video, position: .unspecified)
 	
 	@IBAction func changeCamera(_ cameraButton: UIButton) {
 		cameraButton.isEnabled = false
@@ -312,10 +316,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		
 		sessionQueue.async {
 			let currentVideoDevice = self.videoDeviceInput.device
-			let currentPosition = currentVideoDevice!.position
+			let currentPosition = currentVideoDevice.position
 			
-			let preferredPosition: AVCaptureDevicePosition
-			let preferredDeviceType: AVCaptureDeviceType
+			let preferredPosition: AVCaptureDevice.Position
+			let preferredDeviceType: AVCaptureDevice.DeviceType
 			
 			switch currentPosition {
 				case .unspecified, .front:
@@ -325,9 +329,11 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 				case .back:
 					preferredPosition = .front
 					preferredDeviceType = .builtInWideAngleCamera
+				@unknown default:
+				fatalError()
 			}
 			
-			let devices = self.videoDeviceDiscoverySession.devices!
+			let devices = self.videoDeviceDiscoverySession.devices
 			var newVideoDevice: AVCaptureDevice? = nil
 			
 			// First, look for a device with both the preferred position and device type. Otherwise, look for a device with only the preferred position.
@@ -348,9 +354,9 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 					self.session.removeInput(self.videoDeviceInput)
 					
 					if self.session.canAddInput(videoDeviceInput) {
-						NotificationCenter.default.removeObserver(self, name: Notification.Name.AVCaptureDeviceSubjectAreaDidChange, object: currentVideoDevice!)
+						NotificationCenter.default.removeObserver(self, name: .AVCaptureDeviceSubjectAreaDidChange, object: currentVideoDevice)
 						
-						NotificationCenter.default.addObserver(self, selector: #selector(self.subjectAreaDidChange), name: Notification.Name.AVCaptureDeviceSubjectAreaDidChange, object: videoDeviceInput.device)
+						NotificationCenter.default.addObserver(self, selector: #selector(self.subjectAreaDidChange), name: .AVCaptureDeviceSubjectAreaDidChange, object: videoDeviceInput.device)
 						
 						self.session.addInput(videoDeviceInput)
 						self.videoDeviceInput = videoDeviceInput
@@ -362,14 +368,14 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 					// Rewire connections for metadata tracks because we swapped out videoDeviceInput for a new one.
 					self.connectMetadataPorts()
 					
-					if let movieFileOutputVideoConnection = self.movieFileOutput.connection(withMediaType: AVMediaTypeVideo) {
+					if let movieFileOutputVideoConnection = self.movieFileOutput.connection(with: .video) {
 						// Enable video video stabilization.
 						if movieFileOutputVideoConnection.isVideoStabilizationSupported {
 							movieFileOutputVideoConnection.preferredVideoStabilizationMode = .auto
 						}
 						
 						// Enable video orientation timed metadata.
-						self.movieFileOutput.setRecordsVideoOrientationAndMirroringChanges(true, asMetadataTrackFor: movieFileOutputVideoConnection)
+						self.movieFileOutput.setRecordsVideoOrientationAndMirroringChangesAsMetadataTrack(true, for: movieFileOutputVideoConnection)
 					}
 					
 					self.session.commitConfiguration()
@@ -387,11 +393,11 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	}
 	
 	@IBAction private func focusAndExposeTap(_ gestureRecognizer: UITapGestureRecognizer) {
-		let devicePoint = self.previewView.videoPreviewLayer.captureDevicePointOfInterest(for: gestureRecognizer.location(in: gestureRecognizer.view))
+		let devicePoint = self.previewView.videoPreviewLayer.captureDevicePointConverted(fromLayerPoint: gestureRecognizer.location(in: gestureRecognizer.view))
 		focus(with: .autoFocus, exposureMode: .autoExpose, at: devicePoint, monitorSubjectAreaChange: true)
 	}
 	
-	private func focus(with focusMode: AVCaptureFocusMode, exposureMode: AVCaptureExposureMode, at devicePoint: CGPoint, monitorSubjectAreaChange: Bool) {
+	private func focus(with focusMode: AVCaptureDevice.FocusMode, exposureMode: AVCaptureDevice.ExposureMode, at devicePoint: CGPoint, monitorSubjectAreaChange: Bool) {
 		sessionQueue.async { [unowned self] in
 			if let device = self.videoDeviceInput?.device {
 				do {
@@ -449,7 +455,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 			before entering the session queue. We do this to ensure UI elements are
 			accessed on the main thread and session configuration is done on the session queue.
 		*/
-		let videoPreviewLayerOrientation = previewView.videoPreviewLayer.connection.videoOrientation
+		let videoPreviewLayerOrientation = previewView.videoPreviewLayer.connection!.videoOrientation
 		
 		sessionQueue.async { [unowned self] in
 			if !self.movieFileOutput.isRecording {
@@ -469,104 +475,18 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 				}
 				
 				// Update the orientation on the movie file output video connection before starting recording.
-				let movieFileOutputConnection = self.movieFileOutput.connection(withMediaType: AVMediaTypeVideo)
+				let movieFileOutputConnection = self.movieFileOutput.connection(with: .video)
 				movieFileOutputConnection?.videoOrientation = videoPreviewLayerOrientation
 				
 				// Start recording to a temporary file.
 				let outputFileName = NSUUID().uuidString
 				let outputFilePath = (NSTemporaryDirectory() as NSString).appendingPathComponent((outputFileName as NSString).appendingPathExtension("mov")!)
-				self.movieFileOutput.startRecording(toOutputFileURL: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
+				self.movieFileOutput.startRecording(to: URL(fileURLWithPath: outputFilePath), recordingDelegate: self)
 			}
 			else {
 				self.movieFileOutput.stopRecording()
 				self.locationManager.stopUpdatingLocation()
 			}
-		}
-	}
-	
-	func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!) {
-		// Enable the Record button to let the user stop the recording.
-		DispatchQueue.main.async {
-			self.recordButton.isEnabled = true;
-			self.recordButton.setTitle(NSLocalizedString("Stop", comment: "Recording button stop title"), for: [])
-		}
-	}
-	
-	func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
-		/*
-			Note that currentBackgroundRecordingID is used to end the background task
-			associated with this recording. This allows a new recording to be started,
-			associated with a new UIBackgroundTaskIdentifier, once the movie file output's
-			`isRecording` property is back to false — which happens sometime after this method
-			returns.
-			
-			Note: Since we use a unique file path for each recording, a new recording will
-			not overwrite a recording currently being saved.
-		*/
-		func cleanUp() {
-			let path = outputFileURL.path
-			if FileManager.default.fileExists(atPath: path) {
-				do {
-					try FileManager.default.removeItem(atPath: path)
-				}
-				catch {
-					print("Could not remove file at url: \(outputFileURL)")
-				}
-			}
-			
-			if let currentBackgroundRecordingID = backgroundRecordingID {
-				backgroundRecordingID = UIBackgroundTaskInvalid
-				
-				if currentBackgroundRecordingID != UIBackgroundTaskInvalid {
-					UIApplication.shared.endBackgroundTask(currentBackgroundRecordingID)
-				}
-			}
-		}
-		
-		var success = true
-		
-		if error != nil {
-			print("Movie file finishing error: \(error)")
-			success = (((error as NSError).userInfo[AVErrorRecordingSuccessfullyFinishedKey] as AnyObject).boolValue)!
-		}
-		
-		if success {
-			// Check authorization status.
-			PHPhotoLibrary.requestAuthorization { status in
-				if status == .authorized {
-					// Save the movie file to the photo library and clean up.
-					PHPhotoLibrary.shared().performChanges({
-							// In iOS 9 and later, it's possible to move the file into the photo library without duplicating the file data.
-							// This avoids using double the disk space during save, which can make a difference on devices with limited free disk space.
-							let creationOptions = PHAssetResourceCreationOptions()
-							creationOptions.shouldMoveFile = true
-						
-							let creationRequest = PHAssetCreationRequest.forAsset()
-							creationRequest.addResource(with: .video, fileURL: outputFileURL, options: creationOptions)
-						}, completionHandler: { success, error in
-							if !success {
-								print("Could not save movie to photo library: \(String(describing: error))")
-							}
-							cleanUp()
-						}
-					)
-				}
-				else {
-					cleanUp()
-				}
-			}
-		}
-		else {
-			cleanUp()
-		}
-		
-		// Enable the Camera and Record buttons to let the user switch camera and start another recording.
-		DispatchQueue.main.async {
-			// Only enable the ability to change camera if there are cameras in more than one position, i.e., front and back.
-			self.cameraButton.isEnabled = self.videoDeviceDiscoverySession.uniqueDevicePositionsCount() > 1
-			self.recordButton.isEnabled = true
-			self.playerButton.isEnabled = true
-			self.recordButton.setTitle(NSLocalizedString("Record", comment: "Recording button record title"), for: [])
 		}
 	}
 	
@@ -576,32 +496,28 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	
 	private func connectMetadataPorts() {
 		// Location metadata
-		if !isConnectionActiveWithInputPort(AVMetadataIdentifierQuickTimeMetadataLocationISO6709) {
+		if !isConnectionActiveWithInputPort(AVMetadataIdentifier.quickTimeMetadataLocationISO6709.rawValue) {
 			// Create a format description for the location metadata.
-			let specs = [kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier as String: AVMetadataIdentifierQuickTimeMetadataLocationISO6709,
-			             kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType as String: kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as String]
+			let specs = [kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier: AVMetadataIdentifier.quickTimeMetadataLocationISO6709,
+						 kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType: kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709] as [CFString : Any]
 			
 			var locationMetadataDesc: CMFormatDescription?
-			CMMetadataFormatDescriptionCreateWithMetadataSpecifications(kCFAllocatorDefault, kCMMetadataFormatType_Boxed, [specs] as CFArray, &locationMetadataDesc)
+			CMMetadataFormatDescriptionCreateWithMetadataSpecifications(allocator: kCFAllocatorDefault, metadataType: kCMMetadataFormatType_Boxed, metadataSpecifications: [specs] as CFArray, formatDescriptionOut: &locationMetadataDesc)
 			
 			// Create the metadata input and add it to the session.
-			guard let newLocationMetadataInput = AVCaptureMetadataInput(formatDescription: locationMetadataDesc, clock: CMClockGetHostTimeClock())
-				else {
-					print("Unable to obtain metadata input.")
-					return
-			}
+			let newLocationMetadataInput = AVCaptureMetadataInput(formatDescription: locationMetadataDesc!, clock: CMClockGetHostTimeClock())
 			session.addInputWithNoConnections(newLocationMetadataInput)
 			
 			// Connect the location metadata input to the movie file output.
 			let inputPort = newLocationMetadataInput.ports[0]
-			session.add(AVCaptureConnection(inputPorts: [inputPort], output: movieFileOutput))
+			session.addConnection(AVCaptureConnection(inputPorts: [inputPort], output: movieFileOutput))
 			
 			locationMetadataInput = newLocationMetadataInput
 		}
 		
 		// Face metadata
-		if !isConnectionActiveWithInputPort(AVMetadataIdentifierQuickTimeMetadataDetectedFace) {
-			connectSpecificMetadataPort(AVMetadataIdentifierQuickTimeMetadataDetectedFace)
+		if !isConnectionActiveWithInputPort(AVMetadataIdentifier.quickTimeMetadataDetectedFace.rawValue) {
+			connectSpecificMetadataPort(AVMetadataIdentifier.quickTimeMetadataDetectedFace.rawValue)
 		}
 	}
 	
@@ -612,18 +528,17 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	private func connectSpecificMetadataPort(_ metadataIdentifier: String) {
 		
 		// Iterate over the videoDeviceInput's ports (individual streams of media data) and find the port that matches metadataIdentifier.
-		for inputPort in videoDeviceInput.ports as! [AVCaptureInputPort] {
+		for inputPort in videoDeviceInput.ports {
 			
-			guard (inputPort.formatDescription != nil) && (CMFormatDescriptionGetMediaType(inputPort.formatDescription) == kCMMediaType_Metadata),
-				let metadataIdentifiers = CMMetadataFormatDescriptionGetIdentifiers(inputPort.formatDescription) as NSArray? else {
+			guard (inputPort.formatDescription != nil) && (CMFormatDescriptionGetMediaType(inputPort.formatDescription!) == kCMMediaType_Metadata),
+				let metadataIdentifiers = CMMetadataFormatDescriptionGetIdentifiers(inputPort.formatDescription!) as? [String] else {
 					continue
 			}
 			
 			if metadataIdentifiers.contains(metadataIdentifier) {
 				// Add an AVCaptureConnection to connect the input port to the AVCaptureOutput (movieFileOutput).
-				if let connection = AVCaptureConnection(inputPorts: [inputPort], output: movieFileOutput) {
-					session.add(connection)
-				}
+				let connection = AVCaptureConnection(inputPorts: [inputPort], output: movieFileOutput)
+				session.addConnection(connection)
 			}
 		}
 	}
@@ -634,10 +549,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 	*/
 	private func isConnectionActiveWithInputPort(_ portType: String) -> Bool {
 		
-		for connection in movieFileOutput.connections as! [AVCaptureConnection] {
-			for inputPort in connection.inputPorts as! [AVCaptureInputPort] {
+		for connection in movieFileOutput.connections {
+			for inputPort in connection.inputPorts {
 				if let formatDescription = inputPort.formatDescription, CMFormatDescriptionGetMediaType(formatDescription) == kCMMediaType_Metadata {
-					if let metadataIdentifiers = CMMetadataFormatDescriptionGetIdentifiers(inputPort.formatDescription) as NSArray? {
+					if let metadataIdentifiers = CMMetadataFormatDescriptionGetIdentifiers(inputPort.formatDescription!) as NSArray? {
 						if metadataIdentifiers.contains(portType) {
 							return connection.isActive
 						}
@@ -670,7 +585,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		NotificationCenter.default.addObserver(self, selector: #selector(sessionInterruptionEnded), name: NSNotification.Name.AVCaptureSessionInterruptionEnded, object: session)
 		
 		// Listen for device orientation changes so keep the video orientation metadata capture connection's orientation up-to-date
-		NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationDidChange), name: NSNotification.Name.UIDeviceOrientationDidChange, object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(deviceOrientationDidChange), name: UIDevice.orientationDidChangeNotification, object: nil)
 	}
 	
 	private func removeObservers() {
@@ -695,12 +610,12 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 	}
 	
-	func subjectAreaDidChange(_ notification: Notification) {
+	@objc func subjectAreaDidChange(_ notification: Notification) {
 		let devicePoint: CGPoint = CGPoint(x: 0.5, y: 0.5)
 		focus(with: .continuousAutoFocus, exposureMode: .continuousAutoExposure, at: devicePoint, monitorSubjectAreaChange: false)
 	}
 	
-	func sessionRuntimeError(notification: NSNotification) {
+	@objc func sessionRuntimeError(notification: NSNotification) {
 		guard let errorValue = notification.userInfo?[AVCaptureSessionErrorKey] as? NSError else {
 			return
 		}
@@ -731,7 +646,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 	}
 	
-	func sessionWasInterrupted(notification: NSNotification) {
+	@objc func sessionWasInterrupted(notification: NSNotification) {
 		/*
 			In some scenarios we want to enable the user to resume the session running.
 			For example, if music playback is initiated via control center while
@@ -740,10 +655,10 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 			music playback in control center will not automatically resume the session
 			running. Also note that it is not always possible to resume, see `resumeInterruptedSession(_:)`.
 		*/
-		if let userInfoValue = notification.userInfo?[AVCaptureSessionInterruptionReasonKey] as AnyObject?, let reasonIntegerValue = userInfoValue.integerValue, let reason = AVCaptureSessionInterruptionReason(rawValue: reasonIntegerValue) {
+		if let userInfoValue = notification.userInfo?[AVCaptureSessionInterruptionReasonKey] as AnyObject?, let reasonIntegerValue = userInfoValue.integerValue, let reason = AVCaptureSession.InterruptionReason(rawValue: reasonIntegerValue) {
 			print("Capture session was interrupted with reason \(reason)")
 			
-			if reason == AVCaptureSessionInterruptionReason.audioDeviceInUseByAnotherClient || reason == AVCaptureSessionInterruptionReason.videoDeviceInUseByAnotherClient {
+			if reason == .audioDeviceInUseByAnotherClient || reason == AVCaptureSession.InterruptionReason.videoDeviceInUseByAnotherClient {
 				// Simply fade-in a button to enable the user to try to resume the session running.
 				resumeButton.alpha = 0
 				resumeButton.isHidden = false
@@ -751,7 +666,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 					self.resumeButton.alpha = 1
 				}
 			}
-			else if reason == AVCaptureSessionInterruptionReason.videoDeviceNotAvailableWithMultipleForegroundApps {
+			else if reason == .videoDeviceNotAvailableWithMultipleForegroundApps {
 				// Simply fade-in a label to inform the user that the camera is unavailable.
 				cameraUnavailableLabel.alpha = 0
 				cameraUnavailableLabel.isHidden = false
@@ -762,7 +677,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 	}
 	
-	func sessionInterruptionEnded(notification: NSNotification) {
+	@objc func sessionInterruptionEnded(notification: NSNotification) {
 		print("Capture session interruption ended")
 		
 		if !resumeButton.isHidden {
@@ -785,13 +700,13 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 		}
 	}
 	
-	func deviceOrientationDidChange() {
+	@objc func deviceOrientationDidChange() {
 		// Update capture orientation based on device orientation (if device orientation is one that
 		// should affect capture, i.e. not face up, face down, or unknown)
 		let deviceOrientation = UIDevice.current.orientation
 		if deviceOrientation.isPortrait || deviceOrientation.isLandscape {
 			if let videoOrientation = deviceOrientation.videoOrientation {
-				movieFileOutput.connection(withMediaType: AVMediaTypeVideo).videoOrientation = videoOrientation
+				movieFileOutput.connection(with: AVMediaType.video)!.videoOrientation = videoOrientation
 			}
 		}
 	}
@@ -808,7 +723,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 			if let newLocation = locations.last, CLLocationCoordinate2DIsValid(newLocation.coordinate) {
 				var iso6709Geolocation: String
 				let newLocationMetadataItem = AVMutableMetadataItem()
-				newLocationMetadataItem.identifier = AVMetadataIdentifierQuickTimeMetadataLocationISO6709
+				newLocationMetadataItem.identifier = .quickTimeMetadataLocationISO6709
 				newLocationMetadataItem.dataType = kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709 as String
 				
 				// CoreLocation objects contain altitude information as well if the verticalAccuracy is positive.
@@ -820,7 +735,7 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 				}
 				newLocationMetadataItem.value = iso6709Geolocation as NSString
 				
-				let metadataItemGroup = AVTimedMetadataGroup(items: [newLocationMetadataItem], timeRange: CMTimeRangeMake(CMClockGetTime(CMClockGetHostTimeClock()), kCMTimeInvalid))
+				let metadataItemGroup = AVTimedMetadataGroup(items: [newLocationMetadataItem], timeRange: CMTimeRangeMake(start: CMClockGetTime(CMClockGetHostTimeClock()), duration: CMTime.invalid))
 				do {
 					try locationMetadataInput?.append(metadataItemGroup)
 				}
@@ -828,6 +743,94 @@ class CameraViewController: UIViewController, AVCaptureFileOutputRecordingDelega
 					print("Could not add timed metadata group: \(error)")
 				}
 			}
+		}
+	}
+}
+
+extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
+	func fileOutput(_ output: AVCaptureFileOutput, didStartRecordingTo fileURL: URL, from connections: [AVCaptureConnection]) {
+		// Enable the Record button to let the user stop the recording.
+		DispatchQueue.main.async {
+			self.recordButton.isEnabled = true;
+			self.recordButton.setTitle(NSLocalizedString("Stop", comment: "Recording button stop title"), for: [])
+		}
+	}
+	
+	func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
+		/*
+		Note that currentBackgroundRecordingID is used to end the background task
+		associated with this recording. This allows a new recording to be started,
+		associated with a new UIBackgroundTaskIdentifier, once the movie file output's
+		`isRecording` property is back to false — which happens sometime after this method
+		returns.
+
+		Note: Since we use a unique file path for each recording, a new recording will
+		not overwrite a recording currently being saved.
+		*/
+		func cleanUp() {
+			let path = outputFileURL.path
+			if FileManager.default.fileExists(atPath: path) {
+				do {
+					try FileManager.default.removeItem(atPath: path)
+				}
+				catch {
+					print("Could not remove file at url: \(outputFileURL)")
+				}
+			}
+
+			if let currentBackgroundRecordingID = backgroundRecordingID {
+				backgroundRecordingID = UIBackgroundTaskIdentifier.invalid
+
+				if currentBackgroundRecordingID != UIBackgroundTaskIdentifier.invalid {
+					UIApplication.shared.endBackgroundTask(currentBackgroundRecordingID)
+				}
+			}
+		}
+
+		var success = true
+
+		if let error = error as NSError? {
+			print("Movie file finishing error: \(error)")
+			success = error.userInfo[AVErrorRecordingSuccessfullyFinishedKey] as! Bool
+		}
+
+		if success {
+			// Check authorization status.
+			PHPhotoLibrary.requestAuthorization { status in
+				if status == .authorized {
+					// Save the movie file to the photo library and clean up.
+					PHPhotoLibrary.shared().performChanges({
+						// In iOS 9 and later, it's possible to move the file into the photo library without duplicating the file data.
+						// This avoids using double the disk space during save, which can make a difference on devices with limited free disk space.
+						let creationOptions = PHAssetResourceCreationOptions()
+						creationOptions.shouldMoveFile = true
+
+						let creationRequest = PHAssetCreationRequest.forAsset()
+						creationRequest.addResource(with: .video, fileURL: outputFileURL, options: creationOptions)
+					}, completionHandler: { success, error in
+						if !success {
+							print("Could not save movie to photo library: \(String(describing: error))")
+						}
+						cleanUp()
+					}
+					)
+				}
+				else {
+					cleanUp()
+				}
+			}
+		}
+		else {
+			cleanUp()
+		}
+
+		// Enable the Camera and Record buttons to let the user switch camera and start another recording.
+		DispatchQueue.main.async {
+			// Only enable the ability to change camera if there are cameras in more than one position, i.e., front and back.
+			self.cameraButton.isEnabled = self.videoDeviceDiscoverySession.uniqueDevicePositionsCount() > 1
+			self.recordButton.isEnabled = true
+			self.playerButton.isEnabled = true
+			self.recordButton.setTitle(NSLocalizedString("Record", comment: "Recording button record title"), for: [])
 		}
 	}
 }
@@ -856,9 +859,9 @@ extension UIInterfaceOrientation {
 	}
 }
 
-extension AVCaptureDeviceDiscoverySession {
+extension AVCaptureDevice.DiscoverySession {
 	func uniqueDevicePositionsCount() -> Int {
-		var uniqueDevicePositions = [AVCaptureDevicePosition]()
+		var uniqueDevicePositions = [AVCaptureDevice.Position]()
 		
 		for device in devices {
 			if !uniqueDevicePositions.contains(device.position) {

@@ -35,7 +35,7 @@ class AssetGridViewController: UICollectionViewController, PHPhotoLibraryChangeO
 						let alertController = UIAlertController(title: "AVMetadataRecordPlay", message: message, preferredStyle: .alert)
 						alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Alert OK button"), style: .cancel, handler: nil))
 						alertController.addAction(UIAlertAction(title: NSLocalizedString("Settings", comment: "Alert button to open Settings"), style: .`default`, handler: { _ in
-							UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+							UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!, options: [:], completionHandler: nil)
 						}))
 						self.present(alertController, animated: true, completion: nil)
 					}
@@ -63,7 +63,7 @@ class AssetGridViewController: UICollectionViewController, PHPhotoLibraryChangeO
 		
 		let flowLayout = collectionViewLayout as! UICollectionViewFlowLayout
 		flowLayout.itemSize = CGSize(width: cellWidth, height: cellWidth)
-		flowLayout.sectionInset = UIEdgeInsetsMake(spacing, 0.0, spacing, 0.0)
+		flowLayout.sectionInset = UIEdgeInsets(top: spacing, left: 0.0, bottom: spacing, right: 0.0)
 		flowLayout.minimumInteritemSpacing = spacing
 		flowLayout.minimumLineSpacing = spacing
 		
