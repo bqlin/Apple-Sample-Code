@@ -12,6 +12,8 @@
 #import <AVFoundation/AVVideoSettings.h>
 #import <AVFoundation/AVAudioSettings.h>
 
+#include <objc/runtime.h> // for objc_loadWeak() and objc_storeWeak()
+
 #define LOG_STATUS_TRANSITIONS 0
 
 typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
@@ -29,6 +31,7 @@ typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
 {
 	MovieRecorderStatus _status;
 
+	id <MovieRecorderDelegate> _delegate;
 	dispatch_queue_t _delegateCallbackQueue;
 	
 	dispatch_queue_t _writingQueue;
@@ -45,8 +48,6 @@ typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
 	CGAffineTransform _videoTrackTransform;
 	AVAssetWriterInput *_videoInput;
 }
-
-@property (nonatomic, weak) id<MovieRecorderDelegate> delegate;
 @end
 
 @implementation MovieRecorder
@@ -57,12 +58,14 @@ typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
 - (id)initWithURL:(NSURL *)URL
 {
 	if ( ! URL ) {
+		[self release];
 		return nil;
 	}
 	
 	if ( self = [super init] ) {
 		_writingQueue = dispatch_queue_create( "com.apple.sample.movierecorder.writing", DISPATCH_QUEUE_SERIAL );
 		_videoTrackTransform = CGAffineTransformIdentity;
+		_URL = [URL retain];
 	}
 	return self;
 }
@@ -112,14 +115,27 @@ typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
 	}
 }
 
+- (id<MovieRecorderDelegate>)delegate
+{
+	id <MovieRecorderDelegate> delegate = nil;
+	@synchronized( self ) {
+		delegate = objc_loadWeak( &_delegate ); // unnecessary under ARC, just assign to delegate directly
+	}
+	return delegate;
+}
+
 - (void)setDelegate:(id<MovieRecorderDelegate>)delegate callbackQueue:(dispatch_queue_t)delegateCallbackQueue; // delegate is weak referenced
 {
 	if ( delegate && ( delegateCallbackQueue == NULL ) )
 		@throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Caller must provide a delegateCallbackQueue" userInfo:nil];
 	
 	@synchronized( self ) {
-        _delegate = delegate;
+		objc_storeWeak( &_delegate, delegate ); // unnecessary under ARC, just assign to _delegate directly
 		if ( delegateCallbackQueue != _delegateCallbackQueue  ) {
+			if ( delegateCallbackQueue )
+				[delegateCallbackQueue retain];
+			if ( _delegateCallbackQueue )
+				[_delegateCallbackQueue release];
 			_delegateCallbackQueue = delegateCallbackQueue;
 		}
 	}
@@ -140,23 +156,23 @@ typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
 		@autoreleasepool {
 			NSError *error = nil;
 			// AVAssetWriter will not write over an existing file.
-            [[NSFileManager defaultManager] removeItemAtURL:self->_URL error:NULL];
+			[[NSFileManager defaultManager] removeItemAtURL:_URL error:NULL];
 			
-            self->_assetWriter = [[AVAssetWriter alloc] initWithURL:self->_URL fileType:AVFileTypeQuickTimeMovie error:&error];
+			_assetWriter = [[AVAssetWriter alloc] initWithURL:_URL fileType:AVFileTypeQuickTimeMovie error:&error];
 			
 			// Create and add inputs
-            if ( ! error && self->_videoTrackSourceFormatDescription ) {
-                [self setupAssetWriterVideoInput:self->_videoTrackSourceFormatDescription transform:self->_videoTrackTransform error:&error];
+			if ( ! error && _videoTrackSourceFormatDescription ) {
+				[self setupAssetWriterVideoInput:_videoTrackSourceFormatDescription transform:_videoTrackTransform error:&error];
 			}
 			
-            if ( ! error && self->_audioTrackSourceFormatDescription ) {
-                [self setupAssetWriterAudioInput:self->_audioTrackSourceFormatDescription error:&error];
+			if ( ! error && _audioTrackSourceFormatDescription ) {
+				[self setupAssetWriterAudioInput:_audioTrackSourceFormatDescription error:&error];
 			}
 			
 			if ( ! error ) {
-                BOOL success = [self->_assetWriter startWriting];
+				BOOL success = [_assetWriter startWriting];
 				if ( ! success )
-                    error = self->_assetWriter.error;
+					error = _assetWriter.error;
 			}
 			
 			@synchronized( self ) {
@@ -232,7 +248,7 @@ typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
 		@autoreleasepool {
 			@synchronized( self ) {
 				// We may have transitioned to an error state as we appended inflight buffers. In that case there is nothing to do now.
-                if ( self->_status != MovieRecorderStatusFinishingRecordingPart1 )
+				if ( _status != MovieRecorderStatusFinishingRecordingPart1 )
 					return ;
 				
 				// It is not safe to call -[AVAssetWriter finishWriting*] concurrently with -[AVAssetWriterInput appendSampleBuffer:]
@@ -242,7 +258,7 @@ typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
 			
 			dispatch_block_t completionHandler = ^{
 				@synchronized( self ) {
-                    NSError *error = self->_assetWriter.error;
+					NSError *error = _assetWriter.error;
 					if ( error )
 						[self transitionToStatus:MovieRecorderStatusFailed error:error];
 					else
@@ -250,19 +266,31 @@ typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
 				}				
 			};
 
-            [self->_assetWriter finishWritingWithCompletionHandler:completionHandler];
+			[_assetWriter finishWritingWithCompletionHandler:completionHandler];
 		}
 	});
 }
 
 - (void)dealloc
 {
+	objc_storeWeak( &_delegate, nil ); // unregister _delegate as a weak reference
+	
+	if ( _delegateCallbackQueue )
+		[_delegateCallbackQueue release];
+	
+	if ( _writingQueue )
+		[_writingQueue release];
+	
 	[self teardownAssetWriterAndInputs];
 
 	if ( _audioTrackSourceFormatDescription )
 		CFRelease( _audioTrackSourceFormatDescription );
 	if ( _videoTrackSourceFormatDescription )
 		CFRelease( _videoTrackSourceFormatDescription );
+
+	[_URL release];
+	
+	[super dealloc];
 }
 
 #pragma mark -
@@ -289,23 +317,23 @@ typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
 				// From the client's perspective the movie recorder can asynchronously transition to an error state as the result of an append.
 				// Because of this we are lenient when samples are appended and we are no longer recording.
 				// Instead of throwing an exception we just release the sample buffers and return.
-                if ( self->_status > MovieRecorderStatusFinishingRecordingPart1 ) {
+				if ( _status > MovieRecorderStatusFinishingRecordingPart1 ) {
 					CFRelease( sampleBuffer );
 					return;
 				}
 			}
 			
-            if ( ! self->_haveStartedSession ) {
-                [self->_assetWriter startSessionAtSourceTime:CMSampleBufferGetPresentationTimeStamp(sampleBuffer)];
-                self->_haveStartedSession = YES;
+			if ( ! _haveStartedSession ) {
+				[_assetWriter startSessionAtSourceTime:CMSampleBufferGetPresentationTimeStamp(sampleBuffer)];
+				_haveStartedSession = YES;
 			}
 			
-            AVAssetWriterInput *input = ( mediaType == AVMediaTypeVideo ) ? self->_videoInput : self->_audioInput;
+			AVAssetWriterInput *input = ( mediaType == AVMediaTypeVideo ) ? _videoInput : _audioInput;
 			
 			if ( input.readyForMoreMediaData ) {
 				BOOL success = [input appendSampleBuffer:sampleBuffer];
 				if ( ! success ) {
-                    NSError *error = self->_assetWriter.error;
+					NSError *error = _assetWriter.error;
 					@synchronized( self ) {
 						[self transitionToStatus:MovieRecorderStatusFailed error:error];
 					}
@@ -337,7 +365,7 @@ typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
 			dispatch_async( _writingQueue, ^{
 				[self teardownAssetWriterAndInputs];
 				if ( newStatus == MovieRecorderStatusFailed ) {
-                    [[NSFileManager defaultManager] removeItemAtURL:self->_URL error:NULL];
+					[[NSFileManager defaultManager] removeItemAtURL:_URL error:NULL];
 				}
 			});
 
@@ -530,8 +558,11 @@ typedef NS_ENUM( NSInteger, MovieRecorderStatus ) {
 
 - (void)teardownAssetWriterAndInputs
 {
+	[_videoInput release];
 	_videoInput = nil;
+	[_audioInput release];
 	_audioInput = nil;
+	[_assetWriter release];
 	_assetWriter = nil;
 }
 

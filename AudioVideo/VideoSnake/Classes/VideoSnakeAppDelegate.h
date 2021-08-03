@@ -8,6 +8,6 @@
 
 @interface VideoSnakeAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, retain) UIWindow *window;
 
 @end

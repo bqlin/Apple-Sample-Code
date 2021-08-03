@@ -88,6 +88,7 @@ enum {
 		self->_oglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
 		if (!self->_oglContext) {
 			NSLog(@"Problem with OpenGL context.");
+			[self release];
 			return nil;
 		}
     }
@@ -185,6 +186,8 @@ bail:
 - (void)dealloc
 {
 	[self reset];
+	[_oglContext release];
+    [super dealloc];
 }
 
 - (void)displayPixelBuffer:(CVPixelBufferRef)pixelBuffer

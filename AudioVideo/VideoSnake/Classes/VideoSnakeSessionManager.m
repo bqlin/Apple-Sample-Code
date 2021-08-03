@@ -15,6 +15,8 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <ImageIO/CGImageProperties.h>
 
+#include <objc/runtime.h> // for objc_loadWeak() and objc_storeWeak()
+
 /*
  RETAINED_BUFFER_COUNT is the number of pixel buffers we expect to hold on to from the renderer. This value informs the renderer how to size its buffer pool and how many pixel buffers to preallocate (done in the prepareWithOutputDimensions: method). Preallocation helps to lessen the chance of frame drops in our recording, in particular during recording startup. If we try to hold on to more buffers than RETAINED_BUFFER_COUNT then the renderer will fail to allocate new buffers from its pool and we will drop frames.
 
@@ -29,7 +31,7 @@
 
 #define RETAINED_BUFFER_COUNT 5
 
-#define RECORD_AUDIO 1
+#define RECORD_AUDIO 0
 
 #define LOG_STATUS_TRANSITIONS 0
 
@@ -66,6 +68,7 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 
 @interface VideoSnakeSessionManager () <AVCaptureAudioDataOutputSampleBufferDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, MovieRecorderDelegate, MotionSynchronizationDelegate>
 {
+	id <VideoSnakeSessionManagerDelegate> _delegate;
 	dispatch_queue_t _delegateCallbackQueue;
 	
 	NSMutableArray *_previousSecondTimestamps;
@@ -91,18 +94,16 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 	UIBackgroundTaskIdentifier _pipelineRunningTask;
 }
 
-@property (nonatomic, strong) __attribute__((NSObject)) CVPixelBufferRef currentPreviewPixelBuffer;
+@property (nonatomic, retain) __attribute__((NSObject)) CVPixelBufferRef currentPreviewPixelBuffer;
 
 @property (readwrite) float videoFrameRate;
 @property (readwrite) CMVideoDimensions videoDimensions;
 @property (nonatomic, readwrite) AVCaptureVideoOrientation videoOrientation;
-@property (nonatomic, strong) MotionSynchronizer *motionSynchronizer;
+@property (nonatomic, retain) MotionSynchronizer *motionSynchronizer;
 
-@property (nonatomic, strong) __attribute__((NSObject)) CMFormatDescriptionRef outputVideoFormatDescription;
-@property (nonatomic, strong) __attribute__((NSObject)) CMFormatDescriptionRef outputAudioFormatDescription;
-@property (nonatomic, strong) MovieRecorder *recorder;
-
-@property (nonatomic, weak) id<VideoSnakeSessionManagerDelegate> delegate;
+@property (nonatomic, retain) __attribute__((NSObject)) CMFormatDescriptionRef outputVideoFormatDescription;
+@property (nonatomic, retain) __attribute__((NSObject)) CMFormatDescriptionRef outputAudioFormatDescription;
+@property (nonatomic, retain) MovieRecorder *recorder;
 
 @end
 
@@ -138,16 +139,40 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 
 - (void)dealloc
 {
+	objc_storeWeak( &_delegate, nil ); // unregister _delegate as a weak reference
+	
+	if ( _delegateCallbackQueue )
+		[_delegateCallbackQueue release];
+
 	if ( _currentPreviewPixelBuffer )
 		CFRelease( _currentPreviewPixelBuffer );
 	
+	[_previousSecondTimestamps release];
+	
 	[self teardownCaptureSession];
+	
+	if ( _sessionQueue )
+		[_sessionQueue release];
+	
+	if ( _videoDataOutputQueue )
+		[_videoDataOutputQueue release];
+	
+	[_renderer release];
+	
+	[_motionSynchronizer release];
+	if ( _motionSyncedVideoQueue )
+		[_motionSyncedVideoQueue release];
 		
 	if ( _outputVideoFormatDescription )
 		CFRelease( _outputVideoFormatDescription );
 	
 	if ( _outputAudioFormatDescription )
 		CFRelease( _outputAudioFormatDescription );
+	
+	[_recorder release];
+	[_recordingURL release];
+	
+	[super dealloc];
 }
 
 #pragma mark Delegate
@@ -158,11 +183,24 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 		@throw [NSException exceptionWithName:NSInvalidArgumentException reason:@"Caller must provide a delegateCallbackQueue" userInfo:nil];
 	
 	@synchronized( self ) {
-        _delegate = delegate;
+		objc_storeWeak( &_delegate, delegate ); // unnecessary under ARC, just assign to _delegate directly
 		if ( delegateCallbackQueue != _delegateCallbackQueue  ) {
+			if ( delegateCallbackQueue )
+				[delegateCallbackQueue retain];
+			if ( _delegateCallbackQueue )
+				[_delegateCallbackQueue release];
 			_delegateCallbackQueue = delegateCallbackQueue;
 		}
 	}
+}
+
+- (id<VideoSnakeSessionManagerDelegate>)delegate
+{
+	id <VideoSnakeSessionManagerDelegate> delegate = nil;
+	@synchronized( self ) {
+		delegate = objc_loadWeak( &_delegate ); // unnecessary under ARC, just assign delegate to _delegate directly
+	}
+	return delegate;
 }
 
 #pragma mark Capture Session
@@ -198,7 +236,7 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 	if ( _captureSession )
 		return;
 	
-	_captureSession = [[AVCaptureSession alloc] init];
+	_captureSession = [[AVCaptureSession alloc] init];	
 
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(captureSessionNotification:) name:nil object:_captureSession];
 	_applicationWillEnterForegroundNotificationObserver = [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillEnterForegroundNotification object:[UIApplication sharedApplication] queue:nil usingBlock:^(NSNotification *note) {
@@ -213,15 +251,18 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 	AVCaptureDeviceInput *audioIn = [[AVCaptureDeviceInput alloc] initWithDevice:audioDevice error:nil];
 	if ([_captureSession canAddInput:audioIn])
 		[_captureSession addInput:audioIn];
+	[audioIn release];
 	
 	AVCaptureAudioDataOutput *audioOut = [[AVCaptureAudioDataOutput alloc] init];
 	// Put audio on its own queue to ensure that our video processing doesn't cause us to drop audio
 	dispatch_queue_t audioCaptureQueue = dispatch_queue_create("com.apple.sample.sessionmanager.audio", DISPATCH_QUEUE_SERIAL);
 	[audioOut setSampleBufferDelegate:self queue:audioCaptureQueue];
+	[audioCaptureQueue release];
 	
 	if ([_captureSession canAddOutput:audioOut])
 		[_captureSession addOutput:audioOut];
 	_audioConnection = [audioOut connectionWithMediaType:AVMediaTypeAudio];
+	[audioOut release];
 #endif // RECORD_AUDIO
 	
 	/* Video */
@@ -230,6 +271,7 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 	AVCaptureDeviceInput *videoIn = [[AVCaptureDeviceInput alloc] initWithDevice:videoDevice error:nil];
 	if ([_captureSession canAddInput:videoIn])
 		[_captureSession addInput:videoIn];
+	[videoIn release];
 	
 	AVCaptureVideoDataOutput *videoOut = [[AVCaptureVideoDataOutput alloc] init];
 	[videoOut setVideoSettings:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:kCVPixelFormatType_32BGRA] forKey:(id)kCVPixelBufferPixelFormatTypeKey]];
@@ -239,7 +281,7 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 	// By setting alwaysDiscardsLateVideoFrames to NO we ensure that minor fluctuations in system load or in our processing time for a given frame won't cause framedrops.
 	// We do however need to ensure that on average we can process frames in realtime.
 	// If we were doing preview only we would probably want to set alwaysDiscardsLateVideoFrames to YES.
-    videoOut.alwaysDiscardsLateVideoFrames = NO;
+	[videoOut setAlwaysDiscardsLateVideoFrames:NO];
 	
 	if ([_captureSession canAddOutput:videoOut])
 		[_captureSession addOutput:videoOut];
@@ -270,6 +312,7 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 
 	self.videoOrientation = [_videoConnection videoOrientation];
 	
+	[videoOut release];
 	
 	/* Motion */
     [self.motionSynchronizer setMotionRate:frameRate * 2];
@@ -285,6 +328,7 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 		[[NSNotificationCenter defaultCenter] removeObserver:_applicationWillEnterForegroundNotificationObserver];
 		_applicationWillEnterForegroundNotificationObserver = nil;
 		
+		[_captureSession release];
 		_captureSession = nil;
 	}
 }
@@ -308,8 +352,8 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 				NSLog( @"device not available in background" );
 
 				// Since we can't resume running while in the background we need to remember this for next time we come to the foreground
-                if ( self->_running )
-                    self->_startCaptureSessionOnEnteringForeground = YES;
+				if ( _running )
+					_startCaptureSessionOnEnteringForeground = YES;
 			}
 			else if ( error.code == AVErrorMediaServicesWereReset ) {
 				NSLog( @"media services were reset" );
@@ -579,7 +623,7 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 		[self transitionToRecordingStatus:VideoSnakeRecordingStatusStartingRecording error:nil];
 	}
 	
-	MovieRecorder *recorder = [[MovieRecorder alloc] initWithURL:_recordingURL];
+	MovieRecorder *recorder = [[[MovieRecorder alloc] initWithURL:_recordingURL] autorelease];
 	
 #if RECORD_AUDIO
 	[recorder addAudioTrackWithSourceFormatDescription:self.outputAudioFormatDescription];
@@ -591,6 +635,7 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 	
 	dispatch_queue_t callbackQueue = dispatch_queue_create( "com.apple.sample.sessionmanager.recordercallback", DISPATCH_QUEUE_SERIAL ); // guarantee ordering of callbacks with a serial queue
 	[recorder setDelegate:self callbackQueue:callbackQueue];
+	[callbackQueue release];
 	self.recorder = recorder;
 	
 	[recorder prepareToRecord]; // asynchronous, will call us back with recorderDidFinishPreparing: or recorder:didFailWithError: when done
@@ -648,16 +693,17 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 	ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
 	[library writeVideoAtPathToSavedPhotosAlbum:_recordingURL completionBlock:^(NSURL *assetURL, NSError *error) {
 		
-        [[NSFileManager defaultManager] removeItemAtURL:self->_recordingURL error:NULL];
+		[[NSFileManager defaultManager] removeItemAtURL:_recordingURL error:NULL];
 		
  		@synchronized( self ) {
-            if ( self->_recordingStatus != VideoSnakeRecordingStatusStoppingRecording ) {
+			if ( _recordingStatus != VideoSnakeRecordingStatusStoppingRecording ) {
 				@throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Expected to be in StoppingRecording state" userInfo:nil];
 				return;
 			}
 			[self transitionToRecordingStatus:VideoSnakeRecordingStatusIdle error:error];
 		}
 	}];
+	[library release];
 }
 
 #pragma mark Recording State Machine
@@ -692,9 +738,9 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 		dispatch_async( _delegateCallbackQueue, ^{
 			@autoreleasepool {
 				if ( error )
-					[self.delegate performSelector:delegateSelector withObject:self withObject:error];
+					[[self delegate] performSelector:delegateSelector withObject:self withObject:error];
 				else
-					[self.delegate performSelector:delegateSelector withObject:self];
+					[[self delegate] performSelector:delegateSelector withObject:self];
 			}
 		});
 	}
@@ -730,7 +776,7 @@ static CGFloat angleOffsetFromPortraitOrientationToOrientation(AVCaptureVideoOri
 
 #pragma mark Utilities
 
-// Auto mirroring: Front camera is mirrored; back camera isn't
+// Auto mirroring: Front camera is mirrored; back camera isn't 
 - (CGAffineTransform)transformFromVideoBufferOrientationToOrientation:(AVCaptureVideoOrientation)orientation withAutoMirroring:(BOOL)mirror
 {
 	CGAffineTransform transform = CGAffineTransformIdentity;

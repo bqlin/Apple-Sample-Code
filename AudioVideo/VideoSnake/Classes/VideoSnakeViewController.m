@@ -17,12 +17,12 @@
 	BOOL _allowedToUseGPU;
 }
 
-@property (nonatomic, weak) IBOutlet UIBarButtonItem *recordButton;
-@property (nonatomic, weak) IBOutlet UILabel *framerateLabel;
-@property (nonatomic, weak) IBOutlet UILabel *dimensionsLabel;
-@property (nonatomic, strong) NSTimer *labelTimer;
-@property (nonatomic, strong) OpenGLPixelBufferView *previewView;
-@property (nonatomic, strong) VideoSnakeSessionManager *videoSnakeSessionManager;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *recordButton;
+@property (nonatomic, retain) IBOutlet UILabel *framerateLabel;
+@property (nonatomic, retain) IBOutlet UILabel *dimensionsLabel;
+@property (nonatomic, retain) NSTimer *labelTimer;
+@property (nonatomic, retain) OpenGLPixelBufferView *previewView;
+@property (nonatomic, retain) VideoSnakeSessionManager *videoSnakeSessionManager;
 
 @end
 
@@ -36,6 +36,15 @@
 		[[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:[UIDevice currentDevice]];
 		[[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 	}
+
+	[_recordButton release];
+	[_framerateLabel release];
+	[_dimensionsLabel release];
+	[_labelTimer release];
+	[_previewView release];
+	[_videoSnakeSessionManager release];
+    
+    [super dealloc];
 }
 
 #pragma mark - View lifecycle
@@ -44,7 +53,7 @@
 {
 	// Avoid using the GPU in the background
 	_allowedToUseGPU = NO;
-    self.videoSnakeSessionManager.renderingEnabled = NO;
+	[self.videoSnakeSessionManager setRenderingEnabled:NO];
 
 	[self.videoSnakeSessionManager stopRecording]; // no-op if we aren't recording
 	
@@ -60,7 +69,7 @@
 
 - (void)viewDidLoad
 {
-    self.videoSnakeSessionManager = [[VideoSnakeSessionManager alloc] init];
+    self.videoSnakeSessionManager = [[[VideoSnakeSessionManager alloc] init] autorelease];
     [self.videoSnakeSessionManager setDelegate:self callbackQueue:dispatch_get_main_queue()];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self
@@ -106,8 +115,9 @@
 	[self.videoSnakeSessionManager stopRunning];
 }
 
-- (BOOL)shouldAutorotate {
-    return false;
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+	return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - UI
@@ -122,11 +132,11 @@
 		[UIApplication sharedApplication].idleTimerDisabled = YES;
 		
 		// Make sure we have time to finish saving the movie if the app is backgrounded during recording
-		if ( [UIDevice currentDevice].isMultitaskingSupported )
+		if ( [[UIDevice currentDevice] isMultitaskingSupported] )
 			_backgroundRecordingID = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{}];
 		
-        self.recordButton.enabled = NO; // re-enabled once recording has finished starting
-        self.recordButton.title = @"Stop";
+		[[self recordButton] setEnabled:NO]; // re-enabled once recording has finished starting
+		[[self recordButton] setTitle:@"Stop"];
 		
 		[self.videoSnakeSessionManager startRecording];
 		
@@ -137,8 +147,8 @@
 - (void)recordingStopped
 {
 	_recording = NO;
-    self.recordButton.enabled = YES;
-    self.recordButton.title = @"Record";
+	[[self recordButton] setEnabled:YES];
+	[[self recordButton] setTitle:@"Record"];
 	
 	[UIApplication sharedApplication].idleTimerDisabled = NO;
 	
@@ -149,10 +159,10 @@
 - (void)setupPreviewView
 {
     // Set up GL view
-    self.previewView = [[OpenGLPixelBufferView alloc] initWithFrame:CGRectZero];
+    self.previewView = [[[OpenGLPixelBufferView alloc] initWithFrame:CGRectZero] autorelease];
 	self.previewView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	
-	UIInterfaceOrientation currentInterfaceOrientation = [UIApplication sharedApplication].statusBarOrientation;
+	UIInterfaceOrientation currentInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     self.previewView.transform = [self.videoSnakeSessionManager transformFromVideoBufferOrientationToOrientation:(AVCaptureVideoOrientation)currentInterfaceOrientation withAutoMirroring:YES]; // Front camera preview should be mirrored
 
     [self.view insertSubview:self.previewView atIndex:0];
@@ -188,6 +198,7 @@
 											  cancelButtonTitle:@"OK"
 											  otherButtonTitles:nil];
 	[alertView show];
+	[alertView release];
 }
 
 #pragma mark - VideoSnakeSessionManagerDelegate
@@ -196,7 +207,7 @@
 {
 	[self showError:error];
 	
-    self.recordButton.enabled = NO;
+	[[self recordButton] setEnabled:NO];
 }
 
 // Preview
@@ -220,14 +231,14 @@
 // Recording
 - (void)sessionManagerRecordingDidStart:(VideoSnakeSessionManager *)manager
 {
-    self.recordButton.enabled = YES;
+	[[self recordButton] setEnabled:YES];
 }
 
 - (void)sessionManagerRecordingWillStop:(VideoSnakeSessionManager *)manager
 {
 	// Disable record button until we are ready to start another recording
-    self.recordButton.enabled = NO;
-    self.recordButton.title = @"Record";
+	[[self recordButton] setEnabled:NO];
+	[[self recordButton] setTitle:@"Record"];
 }
 
 - (void)sessionManagerRecordingDidStop:(VideoSnakeSessionManager *)manager
