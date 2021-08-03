@@ -498,8 +498,10 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
 		// Location metadata
 		if !isConnectionActiveWithInputPort(AVMetadataIdentifier.quickTimeMetadataLocationISO6709.rawValue) {
 			// Create a format description for the location metadata.
-			let specs = [kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier: AVMetadataIdentifier.quickTimeMetadataLocationISO6709,
-						 kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType: kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709] as [CFString : Any]
+			let specs = [
+				kCMMetadataFormatDescriptionMetadataSpecificationKey_Identifier: AVMetadataIdentifier.quickTimeMetadataLocationISO6709,
+				kCMMetadataFormatDescriptionMetadataSpecificationKey_DataType: kCMMetadataDataType_QuickTimeMetadataLocation_ISO6709
+				] as [CFString : Any]
 			
 			var locationMetadataDesc: CMFormatDescription?
 			CMMetadataFormatDescriptionCreateWithMetadataSpecifications(allocator: kCFAllocatorDefault, metadataType: kCMMetadataFormatType_Boxed, metadataSpecifications: [specs] as CFArray, formatDescriptionOut: &locationMetadataDesc)
@@ -552,7 +554,7 @@ class CameraViewController: UIViewController, CLLocationManagerDelegate {
 		for connection in movieFileOutput.connections {
 			for inputPort in connection.inputPorts {
 				if let formatDescription = inputPort.formatDescription, CMFormatDescriptionGetMediaType(formatDescription) == kCMMediaType_Metadata {
-					if let metadataIdentifiers = CMMetadataFormatDescriptionGetIdentifiers(inputPort.formatDescription!) as NSArray? {
+					if let metadataIdentifiers = CMMetadataFormatDescriptionGetIdentifiers(inputPort.formatDescription!) as? [String] {
 						if metadataIdentifiers.contains(portType) {
 							return connection.isActive
 						}
