@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.AppleTV.Storyboard" version="3.0" toolsVersion="10060.2" systemVersion="15C49" targetRuntime="AppleTV" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BV1-FR-VrT">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10051"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Game View Controller-->
+        <scene sceneID="tXr-a1-R10">
+            <objects>
+                <viewController id="BV1-FR-VrT" customClass="GameViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="6HI-XX-DTB"/>
+                        <viewControllerLayoutGuide type="bottom" id="ftR-CP-7FU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CHU-nT-uDw">
+                        <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <sceneKitView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4S-Yx-gHh" customClass="GameView">
+                                <rect key="frame" x="0.0" y="0.0" width="1920" height="1080"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </sceneKitView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="r4S-Yx-gHh" firstAttribute="leading" secondItem="CHU-nT-uDw" secondAttribute="leadingMargin" constant="-20" id="D5g-aO-yId"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="r4S-Yx-gHh" secondAttribute="trailing" constant="-20" id="FbJ-ns-pRL"/>
+                            <constraint firstItem="ftR-CP-7FU" firstAttribute="top" secondItem="r4S-Yx-gHh" secondAttribute="bottom" id="Flx-4i-DW2"/>
+                            <constraint firstItem="r4S-Yx-gHh" firstAttribute="top" secondItem="6HI-XX-DTB" secondAttribute="bottom" id="Gns-l9-j8B"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>

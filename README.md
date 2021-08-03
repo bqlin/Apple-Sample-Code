@@ -271,6 +271,13 @@ AVQueuePlayer简单使用。
 
 使用AVAudioEngine和AVAudioPlayerNode实现节拍器。
 
+### AVAEGamingExample
+
+- AVAudioEngine3DAudioExample
+- Version 2.0, 2016-11-03
+
+使用AVAudioEngine、AVAudioEnvironmentNode和AVAudioPlayerNode播放多方位多声道音频。
+
 ## Metal
 
 ### MetalComputeBasic
