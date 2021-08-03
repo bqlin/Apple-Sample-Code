@@ -15,15 +15,15 @@ CFStringRef const VIDEOSNAKE_REMAPPED_PTS = CFSTR("RemappedPTS");
 BOOL LOG = YES;
 
 @interface MotionSynchronizer () {
-	id<MotionSynchronizationDelegate> _delegate;
 	dispatch_queue_t _delegateCallbackQueue;
 }
 
-@property(nonatomic, retain) __attribute__((NSObject)) CMClockRef motionClock;
-@property(nonatomic, retain) NSOperationQueue *motionQueue;
-@property(nonatomic, retain) CMMotionManager *motionManager;
-@property(nonatomic, retain) NSMutableArray *mediaSamples;
-@property(nonatomic, retain) NSMutableArray *motionSamples;
+@property(nonatomic, strong) __attribute__((NSObject)) CMClockRef motionClock;
+@property(nonatomic, strong) NSOperationQueue *motionQueue;
+@property(nonatomic, strong) CMMotionManager *motionManager;
+@property(nonatomic, strong) NSMutableArray *mediaSamples;
+@property(nonatomic, strong) NSMutableArray *motionSamples;
+@property (nonatomic, weak) id<MotionSynchronizationDelegate> delegate;
 
 @end
 
@@ -54,18 +54,10 @@ BOOL LOG = YES;
 
 - (void)dealloc
 {	
-	[_motionManager release];
-	[_motionQueue release];
-	[_motionSamples release];
-	[_mediaSamples release];
-	[_delegateCallbackQueue release];
-	
 	if (_sampleBufferClock)
 		CFRelease(_sampleBufferClock);
 	if (_motionClock)
 		CFRelease(_motionClock);
-	
-	[super dealloc];
 }
 
 - (void)start
@@ -121,7 +113,7 @@ BOOL LOG = YES;
 	CFRetain(sampleBuffer);
 	dispatch_async(_delegateCallbackQueue, ^{
 		@autoreleasepool {
-			[_delegate motionSynchronizer:self didOutputSampleBuffer:sampleBuffer withMotion:motion];
+            [self.delegate motionSynchronizer:self didOutputSampleBuffer:sampleBuffer withMotion:motion];
 			CFRelease(sampleBuffer);
 		}
 	});
@@ -142,7 +134,7 @@ BOOL LOG = YES;
 	int lastSyncedMediaIndex = -1;
 
 	for ( mediaIndex = 0; mediaIndex < [self.mediaSamples count]; mediaIndex++ ) {
-		CMSampleBufferRef mediaSample = (CMSampleBufferRef)[self.mediaSamples objectAtIndex:mediaIndex];
+        CMSampleBufferRef mediaSample = (__bridge CMSampleBufferRef)[self.mediaSamples objectAtIndex:mediaIndex];
 		CFDictionaryRef mediaTimeDict = CMGetAttachment(mediaSample, VIDEOSNAKE_REMAPPED_PTS, NULL);
 		CMTime mediaTime = (mediaTimeDict) ? CMTimeMakeFromDictionary(mediaTimeDict) : CMSampleBufferGetPresentationTimeStamp(mediaSample);
 		double mediaTimeSeconds = CMTimeGetSeconds(mediaTime);
@@ -207,7 +199,7 @@ BOOL LOG = YES;
 	}
 	
 	@synchronized(self) {
-		[self.mediaSamples addObject:(id)sampleBuffer];
+        [self.mediaSamples addObject:(__bridge id)sampleBuffer];
 		[self sync];
 	}
 }
@@ -217,13 +209,7 @@ BOOL LOG = YES;
 	_delegate = sampleBufferDelegate;
 	
 	if ( sampleBufferCallbackQueue != _delegateCallbackQueue ) {
-		dispatch_queue_t oldQueue = _delegateCallbackQueue;
 		_delegateCallbackQueue = sampleBufferCallbackQueue;
-		
-		if (sampleBufferCallbackQueue)
-			[sampleBufferCallbackQueue retain];
-		if (oldQueue)
-			[oldQueue release];
 	}
 }
 

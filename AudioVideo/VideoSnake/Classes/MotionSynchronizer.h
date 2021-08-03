@@ -15,7 +15,7 @@
 @interface MotionSynchronizer : NSObject
 
 @property(nonatomic) int motionRate;
-@property(nonatomic, retain) __attribute__((NSObject)) CMClockRef sampleBufferClock; // safe to update if you aren't concurrently calling appendSampleBufferForSynchronization:
+@property(nonatomic, strong) __attribute__((NSObject)) CMClockRef sampleBufferClock; // safe to update if you aren't concurrently calling appendSampleBufferForSynchronization:
 
 - (void)start;
 - (void)stop;

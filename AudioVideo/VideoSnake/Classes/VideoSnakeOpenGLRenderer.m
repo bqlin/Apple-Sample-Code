@@ -55,7 +55,7 @@ static CFDictionaryRef CreatePixelBufferPoolAuxAttributes(int32_t maxBufferCount
 {
 	// CVPixelBufferPoolCreatePixelBufferWithAuxAttributes() will return kCVReturnWouldExceedAllocationThreshold if we have already vended the max number of buffers
 	NSDictionary *auxAttributes = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:maxBufferCount], (id)kCVPixelBufferPoolAllocationThresholdKey, nil];
-	return (CFDictionaryRef)auxAttributes;
+    return (__bridge CFDictionaryRef)auxAttributes;
 }
 
 static void PreallocatePixelBuffersInPool( CVPixelBufferPoolRef pool, CFDictionaryRef auxAttributes )
@@ -70,10 +70,9 @@ static void PreallocatePixelBuffersInPool( CVPixelBufferPoolRef pool, CFDictiona
 			break;
 		assert( err == noErr );
 		
-		[pixelBuffers addObject:(id)pixelBuffer];
+        [pixelBuffers addObject:(__bridge id)pixelBuffer];
 		CFRelease( pixelBuffer );
 	}
-	[pixelBuffers release];
 }
 
 @interface VideoSnakeOpenGLRenderer ()
@@ -119,7 +118,6 @@ static void PreallocatePixelBuffersInPool( CVPixelBufferPoolRef pool, CFDictiona
 		self->_oglContext = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
 		if (!self->_oglContext) {
 			NSLog(@"Problem with OpenGL context.");
-			[self release];
 			return  nil;
 		}
 	}
@@ -129,8 +127,6 @@ static void PreallocatePixelBuffersInPool( CVPixelBufferPoolRef pool, CFDictiona
 - (void)dealloc
 {
 	[self deleteBuffers];
-	[_oglContext release];
-    [super dealloc];
 }
 
 - (void)prepareWithOutputDimensions:(CMVideoDimensions)outputDimensions retainedBufferCountHint:(size_t)retainedBufferCountHint
