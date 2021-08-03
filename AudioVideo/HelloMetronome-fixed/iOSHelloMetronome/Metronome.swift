@@ -18,7 +18,7 @@ struct GlobalConstants {
     @objc optional func metronomeTicking(_ metronome: Metronome, bar: Int32, beat: Int32)
 }
 
-class Metronome : NSObject {
+@objc class Metronome : NSObject {
     var engine: AVAudioEngine = AVAudioEngine()
     var player: AVAudioPlayerNode = AVAudioPlayerNode()    // owned by engine
     
@@ -35,17 +35,17 @@ class Metronome : NSObject {
     var beatsToScheduleAhead: Int32 = 0     // controls responsiveness to tempo changes
     var beatsScheduled: Int32 = 0
     
-    var isPlaying: Bool = false
+    @objc var isPlaying: Bool = false
     var playerStarted: Bool = false
     
-    weak var delegate: MetronomeDelegate?
+    @objc weak var delegate: MetronomeDelegate?
     
     override init() {
         super.init()
         // Use two triangle waves which are generate for the metronome bips.
         
         // Create a standard audio format deinterleaved float.
-        let format = AVAudioFormat(standardFormatWithSampleRate: 44100.0, channels: 2)
+        let format = AVAudioFormat(standardFormatWithSampleRate: 44100.0, channels: 2)!
         
         // How many audio frames?
         let bipFrames: UInt32 = UInt32(GlobalConstants.kBipDurationSeconds * Float(format.sampleRate))
@@ -138,7 +138,7 @@ class Metronome : NSObject {
         }
     }
     
-    @discardableResult func start() -> Bool {
+    @discardableResult @objc func start() -> Bool {
         // Start the engine without playing anything yet.
         do {
             try engine.start()
@@ -159,7 +159,7 @@ class Metronome : NSObject {
         }
     }
     
-    func stop() {
+    @objc func stop() {
         isPlaying = false;
         
         /* Note that pausing or stopping all AVAudioPlayerNode's connected to an engine does

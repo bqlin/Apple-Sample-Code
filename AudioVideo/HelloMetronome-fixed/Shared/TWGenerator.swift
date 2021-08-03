@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-class TriangleWaveGenerator : NSObject {
+@objc class TriangleWaveGenerator : NSObject {
     var mSampleRate: Float = 44100.0
     var mFreqHz: Float = 440.0
     var mAmplitude: Float = 0.25
@@ -19,15 +19,15 @@ class TriangleWaveGenerator : NSObject {
         super.init()
     }
     
-    convenience init(sampleRate: Float) {
+    @objc convenience init(sampleRate: Float) {
         self.init(sampleRate: sampleRate, frequency: 440.0, amplitude: 0.25)
     }
     
-    convenience init(sampleRate: Float, frequency: Float) {
+    @objc convenience init(sampleRate: Float, frequency: Float) {
         self.init(sampleRate: sampleRate, frequency: frequency, amplitude: 0.25)
     }
     
-    init(sampleRate: Float, frequency: Float, amplitude: Float) {
+    @objc init(sampleRate: Float, frequency: Float, amplitude: Float) {
         super.init()
         
         self.mSampleRate = sampleRate
@@ -35,7 +35,7 @@ class TriangleWaveGenerator : NSObject {
         self.mAmplitude = amplitude
     }
     
-    func render(_ buffer: AVAudioPCMBuffer) {
+    @objc func render(_ buffer: AVAudioPCMBuffer) {
         print("Buffer: \(buffer.format.description) \(buffer.description)\n")
         
         let nFrames = buffer.frameLength

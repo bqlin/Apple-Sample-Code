@@ -254,8 +254,8 @@ static const float      kTempoChangeResponsivenessSeconds = 0.250f;
         }
         
         [_audioPlayerNode scheduleBuffer:bufferToPlay atTime:playerBeatTime options:0 completionHandler:^{
-            dispatch_sync(_syncQueue, ^{
-                _beatsScheduled -= 1;
+            dispatch_sync(self->_syncQueue, ^{
+                self->_beatsScheduled -= 1;
                 [self scheduleBeat];
             });
         }];
@@ -280,11 +280,11 @@ static const float      kTempoChangeResponsivenessSeconds = 0.250f;
             uint64_t latencyHostTicks = [AVAudioTime hostTimeForSeconds: output.presentationLatency];
             dispatch_after(dispatch_time(nodeBeatTime.hostTime + latencyHostTicks, 0), dispatch_get_main_queue(), ^{
                 // if meter has changed since dispatch, callbackBeat will be invalid so just return.
-                if (_meter != callbackMeter) return;
+                if (self->_meter != callbackMeter) return;
                 
                 // if engine is running update the UI.
-                if (_isRunning) {
-                    [_delegate metronomeTick:callbackBeat];
+                if (self->_isRunning) {
+                    [self->_delegate metronomeTick:callbackBeat];
                 }
             });
         }
