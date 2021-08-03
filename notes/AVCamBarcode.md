@@ -85,3 +85,59 @@ if metadataObjectsOverlayLayersDrawingSemaphore.wait(timeout: .now()) == .succes
 ### 对识别出来的URL还支持点击跳转
 
 识别出的内容，通过尝试创建URL对象，并跳转到SFSafariViewController进行浏览。
+
+### 旋转后，保持识别区域不变
+
+示例做到了屏幕旋转前后，其识别区域在屏幕中的绝对位置保持不变。
+
+`viewWillTransition(to:with:)`
+
+```swift
+/*
+    When we transition to a new size, we need to recalculate the preview
+    view's region of interest rect so that it stays in the same
+    position relative to the camera.
+*/
+coordinator.animate(alongsideTransition: { context in
+        let newRegionOfInterest = self.previewView.videoPreviewLayer.layerRectConverted(fromMetadataOutputRect: self.metadataOutput.rectOfInterest)
+        self.previewView.setRegionOfInterestWithProposedRegionOfInterest(newRegionOfInterest)
+    },
+    completion: { context in
+        // ...
+    }
+)
+```
+
+### 探索更好的旋转体验
+
+#### 让AVCaptureVideoPreviewLayer内容不旋转
+
+通过AVCaptureVideoPreviewLayer设置`videoOrientation`的逻辑放入`animate(alongsideTransition:completion:)`的动画block中，可以让AVCaptureVideoPreviewLayer的内容在旋转的过程中保持不变。
+
+但这里有个前提是AVCaptureVideoPreviewLayer要作为某个UIView的layer。
+
+`viewWillTransition(to:with:)`
+
+```swift
+/*
+    When we transition to a new size, we need to recalculate the preview
+    view's region of interest rect so that it stays in the same
+    position relative to the camera.
+*/
+coordinator.animate(alongsideTransition: { context in
+        
+        // 让videoPreviewLayer保持不动的秘诀
+        videoPreviewLayerConnection.videoOrientation = newVideoOrientation
+        // ...
+    },
+    completion: { context in
+        // ...
+    }
+)
+```
+
+#### 让AVCaptureVideoPreviewLayer跟随旋转
+
+如果想要把AVCaptureVideoPreviewLayer跟随屏幕旋转而旋转，可以把AVCaptureVideoPreviewLayer作为某个layer的子视图，这样就可以实现跟随其他UI一起旋转。
+
+注意，不同的布局系统可能在旋转的时候会有不同步的情况。最保险的方式是所有UI都是用UIView进行AutoLayout。

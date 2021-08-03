@@ -137,15 +137,16 @@ class CameraViewController: UIViewController, AVCaptureMetadataOutputObjectsDele
 				return
 			}
 			
-			videoPreviewLayerConnection.videoOrientation = newVideoOrientation
-			
-			/*
-				When we transition to a new size, we need to recalculate the preview
-				view's region of interest rect so that it stays in the same
-				position relative to the camera.
-			*/
-			coordinator.animate(alongsideTransition: { context in
-				
+            /*
+                When we transition to a new size, we need to recalculate the preview
+                view's region of interest rect so that it stays in the same
+                position relative to the camera.
+            */
+            coordinator.animate(alongsideTransition: { context in
+                    
+                    // 让videoPreviewLayer保持不动的秘诀
+                    videoPreviewLayerConnection.videoOrientation = newVideoOrientation
+                    
 					let newRegionOfInterest = self.previewView.videoPreviewLayer.layerRectConverted(fromMetadataOutputRect: self.metadataOutput.rectOfInterest)
 					self.previewView.setRegionOfInterestWithProposedRegionOfInterest(newRegionOfInterest)
 				},
