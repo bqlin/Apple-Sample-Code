@@ -284,6 +284,13 @@ AVQueuePlayer简单使用。
 
 实现视频与来自加速度计和陀螺仪的运动数据进行时间同步。
 
+### MPRemoteCommandSample
+
+- MPRemoteCommandSampleUsingMPRemoteCommandCenterrespondtoremotecontrolevents
+- Version 1.0, 2016-10-27
+
+使用MPRemoteCommandCenter API处理远程控制事件及其Siri命令。
+
 ## Metal
 
 ### MetalComputeBasic
