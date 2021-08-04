@@ -291,6 +291,13 @@ AVQueuePlayer简单使用。
 
 使用MPRemoteCommandCenter API处理远程控制事件及其Siri命令。
 
+### BracketStripes
+
+- BracketStripesUsingtheBracketedCaptureAPI
+- Version 1.1, 2016-09-28
+
+This sample illustrates the use of still image bracketing APIs available in AVFoundation.
+
 ## Metal
 
 ### MetalComputeBasic

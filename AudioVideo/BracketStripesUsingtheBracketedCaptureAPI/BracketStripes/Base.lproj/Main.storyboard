@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11110.2" systemVersion="15E60" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="lAj-MB-GcU">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11087.3"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Bracket Stripes Camera View Controller-->
+        <scene sceneID="LUh-NQ-xbF">
+            <objects>
+                <viewController id="lAj-MB-GcU" customClass="BracketStripesCameraViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="319-x6-7nj"/>
+                        <viewControllerLayoutGuide type="bottom" id="MwQ-J2-gqh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Y0u-cV-AAo" userLabel="ContainerView">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rPM-zY-Rdy" userLabel="CameraPreviewView" customClass="BracketStripesCapturePreviewView">
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HSl-rK-Rah">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="110" id="MYk-Tq-fiQ"/>
+                                    <constraint firstAttribute="height" constant="36" id="cOl-s1-1CE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Shutter">
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="_cameraShutterDidPress:" destination="lAj-MB-GcU" eventType="touchUpInside" id="mvn-Az-Qnp"/>
+                                </connections>
+                            </button>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8JW-ua-9mB">
+                                <segments>
+                                    <segment title="Auto Exposure"/>
+                                    <segment title="Duration/ISO"/>
+                                </segments>
+                                <connections>
+                                    <action selector="_bracketModeDidChange:" destination="lAj-MB-GcU" eventType="valueChanged" id="7pw-S3-XNC"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="rPM-zY-Rdy" firstAttribute="centerX" secondItem="8JW-ua-9mB" secondAttribute="centerX" id="JP0-Rm-raW"/>
+                            <constraint firstItem="HSl-rK-Rah" firstAttribute="centerX" secondItem="8JW-ua-9mB" secondAttribute="centerX" id="K8c-eD-OG1"/>
+                            <constraint firstItem="8JW-ua-9mB" firstAttribute="top" secondItem="Y0u-cV-AAo" secondAttribute="top" constant="20" symbolic="YES" id="b1f-2P-3O2"/>
+                            <constraint firstItem="rPM-zY-Rdy" firstAttribute="bottom" secondItem="MwQ-J2-gqh" secondAttribute="top" id="cF4-wF-R1X"/>
+                            <constraint firstItem="rPM-zY-Rdy" firstAttribute="top" secondItem="319-x6-7nj" secondAttribute="bottom" id="fg6-3b-NUd"/>
+                            <constraint firstAttribute="trailing" secondItem="rPM-zY-Rdy" secondAttribute="trailing" id="hzU-Gp-kUR"/>
+                            <constraint firstAttribute="bottom" secondItem="HSl-rK-Rah" secondAttribute="bottom" constant="20" symbolic="YES" id="imH-PX-0rj"/>
+                            <constraint firstItem="rPM-zY-Rdy" firstAttribute="leading" secondItem="Y0u-cV-AAo" secondAttribute="leading" constant="-6" id="yV1-GF-v4z"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="_bracketModeControl" destination="8JW-ua-9mB" id="lDk-OH-h3i"/>
+                        <outlet property="_cameraPreviewView" destination="rPM-zY-Rdy" id="zcO-vf-Fwz"/>
+                        <outlet property="_cameraShutterButton" destination="HSl-rK-Rah" id="IoX-77-WXH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dlg-Xp-R2Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="631" y="230"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4_0.fullscreen"/>
+    </simulatedMetricsContainer>
+</document>
