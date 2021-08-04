@@ -76,16 +76,16 @@ static NSString *kCapturingStillImageKeypath = @"capturingStillImage";
         [self addSubview:_flashView];
 
         [UIView animateWithDuration:0.1 animations:^{
-            _flashView.alpha = 1.0;
+            self->_flashView.alpha = 1.0;
         }];
     }
     else {
 
         [UIView animateWithDuration:0.1 animations:^{
-            _flashView.alpha = 0.0;
+            self->_flashView.alpha = 0.0;
         } completion:^(BOOL finished) {
-            [_flashView removeFromSuperview];
-            _flashView = nil;
+            [self->_flashView removeFromSuperview];
+            self->_flashView = nil;
         }];
     }
 }

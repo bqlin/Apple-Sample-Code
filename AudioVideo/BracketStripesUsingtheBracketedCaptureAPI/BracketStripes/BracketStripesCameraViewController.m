@@ -274,7 +274,7 @@ typedef void(^AAPLCompletionWithImage)(UIImage *image);
 
                 // Process this sample buffer while we wait for the next bracketed image to be captured.
                 // You would insert your own HDR algorithm here.
-                [_imageStripes addSampleBuffer:sampleBuffer];
+                [self->_imageStripes addSampleBuffer:sampleBuffer];
             }
             else {
                 NSLog(@"This error should be handled appropriately in your app -- Bracket %@ ERROR: %@", stillImageSettings, error);
@@ -284,12 +284,12 @@ typedef void(^AAPLCompletionWithImage)(UIImage *image);
 
             // Return the rendered image strip when the capture completes
             if (!todo) {
-                NSLog(@"All %d bracket(s) have been captured %@ error.", (int)[_bracketSettings count], (failed) ? @"with" : @"without");
+                NSLog(@"All %d bracket(s) have been captured %@ error.", (int)[self->_bracketSettings count], (failed) ? @"with" : @"without");
 
                 // This demo is restricted to portrait orientation for simplicity, where we hard-code the rendered striped image orientation.
                 UIImage *image =
                     (!failed)
-                        ? [_imageStripes imageWithOrientation:UIImageOrientationRight]
+                ? [self->_imageStripes imageWithOrientation:UIImageOrientationRight]
                         : nil;
 
                 // Don't assume we're on the main thread
