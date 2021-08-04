@@ -298,6 +298,13 @@ AVQueuePlayer简单使用。
 
 This sample illustrates the use of still image bracketing APIs available in AVFoundation.
 
+### SpokenWord
+
+- RecognizingSpeechInLiveAudio
+- 2019-05-16
+
+实现语音识别为文字。
+
 ## Metal
 
 ### MetalComputeBasic
