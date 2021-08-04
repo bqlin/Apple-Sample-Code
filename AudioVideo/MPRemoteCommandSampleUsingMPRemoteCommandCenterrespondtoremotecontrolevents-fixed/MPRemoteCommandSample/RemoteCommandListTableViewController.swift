@@ -23,7 +23,7 @@ class RemoteCommandListTableViewController: UITableViewController, RemoteCommand
         title = "Configure"
 
         tableView.estimatedRowHeight = 75
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
     }
 
     // MARK: UITableViewDataSource Protocol Methods

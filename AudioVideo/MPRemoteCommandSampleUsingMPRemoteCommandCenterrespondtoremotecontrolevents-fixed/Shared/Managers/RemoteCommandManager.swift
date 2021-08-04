@@ -9,6 +9,7 @@
 import Foundation
 import MediaPlayer
 
+@available(OSX 10.12.2, *)
 class RemoteCommandManager: NSObject {
     
     // MARK: Properties
@@ -193,32 +194,32 @@ class RemoteCommandManager: NSObject {
     // MARK: MPRemoteCommand handler methods.
     
     // MARK: Playback Command Handlers
-    func handlePauseCommandEvent(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+    @objc func handlePauseCommandEvent(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
         assetPlaybackManager.pause()
         
         return .success
     }
     
-    func handlePlayCommandEvent(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+    @objc func handlePlayCommandEvent(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
         assetPlaybackManager.play()
         
         return .success
     }
     
-    func handleStopCommandEvent(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+    @objc func handleStopCommandEvent(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
         assetPlaybackManager.stop()
         
         return .success
     }
     
-    func handleTogglePlayPauseCommandEvent(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+    @objc func handleTogglePlayPauseCommandEvent(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
         assetPlaybackManager.togglePlayPause()
         
         return .success
     }
     
     // MARK: Track Changing Command Handlers
-    func handleNextTrackCommandEvent(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+    @objc func handleNextTrackCommandEvent(_ event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
         if assetPlaybackManager.asset != nil {
             assetPlaybackManager.nextTrack()
             
@@ -229,7 +230,7 @@ class RemoteCommandManager: NSObject {
         }
     }
     
-    func handlePreviousTrackCommandEvent(event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
+    @objc func handlePreviousTrackCommandEvent(event: MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus {
         if assetPlaybackManager.asset != nil {
             assetPlaybackManager.previousTrack()
             
@@ -241,44 +242,48 @@ class RemoteCommandManager: NSObject {
     }
     
     // MARK: Skip Interval Command Handlers
-    func handleSkipForwardCommandEvent(event: MPSkipIntervalCommandEvent) -> MPRemoteCommandHandlerStatus {
+    @objc func handleSkipForwardCommandEvent(event: MPSkipIntervalCommandEvent) -> MPRemoteCommandHandlerStatus {
         assetPlaybackManager.skipForward(event.interval)
         
         return .success
     }
     
-    func handleSkipBackwardCommandEvent(event: MPSkipIntervalCommandEvent) -> MPRemoteCommandHandlerStatus {
+    @objc func handleSkipBackwardCommandEvent(event: MPSkipIntervalCommandEvent) -> MPRemoteCommandHandlerStatus {
         assetPlaybackManager.skipBackward(event.interval)
         
         return .success
     }
     
     // MARK: Seek Command Handlers
-    func handleSeekForwardCommandEvent(event: MPSeekCommandEvent) -> MPRemoteCommandHandlerStatus {
+    @objc func handleSeekForwardCommandEvent(event: MPSeekCommandEvent) -> MPRemoteCommandHandlerStatus {
         
         switch event.type {
             case .beginSeeking: assetPlaybackManager.beginFastForward()
             case .endSeeking: assetPlaybackManager.endRewindFastForward()
+            @unknown default:
+            fatalError()
         }
         return .success
     }
     
-    func handleSeekBackwardCommandEvent(event: MPSeekCommandEvent) -> MPRemoteCommandHandlerStatus {
+    @objc func handleSeekBackwardCommandEvent(event: MPSeekCommandEvent) -> MPRemoteCommandHandlerStatus {
         switch event.type {
             case .beginSeeking: assetPlaybackManager.beginRewind()
             case .endSeeking: assetPlaybackManager.endRewindFastForward()
+            @unknown default:
+            fatalError()
         }
         return .success
     }
     
-    func handleChangePlaybackPositionCommandEvent(event: MPChangePlaybackPositionCommandEvent) -> MPRemoteCommandHandlerStatus {
+    @objc func handleChangePlaybackPositionCommandEvent(event: MPChangePlaybackPositionCommandEvent) -> MPRemoteCommandHandlerStatus {
         assetPlaybackManager.seekTo(event.positionTime)
         
         return .success
     }
     
     // MARK: Feedback Command Handlers
-    func handleLikeCommandEvent(event: MPFeedbackCommandEvent) -> MPRemoteCommandHandlerStatus {
+    @objc func handleLikeCommandEvent(event: MPFeedbackCommandEvent) -> MPRemoteCommandHandlerStatus {
         
         if assetPlaybackManager.asset != nil {
             print("Did recieve likeCommand for \(assetPlaybackManager.asset.assetName)")
@@ -289,7 +294,7 @@ class RemoteCommandManager: NSObject {
         }
     }
     
-    func handleDislikeCommandEvent(event: MPFeedbackCommandEvent) -> MPRemoteCommandHandlerStatus {
+    @objc func handleDislikeCommandEvent(event: MPFeedbackCommandEvent) -> MPRemoteCommandHandlerStatus {
         
         if assetPlaybackManager.asset != nil {
             print("Did recieve dislikeCommand for \(assetPlaybackManager.asset.assetName)")
@@ -300,7 +305,7 @@ class RemoteCommandManager: NSObject {
         }
     }
     
-    func handleBookmarkCommandEvent(event: MPFeedbackCommandEvent) -> MPRemoteCommandHandlerStatus {
+    @objc func handleBookmarkCommandEvent(event: MPFeedbackCommandEvent) -> MPRemoteCommandHandlerStatus {
         
         if assetPlaybackManager.asset != nil {
             print("Did recieve bookmarkCommand for \(assetPlaybackManager.asset.assetName)")
@@ -313,6 +318,7 @@ class RemoteCommandManager: NSObject {
 }
 
 // MARK: Convienence Category to make it easier to expose different types of remote command groups as the UITableViewDataSource in RemoteCommandListTableViewController.
+@available(OSX 10.12.2, *)
 extension RemoteCommandManager {
     
     }

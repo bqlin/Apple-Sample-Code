@@ -8,6 +8,7 @@
 
 import Cocoa
 
+@available(OSX 10.12.2, *)
 class RemoteCommandConfigurationViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource, RemoteCommandViewDelegate {
     
     // MARK: Types
@@ -47,7 +48,7 @@ class RemoteCommandConfigurationViewController: NSViewController, NSTableViewDel
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if row == 0 || row == 3 || row == 6 {
-            guard let tableCellView = tableView.make(withIdentifier: RemoteCommandConfigurationViewController.sectionCellViewIdentifier, owner: self) as? NSTableCellView else { return nil }
+            guard let tableCellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: RemoteCommandConfigurationViewController.sectionCellViewIdentifier), owner: self) as? NSTableCellView else { return nil }
             
             tableCellView.textField?.stringValue = remoteCommandDataSource.titleForSection(sectionNumberForRow(row: row))
             
@@ -57,7 +58,7 @@ class RemoteCommandConfigurationViewController: NSViewController, NSTableViewDel
             let sectionNumber = sectionNumberForRow(row: row)
             let rowRelativeToSection = rowRelativeToSectionForRow(row: row)
             
-            guard let remoteCommandView = tableView.make(withIdentifier: RemoteCommandView.reuseIdentifier, owner: self) as? RemoteCommandView else { return nil }
+            guard let remoteCommandView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: RemoteCommandView.reuseIdentifier), owner: self) as? RemoteCommandView else { return nil }
             
             remoteCommandView.button.title = remoteCommandDataSource.titleStringForCommand(at: sectionNumber, row: rowRelativeToSection)
             remoteCommandView.delegate = self

@@ -26,7 +26,7 @@ class RemoteCommandView: NSView {
     // MARK: Target-Action
     
     @IBAction func userDidToggleCheckButton(_ sender: NSButton) {
-        delegate?.remoteCommandView(self, didToggleTo: sender.state == NSOffState ? false : true)
+        delegate?.remoteCommandView(self, didToggleTo: sender.state == .off ? false : true)
     }
 }
 

@@ -9,6 +9,7 @@
 import Cocoa
 import AVFoundation
 
+@available(OSX 10.12.2, *)
 class AssetPlaybackViewController: NSViewController, NSTableViewDataSource, NSTableViewDelegate {
     
     // MARK: Types
@@ -82,7 +83,7 @@ class AssetPlaybackViewController: NSViewController, NSTableViewDataSource, NSTa
         // Populate `assetListTableView` with all the m4a files in the Application bundle.
         guard let enumerator = FileManager.default.enumerator(at: Bundle.main.bundleURL, includingPropertiesForKeys: nil, options: [], errorHandler: nil) else { return }
         
-        assets = enumerator.flatMap { element in
+        assets = enumerator.compactMap { element in
             guard let url = element as? URL, url.pathExtension == "m4a" else { return nil }
             
             let fileName = url.lastPathComponent
@@ -115,7 +116,7 @@ class AssetPlaybackViewController: NSViewController, NSTableViewDataSource, NSTa
     // MARK: NSTableViewDelegate Protocol Methods
     
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard let tableCellView = tableView.make(withIdentifier: AssetPlaybackViewController.assetTableCellViewIdentifier, owner: self) as? NSTableCellView else { return nil }
+        guard let tableCellView = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: AssetPlaybackViewController.assetTableCellViewIdentifier), owner: self) as? NSTableCellView else { return nil }
         
         let asset = assets[row]
         
@@ -204,7 +205,7 @@ class AssetPlaybackViewController: NSViewController, NSTableViewDataSource, NSTa
     
     // MARK: Notification Observer Methods
     
-    func handleCurrentAssetDidChangeNotification(notification: Notification) {
+    @objc func handleCurrentAssetDidChangeNotification(notification: Notification) {
         if assetPlaybackManager.asset != nil {
             assetNameTextField.stringValue = assetPlaybackManager.asset.assetName
             
@@ -214,7 +215,7 @@ class AssetPlaybackViewController: NSViewController, NSTableViewDataSource, NSTa
             
             let urlAsset = asset.urlAsset
             
-            let artworkData = AVMetadataItem.metadataItems(from: urlAsset.commonMetadata, withKey: AVMetadataCommonKeyArtwork, keySpace: AVMetadataKeySpaceCommon).first?.value as? Data ?? Data()
+            let artworkData = AVMetadataItem.metadataItems(from: urlAsset.commonMetadata, withKey: AVMetadataKey.commonKeyArtwork, keySpace: AVMetadataKeySpace.common).first?.value as? Data ?? Data()
             
             let image = NSImage(data: artworkData) ?? NSImage()
             
@@ -239,25 +240,25 @@ class AssetPlaybackViewController: NSViewController, NSTableViewDataSource, NSTa
         updateToolbarItemState()
     }
     
-    func handleRemoteCommandNextTrackNotification(notification: Notification) {
+    @objc func handleRemoteCommandNextTrackNotification(notification: Notification) {
         guard let assetName = notification.userInfo?[Asset.nameKey] as? String else { return }
-        guard let assetIndex = assets.index(where: {$0.assetName == assetName}) else { return }
+        guard let assetIndex = assets.firstIndex(where: {$0.assetName == assetName}) else { return }
         
         if assetIndex < assets.count - 1 {
             assetPlaybackManager.asset = assets[assetIndex + 1]
         }
     }
     
-    func handleRemoteCommandPreviousTrackNotification(notification: Notification) {
+    @objc func handleRemoteCommandPreviousTrackNotification(notification: Notification) {
         guard let assetName = notification.userInfo?[Asset.nameKey] as? String else { return }
-        guard let assetIndex = assets.index(where: {$0.assetName == assetName}) else { return }
+        guard let assetIndex = assets.firstIndex(where: {$0.assetName == assetName}) else { return }
         
         if assetIndex > 0 {
             assetPlaybackManager.asset = assets[assetIndex - 1]
         }
     }
     
-    func handlePlayerRateDidChangeNotification(notification: Notification) {
+    @objc func handlePlayerRateDidChangeNotification(notification: Notification) {
         updateToolbarItemState()
     }
 }

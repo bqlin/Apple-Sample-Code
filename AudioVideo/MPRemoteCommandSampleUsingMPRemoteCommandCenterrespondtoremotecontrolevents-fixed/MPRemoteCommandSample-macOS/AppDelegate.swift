@@ -8,6 +8,7 @@
 
 import Cocoa
 
+@available(OSX 10.12.2, *)
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
@@ -30,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         remoteCommandManager.activatePlaybackCommands(true)
 
         // Inject dependencies needed by the app.
-        guard let splitViewController = NSApplication.shared().windows.first?.windowController?.contentViewController as? SplitViewController,
+        guard let splitViewController = NSApplication.shared.windows.first?.windowController?.contentViewController as? SplitViewController,
             let remoteCommandConfigurationViewController = splitViewController.splitViewItems.first?.viewController as? RemoteCommandConfigurationViewController,
             let assetPlaybackViewController = splitViewController.splitViewItems.last?.viewController as? AssetPlaybackViewController else { return }
         

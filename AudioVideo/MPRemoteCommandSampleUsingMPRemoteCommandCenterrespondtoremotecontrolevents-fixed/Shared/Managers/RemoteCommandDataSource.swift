@@ -8,6 +8,7 @@
 
 import Foundation
 
+@available(OSX 10.12.2, *)
 class RemoteCommandDataSource: NSObject {
     
     let remoteCommandManager: RemoteCommandManager

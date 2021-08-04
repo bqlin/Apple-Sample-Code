@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: Application Life Cycle
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Initializer the `RemoteCommandManager`.
         remoteCommandManager = RemoteCommandManager(assetPlaybackManager: assetPlaybackManager)
@@ -36,14 +36,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let audioSession = AVAudioSession.sharedInstance()
         
         do {
-            try audioSession.setCategory(AVAudioSessionCategoryPlayback, mode: AVAudioSessionModeDefault)
+            try audioSession.setCategory(AVAudioSession.Category.playback, mode: AVAudioSession.Mode.default)
         } catch {
             print("An error occured setting the audio session category: \(error)")
         }
         
         // Set the AVAudioSession as active.
         do {
-            try audioSession.setActive(true, with: [])
+            try audioSession.setActive(true, options: [])
         } catch {
             print("An Error occured activating the audio session: \(error)")
         }
