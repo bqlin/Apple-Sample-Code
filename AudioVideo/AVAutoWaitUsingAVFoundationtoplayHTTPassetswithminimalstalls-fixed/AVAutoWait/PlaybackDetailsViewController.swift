@@ -39,7 +39,7 @@ class PlaybackDetailsViewController: UIViewController {
         #keyPath(PlaybackDetailsViewController.player.currentItem.playbackBufferEmpty)
     ]
     
-    private var observerContext = 0
+    private static var observerContext = 0
     
     // MARK: View Life Cycle
     
@@ -54,14 +54,14 @@ class PlaybackDetailsViewController: UIViewController {
         
         // Register observers for the properties we want to display.
         for keyPath in observedKeyPaths {
-            addObserver(self, forKeyPath: keyPath, options: [.new, .initial], context: &observerContext)
+            addObserver(self, forKeyPath: keyPath, options: [.new, .initial], context: &PlaybackDetailsViewController.observerContext)
         }
     }
     
     deinit {
         // Un-register observers
         for keyPath in observedKeyPaths {
-            removeObserver(self, forKeyPath: keyPath, context: &observerContext)
+            removeObserver(self, forKeyPath: keyPath, context: &PlaybackDetailsViewController.observerContext)
         }
     }
     
@@ -105,7 +105,7 @@ class PlaybackDetailsViewController: UIViewController {
     
     //Update the UI as AVPlayer properties change.
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard context == &observerContext else {
+        guard context == &PlaybackDetailsViewController.observerContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }

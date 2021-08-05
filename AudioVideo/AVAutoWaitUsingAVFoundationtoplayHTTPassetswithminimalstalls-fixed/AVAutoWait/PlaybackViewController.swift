@@ -20,7 +20,7 @@ class PlaybackViewController: UIViewController {
     @IBOutlet weak var playImmediatelyButton: UIButton!
     @IBOutlet weak var automaticWaitingSwitch: UISwitch!
     
-    private var observerContext = 0
+    private static var observerContext = 0
     
     @objc var player : AVPlayer? {
         didSet {
@@ -44,11 +44,11 @@ class PlaybackViewController: UIViewController {
         playerView?.player = player
         
         // We will use this to toggle our waiting indicator view.
-        addObserver(self, forKeyPath: #keyPath(PlaybackViewController.player.reasonForWaitingToPlay), options: [.new, .initial], context: &observerContext)
+        addObserver(self, forKeyPath: #keyPath(PlaybackViewController.player.reasonForWaitingToPlay), options: [.new, .initial], context: &PlaybackViewController.observerContext)
     }
     
     deinit {
-        removeObserver(self, forKeyPath: #keyPath(PlaybackViewController.player.reasonForWaitingToPlay), context: &observerContext)
+        removeObserver(self, forKeyPath: #keyPath(PlaybackViewController.player.reasonForWaitingToPlay), context: &PlaybackViewController.observerContext)
     }
     
     // MARK: User Actions
@@ -74,7 +74,8 @@ class PlaybackViewController: UIViewController {
     // MARK: KVO
     
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        guard context == &observerContext else {
+        // 使用对象成员变量会导致错误：Thread 1: Simultaneous accesses to 0x104a27c10, but modification requires exclusive access
+        guard context == &PlaybackViewController.observerContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
