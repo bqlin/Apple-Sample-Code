@@ -23,7 +23,7 @@ class PlaybackDetailsViewController: UIViewController {
     @IBOutlet weak var playbackBufferEmptyLabel: UILabel!
     @IBOutlet weak var timebaseRateLabel: UILabel!
     
-    var player : AVPlayer?
+    @objc var player : AVPlayer?
     
     // AVPlayerItem.currentTime() and the AVPlayerItem.timebase's rate are not KVO observable. We check their values regularly using this timer.
     private let nonObservablePropertiesUpdateTimer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
@@ -49,7 +49,7 @@ class PlaybackDetailsViewController: UIViewController {
         nonObservablePropertiesUpdateTimer.setEventHandler { [weak self] in
             self?.updateNonObservableProperties()
         }
-        nonObservablePropertiesUpdateTimer.scheduleRepeating(deadline: DispatchTime.now(), interval: DispatchTimeInterval.milliseconds(100))
+        nonObservablePropertiesUpdateTimer.schedule(deadline: DispatchTime.now(), repeating: DispatchTimeInterval.milliseconds(100))
         nonObservablePropertiesUpdateTimer.resume()
         
         // Register observers for the properties we want to display.
@@ -68,7 +68,7 @@ class PlaybackDetailsViewController: UIViewController {
     // MARK: Helpers
     
     /// Helper function to get a background color for the timeControlStatus label.
-    private func labelBackgroundColor(forTimeControlStatus status: AVPlayerTimeControlStatus) -> UIColor {
+    private func labelBackgroundColor(forTimeControlStatus status: AVPlayer.TimeControlStatus) -> UIColor {
         switch status {
         case .paused:
             return #colorLiteral(red: 0.8196078538894653, green: 0.2627451121807098, blue: 0.2823528945446014, alpha: 1)
@@ -78,20 +78,22 @@ class PlaybackDetailsViewController: UIViewController {
             
         case .waitingToPlayAtSpecifiedRate:
             return #colorLiteral(red: 0.8679746985435486, green: 0.4876297116279602, blue: 0.2578189671039581, alpha: 1)
+            @unknown default:
+            fatalError()
         }
     }
     
     
     /// Helper function to get an abbreviated description for the waiting reason.
-    private func abbreviatedDescription(forReasonForWaitingToPlay reason: String) -> String {
+    private func abbreviatedDescription(forReasonForWaitingToPlay reason: AVPlayer.WaitingReason) -> String {
         switch reason {
-        case AVPlayerWaitingToMinimizeStallsReason:
+            case .toMinimizeStalls:
             return "Minimizing Stalls"
             
-        case AVPlayerWaitingWhileEvaluatingBufferingRateReason:
+            case .evaluatingBufferingRate:
             return "Evaluating Buffering Rate"
             
-        case AVPlayerWaitingWithNoItemToPlayReason:
+            case .noItemToPlay:
             return "No Item"
             
         default:
@@ -102,7 +104,7 @@ class PlaybackDetailsViewController: UIViewController {
     // MARK: Property Change Handlers
     
     //Update the UI as AVPlayer properties change.
-    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard context == &observerContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
@@ -142,7 +144,7 @@ class PlaybackDetailsViewController: UIViewController {
 // MARK: - Extensions to improve readability of printed properties
 
 // Add description for AVPlayerTimeControlStatus.
-extension AVPlayerTimeControlStatus : CustomStringConvertible{
+extension AVPlayer.TimeControlStatus : CustomStringConvertible{
     public var description: String {
         switch self {
         case .paused:
@@ -153,6 +155,8 @@ extension AVPlayerTimeControlStatus : CustomStringConvertible{
             
         case .waitingToPlayAtSpecifiedRate:
             return " Waiting "
+            @unknown default:
+            fatalError()
         }
     }
 }

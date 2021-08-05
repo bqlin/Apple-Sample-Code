@@ -43,7 +43,7 @@ class MediaSelectionTableViewController: UITableViewController {
     
     // MARK: UIViewController
     
-    override func prepare(for segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowMedia", let mediaVC = segue.destination as? MediaViewController, let itemIndex = tableView.indexPathForSelectedRow?.row {
             
             // Set the selected URL on the destionation view controller.

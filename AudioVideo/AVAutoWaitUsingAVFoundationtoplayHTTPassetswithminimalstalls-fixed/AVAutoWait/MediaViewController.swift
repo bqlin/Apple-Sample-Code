@@ -36,11 +36,11 @@ class MediaViewController: UIViewController {
         
         // Setup sub-view controllers.
         // 1) A PlaybackViewController for the video and playback controls.
-        playbackViewController = storyboard?.instantiateViewController(withIdentifier: "Playback") as! PlaybackViewController
+        playbackViewController = (storyboard!.instantiateViewController(withIdentifier: "Playback") as! PlaybackViewController)
         playbackViewController.player = player
         
         // 2) A PlaybackDetailsViewController for property values.
-        playbackDetailsViewController = storyboard?.instantiateViewController(withIdentifier: "PlaybackDetails") as! PlaybackDetailsViewController
+        playbackDetailsViewController = (storyboard!.instantiateViewController(withIdentifier: "PlaybackDetails") as! PlaybackDetailsViewController)
         playbackDetailsViewController.player = player
         
         // Add both new views to our stackView.

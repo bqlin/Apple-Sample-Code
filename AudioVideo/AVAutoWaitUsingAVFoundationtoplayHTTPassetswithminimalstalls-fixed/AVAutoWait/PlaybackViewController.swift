@@ -22,7 +22,7 @@ class PlaybackViewController: UIViewController {
     
     private var observerContext = 0
     
-    var player : AVPlayer? {
+    @objc var player : AVPlayer? {
         didSet {
             playerView?.player = player
             
@@ -73,7 +73,7 @@ class PlaybackViewController: UIViewController {
     
     // MARK: KVO
     
-    override func observeValue(forKeyPath keyPath: String?, of object: AnyObject?, change: [NSKeyValueChangeKey : AnyObject]?, context: UnsafeMutablePointer<Void>?) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard context == &observerContext else {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
@@ -81,7 +81,7 @@ class PlaybackViewController: UIViewController {
         
         if keyPath == #keyPath(AVPlayer.reasonForWaitingToPlay) {
             // Hide the indicator view if we are not waiting to minimize stalls.
-            waitingIndicatorView.isHidden = (player?.reasonForWaitingToPlay != AVPlayerWaitingToMinimizeStallsReason)
+            waitingIndicatorView.isHidden = (player?.reasonForWaitingToPlay != AVPlayer.WaitingReason.toMinimizeStalls)
         }
     }
 }
