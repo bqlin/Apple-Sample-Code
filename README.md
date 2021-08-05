@@ -305,6 +305,13 @@ This sample illustrates the use of still image bracketing APIs available in AVFo
 
 实现语音识别为文字。
 
+### AVAutoWait
+
+- AVAutoWaitUsingAVFoundationtoplayHTTPassetswithminimalstalls
+- Version 1.0, 2016-09-13
+
+在播放HLS和渐进式下载影片时使用自动等待处理带宽限制。
+
 ## Metal
 
 ### MetalComputeBasic
