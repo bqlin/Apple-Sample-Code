@@ -331,6 +331,12 @@ AVAssetExportSession使用示例。
 
 多个AVPlayerLayer与一个AVPlayer关联，展示一个可交互的放大镜效果。
 
+### StitchedStreamPlayer
+
+-  Version 2.2, 2016-07-14
+
+使用元数据来标识流中的不同内容。
+
 ## Metal
 
 ### MetalComputeBasic
