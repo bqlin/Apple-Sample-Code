@@ -13,8 +13,8 @@ class SetupViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
 
     enum SegueIdentifier: String {
         case queuePlayerLooper = "QueuePlayerLooper"
-        
         case playerLooper = "PlayerLooper"
+        case switchItemLooper = "SwitchItemLooper"
     }
 
     // MARK: Properties
@@ -68,13 +68,16 @@ class SetupViewController: UIViewController, UIPickerViewDelegate, UIPickerViewD
         let videoURL = mediaURLList[selectedMediaFileIndex]
         let loopCount = loopOptionValueList[selectedLoopOptionIndex]
 
+        var looper: Looper!
         switch segueIdentifier {
             case .queuePlayerLooper:
-                looperViewController.looper = QueuePlayerLooper(videoURL: videoURL, loopCount: loopCount)
-
+                looper = QueuePlayerLooper(videoURL: videoURL, loopCount: loopCount)
             case .playerLooper:
-                looperViewController.looper = PlayerLooper(videoURL: videoURL, loopCount: loopCount)
+                looper = PlayerLooper(videoURL: videoURL, loopCount: loopCount)
+            case .switchItemLooper:
+                looper = SwitchItemLooper(videoURL: videoURL, loopCount: loopCount)
         }
+        looperViewController.looper = looper
     }
 
     // MARK: UIPickerViewDataSource

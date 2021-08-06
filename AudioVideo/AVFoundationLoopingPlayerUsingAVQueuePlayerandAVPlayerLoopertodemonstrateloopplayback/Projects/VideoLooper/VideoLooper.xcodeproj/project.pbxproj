@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03D6C9C326BCD3EC001744EC /* SwitchItemLooper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D6C9C226BCD3EC001744EC /* SwitchItemLooper.swift */; };
 		2306FE221CE15DDC00F5C8F0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2306FE211CE15DDC00F5C8F0 /* AppDelegate.swift */; };
 		2306FE241CE15DDC00F5C8F0 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2306FE231CE15DDC00F5C8F0 /* SetupViewController.swift */; };
 		2306FE271CE15DDC00F5C8F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2306FE251CE15DDC00F5C8F0 /* Main.storyboard */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03D6C9C226BCD3EC001744EC /* SwitchItemLooper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchItemLooper.swift; sourceTree = "<group>"; };
 		2306FE1E1CE15DDC00F5C8F0 /* VideoLooper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoLooper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2306FE211CE15DDC00F5C8F0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2306FE231CE15DDC00F5C8F0 /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				B540634B1D00DA40005EA758 /* Looper.swift */,
 				B54063491D00D47A005EA758 /* QueuePlayerLooper.swift */,
 				23F0E46B1CE170EE00E40D22 /* PlayerLooper.swift */,
+				03D6C9C226BCD3EC001744EC /* SwitchItemLooper.swift */,
 				2306FE251CE15DDC00F5C8F0 /* Main.storyboard */,
 				B540633E1D00CDC8005EA758 /* Media */,
 				2306FE281CE15DDC00F5C8F0 /* Assets.xcassets */,
@@ -173,6 +176,7 @@
 				B540634A1D00D47A005EA758 /* QueuePlayerLooper.swift in Sources */,
 				23F0E46C1CE170EE00E40D22 /* PlayerLooper.swift in Sources */,
 				2306FE221CE15DDC00F5C8F0 /* AppDelegate.swift in Sources */,
+				03D6C9C326BCD3EC001744EC /* SwitchItemLooper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

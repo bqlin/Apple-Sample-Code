@@ -108,4 +108,16 @@ if context == &ObserverContexts.currentItem {
 
 其他流程基本一致。
 
-## 细节
+## 添加SwitchItemLooper对比测试
+
+添加SwitchItemLooper，使用seek或重设AVPlayerItem的方式进行循环播放。
+
+对比发现：
+
+- 使用AVQueuePlayer和AVPlayerLooper实现循环播放效果衔接更加紧密。
+- 单用AVPlayer占用内存最低。
+- 使用AVQueuePlayer + AVPlayerLooper时会出现内存波动。
+- 单用AVQueuePlayer内存占用最高。
+
+综上所述，最优方案是使用AVQueuePlayer + AVPlayerLooper。
+
