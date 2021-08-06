@@ -312,6 +312,12 @@ This sample illustrates the use of still image bracketing APIs available in AVFo
 
 在播放HLS和渐进式下载影片时使用自动等待处理带宽限制。
 
+### RosyWriter
+
+- Version 2.2, 2016-09-13
+
+使用多个管线处理采集、处理、预览和保存视频。
+
 ## Metal
 
 ### MetalComputeBasic
