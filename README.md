@@ -223,7 +223,7 @@ use the AVAssetWriterInputMetadataAdaptor API to write circle annotation metadat
 
 Real-time Video Processing Using AVPlayerItemVideoOutput.
 
-### AVFoundationSimplePlayer
+### AVFoundationSimplePlayer-iOS
 
 - CreatingAMoviePlayerAppWithBasicPlaybackControls
 - 2020-02-12

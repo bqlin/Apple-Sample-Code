@@ -23,3 +23,7 @@ asset加载到键值之后才给player注册相关的监听。响应监听要处
 由于是对player进行监听，虽然监听的key path是`\AVPlayer.currentItem?.status`，即对currentItem的属性监听，即使currentItem在注册监听时不存在也可以监听。
 
 AVPlayer的`play()`、`pause()`只是把`rate`切换1.0、0.0，所以要实现变速的暂停、播放，还需记住之前改变的速度值，播放时进行恢复。
+
+更新控件是否启用是在`currentItem.status`变更时修改。
+
+在使用Swift风格的KVO时，注意要尽量不使用change的值，因为其在枚举类型上是为空的。
