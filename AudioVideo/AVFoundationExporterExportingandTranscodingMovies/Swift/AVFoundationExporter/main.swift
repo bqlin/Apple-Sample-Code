@@ -18,11 +18,11 @@ actOnCommandLineArguments()
 struct Exporter {
 	// MARK: Properties
 	
-	let sourceURL: NSURL
+	let sourceURL: URL
 	
-	let destinationURL: NSURL
+	let destinationURL: URL
 	
-	var destinationFileType = AVFileTypeQuickTimeMovie
+    var destinationFileType = AVFileType.mov
 	
 	var presetName = AVAssetExportPresetPassthrough
 	
@@ -32,88 +32,88 @@ struct Exporter {
 	
 	var injectMetadata = false
 	
-	var deleteExistingFile = false
+	var hasDeleteExistingFile = false
 	
 	var isVerbose = false
 	
 	// MARK: Initialization
 	
-	init(sourceURL: NSURL, destinationURL: NSURL) {
+	init(sourceURL: URL, destinationURL: URL) {
 		self.sourceURL = sourceURL
 		self.destinationURL = destinationURL
 	}
 	
 	func export() throws {
-		let asset = AVURLAsset(URL: sourceURL)
+        let asset = AVURLAsset(url: sourceURL)
 		
-		printVerbose("Exporting \"\(sourceURL)\" to \"\(destinationURL)\" (file type \(destinationFileType)), using preset \(presetName).")
+        printVerbose(string: "Exporting \"\(sourceURL)\" to \"\(destinationURL)\" (file type \(destinationFileType)), using preset \(presetName).")
 		
 		// Set up export session.
-		let exportSession = try setUpExportSession(asset, destinationURL: destinationURL)
+        let exportSession = try setUpExportSession(asset: asset, destinationURL: destinationURL)
         
         // AVAssetExportSession will not overwrite existing files.
-		try deleteExistingFile(destinationURL)
+        try deleteExistingFile(destinationURL: destinationURL)
 
-        describeSourceFile(asset)
+        describeSourceFile(asset: asset)
 		
 		// Kick off asynchronous export operation.
-		let group = dispatch_group_create()
-		dispatch_group_enter(group)
-		exportSession.exportAsynchronouslyWithCompletionHandler {
-			dispatch_group_leave(group)
+        let group = DispatchGroup()
+        group.enter()
+        exportSession.exportAsynchronously {
+            group.leave()
 		}
 		
-		waitForExportToFinish(exportSession, group: group)
+        waitForExportToFinish(exportSession: exportSession, group: group)
 		
-		if exportSession.status == .Failed {
+        if exportSession.status == .failed {
 			// `error` is non-nil when in the "failed" status.
 			throw exportSession.error!
 		}
 		else {
-			describeDestFile(destinationURL)
+            describeDestFile(destinationURL: destinationURL)
 		}
 		
-		printVerbose("Export completed successfully.")
+        printVerbose(string: "Export completed successfully.")
 	}
 	
-	func setUpExportSession(asset: AVAsset, destinationURL: NSURL) throws -> AVAssetExportSession {
+	func setUpExportSession(asset: AVAsset, destinationURL: URL) throws -> AVAssetExportSession {
 		guard let exportSession = AVAssetExportSession(asset: asset, presetName: presetName) else {
 			throw CommandLineError.InvalidArgument(reason: "Invalid preset \(presetName).")
 		}
 		
 		// Set required properties.
-		exportSession.outputURL = destinationURL
+        exportSession.outputURL = destinationURL
 		exportSession.outputFileType = destinationFileType
 		
 		if let timeRange = timeRange {
 			exportSession.timeRange = timeRange
 			
-			printVerbose("Trimming to time range \(CMTimeRangeCopyDescription(nil, timeRange)!).")
+            printVerbose(string: "Trimming to time range \(CMTimeRangeCopyDescription(allocator: nil, range: timeRange)!).")
 		}
 		
 		if filterMetadata {
-			printVerbose("Filtering metadata.")
+            printVerbose(string: "Filtering metadata.")
 			
-			exportSession.metadataItemFilter = AVMetadataItemFilter.metadataItemFilterForSharing()
+            exportSession.metadataItemFilter = AVMetadataItemFilter.forSharing()
 		}
 		
 		if injectMetadata {
-			printVerbose("Injecting metadata")
+            printVerbose(string: "Injecting metadata")
 			
-			let now = NSDate()
-			let currentDate = NSDateFormatter.localizedStringFromDate(now, dateStyle: .MediumStyle, timeStyle: .ShortStyle)
+			let now = Date()
+            let currentDate = DateFormatter.localizedString(from: now, dateStyle: .medium, timeStyle: .short)
 			
 			let userDataCommentItem = AVMutableMetadataItem()
-			userDataCommentItem.identifier = AVMetadataIdentifierQuickTimeUserDataComment
-			userDataCommentItem.value = "QuickTime userdata: Exported to preset \(presetName) using AVFoundationExporter at: \(currentDate)."
+            userDataCommentItem.identifier = AVMetadataIdentifier.quickTimeUserDataComment
+            userDataCommentItem.value = "QuickTime userdata: Exported to preset \(presetName) using AVFoundationExporter at: \(currentDate)." as NSString
 			
 			let metadataCommentItem = AVMutableMetadataItem()
-			metadataCommentItem.identifier = AVMetadataIdentifierQuickTimeMetadataComment
-			metadataCommentItem.value = "QuickTime metadata: Exported to preset \(presetName) using AVFoundationExporter at: \(currentDate)."
+            metadataCommentItem.identifier = AVMetadataIdentifier.quickTimeMetadataComment
+			metadataCommentItem.value = "QuickTime metadata: Exported to preset \(presetName) using AVFoundationExporter at: \(currentDate)." as NSString
 			
 			let iTunesCommentItem = AVMutableMetadataItem()
-			iTunesCommentItem.identifier = AVMetadataIdentifieriTunesMetadataUserComment
-			iTunesCommentItem.value = "iTunes metadata: Exported to preset \(presetName) using AVFoundationExporter at: \(currentDate)."
+            iTunesCommentItem.identifier = AVMetadataIdentifier.iTunesMetadataUserComment
+			iTunesCommentItem.value = "iTunes metadata: Exported to preset \(presetName) using AVFoundationExporter at: \(currentDate)." as NSString
 			
 			/*
                 To avoid replacing metadata from the asset:
@@ -131,80 +131,79 @@ struct Exporter {
 		return exportSession
 	}
 	
-	func deleteExistingFile(destinationURL: NSURL) throws {
-		let fileManager = NSFileManager()
+	func deleteExistingFile(destinationURL: URL) throws {
+        let fileManager = FileManager()
 
-        if let destinationPath = destinationURL.path {
-			if deleteExistingFile && fileManager.fileExistsAtPath(destinationPath) {
-				printVerbose("Removing pre-existing file at destination path \"\(destinationPath)\".")
-				
-				try fileManager.removeItemAtURL(destinationURL)
-			}
-		}
+        let destinationPath = destinationURL.path
+        if hasDeleteExistingFile && fileManager.fileExists(atPath: destinationPath) {
+            printVerbose(string: "Removing pre-existing file at destination path \"\(destinationPath)\".")
+            
+            try fileManager.removeItem(at: destinationURL)
+        }
 	}
 	
 	func describeSourceFile(asset: AVAsset) {
 		guard isVerbose else { return }
 		
-		printVerbose("Tracks in source file:")
+        printVerbose(string: "Tracks in source file:")
 		
-        let trackDescriptions = trackDescriptionsForAsset(asset)
-		let tracksDescription = trackDescriptions.joinWithSeparator("\n\t")
-		printVerbose("\t\(tracksDescription)")
+        let trackDescriptions = trackDescriptionsForAsset(asset: asset)
+		let tracksDescription = trackDescriptions.joined(separator: "\n\t")
+        printVerbose(string: "\t\(tracksDescription)")
 		
-		printVerbose("Metadata in source file:")
-        let metadataDescriptions = metadataDescriptionsForAsset(asset)
-		let metadataDescription = metadataDescriptions.joinWithSeparator("\n\t")
+        printVerbose(string: "Metadata in source file:")
+        let metadataDescriptions = metadataDescriptionsForAsset(asset: asset)
+		let metadataDescription = metadataDescriptions.joined(separator: "\n\t")
 		
-		printVerbose("\t\(metadataDescription)")
+        printVerbose(string: "\t\(metadataDescription)")
 	}
 	
 	// Periodically polls & prints export session progress while waiting for the export to finish.
-	func waitForExportToFinish(exportSession: AVAssetExportSession, group: dispatch_group_t) {
-		while exportSession.status == .Waiting || exportSession.status == .Exporting {
-			printVerbose("Progress: \(exportSession.progress * 100.0)%.")
+	func waitForExportToFinish(exportSession: AVAssetExportSession, group: DispatchGroup) {
+        while exportSession.status == .waiting || exportSession.status == .exporting {
+            printVerbose(string: "Progress: \(exportSession.progress * 100.0)%.")
 			
-			dispatch_group_wait(group, dispatch_time(DISPATCH_TIME_NOW, Int64(500 * NSEC_PER_MSEC)))
+            _ = group.wait(timeout: .now() + 0.5)
 		}
 		
-		printVerbose("Progress: \(exportSession.progress * 100.0)%.")
+        printVerbose(string: "Progress: \(exportSession.progress * 100.0)%.")
 	}
 	
-	func describeDestFile(destinationURL: NSURL) {
+	func describeDestFile(destinationURL: URL) {
 		guard isVerbose else { return }
 		
-		let destinationAsset = AVAsset(URL:destinationURL)
+        let destinationAsset = AVAsset(url:destinationURL)
 		
-		printVerbose("Tracks in written file:")
+        printVerbose(string: "Tracks in written file:")
 		
-        let trackDescriptions = trackDescriptionsForAsset(destinationAsset)
-        let tracksDescription = trackDescriptions.joinWithSeparator("\n\t")
-		printVerbose("\t\(tracksDescription)")
+        let trackDescriptions = trackDescriptionsForAsset(asset: destinationAsset)
+        let tracksDescription = trackDescriptions.joined(separator: "\n\t")
+        printVerbose(string: "\t\(tracksDescription)")
 		
-		printVerbose("Metadata in written file:")
+        printVerbose(string: "Metadata in written file:")
 		
-        let metadataDescriptions = metadataDescriptionsForAsset(destinationAsset)
-        let metadataDescription = metadataDescriptions.joinWithSeparator("\n\t")
-		printVerbose("\t\(metadataDescription)")
+        let metadataDescriptions = metadataDescriptionsForAsset(asset: destinationAsset)
+        let metadataDescription = metadataDescriptions.joined(separator: "\n\t")
+        printVerbose(string: "\t\(metadataDescription)")
 	}
 	
 	func trackDescriptionsForAsset(asset: AVAsset) -> [String] {
 		return asset.tracks.map { track in
-			let enabledString = track.enabled ? "YES" : "NO"
+            let enabledString = track.isEnabled ? "YES" : "NO"
 			
-			let selfContainedString = track.selfContained ? "YES" : "NO"
+            let selfContainedString = track.isSelfContained ? "YES" : "NO"
 			
-			let formatDescriptions = track.formatDescriptions as! [CMFormatDescriptionRef]
+            let formatDescriptions = track.formatDescriptions as! [CMFormatDescription]
 			
 			let formatStrings = formatDescriptions.map { formatDescription -> String in
                 let mediaSubType = CMFormatDescriptionGetMediaSubType(formatDescription)
 
-                let mediaSubTypeString = NSFileTypeForHFSTypeCode(mediaSubType)
+                let mediaSubTypeString = NSFileTypeForHFSTypeCode(mediaSubType)!
 				
 				return "'\(track.mediaType)'/\(mediaSubTypeString)"
 			}
 			
-			let formatString = !formatStrings.isEmpty ? formatStrings.joinWithSeparator(", ") : "'\(track.mediaType)'"
+			let formatString = !formatStrings.isEmpty ? formatStrings.joined(separator: ", ") : "'\(track.mediaType)'"
 			
 			return "Track ID \(track.trackID): \(formatString), data length: \(track.totalSampleDataLength), enabled: \(enabledString), self-contained: \(selfContainedString)"
 		}
@@ -212,7 +211,7 @@ struct Exporter {
 	
 	func metadataDescriptionsForAsset(asset: AVAsset) -> [String] {
 		return asset.metadata.map { item in
-			let identifier = item.identifier ?? "<no identifier>"
+            let identifier = item.identifier ?? AVMetadataIdentifier(rawValue: "<no identifier>")
 			
 			let value = item.value?.description ?? "<no value>"
 			

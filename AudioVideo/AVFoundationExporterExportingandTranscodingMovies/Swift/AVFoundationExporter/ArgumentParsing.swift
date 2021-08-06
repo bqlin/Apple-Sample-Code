@@ -11,24 +11,24 @@ import AVFoundation
 
 // Use enums to enforce uniqueness of option labels.
 enum LongLabel: String {
-	case FileType           = "filetype"
-	case PresetName         = "preset"
-	case DeleteExistingFile = "replace"
-	case LogEverything      = "verbose"
-	case TrimStartTime      = "trim-start-time"
-	case TrimEndTime        = "trim-end-time"
-	case FilterMetadata     = "filter-metadata"
-	case InjectMetadata     = "inject-metadata"
+	case fileType = "filetype"
+	case presetName = "preset"
+	case deleteExistingFile = "replace"
+	case logEverything = "verbose"
+	case trimStartTime = "trim-start-time"
+	case trimEndTime = "trim-end-time"
+	case filterMetadata = "filter-metadata"
+	case injectMetadata = "inject-metadata"
 }
 
 enum ShortLabel: String {
-	case FileType           = "f"
-	case PresetName         = "p"
-	case DeleteExistingFile = "r"
-	case LogEverything      = "v"
+	case fileType = "f"
+	case presetName = "p"
+	case deleteExistingFile = "r"
+	case logEverything = "v"
 }
 
-let executableName = NSString(string: Process.arguments.first!).pathComponents.last!
+let executableName = NSString(string: Process().arguments!.first!).pathComponents.last!
 
 func usage() {
 	print("Usage:")
@@ -66,7 +66,7 @@ func usage() {
 }
 
 // Errors that can occur during argument parsing.
-enum CommandLineError: ErrorType, CustomStringConvertible {
+enum CommandLineError: Error, CustomStringConvertible {
 	case TooManyArguments
 	case TooFewArguments(descriptionOfRequiredArguments: String)
 	case InvalidArgument(reason: String)
@@ -86,42 +86,42 @@ enum CommandLineError: ErrorType, CustomStringConvertible {
 }
 
 /// A set of convenience methods to use with our specific command line arguments.
-extension NSUserDefaults {
-	func stringForLongLabel(longLabel: LongLabel) -> String? {
-		return stringForKey(longLabel.rawValue)
+extension UserDefaults {
+	func string(forLongLabel longLabel: LongLabel) -> String? {
+        return string(forKey: longLabel.rawValue)
 	}
 	
-    func stringForShortLabel(shortLabel: ShortLabel) -> String? {
-		return stringForKey(shortLabel.rawValue)
+    func string(forShortLabel shortLabel: ShortLabel) -> String? {
+        return string(forKey: shortLabel.rawValue)
 	}
 	
-    func boolForLongLabel(longLabel: LongLabel) -> Bool {
-		return boolForKey(longLabel.rawValue)
+    func bool(forLongLabel longLabel: LongLabel) -> Bool {
+        return bool(forKey: longLabel.rawValue)
 	}
 	
-    func boolForShortLabel(shortLabel: ShortLabel) -> Bool {
-		return boolForKey(shortLabel.rawValue)
+    func bool(forShortLabel shortLabel: ShortLabel) -> Bool {
+        return bool(forKey: shortLabel.rawValue)
 	}
 
-    func timeForLongLabel(longLabel: LongLabel) throws -> CMTime? {
-		if let timeAsString = stringForLongLabel(longLabel) {
+    func time(forLongLabel longLabel: LongLabel) throws -> CMTime? {
+        if let timeAsString = string(forLongLabel: longLabel) {
 			guard let timeAsSeconds = Float64(timeAsString) else {
 				throw CommandLineError.InvalidArgument(reason: "Non-numeric time \"\(timeAsString)\".")
 			}
 
-            return CMTimeMakeWithSeconds(timeAsSeconds, 600)
+            return CMTime(seconds: timeAsSeconds, preferredTimescale: 600)
 		}
 
         return nil
 	}
 
-    func timeForShortLabel(shortLabel: ShortLabel) throws -> CMTime? {
-		if let timeAsString = stringForShortLabel(shortLabel) {
+    func time(forShortLabel shortLabel: ShortLabel) throws -> CMTime? {
+        if let timeAsString = string(forShortLabel: shortLabel) {
 			guard let timeAsSeconds = Float64(timeAsString) else {
 				throw CommandLineError.InvalidArgument(reason: "Non-numeric time \"\(timeAsString)\".")
 			}
 		
-            return CMTimeMakeWithSeconds(timeAsSeconds, 600)
+            return CMTime(seconds: timeAsSeconds, preferredTimescale: 600)
 		}
 
         return nil
@@ -136,23 +136,25 @@ func listPresets(sourcePath: String? = nil) {
         case let sourcePath?:
             print("Presets compatible with \(sourcePath):.")
             
-            let sourceURL = NSURL(fileURLWithPath: sourcePath)
-            let asset = AVAsset(URL: sourceURL)
-            presets = AVAssetExportSession.exportPresetsCompatibleWithAsset(asset)
+            let sourceURL = URL(fileURLWithPath: sourcePath)
+            let asset = AVAsset(url: sourceURL)
+            presets = AVAssetExportSession.exportPresets(compatibleWith: asset)
             
         case nil:
             print("Available presets:")
             presets = AVAssetExportSession.allExportPresets()
     }
     
-    let presetsDescription = presets.joinWithSeparator("\n\t")
+    let presetsDescription = presets.joined(separator: "\n\t")
     
     print("\t\(presetsDescription)")
 }
 
 /// The main function that handles all of the command line argument parsing.
 func actOnCommandLineArguments() {
-	let arguments = Process.arguments
+    guard let arguments = Process().arguments else {
+        return
+    }
 	let firstArgumentAfterExecutablePath: String? = (arguments.count >= 2) ? arguments[1] : nil
 	
 	if arguments.contains("-help") || arguments.contains("-h") {
@@ -168,7 +170,7 @@ func actOnCommandLineArguments() {
                 
             case "list-presets"?:
                 if arguments.count == 3 {
-                    listPresets(arguments[2])
+                    listPresets(sourcePath: arguments[2])
                 }
                 else if arguments.count > 3 {
                     throw CommandLineError.TooManyArguments
@@ -182,45 +184,45 @@ func actOnCommandLineArguments() {
                     throw CommandLineError.TooFewArguments(descriptionOfRequiredArguments: "source and dest paths")
                 }
                
-                let sourceURL = NSURL(fileURLWithPath: arguments[1])
-                let destinationURL = NSURL(fileURLWithPath: arguments[2])
+                let sourceURL = URL(fileURLWithPath: arguments[1])
+                let destinationURL = URL(fileURLWithPath: arguments[2])
                 
                 var exporter = Exporter(sourceURL: sourceURL, destinationURL: destinationURL)
                 
-                let options = NSUserDefaults.standardUserDefaults()
+                let options = UserDefaults.standard
                 
-                if let fileType = options.stringForLongLabel(.FileType) ?? options.stringForShortLabel(.FileType) {
-                    exporter.destinationFileType = fileType
+                if let fileType = options.string(forLongLabel: .fileType) ?? options.string(forShortLabel: .fileType) {
+                    exporter.destinationFileType = AVFileType(rawValue: fileType)
                 }
                 
-                if let presetName = options.stringForLongLabel(.PresetName) ?? options.stringForShortLabel(.PresetName) {
+                if let presetName = options.string(forLongLabel: .presetName) ?? options.string(forShortLabel: .presetName) {
                     exporter.presetName = presetName
                 }
                 
-                exporter.deleteExistingFile = options.boolForLongLabel(.DeleteExistingFile) || options.boolForShortLabel(.DeleteExistingFile)
+                exporter.hasDeleteExistingFile = options.bool(forLongLabel: .deleteExistingFile) || options.bool(forShortLabel: .deleteExistingFile)
                 
-                exporter.isVerbose = options.boolForLongLabel(.LogEverything) || options.boolForShortLabel(.LogEverything)
+                exporter.isVerbose = options.bool(forLongLabel: .logEverything) || options.bool(forShortLabel: .logEverything)
                 
-                let trimStartTime = try options.timeForLongLabel(.TrimStartTime)
-                let trimEndTime = try options.timeForLongLabel(.TrimEndTime)
+                let trimStartTime = try options.time(forLongLabel: .trimStartTime)
+                let trimEndTime = try options.time(forLongLabel: .trimEndTime)
                 
                 switch (trimStartTime, trimEndTime) {
                     case (nil, nil):
                         exporter.timeRange = nil
                         
                     case (let realStartTime?, nil):
-                        exporter.timeRange = CMTimeRange(start: realStartTime, duration: kCMTimePositiveInfinity)
+                        exporter.timeRange = CMTimeRange(start: realStartTime, duration: CMTime.positiveInfinity)
                         
                     case (nil, let realEndTime?):
-                        exporter.timeRange = CMTimeRangeFromTimeToTime(kCMTimeZero, realEndTime)
+                        exporter.timeRange = CMTimeRange(start: CMTime.zero, end: realEndTime)
                         
                     case (let realStartTime?, let realEndTime?):
-                        exporter.timeRange = CMTimeRangeFromTimeToTime(realStartTime, realEndTime)
+                        exporter.timeRange = CMTimeRange(start: realStartTime, end: realEndTime)
                 }
                 
-                exporter.filterMetadata = options.boolForLongLabel(.FilterMetadata)
+                exporter.filterMetadata = options.bool(forLongLabel: .filterMetadata)
                 
-                exporter.injectMetadata = options.boolForLongLabel(.InjectMetadata)
+                exporter.injectMetadata = options.bool(forLongLabel: .injectMetadata)
                 
                 try exporter.export()
             }
