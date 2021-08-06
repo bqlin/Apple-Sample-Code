@@ -325,6 +325,12 @@ This sample illustrates the use of still image bracketing APIs available in AVFo
 
 AVAssetExportSession使用示例。
 
+### AVLoupe
+
+- Version 1.1, 2016-08-12
+
+多个AVPlayerLayer与一个AVPlayer关联，展示一个可交互的放大镜效果。
+
 ## Metal
 
 ### MetalComputeBasic
