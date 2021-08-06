@@ -337,6 +337,13 @@ AVAssetExportSession使用示例。
 
 使用元数据来标识流中的不同内容。
 
+### AVMovieEditor
+
+- AVMovieEditorEditingtheQuickTimeFileFormat
+- Version 1.0, 2015-09-16
+
+AVMutableMovie的使用示例。
+
 ## Metal
 
 ### MetalComputeBasic
