@@ -318,6 +318,13 @@ This sample illustrates the use of still image bracketing APIs available in AVFo
 
 使用多个管线处理采集、处理、预览和保存视频。
 
+### AVFoundationExporter
+
+- AVFoundationExporterExportingandTranscodingMovies
+- Version 3.0, 2016-09-13
+
+AVAssetExportSession使用示例。
+
 ## Metal
 
 ### MetalComputeBasic
