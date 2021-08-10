@@ -344,6 +344,13 @@ AVAssetExportSession使用示例。
 
 AVMutableMovie的使用示例。
 
+### AVLocationPlayer
+
+- AVLocationPlayerUsingAVFoundationMetadataReadingAPIs
+-  Version 1.0, 2015-04-30
+
+使用AVAAssetReaderOutputMetadataAdaptor从影片中读取位置元数据，并绘制到MKMapView上。
+
 ## Metal
 
 ### MetalComputeBasic
