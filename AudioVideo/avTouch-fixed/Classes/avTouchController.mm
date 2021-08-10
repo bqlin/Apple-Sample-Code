@@ -177,12 +177,12 @@ void RouteChangeListener(	void *                  inClientData,
 		player.delegate = self;
 	}
 	
-	[[AVAudioSession sharedInstance] setDelegate: self];
+	//[[AVAudioSession sharedInstance] setDelegate: self];
 	
     NSError *setCategoryError = nil;
 	
     [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: &setCategoryError];
-	if (setCategoryError) NSLog(@"Error setting category! %d", setCategoryError.code);
+	if (setCategoryError) NSLog(@"Error setting category! %zd", setCategoryError.code);
     
     // we don't do anything special in the route change notification
     [[NSNotificationCenter defaultCenter] addObserver:self

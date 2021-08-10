@@ -196,7 +196,7 @@
 		else if (lightVSpace < 8.) insetAmount = 0.5;
 		else insetAmount = 1.;
 		
-		int peakLight = -1;
+		NSInteger peakLight = -1;
 		if (_peakLevel > 0.)
 		{
 			peakLight = _peakLevel * _numLights;
