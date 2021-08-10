@@ -364,6 +364,12 @@ AVMutableMovie的使用示例。
 
 使用AVPlayerItemVideoOutput+CIFilter实现色键处理。
 
+### AVSimplePlayerOSX
+
+- Version 1.1, 2014-07-09
+
+使用AVPlayer在macOS上构建简单播放器。
+
 ## Metal
 
 ### MetalComputeBasic
