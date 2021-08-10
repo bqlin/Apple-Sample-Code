@@ -386,6 +386,12 @@ AVAssetResourceLoaderDelegate在HLS中身份加密的使用：
 - HLS片段获取加密密钥
 - 生成HLS自定义播放列表/索引文件
 
+### avTouch
+
+- Version 1.4.3, 2014-02-12
+
+用AVAudioPlayer播放音频与实现电平预览。
+
 ## Metal
 
 ### MetalComputeBasic
