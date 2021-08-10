@@ -174,6 +174,7 @@ use the AVAssetWriterInputMetadataAdaptor API to write circle annotation metadat
 ### AVCaptureLocation
 
 - UsingAVFoundationAPIstorecordamoviewithlocationmetadata
+- Version 1.0, 2014-09-17
 
 旨在使用 AVAssetWriterInputMetadataAdaptor 写入位置元数据。
 
@@ -356,6 +357,12 @@ AVMutableMovie的使用示例。
 - Version 2.0, 2014-10-16
 
 命令行工具，处理元数据。
+
+### AVGreenScreenPlayer
+
+- Version 1.3, 2014-08-20
+
+使用AVPlayerItemVideoOutput+CIFilter实现色键处理。
 
 ## Metal
 
