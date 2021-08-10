@@ -351,6 +351,12 @@ AVMutableMovie的使用示例。
 
 使用AVAAssetReaderOutputMetadataAdaptor从影片中读取位置元数据，并绘制到MKMapView上。
 
+### avmetadataeditor
+
+- Version 2.0, 2014-10-16
+
+命令行工具，处理元数据。
+
 ## Metal
 
 ### MetalComputeBasic
