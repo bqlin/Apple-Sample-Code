@@ -376,6 +376,16 @@ AVMutableMovie的使用示例。
 
 实现macOS录屏。
 
+### AVARLDelegateDemo
+
+- Version 1.0, 2014-04-18
+
+AVAssetResourceLoaderDelegate在HLS中身份加密的使用：
+
+- HLS文件重定向
+- HLS片段获取加密密钥
+- 生成HLS自定义播放列表/索引文件
+
 ## Metal
 
 ### MetalComputeBasic
