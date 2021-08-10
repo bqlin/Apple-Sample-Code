@@ -370,6 +370,12 @@ AVMutableMovie的使用示例。
 
 使用AVPlayer在macOS上构建简单播放器。
 
+### AVScreenShack
+
+- Version 2.1, 2014-04-29
+
+实现macOS录屏。
+
 ## Metal
 
 ### MetalComputeBasic
