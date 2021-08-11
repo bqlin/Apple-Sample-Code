@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Av Touch Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="avTouchController" customModule="avTouch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="2zv-H2-Hjj">
+                                <rect key="frame" x="39" y="350" width="241" height="31"/>
+                            </slider>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="0:00" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="3VJ-hC-PgK">
+                                <rect key="frame" x="285" y="129.5" width="25" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="VHZ-Gw-qeh"/>
+                                    <constraint firstAttribute="width" constant="25" id="x1x-YQ-ChT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="ivQ-5M-rrI">
+                                <rect key="frame" x="39" y="125" width="240" height="31"/>
+                            </slider>
+                            <imageView opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" image="volume_down.png" translatesAutoresizingMaskIntoConstraints="NO" id="Ovh-ds-6iC">
+                                <rect key="frame" x="16" y="357.5" width="9" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="15" id="dIV-41-w33"/>
+                                    <constraint firstAttribute="width" constant="9" id="oH3-sj-nFk"/>
+                                </constraints>
+                            </imageView>
+                            <navigationBar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="H51-C4-dMd">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="xRK-2e-YIx"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="avTouch" id="bO9-6o-djG"/>
+                                </items>
+                            </navigationBar>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Label" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="M7n-j6-v89">
+                                <rect key="frame" x="22" y="60" width="276" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="efv-oR-DKp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hsd-Jj-ArP">
+                                <rect key="frame" x="21.5" y="168" width="275" height="128"/>
+                                <subviews>
+                                    <imageView opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="center" image="sound_meter_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="qd0-jL-M6Q">
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="128"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                                        </accessibility>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="275" id="Lfz-7A-nMk"/>
+                                            <constraint firstAttribute="height" constant="128" id="xwR-x6-I2u"/>
+                                        </constraints>
+                                    </imageView>
+                                    <view opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chm-Am-YTb" customClass="CALevelMeter" customModule="avTouch" customModuleProvider="target">
+                                        <rect key="frame" x="19" y="32" width="237" height="61"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" notEnabled="YES"/>
+                                        </accessibility>
+                                    </view>
+                                    <imageView opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="center" image="sound_meter_glare.png" translatesAutoresizingMaskIntoConstraints="NO" id="NwS-yu-KIo">
+                                        <rect key="frame" x="-6" y="26" width="284" height="73"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
+                                        </accessibility>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="qd0-jL-M6Q" firstAttribute="leading" secondItem="hsd-Jj-ArP" secondAttribute="leading" id="4uW-ef-73k"/>
+                                    <constraint firstAttribute="bottom" secondItem="qd0-jL-M6Q" secondAttribute="bottom" id="6iI-qZ-ofa"/>
+                                    <constraint firstItem="NwS-yu-KIo" firstAttribute="leading" secondItem="hsd-Jj-ArP" secondAttribute="leading" constant="-6" id="74g-Xn-KdG"/>
+                                    <constraint firstItem="chm-Am-YTb" firstAttribute="leading" secondItem="hsd-Jj-ArP" secondAttribute="leading" constant="19" id="Fds-Hy-hyp"/>
+                                    <constraint firstAttribute="bottom" secondItem="chm-Am-YTb" secondAttribute="bottom" constant="35" id="SyX-ox-ZG2"/>
+                                    <constraint firstAttribute="trailing" secondItem="chm-Am-YTb" secondAttribute="trailing" constant="19" id="TLh-H1-rq8"/>
+                                    <constraint firstItem="qd0-jL-M6Q" firstAttribute="top" secondItem="hsd-Jj-ArP" secondAttribute="top" id="Uvo-Sk-yzW"/>
+                                    <constraint firstItem="chm-Am-YTb" firstAttribute="top" secondItem="hsd-Jj-ArP" secondAttribute="top" constant="32" id="ghw-nd-ehy"/>
+                                    <constraint firstAttribute="bottom" secondItem="NwS-yu-KIo" secondAttribute="bottom" constant="29" id="iLl-1q-KQR"/>
+                                    <constraint firstAttribute="trailing" secondItem="qd0-jL-M6Q" secondAttribute="trailing" id="udg-SG-Pbv"/>
+                                    <constraint firstItem="NwS-yu-KIo" firstAttribute="top" secondItem="hsd-Jj-ArP" secondAttribute="top" constant="26" id="whp-Pq-yak"/>
+                                    <constraint firstAttribute="trailing" secondItem="NwS-yu-KIo" secondAttribute="trailing" constant="-3" id="yOQ-Ik-zMp"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="0:00" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="l33-Pp-aHf">
+                                <rect key="frame" x="8" y="129.5" width="25" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Ojs-KS-Lwd"/>
+                                    <constraint firstAttribute="width" constant="25" id="XqN-Db-AR0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" image="volume_up.png" translatesAutoresizingMaskIntoConstraints="NO" id="esP-hV-4Jd">
+                                <rect key="frame" x="288" y="354.5" width="22" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Bp0-a4-Spt"/>
+                                    <constraint firstAttribute="width" constant="22" id="WSt-mi-X3S"/>
+                                </constraints>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="j9w-WX-33A">
+                                <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vrB-M3-rLS">
+                                        <rect key="frame" x="0.0" y="11" width="101.5" height="22"/>
+                                        <state key="normal" image="rewind.png"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GsZ-Xc-bRz">
+                                        <rect key="frame" x="109.5" y="11" width="101" height="22"/>
+                                        <state key="normal" image="play.png"/>
+                                        <state key="selected" image="pause.png"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IFR-KJ-75j">
+                                        <rect key="frame" x="218.5" y="11" width="101.5" height="22"/>
+                                        <state key="normal" image="forward.png"/>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="jWF-y0-2fM"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="2zv-H2-Hjj" firstAttribute="leading" secondItem="Ovh-ds-6iC" secondAttribute="trailing" constant="16" id="7rq-Ir-rfh"/>
+                            <constraint firstItem="3VJ-hC-PgK" firstAttribute="leading" secondItem="ivQ-5M-rrI" secondAttribute="trailing" constant="8" id="ELH-vg-8cK"/>
+                            <constraint firstItem="hsd-Jj-ArP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-1" id="GCF-5x-I3J"/>
+                            <constraint firstItem="ivQ-5M-rrI" firstAttribute="top" secondItem="M7n-j6-v89" secondAttribute="bottom" constant="44" id="IkB-9q-IWt"/>
+                            <constraint firstItem="Ovh-ds-6iC" firstAttribute="centerY" secondItem="2zv-H2-Hjj" secondAttribute="centerY" id="Mcz-ZG-4au"/>
+                            <constraint firstItem="j9w-WX-33A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NkM-vW-aYv"/>
+                            <constraint firstItem="M7n-j6-v89" firstAttribute="top" secondItem="H51-C4-dMd" secondAttribute="bottom" constant="16" id="Os5-LX-DdC"/>
+                            <constraint firstItem="Ovh-ds-6iC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Pga-pR-7PY"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="esP-hV-4Jd" secondAttribute="trailing" constant="10" id="ScF-wc-GNz"/>
+                            <constraint firstItem="H51-C4-dMd" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Tro-3P-22U"/>
+                            <constraint firstItem="j9w-WX-33A" firstAttribute="top" secondItem="2zv-H2-Hjj" secondAttribute="bottom" constant="56" id="X3c-d2-LwV"/>
+                            <constraint firstItem="M7n-j6-v89" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="22" id="XGG-R5-ohS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="j9w-WX-33A" secondAttribute="trailing" id="YI7-Nq-Jzu"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="j9w-WX-33A" secondAttribute="bottom" id="ZKv-i0-vW2"/>
+                            <constraint firstItem="esP-hV-4Jd" firstAttribute="centerY" secondItem="2zv-H2-Hjj" secondAttribute="centerY" id="ZUT-w7-rXa"/>
+                            <constraint firstItem="hsd-Jj-ArP" firstAttribute="top" secondItem="ivQ-5M-rrI" secondAttribute="bottom" constant="13" id="bYe-Sa-7Ol"/>
+                            <constraint firstItem="ivQ-5M-rrI" firstAttribute="leading" secondItem="l33-Pp-aHf" secondAttribute="trailing" constant="8" id="cex-HD-fuM"/>
+                            <constraint firstItem="H51-C4-dMd" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="d7W-8D-Bpr"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="3VJ-hC-PgK" secondAttribute="trailing" constant="10" id="fP4-8l-fkS"/>
+                            <constraint firstItem="ivQ-5M-rrI" firstAttribute="centerY" secondItem="l33-Pp-aHf" secondAttribute="centerY" id="fxz-Ja-Z7Y"/>
+                            <constraint firstItem="l33-Pp-aHf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="hkm-cE-Xl9"/>
+                            <constraint firstItem="3VJ-hC-PgK" firstAttribute="centerY" secondItem="l33-Pp-aHf" secondAttribute="centerY" id="ioc-aw-lnt"/>
+                            <constraint firstItem="H51-C4-dMd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ka3-aC-8PS"/>
+                            <constraint firstItem="esP-hV-4Jd" firstAttribute="leading" secondItem="2zv-H2-Hjj" secondAttribute="trailing" constant="10" id="oUC-Bv-gne"/>
+                            <constraint firstItem="M7n-j6-v89" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="zaK-vs-htZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="currentTimeLabel" destination="l33-Pp-aHf" id="N5H-fF-ior"/>
+                        <outlet property="durationLabel" destination="3VJ-hC-PgK" id="2D7-5b-Emt"/>
+                        <outlet property="ffwButton" destination="IFR-KJ-75j" id="nOm-bQ-tqk"/>
+                        <outlet property="fileNameLabel" destination="M7n-j6-v89" id="9vw-A3-k10"/>
+                        <outlet property="levelMeterView" destination="chm-Am-YTb" id="l10-HP-Rck"/>
+                        <outlet property="playButton" destination="GsZ-Xc-bRz" id="VLa-vk-b8Y"/>
+                        <outlet property="progressBar" destination="ivQ-5M-rrI" id="vNH-qm-z8J"/>
+                        <outlet property="rewButton" destination="vrB-M3-rLS" id="kYF-gK-Cws"/>
+                        <outlet property="volumeSlider" destination="2zv-H2-Hjj" id="rTT-qc-BGJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="596" y="35"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="forward.png" width="28" height="21"/>
+        <image name="pause.png" width="23" height="21"/>
+        <image name="play.png" width="23" height="21"/>
+        <image name="rewind.png" width="28" height="21"/>
+        <image name="sound_meter_background.png" width="265" height="89"/>
+        <image name="sound_meter_glare.png" width="265" height="89"/>
+        <image name="volume_down.png" width="9" height="15"/>
+        <image name="volume_up.png" width="22" height="21"/>
+    </resources>
+</document>
