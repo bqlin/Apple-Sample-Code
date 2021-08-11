@@ -108,6 +108,7 @@ extension avTouchController {
     @objc func rewind() {
         guard let player = player else { return }
         player.currentTime -= SkipTime
+        //print("后退\(SkipTime) -> \(player.currentTime)")
         updateCurrentTimeForPlayer(player)
     }
     
@@ -126,6 +127,7 @@ extension avTouchController {
     @objc func ffwd() {
         guard let player = player else { return }
         player.currentTime += SkipTime
+        //print("前进\(SkipTime) -> \(player.currentTime)")
         updateCurrentTimeForPlayer(player)
     }
     
