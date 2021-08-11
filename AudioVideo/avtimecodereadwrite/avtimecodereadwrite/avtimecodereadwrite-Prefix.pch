@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'avtimecodereadwrite' target in the 'avtimecodereadwrite' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif

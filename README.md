@@ -392,6 +392,12 @@ AVAssetResourceLoaderDelegate在HLS中身份加密的使用：
 
 用AVAudioPlayer播放音频与实现电平预览。
 
+### avtimecodereadwrite
+
+- Version 1.2, 2014-01-22
+
+使用AVAssetReader和 AVAssetWriter来读写asset的时间码轨道。
+
 ## Metal
 
 ### MetalComputeBasic
