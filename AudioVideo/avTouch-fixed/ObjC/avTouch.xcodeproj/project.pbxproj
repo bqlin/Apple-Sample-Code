@@ -18,6 +18,7 @@
 		031256EA26C2704C004BB800 /* volume_down.png in Resources */ = {isa = PBXBuildFile; fileRef = 031256E126C2704C004BB800 /* volume_down.png */; };
 		031256EE26C27090004BB800 /* sample.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 031256EC26C27090004BB800 /* sample.m4a */; };
 		031256EF26C27090004BB800 /* sample2ch.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 031256ED26C27090004BB800 /* sample2ch.m4a */; };
+		031420B426C5762A001BAC40 /* CASound.mm in Sources */ = {isa = PBXBuildFile; fileRef = 031420B326C5762A001BAC40 /* CASound.mm */; };
 		1D3623260D0F684500981E51 /* avTouchAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* avTouchAppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
@@ -53,6 +54,8 @@
 		031256E126C2704C004BB800 /* volume_down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = volume_down.png; sourceTree = "<group>"; };
 		031256EC26C27090004BB800 /* sample.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample.m4a; sourceTree = "<group>"; };
 		031256ED26C27090004BB800 /* sample2ch.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample2ch.m4a; sourceTree = "<group>"; };
+		031420B226C5762A001BAC40 /* CASound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CASound.h; path = Classes/CASound.h; sourceTree = "<group>"; };
+		031420B326C5762A001BAC40 /* CASound.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = CASound.mm; path = Classes/CASound.mm; sourceTree = "<group>"; };
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D3623240D0F684500981E51 /* avTouchAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = avTouchAppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* avTouchAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = avTouchAppDelegate.m; sourceTree = "<group>"; };
@@ -176,6 +179,8 @@
 			children = (
 				F768E63A0E78578700715E09 /* MeterTable.h */,
 				F768E6390E78578700715E09 /* MeterTable.cpp */,
+				031420B226C5762A001BAC40 /* CASound.h */,
+				031420B326C5762A001BAC40 /* CASound.mm */,
 				32CA4F630368D1EE00C91783 /* avTouch_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -303,6 +308,7 @@
 				28D7ACF80DDB3853001CB0EB /* avTouchViewController.m in Sources */,
 				F768E6250E78530600715E09 /* GLLevelMeter.m in Sources */,
 				F768E6260E78530600715E09 /* LevelMeter.m in Sources */,
+				031420B426C5762A001BAC40 /* CASound.mm in Sources */,
 				F768E63B0E78578700715E09 /* MeterTable.cpp in Sources */,
 				F7C4694C0E7B12DF00A2E1ED /* avTouchController.mm in Sources */,
 				F7C4694E0E7B133200A2E1ED /* CALevelMeter.mm in Sources */,

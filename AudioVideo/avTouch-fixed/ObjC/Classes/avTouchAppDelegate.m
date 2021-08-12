@@ -49,6 +49,13 @@ Copyright (C) 2014 Apple Inc. All Rights Reserved.
 
 #import "avTouchAppDelegate.h"
 #import "avTouchViewController.h"
+#import "CASound.h"
+
+@interface avTouchAppDelegate()
+
+@property (nonatomic, strong) CASound *sound;
+
+@end
 
 @implementation avTouchAppDelegate
 
@@ -58,6 +65,12 @@ Copyright (C) 2014 Apple Inc. All Rights Reserved.
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    
+    NSURL *fileURL = [[NSURL alloc] initFileURLWithPath: [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"m4a"]];
+    //_sound = [[CASound alloc] initWithContentsOfURL:fileURL];
+    //_sound.numberOfLoops = -1;
+    //[_sound prepareForPlay];
+    //[_sound play];
 }
 
 - (void)dealloc {
