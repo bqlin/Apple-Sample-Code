@@ -28,6 +28,7 @@
 		0312572D26C28407004BB800 /* CALevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0312572C26C28407004BB800 /* CALevelMeter.swift */; };
 		0312572F26C286D0004BB800 /* GLLevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0312572E26C286D0004BB800 /* GLLevelMeter.swift */; };
 		0312573126C28710004BB800 /* LevelMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0312573026C28710004BB800 /* LevelMeter.swift */; };
+		0312575226C4AD33004BB800 /* CASound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0312575126C4AD33004BB800 /* CASound.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		0312572C26C28407004BB800 /* CALevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CALevelMeter.swift; sourceTree = "<group>"; };
 		0312572E26C286D0004BB800 /* GLLevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLLevelMeter.swift; sourceTree = "<group>"; };
 		0312573026C28710004BB800 /* LevelMeter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelMeter.swift; sourceTree = "<group>"; };
+		0312575126C4AD33004BB800 /* CASound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CASound.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +143,7 @@
 				0312572C26C28407004BB800 /* CALevelMeter.swift */,
 				0312572E26C286D0004BB800 /* GLLevelMeter.swift */,
 				0312573026C28710004BB800 /* LevelMeter.swift */,
+				0312575126C4AD33004BB800 /* CASound.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -232,6 +235,7 @@
 				0312573126C28710004BB800 /* LevelMeter.swift in Sources */,
 				0312572B26C27D9E004BB800 /* avTouchController.swift in Sources */,
 				031256FF26C270E6004BB800 /* ViewController.swift in Sources */,
+				0312575226C4AD33004BB800 /* CASound.swift in Sources */,
 				031256FD26C270E6004BB800 /* AppDelegate.swift in Sources */,
 				0312572926C277AE004BB800 /* MeterTable.swift in Sources */,
 			);

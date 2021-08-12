@@ -11,8 +11,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
+    let player = CASound(url: Bundle.main.url(forResource: "sample", withExtension: "m4a")!)
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //player.play()
         return true
     }
 
