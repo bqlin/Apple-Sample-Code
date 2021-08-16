@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		030A936326CA39BC00BD2FA1 /* Movie.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 030A936126CA39BC00BD2FA1 /* Movie.m4v */; };
+		030A936426CA39BC00BD2FA1 /* Music.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 030A936226CA39BC00BD2FA1 /* Music.m4a */; };
 		EF5EBEA91533F4A500C2EF88 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF5EBEA81533F4A500C2EF88 /* UIKit.framework */; };
 		EF5EBEAB1533F4A500C2EF88 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF5EBEAA1533F4A500C2EF88 /* Foundation.framework */; };
 		EF5EBEAD1533F4A500C2EF88 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF5EBEAC1533F4A500C2EF88 /* CoreGraphics.framework */; };
@@ -16,8 +18,6 @@
 		EF5EBEBC1533F4A500C2EF88 /* AVSEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EF5EBEBB1533F4A500C2EF88 /* AVSEViewController.m */; };
 		EF5EBEC21533F4A500C2EF88 /* AVSEViewController_iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = EF5EBEC01533F4A500C2EF88 /* AVSEViewController_iPad.xib */; };
 		EF69952F153BF9F00075301C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF69952E153BF9F00075301C /* AVFoundation.framework */; };
-		EF8272F81550AA13007D261B /* Music.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EF8272F51550AA13007D261B /* Music.m4a */; };
-		EF8273051550B2E9007D261B /* Movie.m4v in Resources */ = {isa = PBXBuildFile; fileRef = EF8273041550B2E9007D261B /* Movie.m4v */; };
 		EF9B8D02154609280045B76E /* AVSECommand.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9B8D01154609280045B76E /* AVSECommand.m */; };
 		EF9B8D05154609DF0045B76E /* AVSETrimCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9B8D04154609DF0045B76E /* AVSETrimCommand.m */; };
 		EF9B8D0815460A2C0045B76E /* AVSERotateCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9B8D0715460A2C0045B76E /* AVSERotateCommand.m */; };
@@ -31,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		030A936126CA39BC00BD2FA1 /* Movie.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; name = Movie.m4v; path = ../../Resource/Movie.m4v; sourceTree = "<group>"; };
+		030A936226CA39BC00BD2FA1 /* Music.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; name = Music.m4a; path = ../../Resource/Music.m4a; sourceTree = "<group>"; };
 		0312573226C42A93004BB800 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/AVSEViewController_iPad.xib; sourceTree = "<group>"; };
 		72C51BE517C43EC7009B306C /* README.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
 		EF5EBEA41533F4A500C2EF88 /* AVSimpleEditoriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AVSimpleEditoriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,8 +48,6 @@
 		EF5EBEBA1533F4A500C2EF88 /* AVSEViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AVSEViewController.h; sourceTree = "<group>"; };
 		EF5EBEBB1533F4A500C2EF88 /* AVSEViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVSEViewController.m; sourceTree = "<group>"; };
 		EF69952E153BF9F00075301C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		EF8272F61550AA13007D261B /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/Music.m4a; sourceTree = "<group>"; };
-		EF8273041550B2E9007D261B /* Movie.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = Movie.m4v; sourceTree = "<group>"; };
 		EF9B8D00154609270045B76E /* AVSECommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVSECommand.h; sourceTree = "<group>"; };
 		EF9B8D01154609280045B76E /* AVSECommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVSECommand.m; sourceTree = "<group>"; };
 		EF9B8D03154609DF0045B76E /* AVSETrimCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVSETrimCommand.h; sourceTree = "<group>"; };
@@ -154,8 +154,8 @@
 		EF5EBEAF1533F4A500C2EF88 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EF8273041550B2E9007D261B /* Movie.m4v */,
-				EF8272F51550AA13007D261B /* Music.m4a */,
+				030A936126CA39BC00BD2FA1 /* Movie.m4v */,
+				030A936226CA39BC00BD2FA1 /* Music.m4a */,
 				EF5EBEC01533F4A500C2EF88 /* AVSEViewController_iPad.xib */,
 				EF5EBEB01533F4A500C2EF88 /* AVSimpleEditoriOS-Info.plist */,
 				EF5EBEB11533F4A500C2EF88 /* InfoPlist.strings */,
@@ -217,10 +217,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				030A936326CA39BC00BD2FA1 /* Movie.m4v in Resources */,
 				EF5EBEB31533F4A500C2EF88 /* InfoPlist.strings in Resources */,
+				030A936426CA39BC00BD2FA1 /* Music.m4a in Resources */,
 				EF5EBEC21533F4A500C2EF88 /* AVSEViewController_iPad.xib in Resources */,
-				EF8272F81550AA13007D261B /* Music.m4a in Resources */,
-				EF8273051550B2E9007D261B /* Movie.m4v in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,14 +261,6 @@
 				0312573226C42A93004BB800 /* Base */,
 			);
 			name = AVSEViewController_iPad.xib;
-			sourceTree = "<group>";
-		};
-		EF8272F51550AA13007D261B /* Music.m4a */ = {
-			isa = PBXVariantGroup;
-			children = (
-				EF8272F61550AA13007D261B /* en */,
-			);
-			name = Music.m4a;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
