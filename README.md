@@ -404,6 +404,12 @@ AVAssetResourceLoaderDelegate在HLS中身份加密的使用：
 
 使用MTAudioProcessingTap对音频sample可视化。
 
+### AVCustomEditOSX
+
+-  Version 1.1, 2013-07-26
+
+AVFoundation编辑API使用。
+
 ## Metal
 
 ### MetalComputeBasic

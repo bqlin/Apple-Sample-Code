@@ -1,0 +1,389 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FE0CA64A175D9BD4009A8771 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0CA649175D9BD4009A8771 /* Cocoa.framework */; };
+		FE0CA654175D9BD4009A8771 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE0CA652175D9BD4009A8771 /* InfoPlist.strings */; };
+		FE0CA656175D9BD4009A8771 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0CA655175D9BD4009A8771 /* main.m */; };
+		FE0CA65F175D9BD4009A8771 /* APLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0CA65E175D9BD4009A8771 /* APLAppDelegate.m */; };
+		FE0CA67E175D9C0C009A8771 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0CA67D175D9C0C009A8771 /* AVKit.framework */; };
+		FE0CA680175D9C11009A8771 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0CA67F175D9C11009A8771 /* AVFoundation.framework */; };
+		FE0CA682175D9C16009A8771 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE0CA681175D9C16009A8771 /* CoreMedia.framework */; };
+		FE0CA685175D9C85009A8771 /* APLSimpleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0CA684175D9C85009A8771 /* APLSimpleEditor.m */; };
+		FE0CA688175D9DE3009A8771 /* sample_clip1.m4v in Resources */ = {isa = PBXBuildFile; fileRef = FE0CA686175D9D1E009A8771 /* sample_clip1.m4v */; };
+		FE0CA689175D9DE3009A8771 /* sample_clip2.mov in Resources */ = {isa = PBXBuildFile; fileRef = FE0CA687175D9D1E009A8771 /* sample_clip2.mov */; };
+		FE0CA68A175D9DEA009A8771 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FE0CA660175D9BD4009A8771 /* MainMenu.xib */; };
+		FE0CA68F175D9E42009A8771 /* APLCustomVideoCompositionInstruction.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0CA68C175D9E42009A8771 /* APLCustomVideoCompositionInstruction.m */; };
+		FE0CA690175D9E42009A8771 /* APLCustomVideoCompositor.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0CA68E175D9E42009A8771 /* APLCustomVideoCompositor.m */; };
+		FE0CA698175D9E9A009A8771 /* APLCrossDissolveRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0CA693175D9E9A009A8771 /* APLCrossDissolveRenderer.m */; };
+		FE0CA699175D9E9A009A8771 /* APLDiagonalWipeRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0CA695175D9E9A009A8771 /* APLDiagonalWipeRenderer.m */; };
+		FE0CA69A175D9E9A009A8771 /* APLOpenGLRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = FE0CA697175D9E9A009A8771 /* APLOpenGLRenderer.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FE0CA646175D9BD4009A8771 /* AVCustomEditOSX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AVCustomEditOSX.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE0CA649175D9BD4009A8771 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		FE0CA64C175D9BD4009A8771 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		FE0CA64D175D9BD4009A8771 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		FE0CA64E175D9BD4009A8771 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FE0CA651175D9BD4009A8771 /* AVCustomEditOSX-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AVCustomEditOSX-Info.plist"; sourceTree = "<group>"; };
+		FE0CA653175D9BD4009A8771 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FE0CA655175D9BD4009A8771 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FE0CA657175D9BD4009A8771 /* AVCustomEditOSX-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVCustomEditOSX-Prefix.pch"; sourceTree = "<group>"; };
+		FE0CA65D175D9BD4009A8771 /* APLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APLAppDelegate.h; sourceTree = "<group>"; };
+		FE0CA65E175D9BD4009A8771 /* APLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APLAppDelegate.m; sourceTree = "<group>"; };
+		FE0CA661175D9BD4009A8771 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		FE0CA67D175D9C0C009A8771 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		FE0CA67F175D9C11009A8771 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FE0CA681175D9C16009A8771 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		FE0CA683175D9C85009A8771 /* APLSimpleEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLSimpleEditor.h; sourceTree = "<group>"; };
+		FE0CA684175D9C85009A8771 /* APLSimpleEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLSimpleEditor.m; sourceTree = "<group>"; };
+		FE0CA686175D9D1E009A8771 /* sample_clip1.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample_clip1.m4v; sourceTree = "<group>"; };
+		FE0CA687175D9D1E009A8771 /* sample_clip2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = sample_clip2.mov; sourceTree = "<group>"; };
+		FE0CA68B175D9E42009A8771 /* APLCustomVideoCompositionInstruction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLCustomVideoCompositionInstruction.h; sourceTree = "<group>"; };
+		FE0CA68C175D9E42009A8771 /* APLCustomVideoCompositionInstruction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLCustomVideoCompositionInstruction.m; sourceTree = "<group>"; };
+		FE0CA68D175D9E42009A8771 /* APLCustomVideoCompositor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLCustomVideoCompositor.h; sourceTree = "<group>"; };
+		FE0CA68E175D9E42009A8771 /* APLCustomVideoCompositor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLCustomVideoCompositor.m; sourceTree = "<group>"; };
+		FE0CA692175D9E9A009A8771 /* APLCrossDissolveRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APLCrossDissolveRenderer.h; path = AVCustomEditOSX/APLCrossDissolveRenderer.h; sourceTree = "<group>"; };
+		FE0CA693175D9E9A009A8771 /* APLCrossDissolveRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APLCrossDissolveRenderer.m; path = AVCustomEditOSX/APLCrossDissolveRenderer.m; sourceTree = "<group>"; };
+		FE0CA694175D9E9A009A8771 /* APLDiagonalWipeRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APLDiagonalWipeRenderer.h; path = AVCustomEditOSX/APLDiagonalWipeRenderer.h; sourceTree = "<group>"; };
+		FE0CA695175D9E9A009A8771 /* APLDiagonalWipeRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APLDiagonalWipeRenderer.m; path = AVCustomEditOSX/APLDiagonalWipeRenderer.m; sourceTree = "<group>"; };
+		FE0CA696175D9E9A009A8771 /* APLOpenGLRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APLOpenGLRenderer.h; path = AVCustomEditOSX/APLOpenGLRenderer.h; sourceTree = "<group>"; };
+		FE0CA697175D9E9A009A8771 /* APLOpenGLRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APLOpenGLRenderer.m; path = AVCustomEditOSX/APLOpenGLRenderer.m; sourceTree = "<group>"; };
+		FE8B0A151761A4AD003C66F3 /* ReadMe.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FE0CA643175D9BD4009A8771 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE0CA682175D9C16009A8771 /* CoreMedia.framework in Frameworks */,
+				FE0CA680175D9C11009A8771 /* AVFoundation.framework in Frameworks */,
+				FE0CA67E175D9C0C009A8771 /* AVKit.framework in Frameworks */,
+				FE0CA64A175D9BD4009A8771 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FE0CA63D175D9BD4009A8771 = {
+			isa = PBXGroup;
+			children = (
+				FE8B0A151761A4AD003C66F3 /* ReadMe.txt */,
+				FE0CA64F175D9BD4009A8771 /* AVCustomEditOSX */,
+				FE0CA648175D9BD4009A8771 /* Frameworks */,
+				FE0CA647175D9BD4009A8771 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FE0CA647175D9BD4009A8771 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FE0CA646175D9BD4009A8771 /* AVCustomEditOSX.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FE0CA648175D9BD4009A8771 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FE0CA681175D9C16009A8771 /* CoreMedia.framework */,
+				FE0CA67F175D9C11009A8771 /* AVFoundation.framework */,
+				FE0CA67D175D9C0C009A8771 /* AVKit.framework */,
+				FE0CA649175D9BD4009A8771 /* Cocoa.framework */,
+				FE0CA64B175D9BD4009A8771 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FE0CA64B175D9BD4009A8771 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FE0CA64C175D9BD4009A8771 /* AppKit.framework */,
+				FE0CA64D175D9BD4009A8771 /* CoreData.framework */,
+				FE0CA64E175D9BD4009A8771 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		FE0CA64F175D9BD4009A8771 /* AVCustomEditOSX */ = {
+			isa = PBXGroup;
+			children = (
+				FE0CA65D175D9BD4009A8771 /* APLAppDelegate.h */,
+				FE0CA65E175D9BD4009A8771 /* APLAppDelegate.m */,
+				FE0CA683175D9C85009A8771 /* APLSimpleEditor.h */,
+				FE0CA684175D9C85009A8771 /* APLSimpleEditor.m */,
+				FE0CA691175D9E4C009A8771 /* Custom Compositors */,
+				FE0CA69B175D9EA1009A8771 /* OpenGL Renderer */,
+				FE0CA660175D9BD4009A8771 /* MainMenu.xib */,
+				FE0CA650175D9BD4009A8771 /* Supporting Files */,
+			);
+			path = AVCustomEditOSX;
+			sourceTree = "<group>";
+		};
+		FE0CA650175D9BD4009A8771 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FE0CA686175D9D1E009A8771 /* sample_clip1.m4v */,
+				FE0CA687175D9D1E009A8771 /* sample_clip2.mov */,
+				FE0CA651175D9BD4009A8771 /* AVCustomEditOSX-Info.plist */,
+				FE0CA652175D9BD4009A8771 /* InfoPlist.strings */,
+				FE0CA655175D9BD4009A8771 /* main.m */,
+				FE0CA657175D9BD4009A8771 /* AVCustomEditOSX-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FE0CA691175D9E4C009A8771 /* Custom Compositors */ = {
+			isa = PBXGroup;
+			children = (
+				FE0CA68B175D9E42009A8771 /* APLCustomVideoCompositionInstruction.h */,
+				FE0CA68C175D9E42009A8771 /* APLCustomVideoCompositionInstruction.m */,
+				FE0CA68D175D9E42009A8771 /* APLCustomVideoCompositor.h */,
+				FE0CA68E175D9E42009A8771 /* APLCustomVideoCompositor.m */,
+			);
+			name = "Custom Compositors";
+			sourceTree = "<group>";
+		};
+		FE0CA69B175D9EA1009A8771 /* OpenGL Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				FE0CA696175D9E9A009A8771 /* APLOpenGLRenderer.h */,
+				FE0CA697175D9E9A009A8771 /* APLOpenGLRenderer.m */,
+				FE0CA692175D9E9A009A8771 /* APLCrossDissolveRenderer.h */,
+				FE0CA693175D9E9A009A8771 /* APLCrossDissolveRenderer.m */,
+				FE0CA694175D9E9A009A8771 /* APLDiagonalWipeRenderer.h */,
+				FE0CA695175D9E9A009A8771 /* APLDiagonalWipeRenderer.m */,
+			);
+			name = "OpenGL Renderer";
+			path = ..;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FE0CA645175D9BD4009A8771 /* AVCustomEditOSX */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE0CA677175D9BD4009A8771 /* Build configuration list for PBXNativeTarget "AVCustomEditOSX" */;
+			buildPhases = (
+				FE0CA642175D9BD4009A8771 /* Sources */,
+				FE0CA643175D9BD4009A8771 /* Frameworks */,
+				FE0CA644175D9BD4009A8771 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AVCustomEditOSX;
+			productName = AVCustomEditOSX;
+			productReference = FE0CA646175D9BD4009A8771 /* AVCustomEditOSX.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FE0CA63E175D9BD4009A8771 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = APL;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = Apple;
+			};
+			buildConfigurationList = FE0CA641175D9BD4009A8771 /* Build configuration list for PBXProject "AVCustomEditOSX" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FE0CA63D175D9BD4009A8771;
+			productRefGroup = FE0CA647175D9BD4009A8771 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FE0CA645175D9BD4009A8771 /* AVCustomEditOSX */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FE0CA644175D9BD4009A8771 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE0CA68A175D9DEA009A8771 /* MainMenu.xib in Resources */,
+				FE0CA688175D9DE3009A8771 /* sample_clip1.m4v in Resources */,
+				FE0CA689175D9DE3009A8771 /* sample_clip2.mov in Resources */,
+				FE0CA654175D9BD4009A8771 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FE0CA642175D9BD4009A8771 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE0CA698175D9E9A009A8771 /* APLCrossDissolveRenderer.m in Sources */,
+				FE0CA65F175D9BD4009A8771 /* APLAppDelegate.m in Sources */,
+				FE0CA690175D9E42009A8771 /* APLCustomVideoCompositor.m in Sources */,
+				FE0CA699175D9E9A009A8771 /* APLDiagonalWipeRenderer.m in Sources */,
+				FE0CA685175D9C85009A8771 /* APLSimpleEditor.m in Sources */,
+				FE0CA68F175D9E42009A8771 /* APLCustomVideoCompositionInstruction.m in Sources */,
+				FE0CA656175D9BD4009A8771 /* main.m in Sources */,
+				FE0CA69A175D9E9A009A8771 /* APLOpenGLRenderer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FE0CA652175D9BD4009A8771 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE0CA653175D9BD4009A8771 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FE0CA660175D9BD4009A8771 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FE0CA661175D9BD4009A8771 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FE0CA675175D9BD4009A8771 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FE0CA676175D9BD4009A8771 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FE0CA678175D9BD4009A8771 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AVCustomEditOSX/AVCustomEditOSX-Prefix.pch";
+				INFOPLIST_FILE = "AVCustomEditOSX/AVCustomEditOSX-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FE0CA679175D9BD4009A8771 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AVCustomEditOSX/AVCustomEditOSX-Prefix.pch";
+				INFOPLIST_FILE = "AVCustomEditOSX/AVCustomEditOSX-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FE0CA641175D9BD4009A8771 /* Build configuration list for PBXProject "AVCustomEditOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE0CA675175D9BD4009A8771 /* Debug */,
+				FE0CA676175D9BD4009A8771 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FE0CA677175D9BD4009A8771 /* Build configuration list for PBXNativeTarget "AVCustomEditOSX" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FE0CA678175D9BD4009A8771 /* Debug */,
+				FE0CA679175D9BD4009A8771 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FE0CA63E175D9BD4009A8771 /* Project object */;
+}
