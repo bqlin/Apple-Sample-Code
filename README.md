@@ -398,6 +398,12 @@ AVAssetResourceLoaderDelegate在HLS中身份加密的使用：
 
 使用AVAssetReader和 AVAssetWriter来读写asset的时间码轨道。
 
+### AudioTapProcessor
+
+- Version 1.0.1, 2013-08-17
+
+使用MTAudioProcessingTap对音频sample可视化。
+
 ## Metal
 
 ### MetalComputeBasic
