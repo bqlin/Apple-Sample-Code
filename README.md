@@ -441,6 +441,13 @@ AVPlayerItemLegibleOutput使用。
 
 使用AVFoundation API在macOS上进行采集录制。
 
+### AVCaptureToAudioUnit
+
+- iOS：Version 1.0, 2012-10-08
+- macOS：Version 1.0, 2012-10-04
+
+在录制过程中使用AudioUnit。
+
 ## Metal
 
 ### MetalComputeBasic
