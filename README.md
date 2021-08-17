@@ -416,6 +416,12 @@ AVFoundation编辑API使用。
 
 实现读取外部字幕写入到媒体文件中。
 
+### AVLegibleMeaningsOSX
+
+- Version 1.0, 2013-06-07
+
+AVPlayerItemLegibleOutput使用。
+
 ## Metal
 
 ### MetalComputeBasic
