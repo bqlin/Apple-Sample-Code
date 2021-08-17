@@ -45,6 +45,19 @@ class ViewController: UIViewController {
         setupUI()
         loadAsset()
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if let watermarkLayer = watermarkLayer, watermarkLayer.superlayer != nil {
+            let videoRect = playerView.videoRect
+            var t = CGAffineTransform.identity
+            t = t.translatedBy(x: videoRect.minX, y: videoRect.minY)
+            let scale = playerView.videoScale
+            t = t.scaledBy(x: 1 / scale.width, y: 1 / scale.height)
+            watermarkLayer.setAffineTransform(t)
+        }
+    }
 
     deinit {
         notificationObservers.forEach { (observer) in
@@ -108,6 +121,7 @@ extension ViewController {
         audioMix = nil
         let url = Bundle.main.url(forResource: "Movie", withExtension: "m4v")!
         inputAsset = AVURLAsset(url: url)
+        infoLabel.text = nil
         reloadPlayerView()
     }
 }
@@ -215,8 +229,10 @@ extension ViewController {
         playerItem.videoComposition = videoComposition
         playerItem.audioMix = audioMix
         if let watermarkLayer = watermarkLayer {
-            watermarkLayer.position = CGPoint(x: playerView.bounds.midX, y: playerView.bounds.midY)
-            playerView.layer.addSublayer(watermarkLayer)
+            print("水印：\(watermarkLayer.frame)")
+            // 添加图层后，后续不能再复用改layer，而是需要重新创建
+            //playerView.layer.addSublayer(watermarkLayer)
+            view.setNeedsLayout()
         }
         player.replaceCurrentItem(with: playerItem)
         
@@ -246,12 +262,11 @@ extension ViewController {
             parentLayer.frame = CGRect(origin: .zero, size: videoComposition.renderSize)
             videoLayer.frame = parentLayer.frame
             parentLayer.addSublayer(videoLayer)
-            watermarkLayer.position = CGPoint(x: videoComposition.renderSize.width / 2, y: videoComposition.renderSize.height / 4)
+            //watermarkLayer.position = CGPoint(x: videoComposition.renderSize.width / 2, y: videoComposition.renderSize.height / 4)
+            watermarkLayer.setAffineTransform(.identity)
             parentLayer.addSublayer(watermarkLayer)
-            let layer = CALayer()
-            layer.frame = CGRect(x: 10, y: 10, width: 100, height: 100)
-            layer.backgroundColor = UIColor.yellow.cgColor
-            parentLayer.addSublayer(layer)
+            print("导出水印：\(watermarkLayer.frame)")
+            parentLayer.isGeometryFlipped = true
             
             videoComposition.animationTool = AVVideoCompositionCoreAnimationTool(postProcessingAsVideoLayer: videoLayer, in: parentLayer)
         }
