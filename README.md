@@ -435,6 +435,12 @@ AVPlayerItemLegibleOutput使用。
 
 使用OpenGL渲染采集内容。实现波纹效果。
 
+### AVRecorder
+
+- Version 2.1, 2012-11-29
+
+使用AVFoundation API在macOS上进行采集录制。
+
 ## Metal
 
 ### MetalComputeBasic
