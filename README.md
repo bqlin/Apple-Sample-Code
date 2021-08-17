@@ -410,6 +410,12 @@ AVAssetResourceLoaderDelegate在HLS中身份加密的使用：
 
 AVFoundation编辑API使用。
 
+### avsubtitleswriterOSX
+
+- Version 1.0.1, 2013-06-11
+
+实现读取外部字幕写入到媒体文件中。
+
 ## Metal
 
 ### MetalComputeBasic
