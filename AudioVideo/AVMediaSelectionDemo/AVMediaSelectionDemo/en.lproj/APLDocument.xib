@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4451" systemVersion="13A476e" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <development version="5000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4451"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="APLDocument">
+            <connections>
+                <outlet property="bottomLeftView" destination="100164" id="100214"/>
+                <outlet property="bottomRightView" destination="100175" id="100215"/>
+                <outlet property="timeSlider" destination="100233" id="100284"/>
+                <outlet property="topLeftView" destination="100186" id="100216"/>
+                <outlet property="topRightView" destination="100198" id="100217"/>
+                <outlet property="window" destination="5" id="18"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" wantsToBeColor="NO" visibleAtLaunch="NO" animationBehavior="default" id="5" userLabel="Window">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="167" y="44" width="980" height="660"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="800"/>
+            <view key="contentView" wantsLayer="YES" id="6">
+                <rect key="frame" x="0.0" y="0.0" width="980" height="660"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="100164" customClass="APLPlaybackView">
+                        <rect key="frame" x="0.0" y="40" width="490" height="310"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </customView>
+                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="100175" customClass="APLPlaybackView">
+                        <rect key="frame" x="490" y="40" width="490" height="310"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </customView>
+                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="100186" customClass="APLPlaybackView">
+                        <rect key="frame" x="0.0" y="350" width="490" height="310"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </customView>
+                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="100198" customClass="APLPlaybackView">
+                        <rect key="frame" x="490" y="350" width="490" height="310"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    </customView>
+                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="100233" customClass="TimeSlider">
+                        <rect key="frame" x="18" y="13" width="944" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="100239"/>
+                            <constraint firstAttribute="width" priority="1" constant="948" id="100253"/>
+                        </constraints>
+                        <sliderCell key="cell" continuous="YES" refusesFirstResponder="YES" alignment="left" maxValue="100" tickMarkPosition="above" sliderType="linear" id="100234" customClass="TimeSliderCell"/>
+                        <connections>
+                            <binding destination="-2" name="value" keyPath="currentTime" previousBinding="100282" id="100283"/>
+                            <binding destination="-2" name="maxValue" keyPath="duration" id="100282"/>
+                        </connections>
+                    </slider>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="100186" firstAttribute="width" secondItem="100198" secondAttribute="width" id="9Ua-E3-MFo"/>
+                    <constraint firstItem="100164" firstAttribute="top" secondItem="100186" secondAttribute="bottom" id="A6x-wl-G4Q"/>
+                    <constraint firstItem="100175" firstAttribute="width" secondItem="100186" secondAttribute="width" id="Eqm-ul-Ti5"/>
+                    <constraint firstItem="100186" firstAttribute="top" secondItem="6" secondAttribute="top" id="M4L-5t-Qwe"/>
+                    <constraint firstItem="100233" firstAttribute="top" secondItem="100175" secondAttribute="bottom" constant="8" id="NmL-cC-7jn"/>
+                    <constraint firstItem="100198" firstAttribute="top" secondItem="6" secondAttribute="top" id="Opr-QD-3BV"/>
+                    <constraint firstItem="100186" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="TDz-Db-9fY"/>
+                    <constraint firstItem="100233" firstAttribute="top" secondItem="100164" secondAttribute="bottom" constant="8" id="Tin-B8-H9S"/>
+                    <constraint firstItem="100198" firstAttribute="trailing" secondItem="6" secondAttribute="trailing" id="TzD-Ir-IIW"/>
+                    <constraint firstItem="100233" firstAttribute="leading" secondItem="6" secondAttribute="leading" constant="20" id="Vhx-bh-xwa"/>
+                    <constraint firstItem="100175" firstAttribute="height" secondItem="100186" secondAttribute="height" id="W4n-uX-DV5"/>
+                    <constraint firstItem="100198" firstAttribute="leading" secondItem="100186" secondAttribute="trailing" id="W65-jQ-Vva"/>
+                    <constraint firstItem="100164" firstAttribute="leading" secondItem="6" secondAttribute="leading" id="XYP-7e-uN4"/>
+                    <constraint firstAttribute="trailing" secondItem="100233" secondAttribute="trailing" constant="20" id="XZd-E6-RIE"/>
+                    <constraint firstItem="100175" firstAttribute="leading" secondItem="100164" secondAttribute="trailing" id="Xym-tJ-IqN"/>
+                    <constraint firstItem="100175" firstAttribute="top" secondItem="100198" secondAttribute="bottom" id="ZC4-Uh-Lv9"/>
+                    <constraint firstItem="100186" firstAttribute="height" secondItem="100164" secondAttribute="height" id="aIe-L0-PAB"/>
+                    <constraint firstItem="100175" firstAttribute="top" secondItem="100198" secondAttribute="bottom" id="bkj-Y8-IvB"/>
+                    <constraint firstItem="100175" firstAttribute="trailing" secondItem="6" secondAttribute="trailing" id="ha7-EI-RiI"/>
+                    <constraint firstItem="100186" firstAttribute="width" secondItem="100164" secondAttribute="width" id="iQ3-pk-Dur"/>
+                    <constraint firstAttribute="bottom" secondItem="100233" secondAttribute="bottom" constant="15" id="lDu-5O-WUg"/>
+                    <constraint firstItem="100175" firstAttribute="leading" secondItem="100164" secondAttribute="trailing" id="lHL-0A-gvV"/>
+                    <constraint firstItem="100233" firstAttribute="top" secondItem="100175" secondAttribute="bottom" constant="8" id="qIh-eW-Hfj"/>
+                    <constraint firstItem="100198" firstAttribute="leading" secondItem="100186" secondAttribute="trailing" id="vU3-K7-jNb"/>
+                    <constraint firstItem="100164" firstAttribute="top" secondItem="100186" secondAttribute="bottom" id="vbw-0e-8Vf"/>
+                    <constraint firstItem="100186" firstAttribute="height" secondItem="100198" secondAttribute="height" id="wwv-LB-kV7"/>
+                </constraints>
+            </view>
+            <connections>
+                <outlet property="delegate" destination="-2" id="17"/>
+            </connections>
+        </window>
+        <customObject id="-3" userLabel="Application"/>
+        <userDefaultsController id="100144"/>
+    </objects>
+    <classes>
+        <class className="APLDocument" superclassName="NSDocument">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/APLDocument.h"/>
+            <relationships>
+                <relationship kind="outlet" name="bottomLeftView" candidateClass="APLPlaybackView"/>
+                <relationship kind="outlet" name="bottomRightView" candidateClass="APLPlaybackView"/>
+                <relationship kind="outlet" name="timeSlider" candidateClass="TimeSlider"/>
+                <relationship kind="outlet" name="topLeftView" candidateClass="APLPlaybackView"/>
+                <relationship kind="outlet" name="topRightView" candidateClass="APLPlaybackView"/>
+            </relationships>
+        </class>
+        <class className="APLPlaybackView" superclassName="NSView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/APLPlaybackView.h"/>
+        </class>
+        <class className="NSDocument">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSDocument.h"/>
+            <relationships>
+                <relationship kind="action" name="browseDocumentVersions:"/>
+                <relationship kind="action" name="duplicateDocument:"/>
+                <relationship kind="action" name="lockDocument:"/>
+                <relationship kind="action" name="moveDocument:"/>
+                <relationship kind="action" name="moveDocumentToUbiquityContainer:"/>
+                <relationship kind="action" name="printDocument:"/>
+                <relationship kind="action" name="renameDocument:"/>
+                <relationship kind="action" name="revertDocumentToSaved:"/>
+                <relationship kind="action" name="runPageLayout:"/>
+                <relationship kind="action" name="saveDocument:"/>
+                <relationship kind="action" name="saveDocumentAs:"/>
+                <relationship kind="action" name="saveDocumentTo:"/>
+                <relationship kind="action" name="saveDocumentToPDF:"/>
+                <relationship kind="action" name="unlockDocument:"/>
+            </relationships>
+        </class>
+        <class className="NSLayoutConstraint" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
+        </class>
+        <class className="TimeSlider" superclassName="NSSlider">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeSlider.h"/>
+        </class>
+        <class className="TimeSliderCell" superclassName="NSSliderCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/TimeSliderCell.h"/>
+        </class>
+    </classes>
+</document>

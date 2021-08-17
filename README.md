@@ -423,6 +423,12 @@ AVFoundation编辑API使用。
 
 AVPlayerItemLegibleOutput使用。
 
+### AVMediaSelectionDemo
+
+- Version 1.0, 2013-06-07
+
+媒体选项使用。
+
 ## Metal
 
 ### MetalComputeBasic
