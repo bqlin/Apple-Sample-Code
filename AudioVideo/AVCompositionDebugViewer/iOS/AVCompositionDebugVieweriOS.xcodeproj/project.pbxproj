@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03F3A55926CBCEC500B1986C /* sample_clip1.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 03F3A55726CBCEC500B1986C /* sample_clip1.m4v */; };
+		03F3A55A26CBCEC500B1986C /* sample_clip2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 03F3A55826CBCEC500B1986C /* sample_clip2.mov */; };
 		282E77D91762B7700076BB36 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282E77D81762B7700076BB36 /* AVFoundation.framework */; };
 		EF830A921760155300CF1DC2 /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = EF830A911760155300CF1DC2 /* ReadMe.txt */; };
 		EFFCDBC4175FC8CD00C81A29 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFFCDBC3175FC8CD00C81A29 /* UIKit.framework */; };
@@ -26,11 +28,11 @@
 		EFFCDBEB175FC8CE00C81A29 /* APLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFCDBEA175FC8CE00C81A29 /* APLViewController.m */; };
 		EFFCDBF3175FCDE500C81A29 /* APLSimpleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFCDBF2175FCDE500C81A29 /* APLSimpleEditor.m */; };
 		EFFCDC10175FCEB200C81A29 /* APLCompositionDebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = EFFCDC0F175FCEB200C81A29 /* APLCompositionDebugView.m */; };
-		EFFCDC12175FD40800C81A29 /* sample_clip1.m4v in Resources */ = {isa = PBXBuildFile; fileRef = EFFCDC11175FD40800C81A29 /* sample_clip1.m4v */; };
-		EFFCDC14175FD42C00C81A29 /* sample_clip2.mov in Resources */ = {isa = PBXBuildFile; fileRef = EFFCDC13175FD42C00C81A29 /* sample_clip2.mov */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		03F3A55726CBCEC500B1986C /* sample_clip1.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; name = sample_clip1.m4v; path = ../../Resource/sample_clip1.m4v; sourceTree = "<group>"; };
+		03F3A55826CBCEC500B1986C /* sample_clip2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = sample_clip2.mov; path = ../../Resource/sample_clip2.mov; sourceTree = "<group>"; };
 		282E77D81762B7700076BB36 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		EF830A911760155300CF1DC2 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
 		EFFCDBC0175FC8CD00C81A29 /* AVCompositionDebugVieweriOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AVCompositionDebugVieweriOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,8 +59,6 @@
 		EFFCDBF2175FCDE500C81A29 /* APLSimpleEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLSimpleEditor.m; sourceTree = "<group>"; };
 		EFFCDC0E175FCEB200C81A29 /* APLCompositionDebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLCompositionDebugView.h; sourceTree = "<group>"; };
 		EFFCDC0F175FCEB200C81A29 /* APLCompositionDebugView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLCompositionDebugView.m; sourceTree = "<group>"; };
-		EFFCDC11175FD40800C81A29 /* sample_clip1.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; path = sample_clip1.m4v; sourceTree = "<group>"; };
-		EFFCDC13175FD42C00C81A29 /* sample_clip2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = sample_clip2.mov; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,8 +125,8 @@
 		EFFCDBCA175FC8CE00C81A29 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				EFFCDC11175FD40800C81A29 /* sample_clip1.m4v */,
-				EFFCDC13175FD42C00C81A29 /* sample_clip2.mov */,
+				03F3A55726CBCEC500B1986C /* sample_clip1.m4v */,
+				03F3A55826CBCEC500B1986C /* sample_clip2.mov */,
 				EFFCDBCB175FC8CE00C81A29 /* AVCompositionDebugVieweriOS-Info.plist */,
 				EFFCDBCC175FC8CE00C81A29 /* InfoPlist.strings */,
 				EFFCDBCF175FC8CE00C81A29 /* main.m */,
@@ -182,6 +182,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = EFFCDBB7175FC8CD00C81A29;
@@ -202,13 +203,13 @@
 				EFFCDBE0175FC8CE00C81A29 /* Default-Landscape~ipad.png in Resources */,
 				EFFCDBDE175FC8CE00C81A29 /* Default-Portrait@2x~ipad.png in Resources */,
 				EFFCDBD8175FC8CE00C81A29 /* Default@2x.png in Resources */,
-				EFFCDC12175FD40800C81A29 /* sample_clip1.m4v in Resources */,
-				EFFCDC14175FD42C00C81A29 /* sample_clip2.mov in Resources */,
+				03F3A55A26CBCEC500B1986C /* sample_clip2.mov in Resources */,
 				EFFCDBE2175FC8CE00C81A29 /* Default-Landscape@2x~ipad.png in Resources */,
 				EFFCDBDA175FC8CE00C81A29 /* Default-568h@2x.png in Resources */,
 				EFFCDBE8175FC8CE00C81A29 /* Main_iPad.storyboard in Resources */,
 				EFFCDBDC175FC8CE00C81A29 /* Default-Portrait~ipad.png in Resources */,
 				EFFCDBCE175FC8CE00C81A29 /* InfoPlist.strings in Resources */,
+				03F3A55926CBCEC500B1986C /* sample_clip1.m4v in Resources */,
 				EF830A921760155300CF1DC2 /* ReadMe.txt in Resources */,
 				EFFCDBD6175FC8CE00C81A29 /* Default.png in Resources */,
 			);

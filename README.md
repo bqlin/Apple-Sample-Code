@@ -141,9 +141,10 @@ Quartz2D API使用示例。
 
 HLS 下载示例。
 
-### AVCompositionDebugVieweriOS
+### AVCompositionDebugViewer
 
-- Version 1.1, 2014-03-11
+- iOS：Version 1.1, 2014-03-11
+- macOS： Version 1.1, 2013-06-07
 
 AVCompostion、AVVideoComposition、AVAudioMix查看、调试视图。
 

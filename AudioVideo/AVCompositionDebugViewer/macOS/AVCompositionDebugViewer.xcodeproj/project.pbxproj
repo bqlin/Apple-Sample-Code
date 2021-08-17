@@ -1,0 +1,352 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		03F3A55D26CBCEDC00B1986C /* sample_clip2.mov in Resources */ = {isa = PBXBuildFile; fileRef = 03F3A55B26CBCEDB00B1986C /* sample_clip2.mov */; };
+		03F3A55E26CBCEDC00B1986C /* sample_clip1.m4v in Resources */ = {isa = PBXBuildFile; fileRef = 03F3A55C26CBCEDC00B1986C /* sample_clip1.m4v */; };
+		FE29164D1757F998001E2D82 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE29164C1757F998001E2D82 /* AVKit.framework */; };
+		FE2916541757FC8D001E2D82 /* APLSimpleEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2916531757FC8D001E2D82 /* APLSimpleEditor.m */; };
+		FE44059B175D12F700CF2905 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE44059A175D12F700CF2905 /* AVFoundation.framework */; };
+		FE44059D175D12FE00CF2905 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE44059C175D12FE00CF2905 /* CoreMedia.framework */; };
+		FE44059F175D135200CF2905 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE44059E175D135200CF2905 /* QuartzCore.framework */; };
+		FEC99D6B175E90B6006DFB09 /* ReadMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = FEC99D6A175E90B6006DFB09 /* ReadMe.txt */; };
+		FED39DDF1757D2D600348ECE /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FED39DDE1757D2D600348ECE /* Cocoa.framework */; };
+		FED39DE91757D2D600348ECE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FED39DE71757D2D600348ECE /* InfoPlist.strings */; };
+		FED39DEB1757D2D600348ECE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FED39DEA1757D2D600348ECE /* main.m */; };
+		FED39DF21757D2D600348ECE /* APLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FED39DF11757D2D600348ECE /* APLAppDelegate.m */; };
+		FED39DF51757D2D600348ECE /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FED39DF31757D2D600348ECE /* MainMenu.xib */; };
+		FEF5A631175C14BA007A5F4C /* APLCompositionDebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = FEF5A630175C14BA007A5F4C /* APLCompositionDebugView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		03F3A55B26CBCEDB00B1986C /* sample_clip2.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = sample_clip2.mov; path = ../../Resource/sample_clip2.mov; sourceTree = "<group>"; };
+		03F3A55C26CBCEDC00B1986C /* sample_clip1.m4v */ = {isa = PBXFileReference; lastKnownFileType = file; name = sample_clip1.m4v; path = ../../Resource/sample_clip1.m4v; sourceTree = "<group>"; };
+		FE29164C1757F998001E2D82 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		FE2916521757FC8D001E2D82 /* APLSimpleEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLSimpleEditor.h; sourceTree = "<group>"; };
+		FE2916531757FC8D001E2D82 /* APLSimpleEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLSimpleEditor.m; sourceTree = "<group>"; };
+		FE44059A175D12F700CF2905 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FE44059C175D12FE00CF2905 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		FE44059E175D135200CF2905 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		FEC99D6A175E90B6006DFB09 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
+		FED39DDB1757D2D600348ECE /* AVCompositionDebugViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AVCompositionDebugViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FED39DDE1757D2D600348ECE /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		FED39DE11757D2D600348ECE /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		FED39DE21757D2D600348ECE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		FED39DE31757D2D600348ECE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FED39DE61757D2D600348ECE /* AVCompositionDebugViewer-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AVCompositionDebugViewer-Info.plist"; sourceTree = "<group>"; };
+		FED39DE81757D2D600348ECE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FED39DEA1757D2D600348ECE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FED39DEC1757D2D600348ECE /* AVCompositionDebugViewer-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "AVCompositionDebugViewer-Prefix.pch"; sourceTree = "<group>"; };
+		FED39DF01757D2D600348ECE /* APLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APLAppDelegate.h; sourceTree = "<group>"; };
+		FED39DF11757D2D600348ECE /* APLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APLAppDelegate.m; sourceTree = "<group>"; };
+		FED39DF41757D2D600348ECE /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		FEF5A62F175C14BA007A5F4C /* APLCompositionDebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APLCompositionDebugView.h; sourceTree = "<group>"; };
+		FEF5A630175C14BA007A5F4C /* APLCompositionDebugView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = APLCompositionDebugView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FED39DD81757D2D600348ECE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FE44059F175D135200CF2905 /* QuartzCore.framework in Frameworks */,
+				FE44059D175D12FE00CF2905 /* CoreMedia.framework in Frameworks */,
+				FE44059B175D12F700CF2905 /* AVFoundation.framework in Frameworks */,
+				FE29164D1757F998001E2D82 /* AVKit.framework in Frameworks */,
+				FED39DDF1757D2D600348ECE /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FED39DD21757D2D600348ECE = {
+			isa = PBXGroup;
+			children = (
+				FEC99D6A175E90B6006DFB09 /* ReadMe.txt */,
+				FED39DE41757D2D600348ECE /* AVCompositionDebugViewer */,
+				FED39DDD1757D2D600348ECE /* Frameworks */,
+				FED39DDC1757D2D600348ECE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FED39DDC1757D2D600348ECE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FED39DDB1757D2D600348ECE /* AVCompositionDebugViewer.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FED39DDD1757D2D600348ECE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FE44059E175D135200CF2905 /* QuartzCore.framework */,
+				FE44059C175D12FE00CF2905 /* CoreMedia.framework */,
+				FE44059A175D12F700CF2905 /* AVFoundation.framework */,
+				FE29164C1757F998001E2D82 /* AVKit.framework */,
+				FED39DDE1757D2D600348ECE /* Cocoa.framework */,
+				FED39DE01757D2D600348ECE /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FED39DE01757D2D600348ECE /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FED39DE11757D2D600348ECE /* AppKit.framework */,
+				FED39DE21757D2D600348ECE /* CoreData.framework */,
+				FED39DE31757D2D600348ECE /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		FED39DE41757D2D600348ECE /* AVCompositionDebugViewer */ = {
+			isa = PBXGroup;
+			children = (
+				FED39DF01757D2D600348ECE /* APLAppDelegate.h */,
+				FED39DF11757D2D600348ECE /* APLAppDelegate.m */,
+				FE2916521757FC8D001E2D82 /* APLSimpleEditor.h */,
+				FE2916531757FC8D001E2D82 /* APLSimpleEditor.m */,
+				FEF5A62F175C14BA007A5F4C /* APLCompositionDebugView.h */,
+				FEF5A630175C14BA007A5F4C /* APLCompositionDebugView.m */,
+				FED39DF31757D2D600348ECE /* MainMenu.xib */,
+				FED39DE51757D2D600348ECE /* Supporting Files */,
+			);
+			path = AVCompositionDebugViewer;
+			sourceTree = "<group>";
+		};
+		FED39DE51757D2D600348ECE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				03F3A55C26CBCEDC00B1986C /* sample_clip1.m4v */,
+				03F3A55B26CBCEDB00B1986C /* sample_clip2.mov */,
+				FED39DE61757D2D600348ECE /* AVCompositionDebugViewer-Info.plist */,
+				FED39DE71757D2D600348ECE /* InfoPlist.strings */,
+				FED39DEA1757D2D600348ECE /* main.m */,
+				FED39DEC1757D2D600348ECE /* AVCompositionDebugViewer-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FED39DDA1757D2D600348ECE /* AVCompositionDebugViewer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FED39DF81757D2D600348ECE /* Build configuration list for PBXNativeTarget "AVCompositionDebugViewer" */;
+			buildPhases = (
+				FED39DD71757D2D600348ECE /* Sources */,
+				FED39DD81757D2D600348ECE /* Frameworks */,
+				FED39DD91757D2D600348ECE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AVCompositionDebugViewer;
+			productName = AVCompositionDebugViewer;
+			productReference = FED39DDB1757D2D600348ECE /* AVCompositionDebugViewer.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FED39DD31757D2D600348ECE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = APL;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = Apple;
+			};
+			buildConfigurationList = FED39DD61757D2D600348ECE /* Build configuration list for PBXProject "AVCompositionDebugViewer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				en,
+			);
+			mainGroup = FED39DD21757D2D600348ECE;
+			productRefGroup = FED39DDC1757D2D600348ECE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FED39DDA1757D2D600348ECE /* AVCompositionDebugViewer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FED39DD91757D2D600348ECE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FED39DE91757D2D600348ECE /* InfoPlist.strings in Resources */,
+				FED39DF51757D2D600348ECE /* MainMenu.xib in Resources */,
+				FEC99D6B175E90B6006DFB09 /* ReadMe.txt in Resources */,
+				03F3A55E26CBCEDC00B1986C /* sample_clip1.m4v in Resources */,
+				03F3A55D26CBCEDC00B1986C /* sample_clip2.mov in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FED39DD71757D2D600348ECE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FED39DF21757D2D600348ECE /* APLAppDelegate.m in Sources */,
+				FE2916541757FC8D001E2D82 /* APLSimpleEditor.m in Sources */,
+				FED39DEB1757D2D600348ECE /* main.m in Sources */,
+				FEF5A631175C14BA007A5F4C /* APLCompositionDebugView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FED39DE71757D2D600348ECE /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FED39DE81757D2D600348ECE /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FED39DF31757D2D600348ECE /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FED39DF41757D2D600348ECE /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FED39DF61757D2D600348ECE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		FED39DF71757D2D600348ECE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		FED39DF91757D2D600348ECE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AVCompositionDebugViewer/AVCompositionDebugViewer-Prefix.pch";
+				INFOPLIST_FILE = "AVCompositionDebugViewer/AVCompositionDebugViewer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FED39DFA1757D2D600348ECE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "AVCompositionDebugViewer/AVCompositionDebugViewer-Prefix.pch";
+				INFOPLIST_FILE = "AVCompositionDebugViewer/AVCompositionDebugViewer-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FED39DD61757D2D600348ECE /* Build configuration list for PBXProject "AVCompositionDebugViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FED39DF61757D2D600348ECE /* Debug */,
+				FED39DF71757D2D600348ECE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FED39DF81757D2D600348ECE /* Build configuration list for PBXNativeTarget "AVCompositionDebugViewer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FED39DF91757D2D600348ECE /* Debug */,
+				FED39DFA1757D2D600348ECE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FED39DD31757D2D600348ECE /* Project object */;
+}
