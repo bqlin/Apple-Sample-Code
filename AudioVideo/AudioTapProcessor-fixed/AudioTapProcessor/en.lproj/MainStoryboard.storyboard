@@ -1,64 +1,70 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="2.0" toolsVersion="3084" systemVersion="12E55" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="2">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.3" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES" initialViewController="2">
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
-        <development version="4600" defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="2083"/>
+        <deployment version="1792" identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="4">
             <objects>
                 <viewController id="2" customClass="MYViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NgN-eE-FuO"/>
+                        <viewControllerLayoutGuide type="bottom" id="GHZ-QD-GHK"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="5">
-                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="nP9-QO-5ZL" customClass="MYPlayerView">
-                                <rect key="frame" x="0.0" y="0.0" width="768" height="962"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nP9-QO-5ZL" customClass="MYPlayerView">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="982"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <view opaque="NO" contentMode="scaleToFill" id="w5C-3p-K2k" customClass="MYVolumeUnitMeterView">
-                                <rect key="frame" x="0.0" y="837" width="300" height="125"/>
+                            <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="w5C-3p-K2k" customClass="MYVolumeUnitMeterView">
+                                <rect key="frame" x="0.0" y="857" width="300" height="125"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </view>
-                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" image="PlaybackControlsBarShadow" id="DdV-es-Y7w">
-                                <rect key="frame" x="300" y="837" width="168" height="125"/>
+                            <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" image="PlaybackControlsBarShadow" translatesAutoresizingMaskIntoConstraints="NO" id="DdV-es-Y7w">
+                                <rect key="frame" x="300" y="857" width="168" height="125"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                             </imageView>
-                            <view opaque="NO" contentMode="scaleToFill" id="OYx-b7-hz9" customClass="MYVolumeUnitMeterView">
-                                <rect key="frame" x="468" y="837" width="300" height="125"/>
+                            <view opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OYx-b7-hz9" customClass="MYVolumeUnitMeterView">
+                                <rect key="frame" x="468" y="857" width="300" height="125"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                             </view>
-                            <view contentMode="scaleToFill" id="GdI-XV-arv" customClass="MYGradientView">
-                                <rect key="frame" x="0.0" y="962" width="768" height="42"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GdI-XV-arv" customClass="MYGradientView">
+                                <rect key="frame" x="0.0" y="982" width="768" height="42"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="LGw-M0-SLo">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGw-M0-SLo">
                                         <rect key="frame" x="15" y="6" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="" image="PlayButton">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="togglePlayPause:" destination="2" eventType="touchUpInside" id="Gne-v8-n7d"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" id="6p0-kN-364">
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6p0-kN-364">
                                         <rect key="frame" x="723" y="6" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="" image="SettingsButton">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <state key="highlighted">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <segue destination="r2J-FC-ni4" kind="popover" identifier="ShowSettingsSegue" popoverAnchorView="6p0-kN-364" id="kjO-Tq-BfS">
@@ -66,34 +72,34 @@
                                             </segue>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-00:00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="2nu-QD-fd0">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="-00:00:00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="2nu-QD-fd0">
                                         <rect key="frame" x="48" y="13" width="53" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="pDr-ps-P6P">
-                                        <rect key="frame" x="107" y="9" width="556" height="23"/>
+                                    <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="pDr-ps-P6P">
+                                        <rect key="frame" x="109" y="9" width="552" height="22"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                        <color key="minimumTrackTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                        <color key="maximumTrackTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="minimumTrackTintColor" red="0.66666668653488159" green="0.66666668653488159" blue="0.66666668653488159" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="maximumTrackTintColor" red="0.3333333432674408" green="0.3333333432674408" blue="0.3333333432674408" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <action selector="seekToTime:" destination="2" eventType="valueChanged" id="rNS-0w-veB"/>
                                         </connections>
                                     </slider>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="-00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="NA0-DS-tZQ">
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="-00:00:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="NA0-DS-tZQ">
                                         <rect key="frame" x="669" y="13" width="53" height="15"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.3333333432674408" green="0.3333333432674408" blue="0.3333333432674408" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.66666668653488159" green="0.66666668653488159" blue="0.66666668653488159" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="currentTimeSlider" destination="pDr-ps-P6P" id="keU-GJ-Uhb"/>
@@ -108,87 +114,84 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-357" y="52"/>
+            <point key="canvasLocation" x="-278.90625" y="30.468749999999996"/>
         </scene>
-        <!--Settings View Controller - Bandpass Filter-->
+        <!--Bandpass Filter-->
         <scene sceneID="e0q-h0-LEM">
             <objects>
                 <tableViewController id="mhm-ab-wZg" customClass="MYSettingsViewController" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="singleLineEtched" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="HDp-bL-xWR">
-                        <rect key="frame" x="0.0" y="64" width="768" height="960"/>
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="HDp-bL-xWR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="387"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
                             <tableViewSection id="X7Z-zx-3wM">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="9Ys-hf-1ke">
-                                        <rect key="frame" x="0.0" y="30" width="768" height="46"/>
+                                        <rect key="frame" x="0.0" y="10" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="45" y="1" width="678" height="43"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Ys-hf-1ke" id="Kb6-Ay-hiL">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="fwY-KX-3QX">
-                                                    <rect key="frame" x="591" y="9" width="79" height="27"/>
+                                                <switch opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fwY-KX-3QX">
+                                                    <rect key="frame" x="233" y="9" width="51" height="31"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="updateEnabledSwitchValue:" destination="mhm-ab-wZg" eventType="valueChanged" id="pwK-fY-3c5"/>
                                                     </connections>
                                                 </switch>
-                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Enabled" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="W0z-AL-je5">
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" fixedFrame="YES" text="Enabled" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="W0z-AL-je5">
                                                     <rect key="frame" x="10" y="12" width="67" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Center Frequency" footerTitle="Global, Hz, 20->(SampleRate/2), 5000" id="Xd6-aZ-eg9">
+                            <tableViewSection headerTitle="Center Frequency" footerTitle="Global, Hz, 20-&gt;(SampleRate/2), 5000" id="Xd6-aZ-eg9">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="fdF-sX-rd1">
-                                        <rect key="frame" x="0.0" y="120" width="768" height="46"/>
+                                        <rect key="frame" x="0.0" y="109.5" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="45" y="1" width="678" height="43"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fdF-sX-rd1" id="mrx-rf-T7T">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="hUN-7l-ai3">
-                                                    <rect key="frame" x="9" y="11" width="660" height="23"/>
+                                                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="hUN-7l-ai3">
+                                                    <rect key="frame" x="11" y="11" width="298" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="updateCenterFrequencySliderValue:" destination="mhm-ab-wZg" eventType="valueChanged" id="bwY-Hs-zqH"/>
                                                     </connections>
                                                 </slider>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection headerTitle="Bandwidth" footerTitle="Global, Cents, 100->12000, 600" id="KEe-aZ-QZa">
+                            <tableViewSection headerTitle="Bandwidth" footerTitle="Global, Cents, 100-&gt;12000, 600" id="KEe-aZ-QZa">
                                 <cells>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="4aU-sx-3us">
-                                        <rect key="frame" x="0.0" y="241" width="768" height="46"/>
+                                        <rect key="frame" x="0.0" y="229" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="45" y="1" width="678" height="43"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4aU-sx-3us" id="ASu-3D-4ie">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" id="V19-Ah-gNb">
-                                                    <rect key="frame" x="9" y="11" width="660" height="23"/>
+                                                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="V19-Ah-gNb">
+                                                    <rect key="frame" x="11" y="11" width="298" height="22"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                     <connections>
                                                         <action selector="updateBandwidthSliderSliderValue:" destination="mhm-ab-wZg" eventType="valueChanged" id="JsQ-8f-vKz"/>
                                                     </connections>
                                                 </slider>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </view>
+                                        </tableViewCellContentView>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -208,7 +211,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Ep-ef-FQy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1511" y="52"/>
+            <point key="canvasLocation" x="1180.46875" y="30.468749999999996"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="VoN-tn-SRu">
@@ -216,7 +219,7 @@
                 <navigationController id="r2J-FC-ni4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LGm-CE-8Xe">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <rect key="frame" x="0.0" y="13" width="320" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -226,54 +229,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dp3-4Z-6Qv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="571" y="52"/>
+            <point key="canvasLocation" x="446.09375" y="30.468749999999996"/>
         </scene>
     </scenes>
     <resources>
-        <image name="PlayButton" width="16" height="16"/>
-        <image name="PlaybackControlsBarShadow" width="16" height="16"/>
-        <image name="SettingsButton" width="16" height="16"/>
+        <image name="PlayButton" width="20" height="20"/>
+        <image name="PlaybackControlsBarShadow" width="10" height="125"/>
+        <image name="SettingsButton" width="20" height="20"/>
     </resources>
-    <classes>
-        <class className="MYGradientView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MYGradientView.h"/>
-        </class>
-        <class className="MYPlayerView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MYPlayerView.h"/>
-        </class>
-        <class className="MYSettingsViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MYSettingsViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="updateBandwidthSliderSliderValue:"/>
-                <relationship kind="action" name="updateCenterFrequencySliderValue:"/>
-                <relationship kind="action" name="updateEnabledSwitchValue:"/>
-                <relationship kind="outlet" name="bandwidthSlider" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="centerFrequencySlider" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="enabledSwitch" candidateClass="UISwitch"/>
-            </relationships>
-        </class>
-        <class className="MYViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MYViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="seekToTime:"/>
-                <relationship kind="action" name="togglePlayPause:"/>
-                <relationship kind="outlet" name="currentTimeSlider" candidateClass="UISlider"/>
-                <relationship kind="outlet" name="elapsedTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="leftChannelVolumeUnitMeterView" candidateClass="MYVolumeUnitMeterView"/>
-                <relationship kind="outlet" name="playPauseButton" candidateClass="UIButton"/>
-                <relationship kind="outlet" name="playerView" candidateClass="MYPlayerView"/>
-                <relationship kind="outlet" name="remainingTimeLabel" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="rightChannelVolumeUnitMeterView" candidateClass="MYVolumeUnitMeterView"/>
-                <relationship kind="outlet" name="settingsPopoverButton" candidateClass="UIButton"/>
-            </relationships>
-        </class>
-        <class className="MYVolumeUnitMeterView" superclassName="UIView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MYVolumeUnitMeterView.h"/>
-        </class>
-    </classes>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
-    </simulatedMetricsContainer>
 </document>
