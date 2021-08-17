@@ -429,6 +429,12 @@ AVPlayerItemLegibleOutput使用。
 
 媒体选项使用。
 
+### GLCameraRipple
+
+- Version 1.2, 2013-02-21
+
+使用OpenGL渲染采集内容。实现波纹效果。
+
 ## Metal
 
 ### MetalComputeBasic
