@@ -8,17 +8,18 @@ import AVFoundation
 
 class TrimCommand: Command {
     override func perform(asset: AVAsset) {
-        let halfDuration = asset.duration.seconds / 2
-        let trimmedDuration = CMTime(seconds: halfDuration, preferredTimescale: asset.duration.timescale)
-        
+        // 每次保留后半段
         if let composition = composition {
-            composition.removeTimeRange(CMTimeRange(start: trimmedDuration, end: composition.duration))
+            let duration = CMTime(seconds: composition.duration.seconds / 2, preferredTimescale: asset.duration.timescale)
+            composition.removeTimeRange(CMTimeRange(start: .zero, end: duration))
         } else {
+            let duration = CMTime(seconds: asset.duration.seconds / 2, preferredTimescale: asset.duration.timescale)
+            let start = asset.duration - duration
             let composition = AVMutableComposition()
             if let assetTrack = asset.tracks(withMediaType: .video).first {
                 let track = composition.addMutableTrack(withMediaType: .video, preferredTrackID: kCMPersistentTrackID_Invalid)
                 do {
-                    try track?.insertTimeRange(CMTimeRange(start: .zero, duration: trimmedDuration), of: assetTrack, at: .zero)
+                    try track?.insertTimeRange(CMTimeRange(start: start, duration: duration), of: assetTrack, at: .zero)
                 } catch {
                     fatalError("error: \(error)")
                 }
@@ -27,7 +28,7 @@ class TrimCommand: Command {
             if let assetTrack = asset.tracks(withMediaType: .audio).first {
                 let track = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCFMessagePortReceiveTimeout)
                 do {
-                    try track?.insertTimeRange(CMTimeRange(start: .zero, duration: trimmedDuration), of: assetTrack, at: .zero)
+                    try track?.insertTimeRange(CMTimeRange(start: start, duration: duration), of: assetTrack, at: .zero)
                 } catch {
                     fatalError("error: \(error)")
                 }

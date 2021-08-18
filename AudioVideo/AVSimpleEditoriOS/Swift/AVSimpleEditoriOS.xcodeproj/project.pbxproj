@@ -59,10 +59,10 @@
 			isa = PBXGroup;
 			children = (
 				030A935D26CA369400BD2FA1 /* Command.swift */,
+				030A937026CA9E3000BD2FA1 /* TrimCommand.swift */,
 				030A935F26CA387700BD2FA1 /* AddMusicCommand.swift */,
 				030A936A26CA40F800BD2FA1 /* AddWatermarkCommand.swift */,
 				030A936E26CA7EAF00BD2FA1 /* CropCommand.swift */,
-				030A937026CA9E3000BD2FA1 /* TrimCommand.swift */,
 				030A937226CAA05000BD2FA1 /* RotateCommand.swift */,
 				030A937426CAA44B00BD2FA1 /* ExportCommand.swift */,
 			);
