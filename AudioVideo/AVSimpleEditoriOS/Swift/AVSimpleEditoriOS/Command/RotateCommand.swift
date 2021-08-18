@@ -18,39 +18,40 @@ class RotateCommand: Command {
         
         var instruction: AVMutableVideoCompositionInstruction
         var layerInstruction: AVMutableVideoCompositionLayerInstruction
-        let naturalSize = videoTrack.naturalSize
         
-        // Translate the composition to compensate the movement caused by rotation (since rotation would cause it to move out of frame)
-        let translate = CGAffineTransform(translationX: naturalSize.height, y: 0)
-        // Rotate transformation
-        let translateRotate = translate.rotated(by: degreesToRadians(90))
-        
+        // 每次顺时针旋转90度
         if let videoComposition = videoComposition {
-            var renderSize = videoComposition.renderSize
-            let tmp = renderSize.width
-            renderSize.width = renderSize.height
-            renderSize.height = tmp
+            let size = videoComposition.renderSize
+            let renderSize = size.swap
+            
+            // Translate the composition to compensate the movement caused by rotation (since rotation would cause it to move out of frame)
+            // Rotate transformation
+            let t = CGAffineTransform(translationX: size.height, y: 0).rotated(by: degreesToRadians(90))
+            
             videoComposition.renderSize = renderSize
             
             instruction = videoComposition.instructions.first! as! AVMutableVideoCompositionInstruction
             layerInstruction = instruction.layerInstructions.first! as! AVMutableVideoCompositionLayerInstruction
             
             var exitingTransform = CGAffineTransform.identity
-            if layerInstruction.getTransformRamp(for: composition.duration, start: &exitingTransform, end: nil, timeRange: nil) {
-                let t = translateRotate.translatedBy(x: -1 * naturalSize.height / 2, y: 0)
-                layerInstruction.setTransform(t, at: .zero)
-            } else {
-                layerInstruction.setTransform(translateRotate, at: .zero)
-            }
+            _ = layerInstruction.getTransformRamp(for: composition.duration, start: &exitingTransform, end: nil, timeRange: nil)
+            layerInstruction.setTransform(exitingTransform.concatenating(t), at: .zero)
         } else {
+            let size = videoTrack.naturalSize
+            let renderSize = size.swap
+            
+            // Translate the composition to compensate the movement caused by rotation (since rotation would cause it to move out of frame)
+            // Rotate transformation
+            let t = CGAffineTransform(translationX: size.height, y: 0).rotated(by: degreesToRadians(90))
+            
             let videoComposition = AVMutableVideoComposition()
-            videoComposition.renderSize = CGSize(width: naturalSize.height, height: naturalSize.width)
+            videoComposition.renderSize = renderSize
             videoComposition.frameDuration = CMTime(value: 1, timescale: 30)
             
             instruction = AVMutableVideoCompositionInstruction()
             instruction.timeRange = CMTimeRange(start: .zero, end: composition.duration)
             layerInstruction = AVMutableVideoCompositionLayerInstruction(assetTrack: videoTrack)
-            layerInstruction.setTransform(translateRotate, at: .zero)
+            layerInstruction.setTransform(t, at: .zero)
             
             self.videoComposition = videoComposition
         }
@@ -60,4 +61,8 @@ class RotateCommand: Command {
         
         NotificationCenter.default.post(name: .editCommandCompletionNotification, object: self, userInfo: nil)
     }
+}
+
+extension CGSize {
+    var swap: CGSize { .init(width: height, height: width) }
 }
