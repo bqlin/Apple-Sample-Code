@@ -15,6 +15,7 @@ class CropCommand: Command {
         guard let composition = composition else { return }
         guard let videoTrack = composition.tracks(withMediaType: .video).first else { return }
         
+        // 每次裁剪到右下角，这里原点还是在左上角
         var instruction: AVMutableVideoCompositionInstruction
         var layerInstruction: AVMutableVideoCompositionLayerInstruction
         if let videoComposition = videoComposition {
@@ -27,8 +28,7 @@ class CropCommand: Command {
             layerInstruction = instruction.layerInstructions.first! as! AVMutableVideoCompositionLayerInstruction
             
             var exitingTransform: CGAffineTransform = .identity
-            let size = videoTrack.naturalSize
-            let t = CGAffineTransform(translationX: -1 * size.width / 2, y: -1 * size.height / 2)
+            let t = CGAffineTransform(translationX: -renderSize.width, y: -renderSize.height)
             if layerInstruction.getTransformRamp(for: composition.duration, start: &exitingTransform, end: nil, timeRange: nil) {
                 layerInstruction.setTransform(exitingTransform.concatenating(t), at: .zero)
             } else {
@@ -46,8 +46,7 @@ class CropCommand: Command {
             instruction.timeRange = CMTimeRange(start: .zero, end: composition.duration)
             
             layerInstruction = .init(assetTrack: videoTrack)
-            let size = videoTrack.naturalSize
-            let t = CGAffineTransform(translationX: -1 * size.width / 2, y: -1 * size.height / 2)
+            let t = CGAffineTransform(translationX: -renderSize.width, y: -renderSize.height)
             layerInstruction.setTransform(t, at: .zero)
             self.videoComposition = videoComposition
         }
