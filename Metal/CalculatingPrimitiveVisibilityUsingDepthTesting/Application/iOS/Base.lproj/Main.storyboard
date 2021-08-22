@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14810.12" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+    <device id="retina5_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14766.15"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tXr-a1-R10">
+            <objects>
+                <viewController id="BV1-FR-VrT" customClass="AAPLViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="8aa-yV-Osq"/>
+                        <viewControllerLayoutGuide type="bottom" id="qHh-Mt-9TT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3se-qz-xqx" customClass="MTKView">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Left Vertex Depth Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wX6-jF-pJD">
+                                <rect key="frame" x="40.000000000000007" y="684" width="114.66666666666669" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Right Vertex Depth Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kuy-5J-Ywl">
+                                <rect key="frame" x="253" y="684" width="121" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.25" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Yyx-Pt-h3q">
+                                <rect key="frame" x="292" y="701" width="104" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="NRs-sg-VJl"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="setRightVertexDepth:" destination="BV1-FR-VrT" eventType="valueChanged" id="3AB-AV-xao"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.25" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="C4F-lq-N4P">
+                                <rect key="frame" x="155" y="20" width="104" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="7Ff-CU-bLl"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="setTopVertexDepth:" destination="BV1-FR-VrT" eventType="valueChanged" id="6n5-qZ-Vet"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Top Vertex Depth Value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oep-U1-Eqf">
+                                <rect key="frame" x="150" y="50" width="114" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.25" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Lz6-PA-zcw">
+                                <rect key="frame" x="18" y="701" width="104" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="A17-AN-R0k"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="setLeftVertexDepth:" destination="BV1-FR-VrT" eventType="valueChanged" id="E7r-ql-crS"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wX6-jF-pJD" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leading" constant="40" id="1at-De-anx"/>
+                            <constraint firstItem="Lz6-PA-zcw" firstAttribute="leading" secondItem="3se-qz-xqx" secondAttribute="leadingMargin" id="2oV-pd-gu1"/>
+                            <constraint firstItem="Oep-U1-Eqf" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" constant="50" id="G5A-Y3-r6G"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="wX6-jF-pJD" secondAttribute="bottom" constant="40" id="Kw2-QO-I8G"/>
+                            <constraint firstItem="C4F-lq-N4P" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="M6i-8k-Bbs"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="Yyx-Pt-h3q" secondAttribute="bottom" constant="5" id="NhI-m6-Abm"/>
+                            <constraint firstItem="C4F-lq-N4P" firstAttribute="top" secondItem="8aa-yV-Osq" secondAttribute="bottom" constant="20" id="Q4i-jq-Mre"/>
+                            <constraint firstItem="Yyx-Pt-h3q" firstAttribute="trailing" secondItem="3se-qz-xqx" secondAttribute="trailingMargin" id="QMO-Bu-Rs9"/>
+                            <constraint firstAttribute="trailing" secondItem="kuy-5J-Ywl" secondAttribute="trailing" constant="40" id="Voh-Kv-KcI"/>
+                            <constraint firstItem="kuy-5J-Ywl" firstAttribute="leading" secondItem="wX6-jF-pJD" secondAttribute="trailing" priority="1" id="cyn-PF-piI"/>
+                            <constraint firstItem="Oep-U1-Eqf" firstAttribute="centerX" secondItem="3se-qz-xqx" secondAttribute="centerX" id="i5c-ni-YzX"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="kuy-5J-Ywl" secondAttribute="bottom" constant="40" id="mhw-uV-WgX"/>
+                            <constraint firstItem="qHh-Mt-9TT" firstAttribute="top" secondItem="Lz6-PA-zcw" secondAttribute="bottom" constant="5" id="zpr-dl-Hx3"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="_leftVertexDepthLabel" destination="wX6-jF-pJD" id="3dN-D1-1fz"/>
+                        <outlet property="_leftVertexDepthSlider" destination="Lz6-PA-zcw" id="85N-Ds-iku"/>
+                        <outlet property="_rightVertexDepthLabel" destination="kuy-5J-Ywl" id="LZN-jk-2qL"/>
+                        <outlet property="_rightVertexDepthSlider" destination="Yyx-Pt-h3q" id="Y7w-m7-rGX"/>
+                        <outlet property="_topVertexDepthLabel" destination="Oep-U1-Eqf" id="EIV-xI-0xU"/>
+                        <outlet property="_topVertexDepthSlider" destination="C4F-lq-N4P" id="P4g-of-8Qa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130.46875" y="93.75"/>
+        </scene>
+    </scenes>
+</document>

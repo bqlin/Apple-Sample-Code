@@ -484,3 +484,10 @@ AVPlayerItemLegibleOutput使用。
 - 2021-01-16
 
 展示一个自定义纹理加载器，将图像数据加载到纹理中，并将其绘制到四边形中。
+
+### DepthTesting
+
+- CalculatingPrimitiveVisibilityUsingDepthTesting
+- 2021-02-04
+
+通过深度纹理来确定场景中可见的像素。
