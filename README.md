@@ -491,3 +491,10 @@ AVPlayerItemLegibleOutput使用。
 - 2021-02-04
 
 通过深度纹理来确定场景中可见的像素。
+
+### CustomRenderPassSetup
+
+- CustomizingRenderPassSetup
+- 2021-01-16
+
+离屏渲染。
