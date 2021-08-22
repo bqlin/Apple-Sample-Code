@@ -11,18 +11,18 @@
 		034DA090264BD5590094D64A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 034DA08E264BD5590094D64A /* Main.storyboard */; };
 		034DA095264BD55B0094D64A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 034DA093264BD55B0094D64A /* LaunchScreen.storyboard */; };
 		034DA09F264BDD500094D64A /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA09E264BDD500094D64A /* Renderer.swift */; };
-		034DA0A1264BDD7E0094D64A /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 034DA0A0264BDD7E0094D64A /* AAPLShaders.metal */; };
 		034DA0AA264BF9650094D64A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA08C264BD5590094D64A /* ViewController.swift */; };
 		034DA0AB264BF9650094D64A /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA09E264BDD500094D64A /* Renderer.swift */; };
-		034DA0AC264BF9650094D64A /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 034DA0A0264BDD7E0094D64A /* AAPLShaders.metal */; };
 		034DA0BA264BF97B0094D64A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA08C264BD5590094D64A /* ViewController.swift */; };
 		034DA0BB264BF97B0094D64A /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA09E264BDD500094D64A /* Renderer.swift */; };
-		034DA0BC264BF97B0094D64A /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 034DA0A0264BDD7E0094D64A /* AAPLShaders.metal */; };
 		034DA0F3264BFE690094D64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA0F2264BFE690094D64A /* AppDelegate.swift */; };
 		034DA0F4264BFEAD0094D64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA0F2264BFE690094D64A /* AppDelegate.swift */; };
 		034DA0F7264BFEC60094D64A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 034DA0F5264BFEC20094D64A /* AppDelegate.swift */; };
 		034DA0F9264BFF350094D64A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 034DA0D3264BFD2B0094D64A /* Main.storyboard */; };
 		034DA0FA264BFF860094D64A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 034DA0D0264BFD220094D64A /* Main.storyboard */; };
+		03F7AE3326D25BBC00585449 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 03F7AE3126D25BBC00585449 /* AAPLShaders.metal */; };
+		03F7AE3426D25BBC00585449 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 03F7AE3126D25BBC00585449 /* AAPLShaders.metal */; };
+		03F7AE3526D25BBC00585449 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 03F7AE3126D25BBC00585449 /* AAPLShaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,8 +32,6 @@
 		034DA094264BD55B0094D64A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		034DA096264BD55B0094D64A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		034DA09E264BDD500094D64A /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
-		034DA0A0264BDD7E0094D64A /* AAPLShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = AAPLShaders.metal; path = ../../../objc/Renderer/AAPLShaders.metal; sourceTree = "<group>"; };
-		034DA0A2264BDD8C0094D64A /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLShaderTypes.h; path = ../../../objc/Renderer/AAPLShaderTypes.h; sourceTree = "<group>"; };
 		034DA0A4264BDDCD0094D64A /* HiTriangle-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HiTriangle-Bridging-Header.h"; sourceTree = "<group>"; };
 		034DA0B6264BF9650094D64A /* HelloTriangle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HelloTriangle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		034DA0C6264BF97B0094D64A /* HiTriangle-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HiTriangle-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +41,8 @@
 		034DA0D4264BFD2B0094D64A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		034DA0F2264BFE690094D64A /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Application/iOS/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		034DA0F5264BFEC20094D64A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		03F7AE3126D25BBC00585449 /* AAPLShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = AAPLShaders.metal; path = ../../ObjC/Renderer/AAPLShaders.metal; sourceTree = "<group>"; };
+		03F7AE3226D25BBC00585449 /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLShaderTypes.h; path = ../../ObjC/Renderer/AAPLShaderTypes.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,8 +116,8 @@
 			isa = PBXGroup;
 			children = (
 				034DA09E264BDD500094D64A /* Renderer.swift */,
-				034DA0A0264BDD7E0094D64A /* AAPLShaders.metal */,
-				034DA0A2264BDD8C0094D64A /* AAPLShaderTypes.h */,
+				03F7AE3126D25BBC00585449 /* AAPLShaders.metal */,
+				03F7AE3226D25BBC00585449 /* AAPLShaderTypes.h */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -266,8 +266,8 @@
 			files = (
 				034DA0F3264BFE690094D64A /* AppDelegate.swift in Sources */,
 				034DA08D264BD5590094D64A /* ViewController.swift in Sources */,
+				03F7AE3426D25BBC00585449 /* AAPLShaders.metal in Sources */,
 				034DA09F264BDD500094D64A /* Renderer.swift in Sources */,
-				034DA0A1264BDD7E0094D64A /* AAPLShaders.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,8 +277,8 @@
 			files = (
 				034DA0F4264BFEAD0094D64A /* AppDelegate.swift in Sources */,
 				034DA0AA264BF9650094D64A /* ViewController.swift in Sources */,
+				03F7AE3526D25BBC00585449 /* AAPLShaders.metal in Sources */,
 				034DA0AB264BF9650094D64A /* Renderer.swift in Sources */,
-				034DA0AC264BF9650094D64A /* AAPLShaders.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,8 +288,8 @@
 			files = (
 				034DA0F7264BFEC60094D64A /* AppDelegate.swift in Sources */,
 				034DA0BA264BF97B0094D64A /* ViewController.swift in Sources */,
+				03F7AE3326D25BBC00585449 /* AAPLShaders.metal in Sources */,
 				034DA0BB264BF97B0094D64A /* Renderer.swift in Sources */,
-				034DA0BC264BF97B0094D64A /* AAPLShaders.metal in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
