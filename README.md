@@ -498,3 +498,10 @@ AVPlayerItemLegibleOutput使用。
 - 2021-01-16
 
 离屏渲染。
+
+### BasicArgumentBuffers
+
+- ManagingGroupsOfResourcesWithArgumentBuffers
+- 2021-02-06
+
+参数缓冲区使用。
