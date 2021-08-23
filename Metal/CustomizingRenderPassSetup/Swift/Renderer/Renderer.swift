@@ -10,8 +10,8 @@ class Renderer: NSObject {
     var commandQueue: MTLCommandQueue!
     var aspectRatio: Float!
     
-    var renderTargetTexture: MTLTexture!
-    let targetRenderPassDescriptor = MTLRenderPassDescriptor()
+    var offscreenTexture: MTLTexture!
+    let offscreenRenderPassDescriptor = MTLRenderPassDescriptor()
     
     var offscreenRenderPipeline: MTLRenderPipelineState!
     var drawableRenderPipeline: MTLRenderPipelineState!
@@ -26,22 +26,22 @@ class Renderer: NSObject {
 
         commandQueue = device.makeCommandQueue()!
 
-        // Set up a texture for rendering to and sampling from
+        // 创建纹理，作为离屏渲染通道的渲染目标
         let textureDescriptor = MTLTextureDescriptor()
         textureDescriptor.textureType = .type2D
         textureDescriptor.width = 512
         textureDescriptor.height = 512
         textureDescriptor.pixelFormat = .rgba8Unorm
         textureDescriptor.usage = [.renderTarget, .shaderRead]
-        renderTargetTexture = device.makeTexture(descriptor: textureDescriptor)
-        assert(renderTargetTexture != nil, "创建目标纹理失败")
+        offscreenTexture = device.makeTexture(descriptor: textureDescriptor)
+        assert(offscreenTexture != nil, "创建目标纹理失败")
 
-        let colorAttachment = targetRenderPassDescriptor.colorAttachments[0]!
-        colorAttachment.texture = renderTargetTexture
+        let colorAttachment = offscreenRenderPassDescriptor.colorAttachments[0]!
+        colorAttachment.texture = offscreenTexture
         colorAttachment.loadAction = .clear
         colorAttachment.clearColor = .init(red: 1, green: 1, blue: 1, alpha: 1)
         colorAttachment.storeAction = .store
-        targetRenderPassDescriptor.colorAttachments[0] = colorAttachment
+        offscreenRenderPassDescriptor.colorAttachments[0] = colorAttachment
 
         // 配置视图渲染管线
         guard let defaultLibrary = device.makeDefaultLibrary() else { fatalError("加载着色器失败") }
@@ -63,7 +63,7 @@ class Renderer: NSObject {
         piplineDescriptor.sampleCount = 1
         piplineDescriptor.vertexFunction = defaultLibrary.makeFunction(name: "simpleVertexShader")
         piplineDescriptor.fragmentFunction = defaultLibrary.makeFunction(name: "simpleFragmentShader")
-        piplineDescriptor.colorAttachments[0].pixelFormat = renderTargetTexture.pixelFormat
+        piplineDescriptor.colorAttachments[0].pixelFormat = offscreenTexture.pixelFormat
         do {
             offscreenRenderPipeline = try device.makeRenderPipelineState(descriptor: piplineDescriptor)
         } catch {
@@ -96,7 +96,7 @@ extension Renderer: MTKViewDelegate {
             .init([0.0, 0.5], [0.0, 0.0, 1.0, 0.0]),
         ]
 
-        let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: targetRenderPassDescriptor)!
+        let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor)!
         encoder.label = "Offscreen Render Pass"
         encoder.setRenderPipelineState(offscreenRenderPipeline)
         encoder.setVertexBytes(triangleVertices, length: MemoryLayout<AAPLSimpleVertex>.size * triangleVertices.count, index: Int(AAPLVertexInputIndexVertices.rawValue))
@@ -123,7 +123,7 @@ extension Renderer: MTKViewDelegate {
         encoder.setVertexBytes(quadVertices, length: MemoryLayout<AAPLTextureVertex>.size * quadVertices.count, index: Int(AAPLVertexInputIndexVertices.rawValue))
         encoder.setVertexBytes(&aspectRatio, length: MemoryLayout.size(ofValue: aspectRatio), index: Int(AAPLVertexInputIndexAspectRatio.rawValue))
         
-        encoder.setFragmentTexture(renderTargetTexture, index: Int(AAPLTextureInputIndexColor.rawValue))
+        encoder.setFragmentTexture(offscreenTexture, index: Int(AAPLTextureInputIndexColor.rawValue))
         encoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: quadVertices.count)
         
         encoder.endEncoding()
