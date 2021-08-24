@@ -34,7 +34,6 @@
 		03213A1B26D1E644006D8C22 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		03213A1C26D1E691006D8C22 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		03213A2226D204AF006D8C22 /* DepthTesting-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DepthTesting-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		03213A2E26D204B0006D8C22 /* DepthTesting_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DepthTesting_macOS.entitlements; sourceTree = "<group>"; };
 		03213A3726D2062E006D8C22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -98,7 +97,6 @@
 		03213A0826D1E05A006D8C22 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
-				03213A2E26D204B0006D8C22 /* DepthTesting_macOS.entitlements */,
 				03213A0926D1E05A006D8C22 /* Main.storyboard */,
 				03213A0B26D1E05A006D8C22 /* Info.plist */,
 				03213A3726D2062E006D8C22 /* AppDelegate.swift */,
@@ -417,7 +415,6 @@
 		03213A3026D204B0006D8C22 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Application/macOS/DepthTesting_macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Application/macOS/Info.plist;
@@ -437,7 +434,6 @@
 		03213A3126D204B0006D8C22 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = Application/macOS/DepthTesting_macOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Application/macOS/Info.plist;

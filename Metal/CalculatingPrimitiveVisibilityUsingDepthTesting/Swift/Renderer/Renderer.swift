@@ -86,20 +86,20 @@ extension Renderer: MTKViewDelegate {
             // 矩形顶点，设置顶点深度值为0.5
             let quadVertices: [AAPLVertex] = [
                 // Pixel positions (x, y) and clip depth (z),RGBA colors.
-                .init([100, 100, 0.5], [0.5, 0.5, 0.5, 1]),
-                .init([100, floatSize.y - 100, 0.5], [0.5, 0.5, 0.5, 1]),
+                .init([100              , 100              , 0.5], [0.5, 0.5, 0.5, 1]),
+                .init([100              , floatSize.y - 100, 0.5], [0.5, 0.5, 0.5, 1]),
                 .init([floatSize.x - 100, floatSize.y - 100, 0.5], [0.5, 0.5, 0.5, 1]),
-                .init([100, 100, 0.5], [0.5, 0.5, 0.5, 1]),
+                .init([100              , 100              , 0.5], [0.5, 0.5, 0.5, 1]),
                 .init([floatSize.x - 100, floatSize.y - 100, 0.5], [0.5, 0.5, 0.5, 1]),
-                .init([floatSize.x - 100, 100, 0.5], [0.5, 0.5, 0.5, 1]),
+                .init([floatSize.x - 100, 100              , 0.5], [0.5, 0.5, 0.5, 1]),
             ]
             renderEncoder.setVertexBytes(quadVertices, length: MemoryLayout<AAPLVertex>.size * quadVertices.count, index: Int(AAPLVertexInputIndexVertices.rawValue))
             renderEncoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: quadVertices.count)
 
             // 三角形顶点
             let triangleVertices: [AAPLVertex] = [
-                .init([200, floatSize.y - 200, leftVertexDepth], [1, 1, 1, 1]),
-                .init([floatSize.x / 2.0, 200, topVertexDepth], [1, 1, 1, 1]),
+                .init([200              , floatSize.y - 200, leftVertexDepth] , [1, 1, 1, 1]),
+                .init([floatSize.x / 2.0, 200              , topVertexDepth]  , [1, 1, 1, 1]),
                 .init([floatSize.x - 200, floatSize.y - 200, rightVertexDepth], [1, 1, 1, 1]),
             ]
             renderEncoder.setVertexBytes(triangleVertices, length: MemoryLayout<AAPLVertex>.size * triangleVertices.count, index: Int(AAPLVertexInputIndexVertices.rawValue))

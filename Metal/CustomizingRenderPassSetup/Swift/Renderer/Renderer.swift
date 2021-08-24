@@ -91,9 +91,9 @@ extension Renderer: MTKViewDelegate {
     func drawOffscreen(commandBuffer: MTLCommandBuffer) {
         let triangleVertices: [AAPLSimpleVertex] = [
             // Positions     ,  Colors
-            .init([0.5, -0.5], [1.0, 0.0, 0.0, 1.0]),
+            .init([+0.5, -0.5], [1.0, 0.0, 0.0, 1.0]),
             .init([-0.5, -0.5], [0.0, 1.0, 0.0, 1.0]),
-            .init([0.0, 0.5], [0.0, 0.0, 1.0, 0.0]),
+            .init([+0.0, +0.5], [0.0, 0.0, 1.0, 0.0]),
         ]
 
         let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: offscreenRenderPassDescriptor)!
@@ -110,12 +110,12 @@ extension Renderer: MTKViewDelegate {
 
         let quadVertices: [AAPLTextureVertex] = [
             // Positions     , Texture coordinates
-            .init([0.5, -0.5], [1.0, 1.0]),
+            .init([+0.5, -0.5], [1.0, 1.0]),
             .init([-0.5, -0.5], [0.0, 1.0]),
-            .init([-0.5, 0.5], [0.0, 0.0]),
-            .init([0.5, -0.5], [1.0, 1.0]),
-            .init([-0.5, 0.5], [0.0, 0.0]),
-            .init([0.5, 0.5], [1.0, 0.0]),
+            .init([-0.5, +0.5], [0.0, 0.0]),
+            .init([+0.5, -0.5], [1.0, 1.0]),
+            .init([-0.5, +0.5], [0.0, 0.0]),
+            .init([+0.5, +0.5], [1.0, 0.0]),
         ]
         let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: passDecriptor)!
         encoder.label = "Drawable Render Pass"
