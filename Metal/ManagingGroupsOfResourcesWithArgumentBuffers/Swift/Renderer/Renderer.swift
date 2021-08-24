@@ -36,10 +36,10 @@ class Renderer: NSObject {
         } catch {
             fatalError("创建渲染管线失败，\(error)")
         }
-        
+
         commandQueue = device.makeCommandQueue()
     }
-    
+
     let vertexData: [AAPLVertex] = [
         //      Vertex     |  Texture    | Vertex
         //     Positions   | Coordinates | Colors
@@ -50,12 +50,12 @@ class Renderer: NSObject {
         .init([-0.75, +0.75], [0, 1], [0, 0, 1, 1]),
         .init([+0.75, +0.75], [1, 1], [1, 1, 1, 1]),
     ]
-    
+
     func setupData(descriptor: MTLRenderPipelineDescriptor) {
         // 创建顶点缓冲区
         vertexBuffer = device.makeBuffer(bytes: vertexData, length: MemoryLayout<AAPLVertex>.size * vertexData.count, options: .storageModeShared)!
         vertexBuffer.label = "顶点"
-        
+
         // 创建纹理
         let textureLoader = MTKTextureLoader(device: device)
         do {
@@ -64,7 +64,7 @@ class Renderer: NSObject {
             fatalError("纹理加载错误，\(error)")
         }
         texture.label = "文字"
-        
+
         // 创建采样器
         let samplerDescriptor = MTLSamplerDescriptor()
         samplerDescriptor.minFilter = .linear
@@ -73,11 +73,11 @@ class Renderer: NSObject {
         samplerDescriptor.normalizedCoordinates = true
         samplerDescriptor.supportArgumentBuffers = true
         sampler = device.makeSamplerState(descriptor: samplerDescriptor)!
-        
+
+        // 创建间接缓冲区
         var bufferElements = 256
         let bufferLength = MemoryLayout<CFloat>.size * bufferElements
         indirectBuffer = device.makeBuffer(length: bufferLength, options: .storageModeShared)!
-        
         let patterns = UnsafeMutableRawBufferPointer(start: indirectBuffer.contents(), count: bufferLength).bindMemory(to: CFloat.self)
         // 或使用下面的方式构建
         // UnsafeMutableRawBufferPointer(start: indirectBuffer.contents().bindMemory(to: CFloat.self, capacity: MemoryLayout<CFloat>.size), count: bufferElements)
@@ -85,23 +85,22 @@ class Renderer: NSObject {
             patterns[i] = (i % 24) < 3 ? 1 : 0
         }
         indirectBuffer.label = "间接缓冲区"
-        
-        // 创建渲染管线和参数缓冲区
+
+        // 用片元函数创建参数缓冲区
         let defaultLibrary = device.makeDefaultLibrary()!
         let vertexFunction = defaultLibrary.makeFunction(name: "vertexShader")!
         let fragmentFunction = defaultLibrary.makeFunction(name: "fragmentShader")!
         let argumentEncoder = fragmentFunction.makeArgumentEncoder(bufferIndex: Int(AAPLFragmentBufferIndexArguments.rawValue))
-        
         fragmentShaderArgumentBuffer = device.makeBuffer(length: argumentEncoder.encodedLength, options: [])!
         fragmentShaderArgumentBuffer.label = "参数缓冲区"
         argumentEncoder.setArgumentBuffer(fragmentShaderArgumentBuffer, offset: 0)
         argumentEncoder.setTexture(texture, index: Int(AAPLArgumentBufferIDExampleTexture.rawValue))
         argumentEncoder.setSamplerState(sampler, index: Int(AAPLArgumentBufferIDExampleSampler.rawValue))
         argumentEncoder.setBuffer(indirectBuffer, offset: 0, index: Int(AAPLArgumentBufferIDExampleBuffer.rawValue))
-        
         let numElements = argumentEncoder.constantData(at: Int(AAPLArgumentBufferIDExampleConstant.rawValue))
         numElements.copyMemory(from: &bufferElements, byteCount: MemoryLayout.size(ofValue: bufferElements))
-        
+
+        // 设置到渲染管线描述符
         descriptor.vertexFunction = vertexFunction
         descriptor.fragmentFunction = fragmentFunction
     }
@@ -111,7 +110,7 @@ extension Renderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         setupViewport(size: size)
     }
-    
+
     func setupViewport(size: CGSize) {
         viewport = .init()
         if size.width < size.height {
@@ -134,20 +133,23 @@ extension Renderer: MTKViewDelegate {
     func draw(in view: MTKView) {
         guard let commandBuffer = commandQueue.makeCommandBuffer() else { return }
         commandBuffer.label = "渲染命令"
-        
+
         if let passDescriptor = view.currentRenderPassDescriptor {
             let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: passDescriptor)!
             encoder.label = "渲染命令编码器"
-            
-            encoder.setViewport(viewport)
+
+            // 使用共享资源，即将其映射到显存中
             encoder.useResource(texture, usage: .sample)
             encoder.useResource(indirectBuffer, usage: .read)
-            
+
+            // 设置参数并进行绘制
+            encoder.setViewport(viewport)
             encoder.setRenderPipelineState(renderPipeline)
             encoder.setVertexBuffer(vertexBuffer, offset: 0, index: Int(AAPLVertexBufferIndexVertices.rawValue))
             encoder.setFragmentBuffer(fragmentShaderArgumentBuffer, offset: 0, index: Int(AAPLFragmentBufferIndexArguments.rawValue))
             encoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertexData.count)
             encoder.endEncoding()
+
             commandBuffer.present(view.currentDrawable!)
             commandBuffer.commit()
         }
