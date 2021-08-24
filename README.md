@@ -505,3 +505,10 @@ AVPlayerItemLegibleOutput使用。
 - 2021-02-06
 
 参数缓冲区使用。
+
+### ArgumentBufferArraysWithHeaps
+
+- UsingArgumentBuffersWithResourceHeaps
+- 2021-01-30
+
+使用资源堆管理参数缓冲区数组。
