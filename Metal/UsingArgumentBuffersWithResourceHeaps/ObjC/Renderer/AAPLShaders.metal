@@ -51,7 +51,7 @@ fragmentShader(       RasterizerData            in                 [[ stage_in ]
 
     float4 color = float4(0, 0, 0, 1);
 
-    // If on the right side of the quad...
+    // If on the right side of the quad...这里的应该是左侧
     if(in.texCoord.x < 0.5)
     {
         //...use accumulated values from each of the 32 textures
@@ -63,7 +63,7 @@ fragmentShader(       RasterizerData            in                 [[ stage_in ]
             color += textureValue;
         }
     }
-    else // if on left side of the quad...
+    else // if on left side of the quad...这里应该是右侧
     {
         //...use values from a buffer
 

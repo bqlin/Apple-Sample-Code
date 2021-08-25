@@ -73,9 +73,12 @@ class Renderer: NSObject {
             argumentEncoder.setTexture(texture, index: i + Int(AAPLArgumentBufferIDExampleTextures.rawValue))
         }
         for (i, dataBuffer) in dataBuffers.enumerated() {
+            // 填充数组
             argumentEncoder.setBuffer(dataBuffer, offset: 0, index: i + Int(AAPLArgumentBufferIDExampleBuffers.rawValue))
+            
+            // 数组元素个数
             let elementCountAddress = argumentEncoder.constantData(at: i + Int(AAPLArgumentBufferIDExampleConstants.rawValue))
-            var count: Int = dataBuffer.length / 4
+            var count: Int = dataBuffer.length / MemoryLayout<DataType>.size
             elementCountAddress.copyMemory(from: &count, byteCount: MemoryLayout.size(ofValue: count))
         }
     }
@@ -145,7 +148,6 @@ class Renderer: NSObject {
             sizeAndAlign.size += (sizeAndAlign.size & (sizeAndAlign.align - 1)) + sizeAndAlign.align
             heapDescriptor.size += sizeAndAlign.size
         }
-
         for dataBuffer in dataBuffers {
             var sizeAndAlign = device.heapBufferSizeAndAlign(length: dataBuffer.length, options: .storageModePrivate)
             sizeAndAlign.size += (sizeAndAlign.size & (sizeAndAlign.align - 1)) + sizeAndAlign.align
