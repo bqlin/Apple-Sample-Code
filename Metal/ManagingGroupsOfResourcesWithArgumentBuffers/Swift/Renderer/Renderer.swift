@@ -11,7 +11,6 @@ class Renderer: NSObject {
     var commandQueue: MTLCommandQueue!
 
     var vertexBuffer: MTLBuffer!
-    var numVertices: Int = 0
     var renderPipeline: MTLRenderPipelineState!
     var texture: MTLTexture!
     var sampler: MTLSamplerState!
