@@ -125,7 +125,7 @@ class Renderer: NSObject {
             blitEncoder.copy(from: dataBuffer, sourceOffset: 0, to: heapBuffer, destinationOffset: 0, size: heapBuffer.length)
 
             // 替换缓冲区
-            dataBuffers[i] = dataBuffer
+            dataBuffers[i] = heapBuffer
         }
 
         blitEncoder.endEncoding()

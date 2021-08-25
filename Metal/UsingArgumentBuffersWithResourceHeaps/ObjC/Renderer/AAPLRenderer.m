@@ -16,7 +16,7 @@ Implementation of renderer class which performs Metal setup and per frame render
 
 // This sample can be run both with and without using a resource heap to demonstrate the difference
 //    between the two methods of resource management when used in conjunction with argument buffers
-#define ENABLE_RESOURCE_HEAP 0
+#define ENABLE_RESOURCE_HEAP 1
 
 // Main class performing the rendering
 @implementation AAPLRenderer
