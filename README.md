@@ -512,3 +512,10 @@ AVPlayerItemLegibleOutput使用。
 - 2021-01-30
 
 使用资源堆管理参数缓冲区数组。
+
+### GPUArgumentBufferEncoding
+
+- EncodingArgumentBuffersOnTheGPU
+- 2021-02-03
+
+在GPU上编码参数缓冲区。

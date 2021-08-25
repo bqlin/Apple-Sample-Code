@@ -1,0 +1,12 @@
+{
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "levels" : [
+    {
+      "filename" : "23House.png",
+      "mipmap-level" : "base"
+    }
+  ]
+}

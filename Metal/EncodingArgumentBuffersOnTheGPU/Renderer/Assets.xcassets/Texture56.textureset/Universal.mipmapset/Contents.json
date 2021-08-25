@@ -1,0 +1,12 @@
+{
+  "info" : {
+    "version" : 1,
+    "author" : "xcode"
+  },
+  "levels" : [
+    {
+      "filename" : "57Pear.png",
+      "mipmap-level" : "base"
+    }
+  ]
+}
