@@ -1,0 +1,674 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1604FCF9206438E400305D9C /* AAPLObjLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1604FCF8206438E400305D9C /* AAPLObjLoader.mm */; };
+		1604FCFA206438E400305D9C /* AAPLObjLoader.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1604FCF8206438E400305D9C /* AAPLObjLoader.mm */; };
+		16C541D7206307BB006E4A86 /* AAPLVegetationRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16C541D6206307BB006E4A86 /* AAPLVegetationRenderer.mm */; };
+		16C541D8206307BC006E4A86 /* AAPLVegetationRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16C541D6206307BB006E4A86 /* AAPLVegetationRenderer.mm */; };
+		16C7A9F72058C717007CB454 /* AAPLCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16C7A9F52058C716007CB454 /* AAPLCamera.mm */; };
+		16C7A9F82058C727007CB454 /* AAPLCamera.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16C7A9F52058C716007CB454 /* AAPLCamera.mm */; };
+		16ECCDC6206076A700D3F99C /* AAPLAllocator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16ECCDC5206076A700D3F99C /* AAPLAllocator.mm */; };
+		16ECCDC7206076A700D3F99C /* AAPLAllocator.mm in Sources */ = {isa = PBXBuildFile; fileRef = 16ECCDC5206076A700D3F99C /* AAPLAllocator.mm */; };
+		16F1221C2069BAA0008DBEA0 /* AAPLVegetationRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 16F1221B2069BAA0008DBEA0 /* AAPLVegetationRenderer.metal */; };
+		16F1221D2069BAA0008DBEA0 /* AAPLVegetationRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 16F1221B2069BAA0008DBEA0 /* AAPLVegetationRenderer.metal */; };
+		6E099796206ED875009C9F71 /* AAPLParticleRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6EFEA868204FCA200037D1C5 /* AAPLParticleRenderer.mm */; };
+		6E49F8EC204A3DE400915908 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E49F8EA204A3DE400915908 /* Metal.framework */; };
+		6E49F8ED204A3DE400915908 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E49F8EB204A3DE400915908 /* MetalKit.framework */; };
+		6E49F8EF204A3DEC00915908 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E49F8EE204A3DEC00915908 /* ModelIO.framework */; };
+		6E822440204A14C2007EEF04 /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E82243F204A14C2007EEF04 /* MetalKit.framework */; };
+		6E822442204A14C7007EEF04 /* Metal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E822441204A14C7007EEF04 /* Metal.framework */; };
+		6E822444204A14CC007EEF04 /* ModelIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E822443204A14CC007EEF04 /* ModelIO.framework */; };
+		6EB91622205B3A2200C12130 /* AAPLRendererCommon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6EB91621205B3A2200C12130 /* AAPLRendererCommon.mm */; };
+		6EB91623205B3A2200C12130 /* AAPLRendererCommon.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6EB91621205B3A2200C12130 /* AAPLRendererCommon.mm */; };
+		6EBEC83A2049C10F0071867D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EBEC8382049C10F0071867D /* Main.storyboard */; };
+		6EBEC83D2049C10F0071867D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EBEC83B2049C10F0071867D /* LaunchScreen.storyboard */; };
+		6EBEC8612049C1100071867D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EBEC85F2049C1100071867D /* Main.storyboard */; };
+		6EBEC8652049C1100071867D /* AAPLMainRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6EBEC8282049C10F0071867D /* AAPLMainRenderer.mm */; };
+		6EBEC8672049C1100071867D /* AAPLMainRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6EBEC8282049C10F0071867D /* AAPLMainRenderer.mm */; };
+		6EBEC87E2049C8E20071867D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBEC83F2049C10F0071867D /* main.m */; };
+		6EBEC87F2049C8E30071867D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6EBEC83F2049C10F0071867D /* main.m */; };
+		6EBEC8802049C8E70071867D /* AAPLAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6EBEC8482049C1100071867D /* AAPLAppDelegate.mm */; };
+		6EBEC8812049C8E70071867D /* AAPLAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6EBEC8482049C1100071867D /* AAPLAppDelegate.mm */; };
+		6EBEC8822049C8EA0071867D /* AAPLGameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6EBEC8362049C10F0071867D /* AAPLGameViewController.mm */; };
+		6EBEC8832049C8EB0071867D /* AAPLGameViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6EBEC8362049C10F0071867D /* AAPLGameViewController.mm */; };
+		6ECA27C62061D39400995831 /* Textures in Resources */ = {isa = PBXBuildFile; fileRef = 6EFEA89F20509D630037D1C5 /* Textures */; };
+		6ED5239320646EB100DE7948 /* AAPLParticleRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 6ED5239120646EB100DE7948 /* AAPLParticleRenderer.metal */; };
+		6ED52395206AB71500DE7948 /* Meshes in Resources */ = {isa = PBXBuildFile; fileRef = 6ED52394206AB71500DE7948 /* Meshes */; };
+		6ED52396206AB71500DE7948 /* Meshes in Resources */ = {isa = PBXBuildFile; fileRef = 6ED52394206AB71500DE7948 /* Meshes */; };
+		6EFEA860204F44010037D1C5 /* AAPLTerrainRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6EFEA85F204F44010037D1C5 /* AAPLTerrainRenderer.mm */; };
+		6EFEA861204F44010037D1C5 /* AAPLTerrainRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6EFEA85F204F44010037D1C5 /* AAPLTerrainRenderer.mm */; };
+		6EFEA865204F444A0037D1C5 /* AAPLTerrainRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 6EFEA864204F444A0037D1C5 /* AAPLTerrainRenderer.metal */; };
+		6EFEA866204F444A0037D1C5 /* AAPLTerrainRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 6EFEA864204F444A0037D1C5 /* AAPLTerrainRenderer.metal */; };
+		6EFEA86A204FCA200037D1C5 /* AAPLParticleRenderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 6EFEA868204FCA200037D1C5 /* AAPLParticleRenderer.mm */; };
+		6EFEA8A020509D9C0037D1C5 /* Textures in Resources */ = {isa = PBXBuildFile; fileRef = 6EFEA89F20509D630037D1C5 /* Textures */; };
+		6EFEA8AB20534E1D0037D1C5 /* AAPLMainRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 6EFEA8AA20534E1D0037D1C5 /* AAPLMainRenderer.metal */; };
+		6EFEA8AC20534E1D0037D1C5 /* AAPLMainRenderer.metal in Sources */ = {isa = PBXBuildFile; fileRef = 6EFEA8AA20534E1D0037D1C5 /* AAPLMainRenderer.metal */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1604FCF7206438E400305D9C /* AAPLObjLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLObjLoader.h; sourceTree = "<group>"; };
+		1604FCF8206438E400305D9C /* AAPLObjLoader.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AAPLObjLoader.mm; sourceTree = "<group>"; };
+		16C541D5206307BB006E4A86 /* AAPLVegetationRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLVegetationRenderer.h; sourceTree = "<group>"; };
+		16C541D6206307BB006E4A86 /* AAPLVegetationRenderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AAPLVegetationRenderer.mm; sourceTree = "<group>"; };
+		16C7A9F52058C716007CB454 /* AAPLCamera.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AAPLCamera.mm; sourceTree = "<group>"; };
+		16C7A9F62058C717007CB454 /* AAPLCamera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLCamera.h; sourceTree = "<group>"; };
+		16D87EDD206D9BFB00EB4AFE /* AAPLVegetationRenderer_shared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLVegetationRenderer_shared.h; sourceTree = "<group>"; };
+		16ECCDC4206076A700D3F99C /* AAPLAllocator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLAllocator.h; sourceTree = "<group>"; };
+		16ECCDC5206076A700D3F99C /* AAPLAllocator.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AAPLAllocator.mm; sourceTree = "<group>"; };
+		16F1221B2069BAA0008DBEA0 /* AAPLVegetationRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AAPLVegetationRenderer.metal; sourceTree = "<group>"; };
+		6E49F8EA204A3DE400915908 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.Internal.sdk/System/Library/Frameworks/Metal.framework; sourceTree = DEVELOPER_DIR; };
+		6E49F8EB204A3DE400915908 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.Internal.sdk/System/Library/Frameworks/MetalKit.framework; sourceTree = DEVELOPER_DIR; };
+		6E49F8EE204A3DEC00915908 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.Internal.sdk/System/Library/Frameworks/ModelIO.framework; sourceTree = DEVELOPER_DIR; };
+		6E5E4C51204A20D60079006B /* AAPLRendererCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLRendererCommon.h; sourceTree = "<group>"; };
+		6E82243F204A14C2007EEF04 /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = System/Library/Frameworks/MetalKit.framework; sourceTree = SDKROOT; };
+		6E822441204A14C7007EEF04 /* Metal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Metal.framework; path = System/Library/Frameworks/Metal.framework; sourceTree = SDKROOT; };
+		6E822443204A14CC007EEF04 /* ModelIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ModelIO.framework; path = System/Library/Frameworks/ModelIO.framework; sourceTree = SDKROOT; };
+		6EB91621205B3A2200C12130 /* AAPLRendererCommon.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AAPLRendererCommon.mm; sourceTree = "<group>"; };
+		6EB916252061BA6000C12130 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6EBEC8272049C10F0071867D /* AAPLMainRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLMainRenderer.h; sourceTree = "<group>"; };
+		6EBEC8282049C10F0071867D /* AAPLMainRenderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AAPLMainRenderer.mm; sourceTree = "<group>"; };
+		6EBEC82F2049C10F0071867D /* DynamicTerrainWithArgumentBuffers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DynamicTerrainWithArgumentBuffers.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EBEC8362049C10F0071867D /* AAPLGameViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AAPLGameViewController.mm; sourceTree = "<group>"; };
+		6EBEC8392049C10F0071867D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6EBEC83C2049C10F0071867D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6EBEC83E2049C10F0071867D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6EBEC83F2049C10F0071867D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6EBEC8472049C10F0071867D /* AAPLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLAppDelegate.h; sourceTree = "<group>"; };
+		6EBEC8482049C1100071867D /* AAPLAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AAPLAppDelegate.mm; sourceTree = "<group>"; };
+		6EBEC84A2049C1100071867D /* AAPLGameViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLGameViewController.h; sourceTree = "<group>"; };
+		6EBEC8572049C1100071867D /* DynamicTerrainWithArgumentBuffers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DynamicTerrainWithArgumentBuffers.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EBEC8602049C1100071867D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6EBEC8622049C1100071867D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6ED5239020645BCD00DE7948 /* AAPLParticleRenderer_shared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLParticleRenderer_shared.h; sourceTree = "<group>"; };
+		6ED5239120646EB100DE7948 /* AAPLParticleRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AAPLParticleRenderer.metal; sourceTree = "<group>"; };
+		6ED52394206AB71500DE7948 /* Meshes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Meshes; sourceTree = "<group>"; };
+		6EFEA85E204F43E30037D1C5 /* AAPLTerrainRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLTerrainRenderer.h; sourceTree = "<group>"; };
+		6EFEA85F204F44010037D1C5 /* AAPLTerrainRenderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AAPLTerrainRenderer.mm; sourceTree = "<group>"; };
+		6EFEA863204F44370037D1C5 /* AAPLTerrainRenderer_shared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLTerrainRenderer_shared.h; sourceTree = "<group>"; };
+		6EFEA864204F444A0037D1C5 /* AAPLTerrainRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AAPLTerrainRenderer.metal; sourceTree = "<group>"; };
+		6EFEA867204FC9770037D1C5 /* AAPLParticleRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLParticleRenderer.h; sourceTree = "<group>"; };
+		6EFEA868204FCA200037D1C5 /* AAPLParticleRenderer.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AAPLParticleRenderer.mm; sourceTree = "<group>"; };
+		6EFEA89F20509D630037D1C5 /* Textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Textures; sourceTree = "<group>"; };
+		6EFEA8A22051BB360037D1C5 /* AAPLTerrainRendererUtilities.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AAPLTerrainRendererUtilities.metal; sourceTree = "<group>"; };
+		6EFEA8A52051BFE50037D1C5 /* AAPLMainRenderer_shared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLMainRenderer_shared.h; sourceTree = "<group>"; };
+		6EFEA8A62051C2120037D1C5 /* AAPLMainRendererUtilities.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AAPLMainRendererUtilities.metal; sourceTree = "<group>"; };
+		6EFEA8A920520B530037D1C5 /* AAPLBufferFormats.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLBufferFormats.h; sourceTree = "<group>"; };
+		6EFEA8AA20534E1D0037D1C5 /* AAPLMainRenderer.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AAPLMainRenderer.metal; sourceTree = "<group>"; };
+		76A1691FFE18E22C1226011E /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
+		9E368ABA28995B820DF55F02 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6EBEC82C2049C10F0071867D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E49F8EF204A3DEC00915908 /* ModelIO.framework in Frameworks */,
+				6E49F8EC204A3DE400915908 /* Metal.framework in Frameworks */,
+				6E49F8ED204A3DE400915908 /* MetalKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EBEC8542049C1100071867D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6E822444204A14CC007EEF04 /* ModelIO.framework in Frameworks */,
+				6E822442204A14C7007EEF04 /* Metal.framework in Frameworks */,
+				6E822440204A14C2007EEF04 /* MetalKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4CB96A428C4F672DFBB806B0 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				76A1691FFE18E22C1226011E /* SampleCode.xcconfig */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
+		4F6216724BE298069C3BEC22 /* LICENSE */ = {
+			isa = PBXGroup;
+			children = (
+				9E368ABA28995B820DF55F02 /* LICENSE.txt */,
+			);
+			path = LICENSE;
+			sourceTree = "<group>";
+		};
+		6E82243E204A14C1007EEF04 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6E49F8EA204A3DE400915908 /* Metal.framework */,
+				6E822441204A14C7007EEF04 /* Metal.framework */,
+				6E49F8EB204A3DE400915908 /* MetalKit.framework */,
+				6E82243F204A14C2007EEF04 /* MetalKit.framework */,
+				6E49F8EE204A3DEC00915908 /* ModelIO.framework */,
+				6E822443204A14CC007EEF04 /* ModelIO.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6EBEC8212049C10F0071867D = {
+			isa = PBXGroup;
+			children = (
+				6EB916252061BA6000C12130 /* README.md */,
+				6EBEC8262049C10F0071867D /* Renderer */,
+				6EBEC88A2049CED80071867D /* Data */,
+				6EBEC8762049C2200071867D /* Application */,
+				6EBEC8302049C10F0071867D /* Products */,
+				6E82243E204A14C1007EEF04 /* Frameworks */,
+				4CB96A428C4F672DFBB806B0 /* Configuration */,
+				4F6216724BE298069C3BEC22 /* LICENSE */,
+			);
+			sourceTree = "<group>";
+		};
+		6EBEC8262049C10F0071867D /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				16ECCDC4206076A700D3F99C /* AAPLAllocator.h */,
+				16ECCDC5206076A700D3F99C /* AAPLAllocator.mm */,
+				6EFEA8A920520B530037D1C5 /* AAPLBufferFormats.h */,
+				16C7A9F62058C717007CB454 /* AAPLCamera.h */,
+				16C7A9F52058C716007CB454 /* AAPLCamera.mm */,
+				6EFEA8A52051BFE50037D1C5 /* AAPLMainRenderer_shared.h */,
+				6EBEC8272049C10F0071867D /* AAPLMainRenderer.h */,
+				6EFEA8AA20534E1D0037D1C5 /* AAPLMainRenderer.metal */,
+				6EBEC8282049C10F0071867D /* AAPLMainRenderer.mm */,
+				6EFEA8A62051C2120037D1C5 /* AAPLMainRendererUtilities.metal */,
+				1604FCF7206438E400305D9C /* AAPLObjLoader.h */,
+				1604FCF8206438E400305D9C /* AAPLObjLoader.mm */,
+				6ED5239020645BCD00DE7948 /* AAPLParticleRenderer_shared.h */,
+				6EFEA867204FC9770037D1C5 /* AAPLParticleRenderer.h */,
+				6ED5239120646EB100DE7948 /* AAPLParticleRenderer.metal */,
+				6EFEA868204FCA200037D1C5 /* AAPLParticleRenderer.mm */,
+				6E5E4C51204A20D60079006B /* AAPLRendererCommon.h */,
+				6EB91621205B3A2200C12130 /* AAPLRendererCommon.mm */,
+				6EFEA863204F44370037D1C5 /* AAPLTerrainRenderer_shared.h */,
+				6EFEA85E204F43E30037D1C5 /* AAPLTerrainRenderer.h */,
+				6EFEA864204F444A0037D1C5 /* AAPLTerrainRenderer.metal */,
+				6EFEA85F204F44010037D1C5 /* AAPLTerrainRenderer.mm */,
+				6EFEA8A22051BB360037D1C5 /* AAPLTerrainRendererUtilities.metal */,
+				16D87EDD206D9BFB00EB4AFE /* AAPLVegetationRenderer_shared.h */,
+				16C541D5206307BB006E4A86 /* AAPLVegetationRenderer.h */,
+				16F1221B2069BAA0008DBEA0 /* AAPLVegetationRenderer.metal */,
+				16C541D6206307BB006E4A86 /* AAPLVegetationRenderer.mm */,
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
+		6EBEC8302049C10F0071867D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6EBEC82F2049C10F0071867D /* DynamicTerrainWithArgumentBuffers.app */,
+				6EBEC8572049C1100071867D /* DynamicTerrainWithArgumentBuffers.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6EBEC8762049C2200071867D /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				6EBEC87B2049C8540071867D /* iOS */,
+				6EBEC87D2049C8860071867D /* macOS */,
+				6EBEC8472049C10F0071867D /* AAPLAppDelegate.h */,
+				6EBEC8482049C1100071867D /* AAPLAppDelegate.mm */,
+				6EBEC84A2049C1100071867D /* AAPLGameViewController.h */,
+				6EBEC8362049C10F0071867D /* AAPLGameViewController.mm */,
+				6EBEC83F2049C10F0071867D /* main.m */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		6EBEC87B2049C8540071867D /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				6EBEC8382049C10F0071867D /* Main.storyboard */,
+				6EBEC83B2049C10F0071867D /* LaunchScreen.storyboard */,
+				6EBEC83E2049C10F0071867D /* Info.plist */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		6EBEC87D2049C8860071867D /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				6EBEC85F2049C1100071867D /* Main.storyboard */,
+				6EBEC8622049C1100071867D /* Info.plist */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		6EBEC88A2049CED80071867D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				6ED52394206AB71500DE7948 /* Meshes */,
+				6EFEA89F20509D630037D1C5 /* Textures */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6EBEC82E2049C10F0071867D /* DynamicTerrainWithArgumentBuffers-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6EBEC86D2049C1100071867D /* Build configuration list for PBXNativeTarget "DynamicTerrainWithArgumentBuffers-iOS" */;
+			buildPhases = (
+				6EBEC82B2049C10F0071867D /* Sources */,
+				6EBEC82C2049C10F0071867D /* Frameworks */,
+				6EBEC82D2049C10F0071867D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DynamicTerrainWithArgumentBuffers-iOS";
+			productName = "ArgumentBuffersTerrainSample iOS";
+			productReference = 6EBEC82F2049C10F0071867D /* DynamicTerrainWithArgumentBuffers.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6EBEC8562049C1100071867D /* DynamicTerrainWithArgumentBuffers-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6EBEC8732049C1100071867D /* Build configuration list for PBXNativeTarget "DynamicTerrainWithArgumentBuffers-macOS" */;
+			buildPhases = (
+				6EBEC8532049C1100071867D /* Sources */,
+				6EBEC8542049C1100071867D /* Frameworks */,
+				6EBEC8552049C1100071867D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DynamicTerrainWithArgumentBuffers-macOS";
+			productName = "ArgumentBuffersTerrainSample macOS";
+			productReference = 6EBEC8572049C1100071867D /* DynamicTerrainWithArgumentBuffers.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6EBEC8222049C10F0071867D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1000;
+				ORGANIZATIONNAME = Apple;
+				TargetAttributes = {
+					6EBEC82E2049C10F0071867D = {
+						CreatedOnToolsVersion = 9.3;
+					};
+					6EBEC8562049C1100071867D = {
+						CreatedOnToolsVersion = 9.3;
+					};
+				};
+			};
+			buildConfigurationList = 6EBEC8252049C10F0071867D /* Build configuration list for PBXProject "DynamicTerrainWithArgumentBuffers" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6EBEC8212049C10F0071867D;
+			productRefGroup = 6EBEC8302049C10F0071867D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6EBEC82E2049C10F0071867D /* DynamicTerrainWithArgumentBuffers-iOS */,
+				6EBEC8562049C1100071867D /* DynamicTerrainWithArgumentBuffers-macOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6EBEC82D2049C10F0071867D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6ED52395206AB71500DE7948 /* Meshes in Resources */,
+				6ECA27C62061D39400995831 /* Textures in Resources */,
+				6EBEC83A2049C10F0071867D /* Main.storyboard in Resources */,
+				6EBEC83D2049C10F0071867D /* LaunchScreen.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EBEC8552049C1100071867D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6ED52396206AB71500DE7948 /* Meshes in Resources */,
+				6EFEA8A020509D9C0037D1C5 /* Textures in Resources */,
+				6EBEC8612049C1100071867D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6EBEC82B2049C10F0071867D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EFEA860204F44010037D1C5 /* AAPLTerrainRenderer.mm in Sources */,
+				1604FCF9206438E400305D9C /* AAPLObjLoader.mm in Sources */,
+				16ECCDC6206076A700D3F99C /* AAPLAllocator.mm in Sources */,
+				16C7A9F72058C717007CB454 /* AAPLCamera.mm in Sources */,
+				16C541D7206307BB006E4A86 /* AAPLVegetationRenderer.mm in Sources */,
+				6EB91622205B3A2200C12130 /* AAPLRendererCommon.mm in Sources */,
+				16F1221C2069BAA0008DBEA0 /* AAPLVegetationRenderer.metal in Sources */,
+				6EBEC8822049C8EA0071867D /* AAPLGameViewController.mm in Sources */,
+				6EBEC8802049C8E70071867D /* AAPLAppDelegate.mm in Sources */,
+				6EBEC8652049C1100071867D /* AAPLMainRenderer.mm in Sources */,
+				6EBEC87E2049C8E20071867D /* main.m in Sources */,
+				6EFEA8AB20534E1D0037D1C5 /* AAPLMainRenderer.metal in Sources */,
+				6EFEA865204F444A0037D1C5 /* AAPLTerrainRenderer.metal in Sources */,
+				6E099796206ED875009C9F71 /* AAPLParticleRenderer.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6EBEC8532049C1100071867D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6EFEA861204F44010037D1C5 /* AAPLTerrainRenderer.mm in Sources */,
+				1604FCFA206438E400305D9C /* AAPLObjLoader.mm in Sources */,
+				16ECCDC7206076A700D3F99C /* AAPLAllocator.mm in Sources */,
+				16C7A9F82058C727007CB454 /* AAPLCamera.mm in Sources */,
+				16C541D8206307BC006E4A86 /* AAPLVegetationRenderer.mm in Sources */,
+				6EB91623205B3A2200C12130 /* AAPLRendererCommon.mm in Sources */,
+				16F1221D2069BAA0008DBEA0 /* AAPLVegetationRenderer.metal in Sources */,
+				6EBEC8832049C8EB0071867D /* AAPLGameViewController.mm in Sources */,
+				6EBEC8812049C8E70071867D /* AAPLAppDelegate.mm in Sources */,
+				6EBEC8672049C1100071867D /* AAPLMainRenderer.mm in Sources */,
+				6EBEC87F2049C8E30071867D /* main.m in Sources */,
+				6EFEA8AC20534E1D0037D1C5 /* AAPLMainRenderer.metal in Sources */,
+				6EFEA866204F444A0037D1C5 /* AAPLTerrainRenderer.metal in Sources */,
+				6EFEA86A204FCA200037D1C5 /* AAPLParticleRenderer.mm in Sources */,
+				6ED5239320646EB100DE7948 /* AAPLParticleRenderer.metal in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		6EBEC8382049C10F0071867D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EBEC8392049C10F0071867D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6EBEC83B2049C10F0071867D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EBEC83C2049C10F0071867D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		6EBEC85F2049C1100071867D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6EBEC8602049C1100071867D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6EBEC86B2049C1100071867D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76A1691FFE18E22C1226011E /* SampleCode.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				MTL_FAST_MATH = YES;
+				MTL_LANGUAGE_REVISION = Metal20;
+				MTL_OPTIMIZATION_LEVEL = 3;
+				MTL_PREPROCESSOR_DEFINITIONS = "";
+				ONLY_ACTIVE_ARCH = YES;
+			};
+			name = Debug;
+		};
+		6EBEC86C2049C1100071867D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76A1691FFE18E22C1226011E /* SampleCode.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_STRICT_SELECTOR_MATCH = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				MTL_LANGUAGE_REVISION = Metal20;
+				MTL_OPTIMIZATION_LEVEL = 3;
+				MTL_PREPROCESSOR_DEFINITIONS = "";
+			};
+			name = Release;
+		};
+		6EBEC86E2049C1100071867D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76A1691FFE18E22C1226011E /* SampleCode.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				INFOPLIST_FILE = Application/iOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTL_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.DynamicTerrainWithArgumentBuffers${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_NAME = DynamicTerrainWithArgumentBuffers;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6EBEC86F2049C1100071867D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76A1691FFE18E22C1226011E /* SampleCode.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				INFOPLIST_FILE = Application/iOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MTL_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.DynamicTerrainWithArgumentBuffers${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_NAME = DynamicTerrainWithArgumentBuffers;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6EBEC8742049C1100071867D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76A1691FFE18E22C1226011E /* SampleCode.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				INFOPLIST_FILE = Application/macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.DynamicTerrainWithArgumentBuffers${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_NAME = DynamicTerrainWithArgumentBuffers;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		6EBEC8752049C1100071867D /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 76A1691FFE18E22C1226011E /* SampleCode.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				GCC_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				INFOPLIST_FILE = Application/macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_PREPROCESSOR_DEFINITIONS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.DynamicTerrainWithArgumentBuffers${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_NAME = DynamicTerrainWithArgumentBuffers;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6EBEC8252049C10F0071867D /* Build configuration list for PBXProject "DynamicTerrainWithArgumentBuffers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EBEC86B2049C1100071867D /* Debug */,
+				6EBEC86C2049C1100071867D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6EBEC86D2049C1100071867D /* Build configuration list for PBXNativeTarget "DynamicTerrainWithArgumentBuffers-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EBEC86E2049C1100071867D /* Debug */,
+				6EBEC86F2049C1100071867D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6EBEC8732049C1100071867D /* Build configuration list for PBXNativeTarget "DynamicTerrainWithArgumentBuffers-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6EBEC8742049C1100071867D /* Debug */,
+				6EBEC8752049C1100071867D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 6EBEC8222049C10F0071867D /* Project object */;
+}

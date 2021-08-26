@@ -519,3 +519,10 @@ AVPlayerItemLegibleOutput使用。
 - 2021-02-03
 
 在GPU上编码参数缓冲区。
+
+### DynamicTerrainWithArgumentBuffers
+
+- RenderingTerrainDynamicallyWithArgumentBuffers
+- 2021-02-19
+
+使用参数缓冲区动态渲染地形。
