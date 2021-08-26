@@ -526,3 +526,11 @@ AVPlayerItemLegibleOutput使用。
 - 2021-02-19
 
 使用参数缓冲区动态渲染地形。
+
+### BasicIndirectCommandBuffers
+
+- EncodingIndirectCommandBuffersOnTheCPU
+- 2021-02-04
+
+在CPU上编码间接命令缓冲区。
+
