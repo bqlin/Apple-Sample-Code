@@ -534,3 +534,9 @@ AVPlayerItemLegibleOutput使用。
 
 在CPU上编码间接命令缓冲区。
 
+### IndirectCommandBuffersWithGPUEncoding
+
+- EncodingIndirectCommandBuffersOnTheGPU
+- 2021-02-04
+
+在GPU上编码间接命令缓冲区。
