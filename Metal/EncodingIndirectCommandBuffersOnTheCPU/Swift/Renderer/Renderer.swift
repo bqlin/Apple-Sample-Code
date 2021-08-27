@@ -116,12 +116,12 @@ class Renderer: NSObject {
         }
     }
     
-    var inFloghtIndex = 0
+    var inFlightIndex = 0
     var frameNumber = 0
     func updateState() {
         frameNumber += 1
-        inFloghtIndex = frameNumber % maxFramesInFlight
-        let frameStatePtr = frameStateBuffers[inFloghtIndex].contents()
+        inFlightIndex = frameNumber % maxFramesInFlight
+        let frameStatePtr = frameStateBuffers[inFlightIndex].contents()
         var frameState = frameStatePtr.load(as: AAPLFrameState.self)
         frameState.aspectScale = aspectScale
         frameStatePtr.copyMemory(from: &frameState, byteCount: MemoryLayout.size(ofValue: frameState))
@@ -145,7 +145,7 @@ extension Renderer: MTKViewDelegate {
         
         // 转存frameStateBuffer到indirectFrameStateBuffer中
         let blitEncoder = commanBuffer.makeBlitCommandEncoder()!
-        blitEncoder.copy(from: frameStateBuffers[inFloghtIndex], sourceOffset: 0, to: indirectFrameStateBuffer, destinationOffset: 0, size: indirectFrameStateBuffer.length)
+        blitEncoder.copy(from: frameStateBuffers[inFlightIndex], sourceOffset: 0, to: indirectFrameStateBuffer, destinationOffset: 0, size: indirectFrameStateBuffer.length)
         blitEncoder.endEncoding()
         
         if let passDescriptor = view.currentRenderPassDescriptor {
