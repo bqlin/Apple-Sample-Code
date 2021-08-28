@@ -67,53 +67,38 @@ class Renderer: NSObject {
         }
 
         // 构建mesh数据，稍后用于拷贝到一个Metal缓冲区中
-        var tempMeshs = [Mesh]()
-        for i in 0 ..< Int(AAPLNumObjects) {
-//            let numTeeth = Int.random(in: 0 ..< 50) + 3
-//            let innerRatio: Float = 0.2 + .random(in: 0 ... 1) * 0.7
-//            let toothWidth: Float = 0.1 + .random(in: 0 ... 1) * 0.4
-//            let toothSlope: Float = .random(in: 0 ... 1) * 0.2
-            let numTeeth = i % 50 + 3
-            let innerRatio: Float = 0.8
-            let toothWidth: Float = 0.25
-            let toothSlope: Float = 0.2
-            let mesh = makeGear(numTeeth: numTeeth, innerRatio: innerRatio, toothWidth: toothWidth, toothSlope: toothSlope)
-            tempMeshs.append(mesh)
-            print("make mesh \(i)")
-        }
+        var meshInfo: [Int] = []
+        // 创建对象再填充数组
+        // vertexBuffer = makeVertexBuffer(info: &meshInfo)
+
+        // 直接填充buffer
+        // vertexBuffer = makeVertexBuffer2(info: &meshInfo)
+
+        // 使用C语言方式创建结构体，然后填充buffer
+        let tmpInfo = NSMutableArray()
+        vertexBuffer = Util.makeVertexBufferAndInfo(tmpInfo, device: device)
+        meshInfo = tmpInfo as! [Int]
 
         // 参数列表，每个齿轮一个参数
-        let objectParameterArraySize = tempMeshs.count * MemoryLayout<AAPLObjectPerameters>.size
+        let objectParameterArraySize = meshInfo.count * MemoryLayout<AAPLObjectPerameters>.size
         objectParameterBuffer = device.makeBuffer(length: objectParameterArraySize, options: [])!
         objectParameterBuffer.label = "对象参数数组"
         let params = UnsafeMutableRawBufferPointer(start: objectParameterBuffer.contents(), count: objectParameterArraySize).bindMemory(to: AAPLObjectPerameters.self)
         print("参数个数：\(params.count)")
 
-        // 顶点列表
-        let bufferSize = tempMeshs.reduce(0) { $0 + $1.vertices.count * MemoryLayout<AAPLVertex>.size }
-        print("buffer size: \(bufferSize)")
-        vertexBuffer = device.makeBuffer(length: bufferSize, options: [])!
-        vertexBuffer.label = "顶点列表缓冲区"
-        let vertces = UnsafeMutableRawBufferPointer(start: vertexBuffer.contents(), count: bufferSize).bindMemory(to: AAPLVertex.self)
-        print("顶点个数：\(vertces.count)")
-
         // 拷贝数据
         var vertexStartIndex = 0
         for i in 0 ..< params.count {
-            let mesh = tempMeshs[i]
-            for (j, v) in mesh.vertices.enumerated() {
-                vertces[vertexStartIndex + j] = v
-            }
-
             var param = params[i]
-            param.numVertices = UInt32(mesh.vertices.count)
+            let vertexCount = meshInfo[i]
+            param.numVertices = UInt32(vertexCount)
             param.startVertex = UInt32(vertexStartIndex)
             let gridPos: vector_float2 = [.init(Int32(i) % AAPLGridWidth), .init(Int32(i) / AAPLGridWidth)]
             param.position = gridPos * Float(AAPLObjecDistance)
             param.boundingRadius = Float(AAPLObjectSize / 2)
             params[i] = param
-            
-            vertexStartIndex += mesh.vertices.count
+
+            vertexStartIndex += vertexCount
         }
 
         frameStateBuffers = []
@@ -133,7 +118,7 @@ class Renderer: NSObject {
         } else {
             // Fallback on earlier versions
         }
-        indirectCommandBuffer = device.makeIndirectCommandBuffer(descriptor: icbDescriptor, maxCommandCount: tempMeshs.count, options: [])!
+        indirectCommandBuffer = device.makeIndirectCommandBuffer(descriptor: icbDescriptor, maxCommandCount: meshInfo.count, options: [])!
         indirectCommandBuffer.label = "Scene ICB"
 
         let argumentEncoder = computeFunction.makeArgumentEncoder(bufferIndex: Int(AAPLKernelBufferIndexCommandBufferContainer.rawValue))
@@ -143,6 +128,8 @@ class Renderer: NSObject {
         argumentEncoder.setArgumentBuffer(icbArgumentBuffer, offset: 0)
         argumentEncoder.setIndirectCommandBuffer(indirectCommandBuffer, index: Int(AAPLArgumentBufferIDCommandBuffer.rawValue))
     }
+
+    let objectCount = Int(AAPLNumObjects)
 
     var inFlightIndex = 0
     var frameNumber = 0
@@ -250,14 +237,148 @@ extension Renderer {
 
     func setupAspectScale(size: CGSize) {
         aspectScale = size.width < size.height ? [1, Float(size.width / size.height)] : [Float(size.height / size.width), 1]
-        //aspectScale = [Float(size.height / size.width), 1]
+        // aspectScale = [Float(size.height / size.width), 1]
+    }
+
+    func makeVertexBuffer(info: inout [Int]) -> MTLBuffer {
+        var tempMeshs = [Mesh]()
+        for i in 0 ..< objectCount {
+            // let numTeeth = Int.random(in: 0 ..< 50) + 3
+            // let innerRatio: Float = 0.2 + .random(in: 0 ... 1) * 0.7
+            // let toothWidth: Float = 0.1 + .random(in: 0 ... 1) * 0.4
+            // let toothSlope: Float = .random(in: 0 ... 1) * 0.2
+            let numTeeth = i % 50 + 3
+            let innerRatio: Float = 0.8
+            let toothWidth: Float = 0.25
+            let toothSlope: Float = 0.2
+            let mesh = makeGear(numTeeth: numTeeth, innerRatio: innerRatio, toothWidth: toothWidth, toothSlope: toothSlope)
+            tempMeshs.append(mesh)
+        }
+
+        // 顶点列表
+        let bufferSize = tempMeshs.reduce(0) { $0 + $1.vertices.count * MemoryLayout<AAPLVertex>.size }
+        print("buffer size: \(bufferSize)")
+        let vertexBuffer = device.makeBuffer(length: bufferSize, options: [])!
+        vertexBuffer.label = "顶点列表缓冲区"
+        let vertces = UnsafeMutableRawBufferPointer(start: vertexBuffer.contents(), count: bufferSize).bindMemory(to: AAPLVertex.self)
+        print("顶点个数：\(vertces.count)")
+
+        // 拷贝数据
+        info = []
+        var vertexStartIndex = 0
+        for mesh in tempMeshs {
+            for (j, v) in mesh.vertices.enumerated() {
+                vertces[vertexStartIndex + j] = v
+            }
+
+            vertexStartIndex += mesh.vertices.count
+            info.append(mesh.vertices.count)
+        }
+
+        return vertexBuffer
+    }
+
+    func makeVertexBuffer2(info: inout [Int]) -> MTLBuffer {
+        var numTeeths = [Int]()
+        let objectVertexCount = 12
+        var bufferSize = 0
+        info = []
+        for i in 0 ..< objectCount {
+            // let numTeeth = Int.random(in: 0 ..< 50) + 3
+            let numTeeth = i % 50 + 3
+            numTeeths.append(numTeeth)
+            let vertexCount = numTeeth * objectVertexCount
+            info.append(vertexCount)
+            bufferSize += vertexCount * MemoryLayout<AAPLVertex>.size
+        }
+
+        // 顶点列表
+        print("buffer size: \(bufferSize)")
+        let vertexBuffer = device.makeBuffer(length: bufferSize, options: [])!
+        vertexBuffer.label = "顶点列表缓冲区"
+
+        var start = 0
+        for i in 0 ..< numTeeths.count {
+            // let innerRatio: Float = 0.2 + .random(in: 0 ... 1) * 0.7
+            // let toothWidth: Float = 0.1 + .random(in: 0 ... 1) * 0.4
+            // let toothSlope: Float = .random(in: 0 ... 1) * 0.2
+            let innerRatio: Float = 0.8
+            let toothWidth: Float = 0.25
+            let toothSlope: Float = 0.2
+            let numTeeth = numTeeths[i]
+            let vertices = UnsafeMutableRawBufferPointer(start: vertexBuffer.contents() + start, count: info[i] * MemoryLayout<AAPLVertex>.size).bindMemory(to: AAPLVertex.self)
+            fillGear(numTeeth: numTeeth, innerRatio: innerRatio, toothWidth: toothWidth, toothSlope: toothSlope, subVetices: vertices)
+            start += numTeeth * objectVertexCount * MemoryLayout<AAPLVertex>.size
+        }
+
+        return vertexBuffer
+    }
+
+    func fillGear(numTeeth: Int, innerRatio: Float, toothWidth: Float, toothSlope: Float, subVetices: UnsafeMutableBufferPointer<AAPLVertex>) {
+        assert(numTeeth >= 3, "至少需要3个齿")
+        assert(toothWidth + 2 * toothSlope < 1, "齿轮参数错误")
+
+        let angle: Float = 2 * .pi / Float(numTeeth)
+        let origin: packed_float2 = [0, 0]
+
+        var vtx = 0
+        for i in 0 ..< numTeeth {
+            // 计算齿和槽的角度
+            let tooth = Float(i)
+            let toothStartAngle = tooth * angle
+            let toothTip1Angle = (tooth + toothSlope) * angle
+            let toothTip2Angle = (tooth + toothSlope + toothWidth) * angle
+            let toothEndAngle = (tooth + 2 * toothSlope + toothWidth) * angle
+            let nextToothAngle = (tooth + 1) * angle
+
+            // 计算齿需要的顶点位置
+            let groove1: packed_float2 = [sin(toothStartAngle) * innerRatio, cos(toothStartAngle) * innerRatio]
+            let tip1: packed_float2 = [sin(toothTip1Angle), cos(toothTip1Angle)]
+            let tip2: packed_float2 = [sin(toothTip2Angle), cos(toothTip2Angle)]
+            let groove2: packed_float2 = [sin(toothEndAngle) * innerRatio, cos(toothEndAngle) * innerRatio]
+            let nextGroove: packed_float2 = [sin(nextToothAngle) * innerRatio, cos(nextToothAngle) * innerRatio]
+
+            // 齿的右上角三角形
+            subVetices[vtx] = .init(position: groove1, texcoord: (groove1 + 1) / 2)
+            vtx += 1
+            subVetices[vtx] = .init(position: tip1, texcoord: (tip1 + 1) / 2)
+            vtx += 1
+            subVetices[vtx] = .init(position: tip2, texcoord: (tip2 + 1) / 2)
+            vtx += 1
+
+            // 齿左下角三角形
+            subVetices[vtx] = .init(position: groove1, texcoord: (groove1 + 1) / 2)
+            vtx += 1
+            subVetices[vtx] = .init(position: tip2, texcoord: (tip2 + 1) / 2)
+            vtx += 1
+            subVetices[vtx] = .init(position: groove2, texcoord: (groove2 + 1) / 2)
+            vtx += 1
+
+            // 从齿底到齿轮中心的圆的切面
+            subVetices[vtx] = .init(position: origin, texcoord: (origin + 1) / 2)
+            vtx += 1
+            subVetices[vtx] = .init(position: groove1, texcoord: (groove1 + 1) / 2)
+            vtx += 1
+            subVetices[vtx] = .init(position: groove2, texcoord: (groove2 + 1) / 2)
+            vtx += 1
+
+            // 从槽到齿轮中心的圆的切面
+            subVetices[vtx] = .init(position: origin, texcoord: (origin + 1) / 2)
+            vtx += 1
+            subVetices[vtx] = .init(position: groove2, texcoord: (groove2 + 1) / 2)
+            vtx += 1
+            subVetices[vtx] = .init(position: nextGroove, texcoord: (nextGroove + 1) / 2)
+            vtx += 1
+        }
     }
 
     func makeGear(numTeeth: Int, innerRatio: Float, toothWidth: Float, toothSlope: Float) -> Mesh {
         assert(numTeeth >= 3, "至少需要3个齿")
         assert(toothWidth + 2 * toothSlope < 1, "齿轮参数错误")
 
-        var mesh = Mesh(vertices: [])
+        // let numVertices = numTeeth * 12
+        // let meshVertices = NSMutableArray(capacity: numVertices)
+        var meshVertices = [AAPLVertex]()
 
         let angle: Float = 2 * .pi / Float(numTeeth)
         let origin: packed_float2 = [0, 0]
@@ -280,46 +401,29 @@ extension Renderer {
 
             let vertices: [AAPLVertex] = [
                 // 齿的右上角三角形
-                .init(groove1, (groove1 + 1) / 2),
-                .init(tip1, (tip1 + 1) / 2),
-                .init(tip2, (tip2 + 1) / 2),
+                .init(position: groove1, texcoord: (groove1 + 1) / 2),
+                .init(position: tip1, texcoord: (tip1 + 1) / 2),
+                .init(position: tip2, texcoord: (tip2 + 1) / 2),
 
                 // 齿左下角三角形
-                .init(groove1, (groove1 + 1) / 2),
-                .init(tip2, (tip2 + 1) / 2),
-                .init(groove2, (groove2 + 1) / 2),
+                .init(position: groove1, texcoord: (groove1 + 1) / 2),
+                .init(position: tip2, texcoord: (tip2 + 1) / 2),
+                .init(position: groove2, texcoord: (groove2 + 1) / 2),
 
                 // 从齿底到齿轮中心的圆的切面
-                .init(origin, (origin + 1) / 2),
-                .init(groove1, (groove1 + 1) / 2),
-                .init(groove2, (groove2 + 1) / 2),
+                .init(position: origin, texcoord: (origin + 1) / 2),
+                .init(position: groove1, texcoord: (groove1 + 1) / 2),
+                .init(position: groove2, texcoord: (groove2 + 1) / 2),
 
                 // 从槽到齿轮中心的圆的切面
-                .init(origin, (origin + 1) / 2),
-                .init(groove2, (groove2 + 1) / 2),
-                .init(nextGroove, (nextGroove + 1) / 2),
+                .init(position: origin, texcoord: (origin + 1) / 2),
+                .init(position: groove2, texcoord: (groove2 + 1) / 2),
+                .init(position: nextGroove, texcoord: (nextGroove + 1) / 2),
             ]
-            //print("\(i): \n\(verticesString(vertes: vertices))")
-            mesh.vertices += vertices
+            // meshVertices.addObjects(from: vertices)
+            meshVertices.append(contentsOf: vertices)
         }
 
-        return mesh
-    }
-    
-    func verticesString(vertes: [AAPLVertex]) -> String {
-        var s = ""
-        for (i, v) in vertes.enumerated() {
-            s += String(format: "%d: p: (%.2f, %.2f), t: (%.2f, %.2f)\n", i, v.position.x, v.position.y, v.texcoord.x, v.texcoord.y)
-        }
-        return s
-    }
-}
-
-extension AAPLVertex {
-    init(_ position: packed_float2, _ texcoord: packed_float2) {
-        //self.init(position: position, texcoord: texcoord)
-        self.init()
-        self.position = position
-        self.texcoord = texcoord
+        return Mesh(vertices: meshVertices)
     }
 }

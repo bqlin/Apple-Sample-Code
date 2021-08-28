@@ -7,5 +7,6 @@
 #define Bridging_Header_h
 
 #import "AAPLShaderTypes.h"
+#import "Util.h"
 
 #endif /* Bridging_Header_h */

@@ -12,10 +12,11 @@
 		03BD08D326D8D17B002E27BC /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 03BD08D126D8D17B002E27BC /* AAPLShaders.metal */; };
 		03BD08D526D8D1CD002E27BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03BD08BF26D8D15F002E27BC /* Main.storyboard */; };
 		03BD08D726D8D220002E27BC /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03BD08D626D8D220002E27BC /* Renderer.swift */; };
+		03BD08DA26D9D9DC002E27BC /* Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 03BD08D926D9D9DC002E27BC /* Util.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		03BD08A926D8D131002E27BC /* IndirectCommandBuffersWithGPUEncoding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IndirectCommandBuffersWithGPUEncoding.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03BD08A926D8D131002E27BC /* IndirectCommandBuffersWithGPUEncoding-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IndirectCommandBuffersWithGPUEncoding-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03BD08BD26D8D15F002E27BC /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		03BD08C026D8D15F002E27BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		03BD08C126D8D15F002E27BC /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -27,6 +28,8 @@
 		03BD08D226D8D17B002E27BC /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLShaderTypes.h; path = ../../ObjC/Renderer/AAPLShaderTypes.h; sourceTree = "<group>"; };
 		03BD08D426D8D192002E27BC /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		03BD08D626D8D220002E27BC /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		03BD08D826D9D9DC002E27BC /* Util.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Util.h; sourceTree = "<group>"; };
+		03BD08D926D9D9DC002E27BC /* Util.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Util.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +55,7 @@
 		03BD08AA26D8D131002E27BC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				03BD08A926D8D131002E27BC /* IndirectCommandBuffersWithGPUEncoding.app */,
+				03BD08A926D8D131002E27BC /* IndirectCommandBuffersWithGPUEncoding-macOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -93,6 +96,8 @@
 			children = (
 				03BD08D126D8D17B002E27BC /* AAPLShaders.metal */,
 				03BD08D226D8D17B002E27BC /* AAPLShaderTypes.h */,
+				03BD08D826D9D9DC002E27BC /* Util.h */,
+				03BD08D926D9D9DC002E27BC /* Util.m */,
 				03BD08D626D8D220002E27BC /* Renderer.swift */,
 			);
 			path = Renderer;
@@ -101,9 +106,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		03BD08A826D8D131002E27BC /* IndirectCommandBuffersWithGPUEncoding */ = {
+		03BD08A826D8D131002E27BC /* IndirectCommandBuffersWithGPUEncoding-macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 03BD08B926D8D133002E27BC /* Build configuration list for PBXNativeTarget "IndirectCommandBuffersWithGPUEncoding" */;
+			buildConfigurationList = 03BD08B926D8D133002E27BC /* Build configuration list for PBXNativeTarget "IndirectCommandBuffersWithGPUEncoding-macOS" */;
 			buildPhases = (
 				03BD08A526D8D131002E27BC /* Sources */,
 				03BD08A626D8D131002E27BC /* Frameworks */,
@@ -113,9 +118,9 @@
 			);
 			dependencies = (
 			);
-			name = IndirectCommandBuffersWithGPUEncoding;
+			name = "IndirectCommandBuffersWithGPUEncoding-macOS";
 			productName = IndirectCommandBuffersWithGPUEncoding;
-			productReference = 03BD08A926D8D131002E27BC /* IndirectCommandBuffersWithGPUEncoding.app */;
+			productReference = 03BD08A926D8D131002E27BC /* IndirectCommandBuffersWithGPUEncoding-macOS.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -146,7 +151,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				03BD08A826D8D131002E27BC /* IndirectCommandBuffersWithGPUEncoding */,
+				03BD08A826D8D131002E27BC /* IndirectCommandBuffersWithGPUEncoding-macOS */,
 			);
 		};
 /* End PBXProject section */
@@ -167,6 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03BD08DA26D9D9DC002E27BC /* Util.m in Sources */,
 				03BD08D726D8D220002E27BC /* Renderer.swift in Sources */,
 				03BD08D326D8D17B002E27BC /* AAPLShaders.metal in Sources */,
 				03BD08CC26D8D15F002E27BC /* AppDelegate.swift in Sources */,
@@ -365,7 +371,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		03BD08B926D8D133002E27BC /* Build configuration list for PBXNativeTarget "IndirectCommandBuffersWithGPUEncoding" */ = {
+		03BD08B926D8D133002E27BC /* Build configuration list for PBXNativeTarget "IndirectCommandBuffersWithGPUEncoding-macOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				03BD08BA26D8D133002E27BC /* Debug */,
