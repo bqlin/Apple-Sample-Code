@@ -10,11 +10,12 @@ class Renderer: NSObject {
     let device: MTLDevice
     let commandQueue: MTLCommandQueue
     let inFlightSemaphore: DispatchSemaphore
-
     let maxFramesInFlight = 3
+    let objectCount = Int(AAPLNumObjects)
+
     var aspectScale: vector_float2!
     var renderPipelineState: MTLRenderPipelineState! // 用于执行ICB的渲染管线
-    var computePipelineState: MTLComputePipelineState! // 当使用GPU做背面剔除时构建间接命令缓冲区
+    var computePipelineState: MTLComputePipelineState! // 当使用GPU做剔除时构建间接命令缓冲区
 
     init(view: MTKView) {
         device = view.device!
@@ -29,35 +30,23 @@ class Renderer: NSObject {
         view.sampleCount = 1
         setupAspectScale(size: view.drawableSize)
 
+        let defaultLibrary = device.makeDefaultLibrary()!
+        let vertexFunction = defaultLibrary.makeFunction(name: "vertexShader")!
+        let fragmentFunction = defaultLibrary.makeFunction(name: "fragmentShader")!
+
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.label = "渲染管线"
         pipelineDescriptor.sampleCount = view.sampleCount
         pipelineDescriptor.colorAttachments[0].pixelFormat = view.colorPixelFormat
         pipelineDescriptor.depthAttachmentPixelFormat = view.depthStencilPixelFormat
         pipelineDescriptor.supportIndirectCommandBuffers = true // 使用ICB
-        setupData(descriptor: pipelineDescriptor)
-
+        pipelineDescriptor.vertexFunction = vertexFunction
+        pipelineDescriptor.fragmentFunction = fragmentFunction
         do {
             renderPipelineState = try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
         } catch {
             fatalError("无法创建渲染管线")
         }
-    }
-
-    var objectParameterBuffer: MTLBuffer!
-    var vertexBuffer: MTLBuffer!
-    var frameStateBuffers = [MTLBuffer]()
-    var indirectCommandBuffer: MTLIndirectCommandBuffer!
-    var icbArgumentBuffer: MTLBuffer!
-    var gridCenter: vector_float2 = [0, 0]
-    var movementSpeed: Float = 0.15
-    var objectDirection: MovementDirection = .up
-    func setupData(descriptor: MTLRenderPipelineDescriptor) {
-        let defaultLibrary = device.makeDefaultLibrary()!
-        let vertexFunction = defaultLibrary.makeFunction(name: "vertexShader")!
-        let fragmentFunction = defaultLibrary.makeFunction(name: "fragmentShader")!
-        descriptor.vertexFunction = vertexFunction
-        descriptor.fragmentFunction = fragmentFunction
 
         let computeFunction = defaultLibrary.makeFunction(name: "cullMeshesAndEncodeCommands")!
         do {
@@ -66,6 +55,14 @@ class Renderer: NSObject {
             fatalError("无法创建计算管线")
         }
 
+        setupData()
+        makeICB(for: computeFunction)
+    }
+
+    var objectParameterBuffer: MTLBuffer!
+    var vertexBuffer: MTLBuffer!
+    var frameStateBuffers = [MTLBuffer]()
+    func setupData() {
         // 构建mesh数据，稍后用于拷贝到一个Metal缓冲区中
         var meshInfo: [Int] = []
         // 创建对象再填充数组
@@ -107,7 +104,12 @@ class Renderer: NSObject {
             buffer.label = "帧状态缓冲区 \(i)"
             frameStateBuffers.append(buffer)
         }
+    }
 
+    var icb: MTLIndirectCommandBuffer!
+    var icbArgumentBuffer: MTLBuffer!
+    func makeICB(for computeFunction: MTLFunction) {
+        // 这里只是简单创建ICB，并没有设置数据和调用命令，这些操作都在计算函数中进行
         let icbDescriptor = MTLIndirectCommandBufferDescriptor()
         icbDescriptor.commandTypes = .draw
         icbDescriptor.inheritBuffers = false
@@ -118,21 +120,22 @@ class Renderer: NSObject {
         } else {
             // Fallback on earlier versions
         }
-        indirectCommandBuffer = device.makeIndirectCommandBuffer(descriptor: icbDescriptor, maxCommandCount: meshInfo.count, options: [])!
-        indirectCommandBuffer.label = "Scene ICB"
+        icb = device.makeIndirectCommandBuffer(descriptor: icbDescriptor, maxCommandCount: objectCount, options: [])!
+        icb.label = "Scene ICB"
 
         let argumentEncoder = computeFunction.makeArgumentEncoder(bufferIndex: Int(AAPLKernelBufferIndexCommandBufferContainer.rawValue))
         icbArgumentBuffer = device.makeBuffer(length: argumentEncoder.encodedLength, options: .storageModeShared)
         print("icbArgumentBuffer length: \(icbArgumentBuffer.length)")
         icbArgumentBuffer.label = "ICB参数缓冲区"
         argumentEncoder.setArgumentBuffer(icbArgumentBuffer, offset: 0)
-        argumentEncoder.setIndirectCommandBuffer(indirectCommandBuffer, index: Int(AAPLArgumentBufferIDCommandBuffer.rawValue))
+        argumentEncoder.setIndirectCommandBuffer(icb, index: Int(AAPLArgumentBufferIDCommandBuffer.rawValue))
     }
-
-    let objectCount = Int(AAPLNumObjects)
 
     var inFlightIndex = 0
     var frameNumber = 0
+    var gridCenter: vector_float2 = [0, 0]
+    var movementSpeed: Float = 0.15
+    var objectDirection: MovementDirection = .up
     func updateState() {
         frameNumber += 1
         inFlightIndex = frameNumber % maxFramesInFlight
@@ -189,12 +192,13 @@ extension Renderer: MTKViewDelegate {
             self.inFlightSemaphore.signal()
         }
 
-        let objectCount = Int(AAPLNumObjects)
+        // 重置ICB数据
         let resetBlitEncoder = commandBuffer.makeBlitCommandEncoder()!
         resetBlitEncoder.label = "重置ICB Blit编码器"
-        resetBlitEncoder.resetCommandsInBuffer(indirectCommandBuffer, range: 0 ..< objectCount)
+        resetBlitEncoder.resetCommandsInBuffer(icb, range: 0 ..< objectCount)
         resetBlitEncoder.endEncoding()
 
+        // 编码计算命令
         let computeEncoder = commandBuffer.makeComputeCommandEncoder()!
         computeEncoder.label = "计算对象可见性"
         computeEncoder.setComputePipelineState(computePipelineState)
@@ -202,13 +206,15 @@ extension Renderer: MTKViewDelegate {
         computeEncoder.setBuffer(objectParameterBuffer, offset: 0, index: Int(AAPLKernelBufferIndexObjectParams.rawValue))
         computeEncoder.setBuffer(vertexBuffer, offset: 0, index: Int(AAPLKernelBufferIndexVertices.rawValue))
         computeEncoder.setBuffer(icbArgumentBuffer, offset: 0, index: Int(AAPLKernelBufferIndexCommandBufferContainer.rawValue))
-        computeEncoder.useResource(indirectCommandBuffer, usage: .write)
+        // 即使传递了包含icb的icbArgumentBuffer，但也要声明使用ICB。
+        computeEncoder.useResource(icb, usage: .write)
         computeEncoder.dispatchThreads(.init(width: objectCount, height: 1, depth: 1), threadsPerThreadgroup: .init(width: computePipelineState.threadExecutionWidth, height: 1, depth: 1))
         computeEncoder.endEncoding()
 
+        // 在编码后优化ICB，以去除空白命令。
         let optimizeBlitEncoder = commandBuffer.makeBlitCommandEncoder()!
         optimizeBlitEncoder.label = "优化ICB转存编码器"
-        optimizeBlitEncoder.optimizeIndirectCommandBuffer(indirectCommandBuffer, range: 0 ..< objectCount)
+        optimizeBlitEncoder.optimizeIndirectCommandBuffer(icb, range: 0 ..< objectCount)
         optimizeBlitEncoder.endEncoding()
 
         if let passDescriptor = view.currentRenderPassDescriptor {
@@ -219,7 +225,8 @@ extension Renderer: MTKViewDelegate {
             renderEncoder.useResource(vertexBuffer, usage: .read)
             renderEncoder.useResource(objectParameterBuffer, usage: .read)
             renderEncoder.useResource(frameStateBuffers[inFlightIndex], usage: .read)
-            renderEncoder.executeCommandsInBuffer(indirectCommandBuffer, range: 0 ..< objectCount)
+            // 在ICB执行绘制
+            renderEncoder.executeCommandsInBuffer(icb, range: 0 ..< objectCount)
             renderEncoder.endEncoding()
 
             commandBuffer.present(view.currentDrawable!)
