@@ -14,7 +14,7 @@ Header containing types and enum constants shared between Metal shaders and C/Ob
 /////////////////////////////////////////////////////////
 
 // Number of unique meshes/objects in the scene
-#define AAPLNumObjects    655
+#define AAPLNumObjects    65536
 
 // The number of objects in a row
 #define AAPLGridWidth     256

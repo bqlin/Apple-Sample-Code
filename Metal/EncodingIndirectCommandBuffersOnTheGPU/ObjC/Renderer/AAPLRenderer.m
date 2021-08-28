@@ -149,7 +149,6 @@ typedef struct AAPLObjectMesh {
                                                            innerRatio:innerRatio
                                                            toothWidth:toothWidth
                                                            toothSlope:toothSlope];
-                NSLog(@"make mesh: %d", objectIdx);
             }
         }
 
@@ -171,8 +170,8 @@ typedef struct AAPLObjectMesh {
                 size_t meshSize = sizeof(AAPLVertex) * tempMeshes[objectIdx].numVerts;
                 bufferSize += meshSize;
             }
-            NSLog(@"bufferSize: %zd", bufferSize);
-            NSLog(@"vertext count: %zd", bufferSize / sizeof(AAPLVertex));
+            //NSLog(@"bufferSize: %zd", bufferSize);
+            //NSLog(@"vertext count: %zd", bufferSize / sizeof(AAPLVertex));
 
             _vertexBuffer = [_device newBufferWithLength:bufferSize options:0];
 
@@ -266,7 +265,7 @@ typedef struct AAPLObjectMesh {
         _icbArgumentBuffer = [_device newBufferWithLength:argumentEncoder.encodedLength
                                                options:MTLResourceStorageModeShared];
         _icbArgumentBuffer.label = @"ICB Argument Buffer";
-        NSLog(@"icb length: %zd", _icbArgumentBuffer.length);
+        //NSLog(@"icb length: %zd", _icbArgumentBuffer.length);
 
         [argumentEncoder setArgumentBuffer:_icbArgumentBuffer offset:0];
 
