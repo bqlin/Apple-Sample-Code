@@ -27,6 +27,10 @@ class Renderer: NSObject {
         view.clearColor = .init(red: 0, green: 0, blue: 0.5, alpha: 1)
         setupAspectScale(size: view.drawableSize)
         
+        let defaultLibrary = device.makeDefaultLibrary()!
+        let vertexFunction = defaultLibrary.makeFunction(name: "vertexShader")!
+        let fragmentFunction = defaultLibrary.makeFunction(name: "fragmentShader")!
+        
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.label = "渲染管线"
         pipelineDescriptor.sampleCount = view.sampleCount
@@ -34,27 +38,23 @@ class Renderer: NSObject {
         pipelineDescriptor.depthAttachmentPixelFormat = view.depthStencilPixelFormat
         // 使用间接命令缓冲区
         pipelineDescriptor.supportIndirectCommandBuffers = true
-        setupData(descriptor: pipelineDescriptor)
+        pipelineDescriptor.vertexFunction = vertexFunction
+        pipelineDescriptor.fragmentFunction = fragmentFunction
         
         do {
             renderPipeline = try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
         } catch {
             fatalError("创建渲染管线失败")
         }
+        
+        setupData()
+        makeICB()
     }
     
     var vertexBuffers = [MTLBuffer]()
     var objectParameterBuffer: MTLBuffer!
     var frameStateBuffers = [MTLBuffer]()
-    var indirectFrameStateBuffer: MTLBuffer!
-    var indirectCommandBuffer: MTLIndirectCommandBuffer!
-    func setupData(descriptor: MTLRenderPipelineDescriptor) {
-        let defaultLibrary = device.makeDefaultLibrary()!
-        let vertexFunction = defaultLibrary.makeFunction(name: "vertexShader")!
-        let fragmentFunction = defaultLibrary.makeFunction(name: "fragmentShader")!
-        descriptor.vertexFunction = vertexFunction
-        descriptor.fragmentFunction = fragmentFunction
-        
+    func setupData() {
         // 顶点
         vertexBuffers = []
         for i in 0 ..< Int(AAPLNumObjects) {
@@ -86,7 +86,11 @@ class Renderer: NSObject {
             buffer.label = "帧状态 \(i)"
             frameStateBuffers.append(buffer)
         }
-        
+    }
+    
+    var indirectFrameStateBuffer: MTLBuffer!
+    var indirectCommandBuffer: MTLIndirectCommandBuffer!
+    func makeICB() {
         // 当用CPU编码命令时，app在间接命令缓冲区中动态地设置该间接帧状态缓冲区。  每一帧数据将从刚刚被CPU更新的frameStateBuffer转存到该缓冲区。 这允许同步更新CPU设置的值。
         indirectFrameStateBuffer = device.makeBuffer(length: MemoryLayout<AAPLFrameState>.size, options: .storageModePrivate)!
         indirectFrameStateBuffer.label = "间接帧状态缓冲区"
@@ -143,7 +147,7 @@ extension Renderer: MTKViewDelegate {
             self.inFlightSemaphore.signal()
         } // 确保CPU写入的frameStateBuffer已经被Metal和GPU读取。
         
-        // 转存frameStateBuffer到indirectFrameStateBuffer中
+        // 转存frameStateBuffer到indirectFrameStateBuffer中，用于更新ICB要访问的数据
         let blitEncoder = commanBuffer.makeBlitCommandEncoder()!
         blitEncoder.copy(from: frameStateBuffers[inFlightIndex], sourceOffset: 0, to: indirectFrameStateBuffer, destinationOffset: 0, size: indirectFrameStateBuffer.length)
         blitEncoder.endEncoding()
