@@ -8,7 +8,7 @@ import MetalKit
 
 class Renderer: NSObject {
     let device: MTLDevice
-    var commandQueue: MTLCommandQueue!
+    let commandQueue: MTLCommandQueue
     var vertexBuffer: MTLBuffer!
     var renderPipeline: MTLRenderPipelineState!
     var textures = [MTLTexture]()
@@ -16,28 +16,35 @@ class Renderer: NSObject {
     var fragmentShaderArgumentBuffer: MTLBuffer!
     var heap: MTLHeap!
     var viewport = MTLViewport()
-
+    
     init(view: MTKView) {
         device = view.device!
-
+        commandQueue = device.makeCommandQueue()!
+        
         super.init()
         view.delegate = self
         view.clearColor = .init(red: 0, green: 0.5, blue: 0.5, alpha: 1)
         setupViewport(size: view.drawableSize)
-
-        commandQueue = device.makeCommandQueue()!
-
+        
+        let defaultLibrary = device.makeDefaultLibrary()!
+        let vertexFunction = defaultLibrary.makeFunction(name: "vertexShader")!
+        let fragmentFuction = defaultLibrary.makeFunction(name: "fragmentShader")!
+        
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.label = "使用堆管理参数缓冲区"
         pipelineDescriptor.colorAttachments[0].pixelFormat = view.colorPixelFormat
-        setupData(descriptor: pipelineDescriptor)
+        pipelineDescriptor.vertexFunction = vertexFunction
+        pipelineDescriptor.fragmentFunction = fragmentFuction
         do {
             renderPipeline = try device.makeRenderPipelineState(descriptor: pipelineDescriptor)
         } catch {
             fatalError("创建渲染管线错误，\(error)")
         }
+        
+        setupData()
+        makeArgumentBuffers(fragmentFuction: fragmentFuction)
     }
-
+    
     let vertexData: [AAPLVertex] = [
         //      Vertex     |  Texture
         //     Positions   | Coordinates
@@ -48,23 +55,18 @@ class Renderer: NSObject {
         .init([-0.75, +0.75], [0, 1]),
         .init([+0.75, +0.75], [1, 1]),
     ]
-
-    func setupData(descriptor: MTLRenderPipelineDescriptor) {
+    
+    func setupData() {
         // 顶点缓冲区
         vertexBuffer = device.makeBuffer(bytes: vertexData, length: MemoryLayout<AAPLVertex>.size * vertexData.count, options: .storageModeShared)
         vertexBuffer.label = "顶点"
-
+        
         loadResouces()
         createHeap()
         moveResourcesToHeap()
-
-        let defaultLibrary = device.makeDefaultLibrary()!
-        let vertexFunction = defaultLibrary.makeFunction(name: "vertexShader")!
-        let fragmentFuction = defaultLibrary.makeFunction(name: "fragmentShader")!
-
-        descriptor.vertexFunction = vertexFunction
-        descriptor.fragmentFunction = fragmentFuction
-
+    }
+    
+    func makeArgumentBuffers(fragmentFuction: MTLFunction) {
         let argumentEncoder = fragmentFuction.makeArgumentEncoder(bufferIndex: Int(AAPLFragmentBufferIndexArguments.rawValue))
         fragmentShaderArgumentBuffer = device.makeBuffer(length: argumentEncoder.encodedLength, options: [])!
         fragmentShaderArgumentBuffer.label = "片元着色器参数缓冲区"
@@ -82,15 +84,15 @@ class Renderer: NSObject {
             elementCountAddress.copyMemory(from: &count, byteCount: MemoryLayout.size(ofValue: count))
         }
     }
-
+    
     // 改变存储方式
     func moveResourcesToHeap() {
         let commandBuffer = commandQueue.makeCommandBuffer()!
         commandBuffer.label = "堆拷贝命令缓冲区"
-
+        
         let blitEncoder = commandBuffer.makeBlitCommandEncoder()!
         blitEncoder.label = "堆转换blit编码器"
-
+        
         // 转换纹理内存到堆
         for i in 0 ..< textures.count {
             let texture = textures[i]
@@ -98,49 +100,49 @@ class Renderer: NSObject {
             let heapTexture = heap.makeTexture(descriptor: descriptor)!
             heapTexture.label = texture.label
             blitEncoder.pushDebugGroup("\(heapTexture.label!) Blits")
-
+            
             var region = MTLRegionMake2D(0, 0, texture.width, texture.height)
             for level in 0 ..< texture.mipmapLevelCount {
                 blitEncoder.pushDebugGroup("Level \(level) Blit")
-
+                
                 for slice in 0 ..< texture.arrayLength {
                     blitEncoder.copy(from: texture, sourceSlice: slice, sourceLevel: level, sourceOrigin: region.origin, sourceSize: region.size, to: heapTexture, destinationSlice: slice, destinationLevel: level, destinationOrigin: region.origin)
                 }
-
+                
                 region.size.width /= 2
                 region.size.height /= 2
                 region.size.width = max(region.size.width, 1)
                 region.size.height = max(region.size.height, 1)
-
+                
                 blitEncoder.popDebugGroup()
             }
             blitEncoder.popDebugGroup()
-
+            
             // 替换纹理
             textures[i] = heapTexture
         }
-
+        
         // 转换data buffer内存到堆
         for i in 0 ..< dataBuffers.count {
             let dataBuffer = dataBuffers[i]
             let heapBuffer = heap.makeBuffer(length: dataBuffer.length, options: .storageModePrivate)!
             heapBuffer.label = dataBuffer.label
             blitEncoder.copy(from: dataBuffer, sourceOffset: 0, to: heapBuffer, destinationOffset: 0, size: heapBuffer.length)
-
+            
             // 替换缓冲区
             dataBuffers[i] = heapBuffer
         }
-
+        
         blitEncoder.endEncoding()
         commandBuffer.commit()
     }
-
+    
     // 在资源加载后创建堆
     func createHeap() {
         let heapDescriptor = MTLHeapDescriptor()
         heapDescriptor.storageMode = .private
         heapDescriptor.size = 0
-
+        
         // 计算堆大小
         for texture in textures {
             let textureDescriptor = Renderer.makeDescriptor(texture: texture, storageMode: heapDescriptor.storageMode)
@@ -153,10 +155,10 @@ class Renderer: NSObject {
             sizeAndAlign.size += (sizeAndAlign.size & (sizeAndAlign.align - 1)) + sizeAndAlign.align
             heapDescriptor.size += sizeAndAlign.size
         }
-
+        
         heap = device.makeHeap(descriptor: heapDescriptor)!
     }
-
+    
     static func makeDescriptor(texture: MTLTexture, storageMode: MTLStorageMode) -> MTLTextureDescriptor {
         let descriptor = MTLTextureDescriptor()
         descriptor.textureType = texture.textureType
@@ -170,7 +172,7 @@ class Renderer: NSObject {
         descriptor.storageMode = storageMode
         return descriptor
     }
-
+    
     typealias DataType = CFloat
     func loadResouces() {
         // 加载纹理资源
@@ -186,7 +188,7 @@ class Renderer: NSObject {
         } catch {
             fatalError("资源加载失败，\(error)")
         }
-
+        
         // 构建数量值缓冲区
         let bufferArgumentCount = Int(AAPLNumBufferArguments.rawValue)
         // var elementCounts = [Int]()
@@ -194,11 +196,11 @@ class Renderer: NSObject {
         for i in 0 ..< bufferArgumentCount {
             let elementCount = Int.random(in: 0 ..< 384) + 128
             // elementCounts.append(elementCount)
-
+            
             let bufferSize = elementCount * MemoryLayout<DataType>.size
             let buffer = device.makeBuffer(length: bufferSize, options: .storageModeShared)!
             buffer.label = "DataBuffer\(i)"
-
+            
             let elements = UnsafeMutableRawBufferPointer(start: buffer.contents(), count: bufferSize).bindMemory(to: DataType.self)
             for k in 0 ..< elements.count {
                 let point = DataType(k) * 2 * .pi / DataType(elementCount)
@@ -213,7 +215,7 @@ extension Renderer: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         setupViewport(size: size)
     }
-
+    
     func setupViewport(size: CGSize) {
         viewport = .init()
         if size.width < size.height {
@@ -232,16 +234,16 @@ extension Renderer: MTKViewDelegate {
             viewport.znear = -1
         }
     }
-
+    
     func draw(in view: MTKView) {
         let commandBuffer = commandQueue.makeCommandBuffer()!
         commandBuffer.label = "帧命令"
-
+        
         if let passDescriptor = view.currentRenderPassDescriptor {
             let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: passDescriptor)!
             encoder.label = "帧渲染"
             encoder.setViewport(viewport)
-
+            
             if let heap = heap {
                 encoder.useHeap(heap)
             } else {
@@ -252,14 +254,14 @@ extension Renderer: MTKViewDelegate {
                     encoder.useResource(dataBuffer, usage: .read)
                 }
             }
-
+            
             encoder.setRenderPipelineState(renderPipeline)
             encoder.setVertexBuffer(vertexBuffer, offset: 0, index: Int(AAPLVertexBufferIndexVertices.rawValue))
             encoder.setFragmentBuffer(fragmentShaderArgumentBuffer, offset: 0, index: Int(AAPLFragmentBufferIndexArguments.rawValue))
-
+            
             encoder.drawPrimitives(type: .triangle, vertexStart: 0, vertexCount: vertexData.count)
             encoder.endEncoding()
-
+            
             commandBuffer.present(view.currentDrawable!)
         }
         commandBuffer.commit()
