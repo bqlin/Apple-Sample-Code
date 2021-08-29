@@ -540,3 +540,10 @@ AVPlayerItemLegibleOutput使用。
 - 2021-02-04
 
 在GPU上编码间接命令缓冲区。
+
+### CustomMetalView
+
+- CreatingACustomMetalView
+- 2020-09-05
+
+自定义Metal视图。
