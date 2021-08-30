@@ -37,15 +37,7 @@ class MetalView: PlatformView, MetalBehavior {
         notificaitonObservers.forEach{ NotificationCenter.default.removeObserver($0) }
     }
 
-    func setupCADisplayLink(for screen: UIScreen) {
-        stopRenderLoop()
-
-        let link = screen.displayLink(withTarget: self, selector: #selector(_render))!
-        link.preferredFramesPerSecond = 60
-        displayLink = link
-    }
-    
-    func startDisplayLink() {
+    func setupDisplayLink() {
         if animationRendering {
             guard let window = window else {
                 displayLink?.invalidate()
@@ -53,7 +45,11 @@ class MetalView: PlatformView, MetalBehavior {
                 return
             }
             
-            setupCADisplayLink(for: window.screen)
+            stopRenderLoop()
+            
+            let link = window.screen.displayLink(withTarget: self, selector: #selector(_render))!
+            link.preferredFramesPerSecond = 60
+            displayLink = link
             
             if renderOnMainThread {
                 displayLink?.add(to: .current, forMode: .common)
@@ -121,7 +117,7 @@ class MetalView: PlatformView, MetalBehavior {
 
     override func didMoveToWindow() {
         super.didMoveToWindow()
-        startDisplayLink()
+        setupDisplayLink()
     }
 
     override func layoutSubviews() {

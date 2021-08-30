@@ -24,26 +24,24 @@ class Renderer: NSObject {
         self.device = device
         commandQueue = device.makeCommandQueue()!
         
+        // 渲染通道
         let passDescriptor = MTLRenderPassDescriptor()
         renderPassDescriptor = passDescriptor
         let colorAttachment = passDescriptor.colorAttachments[0]!
         colorAttachment.loadAction = .clear
         colorAttachment.storeAction = .store
         colorAttachment.clearColor = .init(red: 0, green: 1, blue: 1, alpha: 1)
-        passDescriptor.colorAttachments[0] = colorAttachment
-        
         if createDepthBuffer {
             passDescriptor.depthAttachment.loadAction = .clear
             passDescriptor.depthAttachment.storeAction = .dontCare
             passDescriptor.depthAttachment.clearDepth = 1
         }
         
-        
-        
         let defaultLibrary = device.makeDefaultLibrary()!
         let vertexFunction = defaultLibrary.makeFunction(name: "vertexShader")!
         let fragmentFunction = defaultLibrary.makeFunction(name: "fragmentShader")!
         
+        // 渲染管线
         let pipelineDescriptor = MTLRenderPipelineDescriptor()
         pipelineDescriptor.label = "渲染管线"
         pipelineDescriptor.vertexFunction = vertexFunction
@@ -58,6 +56,7 @@ class Renderer: NSObject {
             fatalError("创建渲染管线失败，\(error)")
         }
         
+        // 顶点
         vertexBuffer = device.makeBuffer(bytes: quadVertices, length: MemoryLayout<AAPLVertex>.size * quadVertices.count, options: .storageModeShared)
         vertexBuffer.label = "四边形"
     }
