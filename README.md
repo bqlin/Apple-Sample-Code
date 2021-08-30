@@ -547,3 +547,10 @@ AVPlayerItemLegibleOutput使用。
 - 2020-09-05
 
 自定义Metal视图。
+
+### DeviceSelectionAndFallback
+
+- SelectingDeviceObjectsForGraphicsRendering
+- 2021-02-27
+
+为图形渲染选择设备。
