@@ -1,0 +1,403 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A3ECD63201FD41200E419CF /* AAPLSimulation.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3ECD61201FD41200E419CF /* AAPLSimulation.m */; };
+		3A3ECD66201FDBA800E419CF /* AAPLKernels.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3A3ECD64201FDBA700E419CF /* AAPLKernels.metal */; };
+		3A43669E204E35D10057F64C /* MetalKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A43669D204E35D10057F64C /* MetalKit.framework */; };
+		3AFE1DA7201BE67300198BB9 /* AAPLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE1DA6201BE67300198BB9 /* AAPLViewController.m */; };
+		3AFE1DAA201BE67300198BB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AFE1DA8201BE67300198BB9 /* Main.storyboard */; };
+		3AFE1DAD201BE67300198BB9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE1DAC201BE67300198BB9 /* main.m */; };
+		3AFE1DD7201BE67300198BB9 /* AAPLRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE1D99201BE67300198BB9 /* AAPLRenderer.m */; };
+		3AFE1DDD201BE67300198BB9 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE1D9B201BE67300198BB9 /* AAPLShaders.metal */; };
+		3AFE1DE3201BE67300198BB9 /* AAPLMathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AFE1D9D201BE67300198BB9 /* AAPLMathUtilities.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3A3ECD61201FD41200E419CF /* AAPLSimulation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AAPLSimulation.m; sourceTree = "<group>"; };
+		3A3ECD62201FD41200E419CF /* AAPLSimulation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLSimulation.h; sourceTree = "<group>"; };
+		3A3ECD64201FDBA700E419CF /* AAPLKernels.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = AAPLKernels.metal; sourceTree = "<group>"; };
+		3A3ECD65201FDBA700E419CF /* AAPLKernelTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AAPLKernelTypes.h; sourceTree = "<group>"; };
+		3A43669D204E35D10057F64C /* MetalKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MetalKit.framework; path = ../../../../../Xcode1/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.Internal.sdk/System/Library/Frameworks/MetalKit.framework; sourceTree = "<group>"; };
+		3AFE1D96201BE67300198BB9 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		3AFE1D98201BE67300198BB9 /* AAPLRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLRenderer.h; sourceTree = "<group>"; };
+		3AFE1D99201BE67300198BB9 /* AAPLRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AAPLRenderer.m; sourceTree = "<group>"; };
+		3AFE1D9A201BE67300198BB9 /* AAPLShaderTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLShaderTypes.h; sourceTree = "<group>"; };
+		3AFE1D9B201BE67300198BB9 /* AAPLShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = AAPLShaders.metal; sourceTree = "<group>"; };
+		3AFE1D9C201BE67300198BB9 /* AAPLMathUtilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLMathUtilities.h; sourceTree = "<group>"; };
+		3AFE1D9D201BE67300198BB9 /* AAPLMathUtilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AAPLMathUtilities.m; sourceTree = "<group>"; };
+		3AFE1DA2201BE67300198BB9 /* DeviceFallbackForCompute.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DeviceFallbackForCompute.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AFE1DA5201BE67300198BB9 /* AAPLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AAPLViewController.h; sourceTree = "<group>"; };
+		3AFE1DA6201BE67300198BB9 /* AAPLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AAPLViewController.m; sourceTree = "<group>"; };
+		3AFE1DA9201BE67300198BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3AFE1DAB201BE67300198BB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AFE1DAC201BE67300198BB9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		66D0CDAE6BA57A0E12B65D69 /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		F30350B4E169F2F713F86479 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3AFE1D9F201BE67300198BB9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A43669E204E35D10057F64C /* MetalKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3A3ECD60201FD41200E419CF /* Simulation */ = {
+			isa = PBXGroup;
+			children = (
+				3A3ECD62201FD41200E419CF /* AAPLSimulation.h */,
+				3A3ECD61201FD41200E419CF /* AAPLSimulation.m */,
+				3A3ECD64201FDBA700E419CF /* AAPLKernels.metal */,
+				3A3ECD65201FDBA700E419CF /* AAPLKernelTypes.h */,
+			);
+			path = Simulation;
+			sourceTree = "<group>";
+		};
+		3A43669C204E35D10057F64C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3A43669D204E35D10057F64C /* MetalKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3AFE1D90201BE67300198BB9 = {
+			isa = PBXGroup;
+			children = (
+				3AFE1D96201BE67300198BB9 /* README.md */,
+				3A3ECD60201FD41200E419CF /* Simulation */,
+				3AFE1D97201BE67300198BB9 /* Renderer */,
+				3AFE1DA4201BE67300198BB9 /* Application */,
+				3AFE1DA3201BE67300198BB9 /* Products */,
+				3A43669C204E35D10057F64C /* Frameworks */,
+				DCA1164DD8257007376ACC52 /* Configuration */,
+				DD19988B0D374E3330777992 /* LICENSE */,
+			);
+			sourceTree = "<group>";
+		};
+		3AFE1D97201BE67300198BB9 /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				3AFE1D98201BE67300198BB9 /* AAPLRenderer.h */,
+				3AFE1D99201BE67300198BB9 /* AAPLRenderer.m */,
+				3AFE1D9A201BE67300198BB9 /* AAPLShaderTypes.h */,
+				3AFE1D9B201BE67300198BB9 /* AAPLShaders.metal */,
+				3AFE1D9C201BE67300198BB9 /* AAPLMathUtilities.h */,
+				3AFE1D9D201BE67300198BB9 /* AAPLMathUtilities.m */,
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
+		3AFE1DA3201BE67300198BB9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3AFE1DA2201BE67300198BB9 /* DeviceFallbackForCompute.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3AFE1DA4201BE67300198BB9 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				3AFE1DA5201BE67300198BB9 /* AAPLViewController.h */,
+				3AFE1DA6201BE67300198BB9 /* AAPLViewController.m */,
+				3AFE1DAC201BE67300198BB9 /* main.m */,
+				3AFE1DA8201BE67300198BB9 /* Main.storyboard */,
+				3AFE1DAB201BE67300198BB9 /* Info.plist */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		DCA1164DD8257007376ACC52 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				F30350B4E169F2F713F86479 /* SampleCode.xcconfig */,
+			);
+			name = Configuration;
+			sourceTree = "<group>";
+		};
+		DD19988B0D374E3330777992 /* LICENSE */ = {
+			isa = PBXGroup;
+			children = (
+				66D0CDAE6BA57A0E12B65D69 /* LICENSE.txt */,
+			);
+			path = LICENSE;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3AFE1DA1201BE67300198BB9 /* DeviceFallbackForCompute-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3AFE1DE6201BE67300198BB9 /* Build configuration list for PBXNativeTarget "DeviceFallbackForCompute-macOS" */;
+			buildPhases = (
+				3AFE1D9E201BE67300198BB9 /* Sources */,
+				3AFE1D9F201BE67300198BB9 /* Frameworks */,
+				3AFE1DA0201BE67300198BB9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DeviceFallbackForCompute-macOS";
+			productName = macOS;
+			productReference = 3AFE1DA2201BE67300198BB9 /* DeviceFallbackForCompute.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3AFE1D91201BE67300198BB9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1200;
+				ORGANIZATIONNAME = Apple;
+				TargetAttributes = {
+					3AFE1DA1201BE67300198BB9 = {
+						CreatedOnToolsVersion = 9.3;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 3AFE1D94201BE67300198BB9 /* Build configuration list for PBXProject "DeviceFallbackForCompute" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3AFE1D90201BE67300198BB9;
+			productRefGroup = 3AFE1DA3201BE67300198BB9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3AFE1DA1201BE67300198BB9 /* DeviceFallbackForCompute-macOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3AFE1DA0201BE67300198BB9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AFE1DAA201BE67300198BB9 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3AFE1D9E201BE67300198BB9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3AFE1DD7201BE67300198BB9 /* AAPLRenderer.m in Sources */,
+				3AFE1DE3201BE67300198BB9 /* AAPLMathUtilities.m in Sources */,
+				3A3ECD66201FDBA800E419CF /* AAPLKernels.metal in Sources */,
+				3A3ECD63201FD41200E419CF /* AAPLSimulation.m in Sources */,
+				3AFE1DAD201BE67300198BB9 /* main.m in Sources */,
+				3AFE1DDD201BE67300198BB9 /* AAPLShaders.metal in Sources */,
+				3AFE1DA7201BE67300198BB9 /* AAPLViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3AFE1DA8201BE67300198BB9 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3AFE1DA9201BE67300198BB9 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3AFE1DE4201BE67300198BB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F30350B4E169F2F713F86479 /* SampleCode.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+			};
+			name = Debug;
+		};
+		3AFE1DE5201BE67300198BB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F30350B4E169F2F713F86479 /* SampleCode.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+			};
+			name = Release;
+		};
+		3AFE1DE7201BE67300198BB9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F30350B4E169F2F713F86479 /* SampleCode.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Application/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.$(PRODUCT_NAME)${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_NAME = DeviceFallbackForCompute;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		3AFE1DE8201BE67300198BB9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F30350B4E169F2F713F86479 /* SampleCode.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				INFOPLIST_FILE = Application/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.example.apple-samplecode.$(PRODUCT_NAME)${SAMPLE_CODE_DISAMBIGUATOR}";
+				PRODUCT_NAME = DeviceFallbackForCompute;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3AFE1D94201BE67300198BB9 /* Build configuration list for PBXProject "DeviceFallbackForCompute" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AFE1DE4201BE67300198BB9 /* Debug */,
+				3AFE1DE5201BE67300198BB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3AFE1DE6201BE67300198BB9 /* Build configuration list for PBXNativeTarget "DeviceFallbackForCompute-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3AFE1DE7201BE67300198BB9 /* Debug */,
+				3AFE1DE8201BE67300198BB9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3AFE1D91201BE67300198BB9 /* Project object */;
+}

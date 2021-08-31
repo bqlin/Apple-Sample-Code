@@ -554,3 +554,10 @@ AVPlayerItemLegibleOutput使用。
 - 2021-02-27
 
 为图形渲染选择设备。
+
+### DeviceFallbackForCompute
+
+- SelectingDeviceObjectsForComputeProcessing
+- 2021-02-27
+
+为计算处理选择设备对象。
