@@ -561,3 +561,10 @@ AVPlayerItemLegibleOutput使用。
 - 2021-02-27
 
 为计算处理选择设备对象。
+
+### OpenGLMetalInteroperability
+
+- MixingMetalAndOpenGLRenderingInAView
+- 2019-05-18
+
+在视图中混合Metal和OpenGL渲染。
