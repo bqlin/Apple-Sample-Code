@@ -5,8 +5,9 @@
 
 import GLKit.GLKTextureLoader
 
+let interopTextureSize = CGSize(width: 1024, height: 1024)
+
 class GLRenderer: NSObject {
-    static let interopTextureSize = CGSize(width: 1024, height: 1024)
     let defaultFOBName: GLuint
     var viewSize: CGSize!
     var programName: GLuint!
@@ -33,6 +34,7 @@ class GLRenderer: NSObject {
         vaoName = makeVAO()
     }
 
+    // 注意，这里的坐标与MetalRenderer中有所区别，做了纵向的翻转
     let quadVertices: [AAPLVertex] = [
         .init(position: [-0.75, -0.75, 0, 1], texCoord: [0, 0]),
         .init(position: [+0.75, -0.75, 0, 1], texCoord: [1, 0]),
@@ -104,7 +106,9 @@ class GLRenderer: NSObject {
             fatalError("无法读取着色器")
         }
 
+        // 创建程序
         let programName = glCreateProgram()
+        // 绑定属性槽位
         glBindAttribLocation(programName, 0, "inPosition")
         glBindAttribLocation(programName, 1, "inTexcoord")
 
@@ -120,7 +124,8 @@ class GLRenderer: NSObject {
         glShaderSource(vShader, 1, &cStringSource, nil)
         glCompileShader(vShader)
         log(shader: vShader)
-
+        
+        // 绑定顶点着色器到程序
         glAttachShader(programName, vShader)
         glDeleteShader(vShader)
 
@@ -132,13 +137,18 @@ class GLRenderer: NSObject {
         glCompileShader(fShader)
         log(shader: fShader)
 
+        // 绑定片元着色器到程序
         glAttachShader(programName, fShader)
         glDeleteShader(fShader)
 
+        // 链接
         glLinkProgram(programName)
         log(program: programName)
-
+        
+        // 使用
         glUseProgram(programName)
+        
+        // 着色器传值
         mvpUniformIndex = glGetUniformLocation(programName, "modelViewProjectionMatrix")
         assert(mvpUniformIndex >= 0, "Could not get MVP Uniform Index")
 
@@ -190,7 +200,7 @@ class GLRenderer: NSObject {
         #if os(macOS)
             textureDimensionIndex = glGetUniformLocation(programName, "textureDimensions")
             assert(textureDimensionIndex > 0, "No textureDimensions uniform in rectangle texture fragment shader")
-            glUniform2f(textureDimensionIndex, GLfloat(GLRenderer.interopTextureSize.width), GLfloat(GLRenderer.interopTextureSize.height))
+            glUniform2f(textureDimensionIndex, GLfloat(interopTextureSize.width), GLfloat(interopTextureSize.height))
         #endif
 
         let labelMapUrl = Bundle.main.url(forResource: "Assets/QuadWithGLtoView", withExtension: "png")!

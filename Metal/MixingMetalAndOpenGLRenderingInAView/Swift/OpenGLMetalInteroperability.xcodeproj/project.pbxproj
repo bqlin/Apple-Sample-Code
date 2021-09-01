@@ -14,7 +14,7 @@
 		0349836026DF8DA0009C33E6 /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = 0367EB5626DDE7E0005BF1B6 /* Assets */; };
 		0349836126DF8DC6009C33E6 /* GLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3307726DF0ABE00495C36 /* GLViewController.swift */; };
 		0349836226DF8DC6009C33E6 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3309D26DF6B1D00495C36 /* MetalViewController.swift */; };
-		0349836326DF8DC6009C33E6 /* InteropTExture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3307926DF118000495C36 /* InteropTExture.swift */; };
+		0349836326DF8DC6009C33E6 /* InteropTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3307926DF118000495C36 /* InteropTexture.swift */; };
 		0349836426DF8DC6009C33E6 /* AAPLMathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0367EB6A26DDE88D005BF1B6 /* AAPLMathUtilities.m */; };
 		0349836526DF8DC6009C33E6 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0367EB6726DDE868005BF1B6 /* AAPLShaders.metal */; };
 		0349836626DF8DC6009C33E6 /* MetalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0367EB6D26DDEB3A005BF1B6 /* MetalRenderer.swift */; };
@@ -30,7 +30,7 @@
 		0367EB6E26DDEB3A005BF1B6 /* MetalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0367EB6D26DDEB3A005BF1B6 /* MetalRenderer.swift */; };
 		0367EB7026DDEC0B005BF1B6 /* GLRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0367EB6F26DDEC0B005BF1B6 /* GLRenderer.swift */; };
 		03D3307826DF0ABE00495C36 /* GLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3307726DF0ABE00495C36 /* GLViewController.swift */; };
-		03D3307A26DF118000495C36 /* InteropTExture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3307926DF118000495C36 /* InteropTExture.swift */; };
+		03D3307A26DF118000495C36 /* InteropTexture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3307926DF118000495C36 /* InteropTexture.swift */; };
 		03D3309E26DF6B1D00495C36 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3309D26DF6B1D00495C36 /* MetalViewController.swift */; };
 		03D330A626DF893F00495C36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D330A526DF893F00495C36 /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
@@ -56,7 +56,7 @@
 		0367EB6D26DDEB3A005BF1B6 /* MetalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalRenderer.swift; sourceTree = "<group>"; };
 		0367EB6F26DDEC0B005BF1B6 /* GLRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLRenderer.swift; sourceTree = "<group>"; };
 		03D3307726DF0ABE00495C36 /* GLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLViewController.swift; sourceTree = "<group>"; };
-		03D3307926DF118000495C36 /* InteropTExture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteropTExture.swift; sourceTree = "<group>"; };
+		03D3307926DF118000495C36 /* InteropTexture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteropTexture.swift; sourceTree = "<group>"; };
 		03D3309D26DF6B1D00495C36 /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
 		03D330A326DF893F00495C36 /* OpenGLMetalInteroperability-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenGLMetalInteroperability-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		03D330A526DF893F00495C36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -105,7 +105,7 @@
 				0367EB6926DDE88C005BF1B6 /* Bridging-Header.h */,
 				03D3307726DF0ABE00495C36 /* GLViewController.swift */,
 				03D3309D26DF6B1D00495C36 /* MetalViewController.swift */,
-				03D3307926DF118000495C36 /* InteropTExture.swift */,
+				03D3307926DF118000495C36 /* InteropTexture.swift */,
 				0367EB4026DDE76E005BF1B6 /* macOS */,
 				0367EB4526DDE76E005BF1B6 /* iOS */,
 			);
@@ -280,7 +280,7 @@
 				03D3307826DF0ABE00495C36 /* GLViewController.swift in Sources */,
 				0367EB7026DDEC0B005BF1B6 /* GLRenderer.swift in Sources */,
 				0367EB6E26DDEB3A005BF1B6 /* MetalRenderer.swift in Sources */,
-				03D3307A26DF118000495C36 /* InteropTExture.swift in Sources */,
+				03D3307A26DF118000495C36 /* InteropTexture.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +290,7 @@
 			files = (
 				0349836126DF8DC6009C33E6 /* GLViewController.swift in Sources */,
 				0349836226DF8DC6009C33E6 /* MetalViewController.swift in Sources */,
-				0349836326DF8DC6009C33E6 /* InteropTExture.swift in Sources */,
+				0349836326DF8DC6009C33E6 /* InteropTexture.swift in Sources */,
 				0349836426DF8DC6009C33E6 /* AAPLMathUtilities.m in Sources */,
 				0349836526DF8DC6009C33E6 /* AAPLShaders.metal in Sources */,
 				0349836626DF8DC6009C33E6 /* MetalRenderer.swift in Sources */,

@@ -6,6 +6,9 @@
 import Foundation
 import MetalKit
 
+// 若修改为.bgra8Unorm则可以确保与GL展示效果一致
+let interopPixelFormat: MTLPixelFormat = .bgra8Unorm_srgb
+
 class MetalViewController: PlatformViewController {
     var mtlView: MTKView { view as! MTKView }
     var interopTexture: InteropTexture!
@@ -13,24 +16,20 @@ class MetalViewController: PlatformViewController {
     var glRenderer: GLRenderer!
     var mtlRenderer: MetalRenderer!
 
-    let interopPixelFormat: MTLPixelFormat = .bgra8Unorm_srgb
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         prepareView()
-        makeCurrentContext()
 
         mtlRenderer = .init(device: mtlView.device!, colorPixelFormat: mtlView.colorPixelFormat)
         mtlRenderer.resize(mtlView.drawableSize)
-        interopTexture = .init(mtlDevice: mtlView.device!, glContext: glContext, mtlPixelFormat: interopPixelFormat, size: GLRenderer.interopTextureSize)
+        interopTexture = .init(mtlDevice: mtlView.device!, glContext: glContext, mtlPixelFormat: interopPixelFormat, size: interopTextureSize)
+        mtlRenderer.useInteropTextureAsBaseMap(interopTexture.mtlTexture)
 
-        makeCurrentContext()
+        //makeCurrentContext()
         glRenderer = .init(FBOName: defaultFBO(interopTexture: interopTexture))
         glRenderer.useTextureFromFileAsBaseMap()
-        glRenderer.resize(GLRenderer.interopTextureSize)
-
-        mtlRenderer.useInteropTextureAsBaseMap(interopTexture.mtlTexture)
+        glRenderer.resize(interopTextureSize)
     }
 }
 
@@ -44,10 +43,12 @@ extension MetalViewController {
     }
 
     func prepareView() {
+        // 配置视图
         mtlView.device = MTLCreateSystemDefaultDevice()
         mtlView.colorPixelFormat = interopPixelFormat
         mtlView.delegate = self
 
+        // 创建并绑定上下文
         #if os(macOS)
             let attrs = [
                 NSOpenGLPFAAccelerated,
@@ -59,8 +60,8 @@ extension MetalViewController {
             glContext = NSOpenGLContext(format: pixelFormat, share: nil)
         #else
             glContext = EAGLContext(api: .openGLES2)
-            makeCurrentContext()
         #endif
+        makeCurrentContext()
     }
 
     func defaultFBO(interopTexture: InteropTexture) -> GLuint {
@@ -88,7 +89,7 @@ extension MetalViewController: MTKViewDelegate {
     func draw(in view: MTKView) {
         makeCurrentContext()
         glRenderer.draw()
-        glFlush()
+        glFlush() // 用此确保GL绘制命令的执行，便于Metal读取
         mtlRenderer.draw(to: view)
     }
 }

@@ -47,17 +47,16 @@ class GLViewController: PlatformViewController {
         super.viewDidLoad()
 
         prepareView()
-        makeCurrentContext()
 
         glRenderer = .init(FBOName: defaultFBOName)
         mtlDevice = MTLCreateSystemDefaultDevice()
         mtlRenderer = .init(device: mtlDevice, colorPixelFormat: interopPixelFormat)
-        interopTexture = .init(mtlDevice: mtlDevice, glContext: glContext, mtlPixelFormat: interopPixelFormat, size: GLRenderer.interopTextureSize)
+        interopTexture = .init(mtlDevice: mtlDevice, glContext: glContext, mtlPixelFormat: interopPixelFormat, size: interopTextureSize)
 
         glRenderer.useInteropTextureAsBaseMap(interopTexture.glTexture)
         glRenderer.resize(drawableSize)
         mtlRenderer.useTextureFromFileAsBaseMap()
-        mtlRenderer.resize(GLRenderer.interopTextureSize)
+        mtlRenderer.resize(interopTextureSize)
     }
 
     #if os(macOS)
@@ -101,6 +100,9 @@ class GLViewController: PlatformViewController {
 }
 
 #if os(macOS)
+
+    // MARK: - macOS
+
     extension GLViewController {
         var drawableSize: CGSize {
             let viewSize = view.bounds.size
@@ -125,6 +127,7 @@ class GLViewController: PlatformViewController {
         }
 
         func prepareView() {
+            // 创建并设置上下文
             let attrs = [
                 NSOpenGLPFAColorSize, 32,
                 NSOpenGLPFADoubleBuffer,
@@ -134,18 +137,21 @@ class GLViewController: PlatformViewController {
             guard let pixelFormat = NSOpenGLPixelFormat(attributes: attrs) else {
                 fatalError("No OpenGL pixel format")
             }
-
             glContext = NSOpenGLContext(format: pixelFormat, share: nil)
-
             guard let cglContext = glContext.cglContextObj else { fatalError() }
             CGLLockContext(cglContext)
             makeCurrentContext()
             CGLUnlockContext(cglContext)
 
+            // 配置视图
             glView.pixelFormat = pixelFormat
             glView.openGLContext = glContext
             glView.wantsBestResolutionOpenGLSurface = true
 
+            // 将FBO设为0以兼容传统OpenGL
+            defaultFBOName = 0
+
+            // 创建display link
             CVDisplayLinkCreateWithActiveCGDisplays(&displayLink)
             CVDisplayLinkSetOutputCallback(displayLink, { (displayLink, now, outputTime, flagsIn, flagsOut, displayLinkContext) -> CVReturn in
                 let controller = Unmanaged<GLViewController>.fromOpaque(displayLinkContext!).takeUnretainedValue()
@@ -156,6 +162,9 @@ class GLViewController: PlatformViewController {
         }
     }
 #else
+
+    // MARK: iOS
+
     extension GLViewController {
         var drawableSize: CGSize {
             var backingWidth: GLint = 0
@@ -180,27 +189,27 @@ class GLViewController: PlatformViewController {
         }
 
         func prepareView() {
+            // 配置视图
             let glLayer = view.layer as! CAEAGLLayer
             glLayer.drawableProperties = [
                 kEAGLDrawablePropertyRetainedBacking: false,
                 kEAGLDrawablePropertyColorFormat: kEAGLColorFormatRGBA8,
             ]
             glLayer.isOpaque = true
+            view.contentScaleFactor = UIScreen.main.nativeScale
 
+            // 创建并设置上下文
             glContext = EAGLContext(api: .openGLES2)
             makeCurrentContext()
 
-            view.contentScaleFactor = UIScreen.main.nativeScale
-
+            // 创建FBO，并与CoreAnimation的可绘制纹理绑定
             glGenFramebuffers(1, &defaultFBOName)
             glBindFramebuffer(GLenum(GL_FRAMEBUFFER), defaultFBOName)
-
             glGenRenderbuffers(1, &colorRenderBuffer)
-
             resizeDrawable()
-
             glFramebufferRenderbuffer(GLenum(GL_FRAMEBUFFER), GLenum(GL_COLOR_ATTACHMENT0), GLenum(GL_RENDERBUFFER), colorRenderBuffer)
 
+            // 创建display link
             displayLink = .init(target: self, selector: #selector(draw))
             displayLink.preferredFramesPerSecond = 60
             displayLink.add(to: .current, forMode: .default)
