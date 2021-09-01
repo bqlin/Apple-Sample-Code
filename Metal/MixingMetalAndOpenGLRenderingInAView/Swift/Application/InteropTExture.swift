@@ -7,11 +7,11 @@ import Foundation
 import Metal
 
 #if os(macOS)
-import AppKit
-typealias PlatformGLContext = NSOpenGLContext
+    import AppKit
+    typealias PlatformGLContext = NSOpenGLContext
 #else
-import UIKit
-typealias PlatformGLContext = EAGLContext
+    import UIKit
+    typealias PlatformGLContext = EAGLContext
 #endif
 
 class InteropTexture: NSObject {
@@ -29,8 +29,8 @@ class InteropTexture: NSObject {
         var cvglTexture: CVOpenGLTexture!
         var cglPixelFormat: CGLPixelFormatObj
     #else
-    var cvglTextureCache: CVOpenGLESTextureCache!
-    var cvglTexture: CVOpenGLESTexture!
+        var cvglTextureCache: CVOpenGLESTextureCache!
+        var cvglTexture: CVOpenGLESTexture!
     #endif
 
     var cvmtlTextureCahce: CVMetalTextureCache!
@@ -87,18 +87,18 @@ extension InteropTexture {
             var cvret: CVReturn
             cvret = CVOpenGLESTextureCacheCreate(kCFAllocatorDefault, nil, glContext, nil, &cvglTextureCache)
             assert(cvret == kCVReturnSuccess, "创建GLES纹理缓存失败")
-            
+
             cvret = CVOpenGLESTextureCacheCreateTextureFromImage(kCFAllocatorDefault, cvglTextureCache, cvPixelBuffer, nil, GLenum(GL_TEXTURE_2D), formatInfo.glInternalFormat, GLsizei(size.width), GLsizei(size.height), GLenum(formatInfo.glFormat), GLenum(formatInfo.glType), 0, &cvglTexture)
             assert(cvret == kCVReturnSuccess, "从PixelBuffer创建GLES纹理失败")
-            
+
             glTexture = CVOpenGLESTextureGetName(cvglTexture)
-    }
+        }
     #endif
 }
 
 #if os(macOS)
 #else
-let GL_UNSIGNED_INT_8_8_8_8_REV: GLint = 0x8367
+    let GL_UNSIGNED_INT_8_8_8_8_REV: GLint = 0x8367
 #endif
 struct TextureFormatInfo {
     var cvPixelFormat: OSType

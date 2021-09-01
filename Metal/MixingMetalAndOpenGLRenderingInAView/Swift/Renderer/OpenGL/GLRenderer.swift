@@ -3,16 +3,7 @@
 // Copyright © 2021 Bq. All rights reserved.
 //
 
-import CoreGraphics
-import Foundation
-#if os(macOS)
-import OpenGL
-import OpenGL.GL
-import OpenGL.GL3
-#else
-
-#endif
-import GLKit
+import GLKit.GLKTextureLoader
 
 class GLRenderer: NSObject {
     static let interopTextureSize = CGSize(width: 1024, height: 1024)
@@ -53,9 +44,14 @@ class GLRenderer: NSObject {
     ]
     func makeVAO() -> GLuint {
         var vaoName: GLuint = 0
-        glGenVertexArrays(1, &vaoName)
-        GetGLError()
-        glBindVertexArray(vaoName)
+        #if os(macOS)
+            glGenVertexArraysAPPLE(1, &vaoName)
+            GetGLError()
+            glBindVertexArrayAPPLE(vaoName)
+        #else
+            glGenVertexArrays(1, &vaoName)
+            glBindVertexArray(vaoName)
+        #endif
 
         var bufferName: GLuint = 0
         glGenBuffers(1, &bufferName)
@@ -81,7 +77,12 @@ class GLRenderer: NSObject {
 
     func destroyVAO(_ vaoName: GLuint) {
         var bufName: GLint = 0
-        glBindVertexArray(vaoName)
+        #if os(macOS)
+            glBindVertexArrayAPPLE(vaoName)
+        #else
+            glBindVertexArray(vaoName)
+        #endif
+
         for i: GLuint in 0 ..< 16 {
             glGetVertexAttribiv(i, GLenum(GL_VERTEX_ATTRIB_ARRAY_BUFFER_BINDING), &bufName)
             if bufName != 0 {
@@ -242,7 +243,11 @@ class GLRenderer: NSObject {
         glActiveTexture(GLenum(GL_TEXTURE1))
         glBindTexture(labelMapTex.target, labelMapTex.name)
 
-        glBindVertexArray(vaoName)
+        #if os(macOS)
+            glBindVertexArrayAPPLE(vaoName)
+        #else
+            glBindVertexArray(vaoName)
+        #endif
         glDrawArrays(GLenum(GL_TRIANGLES), 0, GLsizei(quadVertices.count))
         GetGLError()
     }
@@ -259,7 +264,7 @@ func GetGLError() {
     let err = glGetError()
     guard err != GL_NO_ERROR else { return }
     fatalError("GLError \(String(cString: GetGLErrorString(err)))")
-    //GetGLError()
+    // GetGLError()
 }
 
 func log(shader: GLuint) {
@@ -275,7 +280,7 @@ func log(shader: GLuint) {
         glGetShaderInfoLog(shader, logLength, &logLength, log)
         let logString = String(cString: log).trimmingCharacters(in: .newlines)
         fatalError("着色器编译log：\(logString)")
-        //log.deallocate()
+        // log.deallocate()
     }
 }
 
@@ -285,7 +290,7 @@ func log(program: GLuint) {
     if status == 0 {
         print("程序链接失败")
     }
-    
+
     var logLength: GLint = 0
     glGetProgramiv(program, GLenum(GL_INFO_LOG_LENGTH), &logLength)
     if logLength > 0 {
@@ -293,6 +298,6 @@ func log(program: GLuint) {
         glGetProgramInfoLog(program, logLength, &logLength, log)
         let logString = String(cString: log).trimmingCharacters(in: .newlines)
         fatalError("程序链接log：\(logString)")
-        //log.deallocate()
+        // log.deallocate()
     }
 }
