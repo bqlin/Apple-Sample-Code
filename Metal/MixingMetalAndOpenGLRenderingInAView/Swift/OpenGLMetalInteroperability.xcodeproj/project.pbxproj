@@ -1,0 +1,576 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0349835C26DF8D8B009C33E6 /* shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0367EB6226DDE85A005BF1B6 /* shader.vsh */; };
+		0349835D26DF8D8B009C33E6 /* shaderTex2D.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0367EB6026DDE85A005BF1B6 /* shaderTex2D.fsh */; };
+		0349835E26DF8D8B009C33E6 /* shaderTexRect.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0367EB6126DDE85A005BF1B6 /* shaderTexRect.fsh */; };
+		0349835F26DF8D92009C33E6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0367EB4826DDE76E005BF1B6 /* Main.storyboard */; };
+		0349836026DF8DA0009C33E6 /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = 0367EB5626DDE7E0005BF1B6 /* Assets */; };
+		0349836126DF8DC6009C33E6 /* GLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3307726DF0ABE00495C36 /* GLViewController.swift */; };
+		0349836226DF8DC6009C33E6 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3309D26DF6B1D00495C36 /* MetalViewController.swift */; };
+		0349836326DF8DC6009C33E6 /* InteropTExture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3307926DF118000495C36 /* InteropTExture.swift */; };
+		0349836426DF8DC6009C33E6 /* AAPLMathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0367EB6A26DDE88D005BF1B6 /* AAPLMathUtilities.m */; };
+		0349836526DF8DC6009C33E6 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0367EB6726DDE868005BF1B6 /* AAPLShaders.metal */; };
+		0349836626DF8DC6009C33E6 /* MetalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0367EB6D26DDEB3A005BF1B6 /* MetalRenderer.swift */; };
+		0349836726DF8DC6009C33E6 /* GLRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0367EB6F26DDEC0B005BF1B6 /* GLRenderer.swift */; };
+		0367EB5026DDE76F005BF1B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0367EB4326DDE76E005BF1B6 /* AppDelegate.swift */; };
+		0367EB5526DDE784005BF1B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0367EB4126DDE76E005BF1B6 /* Main.storyboard */; };
+		0367EB5726DDE7E0005BF1B6 /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = 0367EB5626DDE7E0005BF1B6 /* Assets */; };
+		0367EB6326DDE85A005BF1B6 /* shaderTex2D.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0367EB6026DDE85A005BF1B6 /* shaderTex2D.fsh */; };
+		0367EB6426DDE85A005BF1B6 /* shaderTexRect.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 0367EB6126DDE85A005BF1B6 /* shaderTexRect.fsh */; };
+		0367EB6526DDE85A005BF1B6 /* shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 0367EB6226DDE85A005BF1B6 /* shader.vsh */; };
+		0367EB6826DDE868005BF1B6 /* AAPLShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0367EB6726DDE868005BF1B6 /* AAPLShaders.metal */; };
+		0367EB6C26DDE88D005BF1B6 /* AAPLMathUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 0367EB6A26DDE88D005BF1B6 /* AAPLMathUtilities.m */; };
+		0367EB6E26DDEB3A005BF1B6 /* MetalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0367EB6D26DDEB3A005BF1B6 /* MetalRenderer.swift */; };
+		0367EB7026DDEC0B005BF1B6 /* GLRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0367EB6F26DDEC0B005BF1B6 /* GLRenderer.swift */; };
+		03D3307826DF0ABE00495C36 /* GLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3307726DF0ABE00495C36 /* GLViewController.swift */; };
+		03D3307A26DF118000495C36 /* InteropTExture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3307926DF118000495C36 /* InteropTExture.swift */; };
+		03D3309E26DF6B1D00495C36 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D3309D26DF6B1D00495C36 /* MetalViewController.swift */; };
+		03D330A626DF893F00495C36 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03D330A526DF893F00495C36 /* AppDelegate.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0367EB2B26DDE71D005BF1B6 /* OpenGLMetalInteroperability-macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenGLMetalInteroperability-macOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0367EB4226DDE76E005BF1B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0367EB4326DDE76E005BF1B6 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0367EB4426DDE76E005BF1B6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0367EB4726DDE76E005BF1B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		0367EB4926DDE76E005BF1B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		0367EB4A26DDE76E005BF1B6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0367EB5626DDE7E0005BF1B6 /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Assets; path = ../ObjC/Assets; sourceTree = "<group>"; };
+		0367EB5F26DDE85A005BF1B6 /* AAPLGLHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLGLHeaders.h; path = ../../../ObjC/Renderer/OpenGL/AAPLGLHeaders.h; sourceTree = "<group>"; };
+		0367EB6026DDE85A005BF1B6 /* shaderTex2D.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderTex2D.fsh; path = ../../../ObjC/Renderer/OpenGL/shaderTex2D.fsh; sourceTree = "<group>"; };
+		0367EB6126DDE85A005BF1B6 /* shaderTexRect.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shaderTexRect.fsh; path = ../../../ObjC/Renderer/OpenGL/shaderTexRect.fsh; sourceTree = "<group>"; };
+		0367EB6226DDE85A005BF1B6 /* shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; name = shader.vsh; path = ../../../ObjC/Renderer/OpenGL/shader.vsh; sourceTree = "<group>"; };
+		0367EB6626DDE868005BF1B6 /* AAPLShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLShaderTypes.h; path = ../../../ObjC/Renderer/Metal/AAPLShaderTypes.h; sourceTree = "<group>"; };
+		0367EB6726DDE868005BF1B6 /* AAPLShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; name = AAPLShaders.metal; path = ../../../ObjC/Renderer/Metal/AAPLShaders.metal; sourceTree = "<group>"; };
+		0367EB6926DDE88C005BF1B6 /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		0367EB6A26DDE88D005BF1B6 /* AAPLMathUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AAPLMathUtilities.m; path = ../../ObjC/Renderer/AAPLMathUtilities.m; sourceTree = "<group>"; };
+		0367EB6B26DDE88D005BF1B6 /* AAPLMathUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AAPLMathUtilities.h; path = ../../ObjC/Renderer/AAPLMathUtilities.h; sourceTree = "<group>"; };
+		0367EB6D26DDEB3A005BF1B6 /* MetalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalRenderer.swift; sourceTree = "<group>"; };
+		0367EB6F26DDEC0B005BF1B6 /* GLRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLRenderer.swift; sourceTree = "<group>"; };
+		03D3307726DF0ABE00495C36 /* GLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLViewController.swift; sourceTree = "<group>"; };
+		03D3307926DF118000495C36 /* InteropTExture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteropTExture.swift; sourceTree = "<group>"; };
+		03D3309D26DF6B1D00495C36 /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
+		03D330A326DF893F00495C36 /* OpenGLMetalInteroperability-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "OpenGLMetalInteroperability-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		03D330A526DF893F00495C36 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0367EB2826DDE71D005BF1B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03D330A026DF893F00495C36 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0367EB2226DDE71D005BF1B6 = {
+			isa = PBXGroup;
+			children = (
+				0367EB5626DDE7E0005BF1B6 /* Assets */,
+				0367EB3E26DDE76E005BF1B6 /* Application */,
+				0367EB4B26DDE76F005BF1B6 /* Renderer */,
+				0367EB2C26DDE71D005BF1B6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0367EB2C26DDE71D005BF1B6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0367EB2B26DDE71D005BF1B6 /* OpenGLMetalInteroperability-macOS.app */,
+				03D330A326DF893F00495C36 /* OpenGLMetalInteroperability-iOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0367EB3E26DDE76E005BF1B6 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				0367EB6926DDE88C005BF1B6 /* Bridging-Header.h */,
+				03D3307726DF0ABE00495C36 /* GLViewController.swift */,
+				03D3309D26DF6B1D00495C36 /* MetalViewController.swift */,
+				03D3307926DF118000495C36 /* InteropTExture.swift */,
+				0367EB4026DDE76E005BF1B6 /* macOS */,
+				0367EB4526DDE76E005BF1B6 /* iOS */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		0367EB4026DDE76E005BF1B6 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				0367EB4126DDE76E005BF1B6 /* Main.storyboard */,
+				0367EB4326DDE76E005BF1B6 /* AppDelegate.swift */,
+				0367EB4426DDE76E005BF1B6 /* Info.plist */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		0367EB4526DDE76E005BF1B6 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				03D330A526DF893F00495C36 /* AppDelegate.swift */,
+				0367EB4626DDE76E005BF1B6 /* LaunchScreen.storyboard */,
+				0367EB4826DDE76E005BF1B6 /* Main.storyboard */,
+				0367EB4A26DDE76E005BF1B6 /* Info.plist */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
+		0367EB4B26DDE76F005BF1B6 /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				0367EB6B26DDE88D005BF1B6 /* AAPLMathUtilities.h */,
+				0367EB6A26DDE88D005BF1B6 /* AAPLMathUtilities.m */,
+				0367EB4C26DDE76F005BF1B6 /* Metal */,
+				0367EB4D26DDE76F005BF1B6 /* OpenGL */,
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
+		0367EB4C26DDE76F005BF1B6 /* Metal */ = {
+			isa = PBXGroup;
+			children = (
+				0367EB6726DDE868005BF1B6 /* AAPLShaders.metal */,
+				0367EB6626DDE868005BF1B6 /* AAPLShaderTypes.h */,
+				0367EB6D26DDEB3A005BF1B6 /* MetalRenderer.swift */,
+			);
+			path = Metal;
+			sourceTree = "<group>";
+		};
+		0367EB4D26DDE76F005BF1B6 /* OpenGL */ = {
+			isa = PBXGroup;
+			children = (
+				0367EB5F26DDE85A005BF1B6 /* AAPLGLHeaders.h */,
+				0367EB6F26DDEC0B005BF1B6 /* GLRenderer.swift */,
+				0367EB6226DDE85A005BF1B6 /* shader.vsh */,
+				0367EB6026DDE85A005BF1B6 /* shaderTex2D.fsh */,
+				0367EB6126DDE85A005BF1B6 /* shaderTexRect.fsh */,
+			);
+			path = OpenGL;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0367EB2A26DDE71D005BF1B6 /* OpenGLMetalInteroperability-macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0367EB3B26DDE71F005BF1B6 /* Build configuration list for PBXNativeTarget "OpenGLMetalInteroperability-macOS" */;
+			buildPhases = (
+				0367EB2726DDE71D005BF1B6 /* Sources */,
+				0367EB2826DDE71D005BF1B6 /* Frameworks */,
+				0367EB2926DDE71D005BF1B6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OpenGLMetalInteroperability-macOS";
+			productName = OpenGLMetalInteroperability;
+			productReference = 0367EB2B26DDE71D005BF1B6 /* OpenGLMetalInteroperability-macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		03D330A226DF893F00495C36 /* OpenGLMetalInteroperability-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 03D330B226DF894100495C36 /* Build configuration list for PBXNativeTarget "OpenGLMetalInteroperability-iOS" */;
+			buildPhases = (
+				03D3309F26DF893F00495C36 /* Sources */,
+				03D330A026DF893F00495C36 /* Frameworks */,
+				03D330A126DF893F00495C36 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OpenGLMetalInteroperability-iOS";
+			productName = "OpenGLMetalInteroperability-iOS";
+			productReference = 03D330A326DF893F00495C36 /* OpenGLMetalInteroperability-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0367EB2326DDE71D005BF1B6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1170;
+				LastUpgradeCheck = 1170;
+				ORGANIZATIONNAME = Bq;
+				TargetAttributes = {
+					0367EB2A26DDE71D005BF1B6 = {
+						CreatedOnToolsVersion = 11.7;
+						LastSwiftMigration = 1170;
+					};
+					03D330A226DF893F00495C36 = {
+						CreatedOnToolsVersion = 11.7;
+					};
+				};
+			};
+			buildConfigurationList = 0367EB2626DDE71D005BF1B6 /* Build configuration list for PBXProject "OpenGLMetalInteroperability" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0367EB2226DDE71D005BF1B6;
+			productRefGroup = 0367EB2C26DDE71D005BF1B6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0367EB2A26DDE71D005BF1B6 /* OpenGLMetalInteroperability-macOS */,
+				03D330A226DF893F00495C36 /* OpenGLMetalInteroperability-iOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0367EB2926DDE71D005BF1B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0367EB6526DDE85A005BF1B6 /* shader.vsh in Resources */,
+				0367EB5526DDE784005BF1B6 /* Main.storyboard in Resources */,
+				0367EB5726DDE7E0005BF1B6 /* Assets in Resources */,
+				0367EB6426DDE85A005BF1B6 /* shaderTexRect.fsh in Resources */,
+				0367EB6326DDE85A005BF1B6 /* shaderTex2D.fsh in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03D330A126DF893F00495C36 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0349836026DF8DA0009C33E6 /* Assets in Resources */,
+				0349835F26DF8D92009C33E6 /* Main.storyboard in Resources */,
+				0349835C26DF8D8B009C33E6 /* shader.vsh in Resources */,
+				0349835D26DF8D8B009C33E6 /* shaderTex2D.fsh in Resources */,
+				0349835E26DF8D8B009C33E6 /* shaderTexRect.fsh in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0367EB2726DDE71D005BF1B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0367EB6826DDE868005BF1B6 /* AAPLShaders.metal in Sources */,
+				0367EB5026DDE76F005BF1B6 /* AppDelegate.swift in Sources */,
+				03D3309E26DF6B1D00495C36 /* MetalViewController.swift in Sources */,
+				0367EB6C26DDE88D005BF1B6 /* AAPLMathUtilities.m in Sources */,
+				03D3307826DF0ABE00495C36 /* GLViewController.swift in Sources */,
+				0367EB7026DDEC0B005BF1B6 /* GLRenderer.swift in Sources */,
+				0367EB6E26DDEB3A005BF1B6 /* MetalRenderer.swift in Sources */,
+				03D3307A26DF118000495C36 /* InteropTExture.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		03D3309F26DF893F00495C36 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0349836126DF8DC6009C33E6 /* GLViewController.swift in Sources */,
+				0349836226DF8DC6009C33E6 /* MetalViewController.swift in Sources */,
+				0349836326DF8DC6009C33E6 /* InteropTExture.swift in Sources */,
+				0349836426DF8DC6009C33E6 /* AAPLMathUtilities.m in Sources */,
+				0349836526DF8DC6009C33E6 /* AAPLShaders.metal in Sources */,
+				0349836626DF8DC6009C33E6 /* MetalRenderer.swift in Sources */,
+				0349836726DF8DC6009C33E6 /* GLRenderer.swift in Sources */,
+				03D330A626DF893F00495C36 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0367EB4126DDE76E005BF1B6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0367EB4226DDE76E005BF1B6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		0367EB4626DDE76E005BF1B6 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0367EB4726DDE76E005BF1B6 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		0367EB4826DDE76E005BF1B6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0367EB4926DDE76E005BF1B6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0367EB3926DDE71F005BF1B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		0367EB3A26DDE71F005BF1B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		0367EB3C26DDE71F005BF1B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"TARGET_MACOS=1",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Application/macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = bq.OpenGLMetalInteroperability;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Application/Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		0367EB3D26DDE71F005BF1B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"TARGET_MACOS=1",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Application/macOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = bq.OpenGLMetalInteroperability;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Application/Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		03D330B326DF894100495C36 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V7WL667MJM;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"TARGET_IOS=1",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Application/iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = bq.demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Application/Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		03D330B426DF894100495C36 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = V7WL667MJM;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"TARGET_IOS=1",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/Application/iOS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = bq.demo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "Application/Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0367EB2626DDE71D005BF1B6 /* Build configuration list for PBXProject "OpenGLMetalInteroperability" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0367EB3926DDE71F005BF1B6 /* Debug */,
+				0367EB3A26DDE71F005BF1B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0367EB3B26DDE71F005BF1B6 /* Build configuration list for PBXNativeTarget "OpenGLMetalInteroperability-macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0367EB3C26DDE71F005BF1B6 /* Debug */,
+				0367EB3D26DDE71F005BF1B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		03D330B226DF894100495C36 /* Build configuration list for PBXNativeTarget "OpenGLMetalInteroperability-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				03D330B326DF894100495C36 /* Debug */,
+				03D330B426DF894100495C36 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0367EB2326DDE71D005BF1B6 /* Project object */;
+}
