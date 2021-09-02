@@ -568,3 +568,10 @@ AVPlayerItemLegibleOutput使用。
 - 2019-05-18
 
 在视图中混合Metal和OpenGL渲染。
+
+### TextureCompute
+
+- ProcessingATextureInAComputeFunction
+- 2021-03-13
+
+在计算函数中处理纹理。
