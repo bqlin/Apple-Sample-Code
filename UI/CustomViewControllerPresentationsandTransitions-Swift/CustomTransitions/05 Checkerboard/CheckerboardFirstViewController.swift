@@ -8,7 +8,7 @@ import Foundation
 import UIKit
 
 /// The initial view controller for the Custom Presentation demo.
-class CheckerboardFirstViewController: DemoInitialViewController, UINavigationControllerDelegate {
+class CheckerboardFirstViewController: DemoInitialViewController {
     
     var originalNavigationDelegate: UINavigationControllerDelegate?
     
@@ -25,9 +25,10 @@ class CheckerboardFirstViewController: DemoInitialViewController, UINavigationCo
     override func buttonAction(_ sender: AnyObject) {
         navigationController?.pushViewController(DemoPresentedViewController(), animated: true)
     }
+}
     
-    // MARK: - UINavigationControllerDelegate
-    
+// MARK: - UINavigationControllerDelegate
+extension CheckerboardFirstViewController: UINavigationControllerDelegate {
     //| ----------------------------------------------------------------------------
     //  The navigation controller tries to invoke this method on its delegate to
     //  retrieve an animator object to be used for animating the transition to the

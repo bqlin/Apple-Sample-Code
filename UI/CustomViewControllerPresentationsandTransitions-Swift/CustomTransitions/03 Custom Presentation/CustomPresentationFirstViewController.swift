@@ -27,7 +27,7 @@ class CustomPresentationFirstViewController: DemoInitialViewController {
         // destination object.  To prevent presentationController from being
         // released prior to calling -presentViewController:animated:completion:
         // the NS_VALID_UNTIL_END_OF_SCOPE attribute is appended to the declaration.
-        // 这里的好处是不用自身不用在额外持有过渡相关的变量
+        // 这里的好处是不用自身不用在额外持有过渡相关的变量，使用成本低，把自定义过渡效果的所有逻辑都放在 CustomPresentationController 中，是比较理想的封装方式。
         let presentationController = CustomPresentationController(presentedViewController: secondViewController, presenting: self)
         secondViewController.transitioningDelegate = presentationController
         present(secondViewController, animated: true)

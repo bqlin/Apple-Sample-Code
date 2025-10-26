@@ -16,6 +16,7 @@ class CrossDissolveFirstViewController: DemoInitialViewController {
     }
     
     @objc override func buttonAction(_ sender: AnyObject) {
+        // CrossDissolveTransitionAnimator 虽然定义简单，但代码量转嫁给了调用方。
         // For the sake of example, this demo implements the presentation and
         // dismissal logic completely in code.  Take a look at the later demos
         // to learn how to integrate custom transitions with segues.

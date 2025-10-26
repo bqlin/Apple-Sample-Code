@@ -8,7 +8,7 @@ import Foundation
 import UIKit
 
 /// The second view controller for the Adaptive Presentation demo.
-class AdaptivePresentationSecondViewController: DemoPresentedViewController, UIAdaptivePresentationControllerDelegate {
+class AdaptivePresentationSecondViewController: DemoPresentedViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +33,10 @@ class AdaptivePresentationSecondViewController: DemoPresentedViewController, UIA
             presentationController?.delegate = self
         }
     }
+}
     
-    
-    // MARK: - UIAdaptivePresentationControllerDelegate
-    
+// MARK: - UIAdaptivePresentationControllerDelegate
+extension AdaptivePresentationSecondViewController: UIAdaptivePresentationControllerDelegate {
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
         // An adaptive presentation may only fallback to
         // UIModalPresentationFullScreen or UIModalPresentationOverFullScreen

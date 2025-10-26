@@ -25,6 +25,7 @@ class SlideTransitionDelegate: NSObject, UITabBarControllerDelegate {
     //! gesture recognizer on the tab bar controller's view.
     lazy var panGestureRecongizer = makePanGestureRecognizer()
     
+    // 通过在配置 tabBarController，将自身附加到 tabBarController 上
     func tabBarControllerDidSet(_ oldValue: UITabBarController?) {
         guard tabBarController != oldValue else { return }
         

@@ -13,8 +13,8 @@ import UIKit
 class SwipeTransitionDelegate: NSObject, UIViewControllerTransitioningDelegate {
     //! If this transition will be interactive, this property is set to the
     //! gesture recognizer which will drive the interactivity.
-    var gestureRecognizer: UIScreenEdgePanGestureRecognizer?
-    var targetEdge: UIRectEdge!
+    weak var gestureRecognizer: UIScreenEdgePanGestureRecognizer?
+    var targetEdge: UIRectEdge = []
     // init(gestureRecognizer: UIScreenEdgePanGestureRecognizer, targetEdge: UIRectEdge) {
     //     self.gestureRecognizer = gestureRecognizer
     //     self.targetEdge = targetEdge

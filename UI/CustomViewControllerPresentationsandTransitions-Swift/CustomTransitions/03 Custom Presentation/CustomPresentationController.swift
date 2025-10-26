@@ -9,7 +9,7 @@ import UIKit
 
 /// A custom presentation controller which slides the presenting view controller
 ///  upwards to reveal the presented view controller.
-class CustomPresentationController: UIPresentationController, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
+class CustomPresentationController: UIPresentationController {
     // 两者都会在 presentationTransitionWillBegin 中创建
     var dimmingView: UIView!
     var presentationWrappingView: UIView!
@@ -211,8 +211,10 @@ class CustomPresentationController: UIPresentationController, UIViewControllerTr
     @objc func dimmingViewTapped(_ sender: UITapGestureRecognizer) {
         presentedViewController.dismiss(animated: true)
     }
-    
-    // MARK: - UIViewControllerAnimatedTransitioning
+}
+
+// MARK: - UIViewControllerAnimatedTransitioning
+extension CustomPresentationController: UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: (any UIViewControllerContextTransitioning)?) -> TimeInterval {
         transitionContext?.isAnimated == true ? 0.35 : 0
     }
@@ -304,8 +306,10 @@ class CustomPresentationController: UIPresentationController, UIViewControllerTr
             transitionContext.completeTransition(!wasCancelled)
         }
     }
+}
     
-    // MARK: - UIViewControllerTransitioningDelegate
+// MARK: - UIViewControllerTransitioningDelegate
+extension CustomPresentationController: UIViewControllerTransitioningDelegate {
     //| ----------------------------------------------------------------------------
     //  If the modalPresentationStyle of the presented view controller is
     //  UIModalPresentationCustom, the system calls this method on the presented

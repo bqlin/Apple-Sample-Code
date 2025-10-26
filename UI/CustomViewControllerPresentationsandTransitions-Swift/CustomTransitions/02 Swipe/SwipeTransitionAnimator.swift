@@ -144,6 +144,5 @@ class SwipeTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             // finished or not.
             transitionContext.completeTransition(!wasCancelled)
         }
-
     }
 }

@@ -7,7 +7,7 @@
 import Foundation
 import UIKit
 
-class AdaptivePresentationController: UIPresentationController, UIViewControllerTransitioningDelegate, UIViewControllerAnimatedTransitioning {
+class AdaptivePresentationController: UIPresentationController {
     var presentationWrappingView: UIView!
     var dismissButton: UIButton!
     
@@ -151,9 +151,10 @@ class AdaptivePresentationController: UIPresentationController, UIViewController
         // view controller's view.
         dismissButton.center = CGPoint(x: presentedViewController.view.frame.minX, y: presentedViewController.view.frame.minY)
     }
+}
     
-    // MARK: - UIViewControllerAnimatedTransitioning
-    
+// MARK: - UIViewControllerAnimatedTransitioning
+extension AdaptivePresentationController: UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: (any UIViewControllerContextTransitioning)?) -> TimeInterval {
         transitionContext?.isAnimated == true ? 0.35 : 0
     }
@@ -218,9 +219,10 @@ class AdaptivePresentationController: UIPresentationController, UIViewController
             }
         }
     }
+}
     
-    // MARK: - UIViewControllerTransitioningDelegate
-    
+// MARK: - UIViewControllerTransitioningDelegate
+extension AdaptivePresentationController: UIViewControllerTransitioningDelegate {
     //| ----------------------------------------------------------------------------
     //  If the modalPresentationStyle of the presented view controller is
     //  UIModalPresentationCustom, the system calls this method on the presented

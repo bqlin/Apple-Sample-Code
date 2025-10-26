@@ -9,6 +9,7 @@ import UIKit
 
 /// A transition animator that performs a cross dissolve transition between
 ///  two view controllers.
+///  最简单的自定义过渡效果。
 class CrossDissolveTransitionAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     func transitionDuration(using transitionContext: (any UIViewControllerContextTransitioning)?) -> TimeInterval {
         0.35
